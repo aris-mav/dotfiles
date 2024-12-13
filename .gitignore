@@ -1,0 +1,8 @@
+*
+!./.gitignore
+!./.alacritty.toml
+!./.bashrc
+!./.zshrc
+!./.vimrc
+!./.config/nvim/
+
