@@ -18,7 +18,3 @@ compinit
 # Set a custom prompt
 PROMPT='%F{cyan}%n@%m %F{yellow}%~ %F{reset}%# '
 
-# Enable syntax highlighting and autocompletion
-autoload -Uz compinit && compinit
-autoload -Uz zsh-syntax-highlighting && zsh-syntax-highlighting
-autoload -Uz zsh-autosuggestions && zsh-autosuggestions

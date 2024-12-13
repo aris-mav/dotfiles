@@ -18,7 +18,7 @@ bold_italic.family = "JuliaMono"
 size = 19.0
 
 [terminal]
-shell = "/usr/bin/bash"
+# shell = "/usr/bin/bash"
 
 
 [colors.primary]
