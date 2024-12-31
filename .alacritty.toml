@@ -10,12 +10,12 @@ startup_mode = "Maximized"
 
 [font]
 
-normal.family = "JuliaMono"
-bold.family = "JuliaMono"
-italic.family = "JuliaMono"
-bold_italic.family = "JuliaMono"
+normal.family = "JetbrainsMono Nerdfont"
+bold.family = "JetbrainsMono Nerdfont"
+italic.family = "JetbrainsMono Nerdfont"
+bold_italic.family = "JetbrainsMono Nerdfont"
 
-size = 19.0
+size = 18.0
 
 [terminal]
 shell = "/usr/bin/zsh"
