@@ -15,7 +15,6 @@ compinit
 # End of lines added by compinstall
 
 # PROMPT='%~%# '
-# PS1='%~ $: '
 PROMPT='%F{cyan}%n@%m %F{yellow}%~ %F{reset}%# '
 
 # Change cursor shape for different vi modes.
@@ -33,4 +32,11 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+
+# Add some colour
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+alias tree='tree -C'
 
