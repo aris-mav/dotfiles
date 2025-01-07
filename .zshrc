@@ -39,4 +39,21 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias tree='tree -C'
+alias f='pipx run --spec ranger-fm ranger'
 
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+case ":$PATH:" in
+    *:/home/arismav/.juliaup/bin:*)
+        ;;
+
+    *)
+        export PATH=/home/arismav/.juliaup/bin${PATH:+:${PATH}}
+        ;;
+esac
+
+# <<< juliaup initialize <<<
+. "$HOME/.cargo/env"
