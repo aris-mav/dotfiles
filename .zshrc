@@ -15,7 +15,7 @@ compinit
 # End of lines added by compinstall
 
 # PROMPT='%~%# '
-PROMPT='%F{cyan}%n@%m %F{yellow}%~ %F{reset}%# '
+PS1='%F{cyan}%n@%m %F{yellow}%~ %F{reset}%# '
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select () {
@@ -40,7 +40,11 @@ alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias tree='tree -C'
 alias f='pipx run --spec ranger-fm ranger'
+# export PATH="$HOME/.cargo/bin:$PATH"
+. "$HOME/.cargo/env"
 
+export EDITOR="nvim"
+export PATH="/home/arismav/.local/bin":$PATH
 
 # >>> juliaup initialize >>>
 
@@ -56,4 +60,3 @@ case ":$PATH:" in
 esac
 
 # <<< juliaup initialize <<<
-. "$HOME/.cargo/env"
