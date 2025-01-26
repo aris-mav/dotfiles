@@ -5,6 +5,7 @@
 set -o vi
 export EDITOR="nvim"
 export PATH="/home/arismav/.local/bin":$PATH
+alias vi='nvim'
 
 # If not running interactively, don't do anything
 case $- in

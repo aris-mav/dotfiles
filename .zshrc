@@ -40,6 +40,7 @@ alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias tree='tree -C'
 alias f='pipx run --spec ranger-fm ranger'
+alias vi='nvim'
 # export PATH="$HOME/.cargo/bin:$PATH"
 . "$HOME/.cargo/env"
 
