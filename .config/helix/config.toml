@@ -4,7 +4,18 @@ theme = "gruvbox"
 line-number = "relative"
 mouse = false
 true-color = true
+scrolloff = 1
 
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
+
+[editor.statusline]
+left = ["mode", "spinner", "version-control", "file-name"]
+
+[editor.file-picker]
+hidden = false
+
+[keys.normal]
+Z = { Q = ":quit!", Z = ":x" }
+";" = "repeat_last_motion"      
