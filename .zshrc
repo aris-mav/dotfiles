@@ -47,6 +47,7 @@ alias vi='nvim'
 export EDITOR="nvim"
 export PATH="/home/arismav/.local/bin":$PATH
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+export HELIX_RUNTIME=~/software/helix/runtime
 
 # >>> juliaup initialize >>>
 
