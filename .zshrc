@@ -40,11 +40,12 @@ alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias tree='tree -C'
 alias f='pipx run --spec ranger-fm ranger'
-alias vi='nvim'
+alias e='nvim'
 # export PATH="$HOME/.cargo/bin:$PATH"
 . "$HOME/.cargo/env"
 
 export EDITOR="nvim"
+
 export PATH="/home/arismav/.local/bin":$PATH
 export HELIX_RUNTIME=~/software/helix/runtime
 
@@ -62,3 +63,7 @@ case ":$PATH:" in
 esac
 
 # <<< juliaup initialize <<<
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
