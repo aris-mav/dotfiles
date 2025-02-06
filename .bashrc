@@ -5,7 +5,9 @@
 set -o vi
 export EDITOR="nvim"
 export PATH="/home/arismav/.local/bin":$PATH
-alias vi='nvim'
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+export HELIX_RUNTIME=~/src/helix/runtime
 
 # If not running interactively, don't do anything
 case $- in
@@ -122,11 +124,11 @@ fi
 # !! Contents within this block are managed by juliaup !!
 
 case ":$PATH:" in
-    *:/home/arismav/.juliaup/bin:*)
+    *:/home/aris/.juliaup/bin:*)
         ;;
 
     *)
-        export PATH=/home/arismav/.juliaup/bin${PATH:+:${PATH}}
+        export PATH=/home/aris/.juliaup/bin${PATH:+:${PATH}}
         ;;
 esac
 
