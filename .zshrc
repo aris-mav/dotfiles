@@ -33,6 +33,7 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
+export EDITOR="nvim"
 
 # Add some colour
 alias ls='ls --color=auto'
@@ -40,11 +41,9 @@ alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias tree='tree -C'
 alias f='pipx run --spec ranger-fm ranger'
-alias e='nvim'
 # export PATH="$HOME/.cargo/bin:$PATH"
 . "$HOME/.cargo/env"
 
-export EDITOR="nvim"
 
 export PATH="/home/arismav/.local/bin":$PATH
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
@@ -54,11 +53,33 @@ export HELIX_RUNTIME=~/software/helix/runtime
 
 # !! Contents within this block are managed by juliaup !!
 
-path=('/home/aris/.juliaup/bin' $path)
+path=('/home/arismav/.juliaup/bin' $path)
 export PATH
 
 # <<< juliaup initialize <<<
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# lazy aliases
+alias e='$EDITOR'
+
+alias td='e ~/TODO.md'
+
+alias gc='git commit'
+alias gf='git fetch'
+alias ga='git add'
+alias gs='git status'
+alias gp='git pull'
+alias gP='git push'
+
+# Functions for shortcuts
+
+note() {
+  cd ~/Documents/notes || return
+  filename=$(date +"%Y%m%d%H%M%S.md")
+  nvim "$filename"
+}
+
+gacp() {
+    git add .
+    git commit
+    git push
+}
