@@ -15,6 +15,25 @@ case $- in
       *) return;;
 esac
 
+# Aliases
+
+alias e='$EDITOR'
+alias f='pipx run --spec ranger-fm ranger'
+alias td='e ~/TODO.md'
+
+alias gc='git commit'
+alias gf='git fetch'
+alias ga='git add'
+alias gd='git diff'
+alias gs='git status'
+alias gp='git pull'
+alias gP='git push'
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+alias tree='tree -C'
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -124,11 +143,11 @@ fi
 # !! Contents within this block are managed by juliaup !!
 
 case ":$PATH:" in
-    *:/home/aris/.juliaup/bin:*)
+    *:/home/arismav/.juliaup/bin:*)
         ;;
 
     *)
-        export PATH=/home/aris/.juliaup/bin${PATH:+:${PATH}}
+        export PATH=/home/arismav/.juliaup/bin${PATH:+:${PATH}}
         ;;
 esac
 
