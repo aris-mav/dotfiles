@@ -19,8 +19,8 @@
 (deflayer spc_layer
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    1    2    3    4    5    6    7    8    9    0    _    _    _
-  caps _    tab  bspc _    ret  left down up   rght grv  _    _
-  _    _    del  caps _    [    ]    _    -    =    \    _
+  caps _    tab  bspc _    ret  left down up   rght '    _    _
+  _    _    del  caps _    [    ]    `    -    =    \    _
   _         _    _         XX             _    _ 
 )
 
