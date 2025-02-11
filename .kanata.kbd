@@ -19,8 +19,8 @@
 (deflayer spc_layer
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    1    2    3    4    5    6    7    8    9    0    _    _    _
-  caps _    _    _    _    ret  left down up   rght tab  grv  _
-  _    _    del  caps [    bspc ]    _    -    =    \    _
+  caps _    tab  bspc _    ret  left down up   rght grv  _    _
+  _    _    del  caps _    [    ]    _    -    =    \    _
   _         _    _         XX             _    _ 
 )
 
@@ -34,7 +34,8 @@
 
 (defvar
   tap-time 200
-  hold-time 140
+  hold-time 150
+  hold-time-short 100
 )
 
 (defalias
@@ -43,12 +44,12 @@
 
   a (multi f24 (tap-hold $tap-time $hold-time a lmet))
   s (multi f24 (tap-hold $tap-time $hold-time s lalt))
-  d (multi f24 (tap-hold $tap-time $hold-time d lsft))
+  d (multi f24 (tap-hold $tap-time $hold-time-short d lsft))
   f (multi f24 (tap-hold $tap-time $hold-time f lctl))
   g (multi f24 (tap-hold $tap-time $hold-time g ret))
   h (multi f24 (tap-hold $tap-time $hold-time h bspc))
   j (multi f24 (tap-hold $tap-time $hold-time j rctl))
-  k (multi f24 (tap-hold $tap-time $hold-time k rsft))
+  k (multi f24 (tap-hold $tap-time $hold-time-short k rsft))
   l (multi f24 (tap-hold $tap-time $hold-time l ralt))
   ; (multi f24 (tap-hold $tap-time $hold-time ; rmet))
 )
@@ -81,4 +82,5 @@
 ;; Run systemctl --user start kanata.service to start kanata daemon
 ;; Run systemctl --user enable kanata.service so it may autostart whenever the current user logs in.
 ;; Run systemctl --user status kanata.service to check if kanata daemon is running or not.
+
 
