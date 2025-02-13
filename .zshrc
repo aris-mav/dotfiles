@@ -15,7 +15,7 @@ export HELIX_RUNTIME=~/software/helix/runtime
 alias e='$EDITOR'
 alias f='pipx run --spec ranger-fm ranger'
 alias jl='julia'
-alias td='e ~/TODO.md'
+alias hm='cd ~'
 
 alias gc='git commit'
 alias gf='git fetch'
@@ -30,16 +30,21 @@ alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias tree='tree -C'
 
-note() {
-  cd ~/Documents/notes || return
-  filename=$(date +"%Y%m%d%H%M%S.md")
-  nvim "$filename"
-}
+alias nt='$EDITOR ~/Documents/notes/$(date +"%Y%m%d%H%M%S.md")'
+alias td='$EDITOR ~/Documents/notes/TODO.md'
 
-gacp() {
-    git add .
-    git commit
-    git push
+gacP() {
+
+    target_folder="$1" 
+
+    if [ -z "$target_folder" ]; then
+        echo "Please provide a target folder as argument."
+        return 1
+    fi
+
+    git -C "$target_folder" add .
+    git -C "$target_folder" commit
+    git -C "$target_folder" push
 }
 
 # Change cursor shape for different vi modes.

@@ -5,3 +5,7 @@
 !.bashrc
 !.zshrc
 !.vimrc
+!.kanata.kbd
+!.julia/config
+!.config/helix
+!.config/zellij
