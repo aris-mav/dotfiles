@@ -11,24 +11,24 @@
 (deflayer base
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @cap @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
+  lsft @z   x    c    v    b    n    m    ,    .    @/   rsft
   lctl      lmet lalt      @sp            ralt rctl 
 )
 
 (deflayer spc_layer
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    1    2    3    4    5    6    7    8    9    0    _    _    _
-  caps _    tab  bspc _    ret  left down up   rght '    _    _
-  _    _    del  caps _    [    ]    `    -    =    \    _
+  _    tab  _    _    _    ret  left down up   rght '    _    _
+  _    esc  del  caps bspc `    -    =    [    ]    \    _
   _         _    _         XX             _    _ 
 )
 
-(deflayer esc_layer
+(deflayer z_layer
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
-  XX   _    _    _    _    _    home pgdn pgup end  tab  _    _
-  _    _    _    _    _    _    _    _    _    _    _    _
+  _    f1   f2   f3   f4   _    _    _    _    _    _    _    _    _
+  _    f5   f6   f7   f8   _    home pgdn pgup end  _    _    _
+  _    f9   f10  f11  f12  _    _    _    _    _    _    _
   _    _    _              _              _    _ 
 )
 
@@ -40,7 +40,8 @@
 
 (defalias
   sp (tap-hold-press $tap-time $hold-time spc (layer-while-held spc_layer))
-  cap (tap-hold-press $tap-time $hold-time esc (layer-while-held esc_layer))
+  z (tap-hold-press $tap-time $hold-time z (layer-while-held z_layer))
+  / (tap-hold-press $tap-time $hold-time / (layer-while-held z_layer))
 
   a (multi f24 (tap-hold $tap-time $hold-time a lmet))
   s (multi f24 (tap-hold $tap-time $hold-time s lalt))
