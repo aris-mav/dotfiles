@@ -23,6 +23,9 @@ vim.keymap.set("n", "<leader>w", ":w <cr>", { remap = true, silent = false })
 -- Map leader-e to netrw for the directory of curent file
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { remap = true, silent = false })
 
+-- cd to the folder containing the current file
+vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>')
+
 -- Keep cursor centered after some big movements
 vim.keymap.set("n", "n", "nzzzv", { remap = true, silent = false })
 vim.keymap.set("n", "N", "Nzzzv", { remap = true, silent = false })

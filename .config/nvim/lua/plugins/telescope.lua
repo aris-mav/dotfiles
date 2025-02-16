@@ -8,6 +8,7 @@ return {
         defaults = {
             -- Default configuration for telescope goes here:
             -- config_key = value,
+            -- border = false, 
             mappings = {
                 n = {
                     ['dd'] = require('telescope.actions').delete_buffer,
