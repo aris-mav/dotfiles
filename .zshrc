@@ -38,6 +38,8 @@ alias tree='tree -C'
 alias nt='$EDITOR ~/Documents/notes/$(date +"%Y%m%d%H%M%S.md")'
 alias td='$EDITOR ~/Documents/notes/TODO.md'
 
+alias ze='zellij edit'
+
 gacP() {
 
     target_folder="$1" 
