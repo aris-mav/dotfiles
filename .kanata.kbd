@@ -10,16 +10,16 @@
 
 (deflayer base
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  esc  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   '    ret
-  lsft @z   x    c    v    b    n    m    ,    .    @/   rsft
+  tab  q    w    e    r    t    y    u    @i   o    p    [    ]    \
+  esc  @a   @s   @d   @f   g    @h   @j   @k   @l   @;   '    ret
+  lsft @z   x    c    v    b    n    @m   ,    .    @/   rsft
   lctl      lmet lalt      @sp            ralt rctl 
 )
 
 (deflayer spc_layer
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    1    2    3    4    5    6    7    8    9    0    _    _    _
-  _    tab  _    _    _    ret  left down up   rght '    _    _
+  _    tab  _    _    _    _    left down up   rght '    _    _
   _    esc  del  caps bspc `    -    =    [    ]    \    _
   _         _    _         XX             _    _ 
 )
@@ -40,19 +40,22 @@
 
 (defalias
   sp (tap-hold-press $tap-time $hold-time spc (layer-while-held spc_layer))
-  z (tap-hold-press $tap-time $hold-time z (layer-while-held z_layer))
   / (tap-hold-press $tap-time $hold-time / (layer-while-held z_layer))
 
   a (multi f24 (tap-hold $tap-time $hold-time a lmet))
   s (multi f24 (tap-hold $tap-time $hold-time s lalt))
   d (multi f24 (tap-hold $tap-time $hold-time-short d lsft))
   f (multi f24 (tap-hold $tap-time $hold-time f lctl))
-  g (multi f24 (tap-hold $tap-time $hold-time g ret))
-  h (multi f24 (tap-hold $tap-time $hold-time h bspc))
+
   j (multi f24 (tap-hold $tap-time $hold-time j rctl))
   k (multi f24 (tap-hold $tap-time $hold-time-short k rsft))
   l (multi f24 (tap-hold $tap-time $hold-time l ralt))
   ; (multi f24 (tap-hold $tap-time $hold-time ; rmet))
+
+  h (multi f24 (tap-hold $tap-time $hold-time h bspc))
+  m (multi f24 (tap-hold $tap-time $hold-time m ret))
+  i (multi f24 (tap-hold $tap-time $hold-time i tab))
+  z (multi f24 (tap-hold $tap-time $hold-time z esc))
 )
 
 
