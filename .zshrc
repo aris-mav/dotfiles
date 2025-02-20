@@ -8,6 +8,8 @@ unsetopt beep
 PS1='%F{cyan}%n@%m %F{yellow}%~ %F{reset}%# '
 
 export EDITOR="nvim"
+export FUZZYFIND="sk"
+
 export PATH="/home/arismav/.local/bin":$PATH
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export HELIX_RUNTIME=~/software/helix/runtime
@@ -39,6 +41,10 @@ alias nt='$EDITOR ~/Documents/notes/$(date +"%Y%m%d%H%M%S.md")'
 alias td='$EDITOR ~/Documents/notes/TODO.md'
 
 alias ze='zellij edit -x 30% --width 70% -y 3% --height 97% -f'
+
+jf() {fg %$(jobs | $FUZZYFIND | sed -E 's/^\[([0-9]+).*/\1/') }
+
+fp() {$FUZZYFIND --preview='less {}'}
 
 gacP() {
 
