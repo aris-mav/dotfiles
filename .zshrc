@@ -32,7 +32,12 @@ alias gs='git status'
 alias gp='git pull'
 alias gP='git push'
 
-alias ls='ls --color=auto'
+if type lsd > /dev/null; then
+    alias ls='lsd'
+else
+    alias ls='ls --color=auto'
+fi
+
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias tree='tree -C'
@@ -97,3 +102,5 @@ zstyle :compinstall filename '/home/arismav/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+source /home/arismav/.config/broot/launcher/bash/br

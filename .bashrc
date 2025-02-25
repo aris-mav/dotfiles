@@ -155,3 +155,5 @@ esac
 . "$HOME/.cargo/env"
 
 
+
+source /home/arismav/.config/broot/launcher/bash/br

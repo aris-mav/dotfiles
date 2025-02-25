@@ -19,8 +19,8 @@
 (deflayer spc_layer
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    1    2    3    4    5    6    7    8    9    0    _    _    _
-  _    tab  _    _    _    `    left down up   rght '    _    _
-  _    esc  del  caps bspc -    =    ret  [    ]    \    _
+  _    esc  _    _    _    XX   left down up   rght '    _    _
+  _    caps del  -    =    `    bspc ret  [    ]    \    _
   _         _    _         XX             _    _ 
 )
 
@@ -87,5 +87,6 @@
 ;; Run systemctl --user start kanata.service to start kanata daemon
 ;; Run systemctl --user enable kanata.service so it may autostart whenever the current user logs in.
 ;; Run systemctl --user status kanata.service to check if kanata daemon is running or not.
+;; Run systemctl --user restart kanata.service to restart.
 
 
