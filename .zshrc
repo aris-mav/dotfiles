@@ -21,8 +21,9 @@ export HELIX_RUNTIME=~/software/helix/runtime
 
 alias e='$EDITOR'
 alias f='pipx run --spec ranger-fm ranger'
-alias jl='julia'
+alias jl='julia -t auto'
 alias hm='cd ~'
+alias z='zellij'
 
 alias gc='git commit'
 alias gf='git fetch'
