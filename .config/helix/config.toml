@@ -18,4 +18,4 @@ hidden = false
 
 [keys.normal]
 Z = { Q = ":quit!", Z = ":x" }
-";" = "repeat_last_motion"      
+X = ["extend_line_up", "extend_to_line_bounds"]

@@ -24,6 +24,7 @@ alias f='pipx run --spec ranger-fm ranger'
 alias jl='julia -t auto'
 alias hm='cd ~'
 alias z='zellij'
+alias h='cd ~'
 
 alias gc='git commit'
 alias gf='git fetch'
@@ -43,8 +44,16 @@ alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias tree='tree -C'
 
-alias nt='$EDITOR ~/Documents/notes/$(date +"%Y%m%d%H%M%S.md")'
-alias td='$EDITOR ~/Documents/notes/TODO.md'
+nt() {
+    cd ~/Documents/notes
+    $EDITOR $(date +"%Y%m%d%H%M%S.md")
+}
+
+td() {
+    cd ~/Documents/notes
+    $EDITOR TODO.md
+}
+
 
 alias ze='zellij edit -x 30% --width 70% -y 3% --height 97% -f'
 
