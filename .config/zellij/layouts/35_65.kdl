@@ -1,0 +1,10 @@
+layout {
+    pane split_direction="vertical" {
+        pane size="35%" name="side"
+            pane focus=true name="main" size="65%" {
+            }
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:compact-bar"
+    }
+}
