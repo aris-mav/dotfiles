@@ -19,16 +19,16 @@
 (deflayer spc_layer
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    1    2    3    4    5    6    7    8    9    0    _    _    _
-  _    esc  _    _    _    XX   left down up   rght '    _    _
-  _    caps del  -    =    `    bspc ret  [    ]    \    _
+  _    !    @    #    $    %    ^    &    *    -    +    _    _
+  _    |    ~    S--  =    XX   XX   '    "    `    \    _
   _         _    _         XX             _    _ 
 )
 
 (deflayer z_layer
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    f1   f2   f3   f4   _    _    _    _    _    _    _    _    _
-  _    f5   f6   f7   f8   _    home pgdn pgup end  _    _    _
-  _    f9   f10  f11  f12  _    _    _    _    _    _    _
+  _    f1   f2   f3   f4   (    )    home pgdn pgup end  _    _    _
+  _    f5   f6   f7   f8   [    ]    left down up   rght _
+  _    f9   f10  f11  f12  {    }    caps bspc tab  del  _
   _    _    _              _              _    _ 
 )
 
