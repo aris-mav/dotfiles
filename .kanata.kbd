@@ -9,26 +9,26 @@
 )
 
 (deflayer base
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    @e   r    t    y    u    @i   o    p    [    ]    \
-  esc  @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    ret
-  lsft @z   x    c    @v   b    n    @m   ,    .    @/   rsft
-  lctl      lmet lalt      @sp            ralt rctl 
+  XX   1    2    3    4    5    6    7    8    9    0    XX   XX   XX  
+  XX   q    w    @e   r    t    y    u    @i   o    p    XX   XX   XX  
+  @es  @a   @s   @d   @f   g    h    @j   @k   @l   @;   @tb  XX  
+  lsft @z   x    c    @v   b    n    @m   ,    .    @/   rsft  
+  XX        lmet @es       @sp            @tb  XX   
 )
 
-(deflayer spc_layer
+(deflayer sym_layer
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    1    2    3    4    5    6    7    8    9    0    _    _    _
-  _    !    @    #    $    %    ^    &    *    -    +    _    _
-  _    |    ~    S--  =    XX   XX   '    "    `    \    _
-  _         _    _         XX             _    _ 
+  XX   1    2    3    4    5    6    7    8    9    0    _    _    _
+  XX   S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8  -    +    _    _
+  XX   S-\  S-`  S--  =    XX   XX   '    S-'  `    \    _
+  XX        _    _         XX             _    _
 )
 
-(deflayer z_layer
+(deflayer nav_layer
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    f1   f2   f3   f4   (    )    home pgdn pgup end  _    _    _
-  _    f5   f6   f7   f8   [    ]    left down up   rght _
-  _    f9   f10  f11  f12  {    }    caps bspc tab  del  _
+  _    f1   f2   f3   f4   S-9  S-0  home up   end  pgup _    _    _
+  _    f5   f6   f7   f8   [    ]    left down rght pgdn _    _
+  _    f9   f10  f11  f12  {    }    bspc ret  del  caps _
   _    _    _              _              _    _ 
 )
 
@@ -39,9 +39,11 @@
 )
 
 (defalias
-  sp (tap-hold-press $tap-time $hold-time spc (layer-while-held spc_layer))
-  / (tap-hold-press $tap-time $hold-time / (layer-while-held z_layer))
-  z (tap-hold-press $tap-time $hold-time z (layer-while-held z_layer))
+  sp (tap-hold-press $tap-time $hold-time spc (layer-while-held nav_layer))
+  es (tap-hold-press $tap-time $hold-time esc (layer-while-held sym_layer))
+  tb (tap-hold-press $tap-time $hold-time tab (layer-while-held sym_layer))
+  / (tap-hold-press $tap-time $hold-time / (layer-while-held sym_layer))
+  z (tap-hold-press $tap-time $hold-time z (layer-while-held sym_layer))
 
   a (multi f24 (tap-hold $tap-time $hold-time a lmet))
   s (multi f24 (tap-hold $tap-time $hold-time s lalt))
