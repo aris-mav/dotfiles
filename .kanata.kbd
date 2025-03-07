@@ -13,7 +13,7 @@
   tab  q    w    @e   r    t    y    u    @i   o    p    [    ]    \
   @es  @a   @s   @d   @f   g    h    @j   @k   @l   @;   @tb  ret
   lsft @z   x    c    @v   b    n    @m   ,    .    /    rsft
-  lctl      lmet lalt      @sp            ralt rctl 
+  lctl      lmet @es       @sp            @tb  rctl 
   )
 
 (deflayer spc_layer
