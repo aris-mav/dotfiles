@@ -17,3 +17,17 @@ macro entr(x)
     )
 
 end
+
+"""
+    @entrm
+Whenever a .jl file is saved, main() will be evaluated.
+"""
+macro entrm()
+
+    return :(
+        Revise.entr([".jl"]) do
+            main()
+        end
+    )
+
+end

@@ -20,19 +20,20 @@ export HELIX_RUNTIME=~/software/helix/runtime
 # Aliases
 
 alias e='$EDITOR'
-alias f='pipx run --spec ranger-fm ranger'
 alias jl='julia -t auto'
 alias hm='cd ~'
 alias z='zellij'
 alias h='cd ~'
 
-alias gc='git commit'
+alias gC='git commit'
+alias gc='git checkout'
 alias gf='git fetch'
 alias ga='git add'
 alias gd='git diff'
 alias gs='git status'
 alias gp='git pull'
 alias gP='git push'
+alias gb='git branch'
 
 if type lsd > /dev/null; then
     alias ls='lsd'
