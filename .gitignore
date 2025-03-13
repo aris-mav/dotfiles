@@ -9,3 +9,4 @@
 !.julia/config
 !.config/helix
 !.config/zellij
+!.config/broot
