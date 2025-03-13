@@ -42,7 +42,7 @@
 
 (defvar
   tap-time 200
-  hold-time 150
+  hold-time 140
   hold-time-short 100
   )
 
@@ -65,10 +65,10 @@
  l (multi f24 (tap-hold $tap-time $hold-time l ralt))
  ; (multi f24 (tap-hold $tap-time $hold-time ; rmet))
 
- v (multi f24 (tap-hold $tap-time $hold-time v bspc))
- m (multi f24 (tap-hold $tap-time $hold-time m ret))
- i (multi f24 (tap-hold $tap-time $hold-time i tab))
- e (multi f24 (tap-hold $tap-time $hold-time e esc))
+ v (multi f24 (tap-hold $tap-time $hold-time-short v bspc))
+ m (multi f24 (tap-hold $tap-time $hold-time-short m ret))
+ i (multi f24 (tap-hold $tap-time $hold-time-short i tab))
+ e (multi f24 (tap-hold $tap-time $hold-time-short e esc))
 
     )
 
