@@ -10,9 +10,9 @@
 
 (deflayer base
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    @e   r    t    y    u    @i   o    p    [    ]    \
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   @es  @a   @s   @d   @f   g    h    @j   @k   @l   @;   @tb  ret
-  lsft @z   x    c    @v   b    n    @m   ,    .    /    rsft
+  lsft @z   x    c    v    b    n    m    ,    .    /    rsft
   lctl      lmet @es       @sp            @tb  rctl 
   )
 
@@ -65,11 +65,6 @@
  k (multi f24 (tap-hold $tap-time $hold-time-short k rsft))
  l (multi f24 (tap-hold $tap-time $hold-time-long l ralt))
  ; (multi f24 (tap-hold $tap-time $hold-time-long ; rmet))
-
- v (multi f24 (tap-hold $tap-time $hold-time-mid v bspc))
- m (multi f24 (tap-hold $tap-time $hold-time-mid m ret))
- i (multi f24 (tap-hold $tap-time $hold-time-mid i tab))
- e (multi f24 (tap-hold $tap-time $hold-time-mid e esc))
 
     )
 
