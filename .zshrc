@@ -115,3 +115,4 @@ compinit
 # End of lines added by compinstall
 
 source /home/arismav/.config/broot/launcher/bash/br
+eval "$(zellij setup --generate-auto-start zsh)"
