@@ -30,7 +30,7 @@ vim.g.netrw_banner = 0
 
 -- Wrap text
 -- vim.opt.textwidth = 80
--- vim.opt.wrap = true
+vim.opt.wrap = false
 
 vim.opt.undofile = true
 
