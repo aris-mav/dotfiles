@@ -19,7 +19,7 @@ return {
                 ['<C-u>'] = cmp.mapping.scroll_docs(-4),
                 ['<C-d>'] = cmp.mapping.scroll_docs(4),
                 ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                ['<Space>'] = cmp.mapping.confirm({ select = true }),
+                ['<Space>'] = cmp.mapping.confirm({ select = false }), -- select false is so that it does not auto select the 1st sugggestion
                 ['<Tab>'] = cmp.mapping.select_next_item(),
                 ['<S-Tab>'] = cmp.mapping.select_prev_item(),
             }),
