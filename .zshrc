@@ -14,8 +14,12 @@ export PATH="/home/arismav/.local/bin":$PATH
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export HELIX_RUNTIME=~/software/helix/runtime
 
-# export PATH="$HOME/.cargo/bin:$PATH"
-. "$HOME/.cargo/env"
+if [[ "$PREFIX" == *"com.termux"* ]]; then
+    export PATH="$PATH:/data/data/com.termux/files/home/.cargo/bin"
+else
+    # export PATH="$HOME/.cargo/bin:$PATH"
+    . "$HOME/.cargo/env"
+fi 
 
 # Aliases
 
@@ -116,3 +120,5 @@ compinit
 
 source /home/arismav/.config/broot/launcher/bash/br
 eval "$(zellij setup --generate-auto-start zsh)"
+
+source /data/data/com.termux/files/home/.config/broot/launcher/bash/br

@@ -157,3 +157,5 @@ esac
 
 
 source /home/arismav/.config/broot/launcher/bash/br
+
+source /data/data/com.termux/files/home/.config/broot/launcher/bash/br
