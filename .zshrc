@@ -51,7 +51,14 @@ alias tree='tree -C'
 
 nt() {
     cd ~/Documents/notes
+
+    if [ "$NT_PULLED" = "yes" ] ; then
+        git pull
+        export NT_PULLED="yes"
+    fi
     $EDITOR $(date +"%Y%m%d%H%M%S.md")
+    git commit -am "."
+    git push
 }
 
 td() {
