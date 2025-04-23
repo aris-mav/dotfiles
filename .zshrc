@@ -125,7 +125,10 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-source /home/arismav/.config/broot/launcher/bash/br
-eval "$(zellij setup --generate-auto-start zsh)"
+if [[ "$PREFIX" == *"com.termux"* ]]; then
+    source /data/data/com.termux/files/home/.config/broot/launcher/bash/br
+else
+    source /home/arismav/.config/broot/launcher/bash/br
+fi 
 
-source /data/data/com.termux/files/home/.config/broot/launcher/bash/br
+eval "$(zellij setup --generate-auto-start zsh)"
