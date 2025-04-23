@@ -133,3 +133,5 @@ if [[ "$PREFIX" == *"com.termux"* ]]; then
 else
     source /home/arismav/.config/broot/launcher/bash/br
 fi 
+
+source /home/arismav/.config/broot/launcher/bash/br
