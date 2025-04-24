@@ -1,0 +1,20 @@
+#! /bin/zsh
+
+if [ "$(hostname)" = "fwdb" ] ; then
+
+    SANDISKDIR="/media/arismav/ARISSANDISK/"
+
+    if test -d $SANDISKDIR ; then
+        echo "syncing reads with usb drive"
+        rsync -au --no-times ~/Documents/reads/ "$SANDISKDIR/reads/"
+        echo "syncing music with usb drive"
+        rsync -au --no-times ~/Music/ "$SANDISKDIR/Music/"
+    else
+        echo "sandisk usb drive not connected"
+    fi
+
+else
+
+    echo "idk what to do in this machine"
+
+fi

@@ -10,7 +10,8 @@ PS1='%F{cyan}%n@%m %F{yellow}%~ %F{reset}%# '
 export EDITOR="nvim"
 export FUZZYFIND="sk"
 
-export PATH="/home/arismav/.local/bin":$PATH
+export PATH="$PATH:/home/arismav/.local/bin"
+export PATH="$PATH:/home/arismav/.scripts"
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export HELIX_RUNTIME=~/software/helix/runtime
 
@@ -123,10 +124,12 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+eval "$(zellij setup --generate-auto-start zsh)"
+
 if [[ "$PREFIX" == *"com.termux"* ]]; then
     source /data/data/com.termux/files/home/.config/broot/launcher/bash/br
 else
     source /home/arismav/.config/broot/launcher/bash/br
 fi 
 
-eval "$(zellij setup --generate-auto-start zsh)"
+source /home/arismav/.config/broot/launcher/bash/br
