@@ -65,6 +65,8 @@ nt() {
         git commit -m "."
         git push
     fi
+
+    cd $OLDPWD
 }
 
 td() {
