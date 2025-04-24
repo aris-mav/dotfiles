@@ -54,7 +54,7 @@ default_flags: -ih
 # You may start either in 'command' mode, or in 'input' mode
 #
 modal: true
-initial_mode: command
+initial_mode: input
 
 ###############################################################
 # Whether to mark the selected line with a triangle
