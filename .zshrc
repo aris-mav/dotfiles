@@ -25,9 +25,7 @@ fi
 
 alias e='$EDITOR'
 alias jl='julia -t auto'
-alias hm='cd ~'
 alias z='zellij'
-alias h='cd ~'
 
 alias gC='git commit'
 alias gc='git checkout'
