@@ -24,7 +24,7 @@ vim.keymap.set("n", "<leader>w", ":w <cr>", { remap = true, silent = false })
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { remap = true, silent = false })
 
 -- Map leader-c to activate spellchecker
-vim.keymap.set("n", "<leader>c", ":setlocal spell spelllang=en_us ", { remap = true, silent = false })
+vim.keymap.set("n", "<leader>c", ":setlocal spell spelllang=en_us <cr>", { remap = true, silent = false })
 
 -- cd to the folder containing the current file
 vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>')
