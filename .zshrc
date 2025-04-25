@@ -53,7 +53,7 @@ nt() {
 
     filename=$(date +"%Y%m%d%H%M%S.md")
 
-    if [ "$NT_PULLED" = "yes" ] ; then
+    if [ -z "$NT_PULLED" ]; then
         git pull
         export NT_PULLED="yes"
     fi
