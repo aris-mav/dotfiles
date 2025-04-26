@@ -97,12 +97,6 @@ nt() {
     cd $OLDPWD
 }
 
-td() {
-    cd ~/Documents/notes
-    $EDITOR TODO.md
-}
-
-
 alias ze='zellij edit -x 30% --width 70% -y 3% --height 97% -f'
 
 jf() {fg %$(jobs | $FUZZYFIND | sed -E 's/^\[([0-9]+).*/\1/') }
@@ -110,17 +104,9 @@ jf() {fg %$(jobs | $FUZZYFIND | sed -E 's/^\[([0-9]+).*/\1/') }
 fp() {$FUZZYFIND --preview='less {}'}
 
 gacP() {
-
-    target_folder="$1" 
-
-    if [ -z "$target_folder" ]; then
-        echo "Please provide a target folder as argument."
-        return 1
-    fi
-
-    git -C "$target_folder" add .
-    git -C "$target_folder" commit
-    git -C "$target_folder" push
+    git add .
+    git commit
+    git push
 }
 
 # vi mode
