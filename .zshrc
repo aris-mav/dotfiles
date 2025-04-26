@@ -51,18 +51,46 @@ alias tree='tree -C'
 nt() {
     cd ~/Documents/notes
 
-    filename=$(date +"%Y%m%d%H%M%S.md")
-
     if [ -z "$NT_PULLED" ]; then
         git pull
         export NT_PULLED="yes"
     fi
+    local committed_anything=false
 
-    $EDITOR $filename
+    newnote=$(date +"%Y%m%d%H%M%S.md")
+    $EDITOR $newnote
 
-    if [ -f $filename ]; then
-        git add $filename
-        git commit -m "."
+    if [ -f $newnote ]; then
+        first_line=$(head -n 1 "$newnote")
+        git add $newnote
+        git commit -m "new note $first_line"
+        local committed_anything=true
+    fi
+
+    for file in ${(f)"$(git diff --name-only)"}; do
+        # following if excludes deleted files
+        if [ -f "$file" ]; then
+
+            case "$file" in
+                TODO.md)
+                    commit_msg="Update TODO list"
+                    ;;
+                books_finished.csv)
+                    commit_msg="Log finished books"
+                    ;;
+                *)
+                    first_line=$(head -n 1 "$file")
+                    commit_msg="edits on $first_line"
+                    ;;
+            esac
+
+            git add  "$file"
+            git commit -m "$commit_msg"
+            local committed_anything=true
+        fi
+    done
+
+    if $committed_anything; then
         git push
     fi
 
