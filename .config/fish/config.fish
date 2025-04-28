@@ -8,4 +8,20 @@ set fish_cursor_default     block      blink
 set fish_cursor_insert      line       blink
 set fish_cursor_replace_one underscore blink
 set fish_cursor_visual      bloch
-function fish_mode_prompt; end
+
+function fish_mode_prompt; 
+end 
+
+abbr e '$EDITOR'
+abbr jl 'julia -t auto'
+abbr z 'zellij'
+
+abbr gC 'git commit'
+abbr gc 'git checkout'
+abbr gf 'git fetch'
+abbr ga 'git add'
+abbr gd 'git diff'
+abbr gs 'git status'
+abbr gp 'git pull'
+abbr gP 'git push'
+abbr gb 'git branch'
