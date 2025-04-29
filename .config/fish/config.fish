@@ -1,13 +1,16 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-      fish_vi_key_bindings
+# Set up PATH entries
+fish_add_path /home/arismav/.local/bin
+fish_add_path /home/arismav/.scripts
+fish_add_path /opt/nvim-linux-x86_64/bin
+fish_add_path $HOME/.juliaup/bin/
+
+if string match -q '*com.termux*' "$PREFIX"
+    fish_add_path /data/data/com.termux/files/home/.cargo/bin
+else
+    fish_add_path $HOME/.cargo/bin
 end
 
-# Set the cursor shapes for the different vi modes.
-set fish_cursor_default     block      
-set fish_cursor_insert      line       blink
-set fish_cursor_replace_one underscore blink
-set fish_cursor_visual      bloch
+set -gx HELIX_RUNTIME ~/software/helix/runtime
 
 # Define abbreviations
 abbr e '$EDITOR'
@@ -24,3 +27,34 @@ abbr gP 'git push'
 abbr gb 'git branch'
 abbr gacp 'git add . ; git commit ; git push '
 abbr fp '$FUZZYFIND --preview="less {}"'
+
+for candidate in nvim hx vim vi
+    if type -q $candidate
+        set -gx EDITOR $candidate
+        break
+    end
+end
+
+for candidate in sk fzf
+    if type -q $candidate
+        set -gx FUZZYFIND $candidate
+        break
+    end
+end
+
+
+if status is-interactive
+
+    fish_vi_key_bindings
+    # Set the cursor shapes for the different vi modes.
+    set fish_cursor_default     block      
+    set fish_cursor_insert      line       blink
+    set fish_cursor_replace_one underscore blink
+    set fish_cursor_visual      bloch
+
+    if type -q zellij
+        set -gx ZELLIJ_AUTO_ATTACH true
+        eval (zellij setup --generate-auto-start fish | string collect)
+    end
+end
+
