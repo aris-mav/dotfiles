@@ -16,6 +16,9 @@ set -gx HELIX_RUNTIME ~/software/helix/runtime
 abbr e '$EDITOR'
 abbr jl 'julia -t auto'
 abbr z 'zellij'
+abbr f 'br'
+abbr fp '$FUZZYFIND --preview="less {}"'
+
 abbr gC 'git commit'
 abbr gc 'git checkout'
 abbr gr 'git restore'
@@ -28,7 +31,6 @@ abbr gp 'git pull'
 abbr gP 'git push'
 abbr gb 'git branch'
 abbr gacp 'git add . ; git commit ; git push '
-abbr fp '$FUZZYFIND --preview="less {}"'
 
 # Define some software preferences
 for candidate in nvim hx vim vi
