@@ -31,6 +31,7 @@ abbr gp 'git pull'
 abbr gP 'git push'
 abbr gb 'git branch'
 abbr gacp 'git add . ; git commit ; git push '
+abbr -a skrg 'sk --ansi -i -c \'rg --color=always --line-number "{}"\' --preview "bat --color=always --highlight-line {2} {1}" --delimiter : --bind "enter:execute($EDITOR +{2} {1})" '
 
 # Define some software preferences
 for candidate in nvim hx vim vi

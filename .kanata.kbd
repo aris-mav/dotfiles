@@ -27,9 +27,9 @@
 ;; (deflayer base
 ;;   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
 ;;   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-;;   @es  @a   @s   @d   @f   g    h    @j   @k   @l   @;   @tb  ret
-;;   lsft @z   x    c    v    b    n    m    ,    .    /    rsft
-;;   lctl      lmet @es       @sp            @tb  rctl 
+;;   @es  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   @tb  ret
+;;   lsft z    x    c    v    b    n    m    ,    .    /    rsft
+;;   lctl      lmet lalt      @sp            ralt rctl 
 ;;   )
 ;; 
 ;; (deflayer spc_layer
@@ -44,7 +44,7 @@
 ;;   _    _    _    _    _    _    _    _    _    _    _    _    _    _
 ;;   _    S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8  S-9  S-0  _    _    _
 ;;   _    _    _    _    _    S--  home pgdn pgup end  S-'  _    _
-;;   _    _    del  caps bspc S-=  S-`  ret  S-[  S-]  S-\  _
+;;   _    caps del  _    bspc S-=  S-`  ret  S-[  S-]  S-\  _
 ;;   _         _    _         XX             _    _ 
 ;;   )
 ;; 
@@ -112,5 +112,3 @@
 ;; Run systemctl --user enable kanata.service so it may autostart whenever the current user logs in.
 ;; Run systemctl --user status kanata.service to check if kanata daemon is running or not.
 ;; Run systemctl --user restart kanata.service to restart.
-
-
