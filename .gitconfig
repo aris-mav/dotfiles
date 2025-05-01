@@ -1,0 +1,5 @@
+[user]
+    name = arismav
+    email = aris.mav@hotmail.com
+[safe]
+	directory = /etc/nixos
