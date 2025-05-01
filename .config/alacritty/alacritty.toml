@@ -7,7 +7,6 @@ decorations = "None"
 decorations_theme_variant = "Dark"
 startup_mode = "Maximized"
 
-
 [font]
 
 normal.family = "JetbrainsMono Nerdfont"
@@ -15,11 +14,10 @@ bold.family = "JetbrainsMono Nerdfont"
 italic.family = "JetbrainsMono Nerdfont"
 bold_italic.family = "JetbrainsMono Nerdfont"
 
-size = 18.0
+# size = 18.0
 
 [terminal]
-shell = "/usr/bin/zsh"
-
+shell = "fish"
 
 [colors.primary]
 # hard contrast background = = '#1d2021'
