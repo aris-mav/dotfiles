@@ -137,6 +137,7 @@
         neovim
             wget
             curl
+            gnomeExtensions.blur-my-shell
     ];
 
     system.autoUpgrade.enable = true;
@@ -144,7 +145,7 @@
     nix.gc = {
         automatic = true;
         dates = "daily";
-        options = "--delete-older-than 15d";
+        options = "--delete-older-than 5d";
     };
 
 

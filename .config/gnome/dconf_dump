@@ -4,6 +4,10 @@ font-scale=1.1000000000000001
 last-window-maximised=false
 last-window-size=(812, 576)
 
+[org/gnome/Extensions]
+window-height=1162
+window-width=1133
+
 [org/gnome/Snapshot]
 is-maximized=false
 window-height=640
@@ -63,6 +67,7 @@ sources=[('xkb', 'us'), ('xkb', 'us+colemak_dh')]
 xkb-options=['terminate:ctrl_alt_bksp', 'lv3:ralt_switch']
 
 [org/gnome/desktop/interface]
+accent-color='teal'
 color-scheme='prefer-dark'
 font-name='Cantarell 12'
 icon-theme='Adwaita'
@@ -99,6 +104,9 @@ picture-uri='file:///run/current-system/sw/share/backgrounds/gnome/blobs-l.svg'
 primary-color='#241f31'
 secondary-color='#000000'
 
+[org/gnome/desktop/search-providers]
+sort-order=['org.gnome.Settings.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Nautilus.desktop']
+
 [org/gnome/epiphany]
 ask-for-default=false
 
@@ -124,7 +132,71 @@ initial-size-file-chooser=(890, 550)
 night-light-schedule-automatic=false
 
 [org/gnome/shell]
+command-history=['blur', 'r']
+disabled-extensions=['windowsNavigator@gnome-shell-extensions.gcampax.github.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'light-style@gnome-shell-extensions.gcampax.github.com', 'native-window-placement@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'screenshot-window-sizer@gnome-shell-extensions.gcampax.github.com', 'status-icons@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['blur-my-shell@aunetx', 'system-monitor@gnome-shell-extensions.gcampax.github.com']
 welcome-dialog-last-shown-version='47.2'
+
+[org/gnome/shell/app-switcher]
+current-workspace-only=true
+
+[org/gnome/shell/extensions/blur-my-shell]
+pipelines={'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_000000000000'>, 'params': <{'radius': <30>, 'brightness': <0.59999999999999998>}>}>]>}, 'pipeline_default_rounded': {'name': <'Default rounded'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_000000000001'>, 'params': <{'radius': <30>, 'brightness': <0.59999999999999998>}>}>]>}, 'pipeline_26493215630915': {'name': <'New pipeline'>, 'effects': <@av []>}}
+settings-version=2
+
+[org/gnome/shell/extensions/blur-my-shell/appfolder]
+brightness=0.59999999999999998
+sigma=30
+
+[org/gnome/shell/extensions/blur-my-shell/applications]
+blur=false
+dynamic-opacity=true
+enable-all=true
+
+[org/gnome/shell/extensions/blur-my-shell/coverflow-alt-tab]
+pipeline='pipeline_default'
+
+[org/gnome/shell/extensions/blur-my-shell/dash-to-dock]
+blur=false
+brightness=0.59999999999999998
+pipeline='pipeline_default_rounded'
+sigma=30
+static-blur=true
+style-dash-to-dock=0
+
+[org/gnome/shell/extensions/blur-my-shell/lockscreen]
+pipeline='pipeline_default'
+
+[org/gnome/shell/extensions/blur-my-shell/overview]
+blur=true
+pipeline='pipeline_default'
+
+[org/gnome/shell/extensions/blur-my-shell/panel]
+blur=true
+brightness=0.25
+force-light-text=false
+override-background=true
+override-background-dynamically=false
+pipeline='pipeline_default_rounded'
+sigma=60
+static-blur=false
+style-panel=0
+unblur-in-overview=true
+
+[org/gnome/shell/extensions/blur-my-shell/screenshot]
+pipeline='pipeline_default'
+
+[org/gnome/shell/extensions/blur-my-shell/window-list]
+brightness=0.5
+sigma=50
+
+[org/gnome/shell/extensions/system-monitor]
+show-download=false
+show-swap=false
+show-upload=false
+
+[org/gnome/shell/extensions/workspace-indicator]
+embed-previews=true
 
 [org/gnome/shell/world-clocks]
 locations=@av []
