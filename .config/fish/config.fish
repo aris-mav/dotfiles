@@ -63,7 +63,9 @@ if status is-interactive
     set fish_cursor_visual      bloch
 
     # zellij auto-start
-    if type -q zellij
+    if type -q tmux
+        #eval (tmux && tmux split-window -h && tmux resize-pane -x 66%)
+    else if type -q zellij
         set -gx ZELLIJ_AUTO_ATTACH true
         eval (zellij setup --generate-auto-start fish | string collect)
     end
