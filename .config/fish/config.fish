@@ -12,6 +12,7 @@ end
 
 set -gx HELIX_RUNTIME ~/software/helix/runtime
 
+set fish_greeting
 
 # Define abbreviations
 abbr e '$EDITOR'
@@ -62,10 +63,16 @@ if status is-interactive
     set fish_cursor_replace_one underscore blink
     set fish_cursor_visual      bloch
 
-    # zellij auto-start
-    if type -q tmux
-        #eval (tmux && tmux split-window -h && tmux resize-pane -x 66%)
+    if type -q tmux 
+        if not set -q TMUX
+            if tmux has-session -t main
+                exec tmux attach-session -t main
+            else
+                exec tmux new-session -s main \; split-window -h \; resize-pane -x 66%
+            end
+        end
     else if type -q zellij
+
         set -gx ZELLIJ_AUTO_ATTACH true
         eval (zellij setup --generate-auto-start fish | string collect)
     end
