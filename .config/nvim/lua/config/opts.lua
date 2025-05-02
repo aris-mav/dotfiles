@@ -17,6 +17,15 @@ vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a T
 vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
 vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "csv", },
+  callback = function()
+    vim.opt_local.expandtab = false
+    vim.opt_local.tabstop = 4
+  end,
+})
+
+
 vim.opt.hlsearch = false -- Do not highlight search results
 vim.opt.incsearch = true -- Highlight search results only as you type
 
