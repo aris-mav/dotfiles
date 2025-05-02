@@ -68,7 +68,7 @@ if status is-interactive
             if tmux has-session -t main
                 exec tmux attach-session -t main
             else
-                exec tmux new-session -s main \; split-window -h \; resize-pane -x 66%
+                exec tmux new-session -s main -n home \; split-window -h \; resize-pane -x 66%
             end
         end
     else if type -q zellij
