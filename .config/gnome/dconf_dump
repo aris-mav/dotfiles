@@ -58,15 +58,20 @@ secondary-color='#000000'
 
 [org/gnome/desktop/input-sources]
 mru-sources=[('xkb', 'us')]
+show-all-sources=false
 sources=[('xkb', 'us'), ('xkb', 'us+colemak_dh')]
 xkb-options=['terminate:ctrl_alt_bksp', 'lv3:ralt_switch']
 
 [org/gnome/desktop/interface]
 color-scheme='prefer-dark'
+font-name='Cantarell 12'
+icon-theme='Adwaita'
+monospace-font-name='JetBrains Mono 10'
+text-scaling-factor=1.8500000000000005
 toolkit-accessibility=false
 
 [org/gnome/desktop/notifications]
-application-children=['gnome-power-panel', 'firefox', 'org-gnome-console', 'vivaldi-stable']
+application-children=['gnome-power-panel', 'firefox', 'org-gnome-console', 'vivaldi-stable', 'org-gnome-tweaks']
 
 [org/gnome/desktop/notifications/application/firefox]
 application-id='firefox.desktop'
@@ -76,6 +81,9 @@ application-id='gnome-power-panel.desktop'
 
 [org/gnome/desktop/notifications/application/org-gnome-console]
 application-id='org.gnome.Console.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-tweaks]
+application-id='org.gnome.tweaks.desktop'
 
 [org/gnome/desktop/notifications/application/vivaldi-stable]
 application-id='vivaldi-stable.desktop'
@@ -105,7 +113,12 @@ migrated=true
 dynamic-workspaces=true
 
 [org/gnome/nautilus/preferences]
+default-folder-viewer='icon-view'
 migrated-gtk-settings=true
+search-filter-time-type='last_modified'
+
+[org/gnome/nautilus/window-state]
+initial-size-file-chooser=(890, 550)
 
 [org/gnome/settings-daemon/plugins/color]
 night-light-schedule-automatic=false
@@ -115,3 +128,6 @@ welcome-dialog-last-shown-version='47.2'
 
 [org/gnome/shell/world-clocks]
 locations=@av []
+
+[org/gnome/tweaks]
+show-extensions-notice=false
