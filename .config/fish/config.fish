@@ -12,7 +12,6 @@ end
 
 set -gx HELIX_RUNTIME ~/software/helix/runtime
 
-set fish_greeting
 
 # Define abbreviations
 abbr e '$EDITOR'
@@ -76,6 +75,12 @@ if status is-interactive
         set -gx ZELLIJ_AUTO_ATTACH true
         eval (zellij setup --generate-auto-start fish | string collect)
     end
+
+    # Cosmetic stuff
+    set fish_greeting # disables the greeting
+    set fish_color_user yellow
+    set fish_color_host cyan
+    set fish_color_cwd  blue
 
 end
 
