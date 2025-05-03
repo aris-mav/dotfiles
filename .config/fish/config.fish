@@ -1,18 +1,3 @@
-# Set up PATH entries
-fish_add_path $HOME/.local/bin
-fish_add_path $HOME/.scripts
-fish_add_path $HOME/.juliaup/bin/
-fish_add_path /opt/nvim-linux-x86_64/bin
-
-if string match -q '*com.termux*' "$PREFIX"
-    fish_add_path /data/data/com.termux/files/home/.cargo/bin
-else
-    fish_add_path $HOME/.cargo/bin
-end
-
-set -gx HELIX_RUNTIME ~/software/helix/runtime
-
-
 # Define abbreviations
 
 # general stuff
