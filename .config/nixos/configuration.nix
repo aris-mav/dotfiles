@@ -55,6 +55,10 @@
         variant = "";
     };
 
+
+# Enable unpatched binaries ( https://github.com/nix-community/nix-ld )
+    programs.nix-ld.enable = true;
+
 # Enable CUPS to print documents.
     services.printing.enable = true;
 
@@ -98,6 +102,10 @@
                 broot
                 delta
                 gnome-tweaks
+# Language Servers
+                lua-language-server
+                pyright
+                rust-analyzer
         ];
     };
 
