@@ -14,12 +14,15 @@ set -gx HELIX_RUNTIME ~/software/helix/runtime
 
 
 # Define abbreviations
+
+# general stuff
 abbr e '$EDITOR'
 abbr jl 'julia -t auto'
 abbr z 'zellij'
 abbr f 'br'
 abbr fp '$FUZZYFIND --preview="less {}"'
 
+# git stuff
 abbr gC 'git commit'
 abbr gc 'git checkout'
 abbr gr 'git restore'
@@ -35,7 +38,9 @@ abbr gacp 'git add . ; git commit ; git push '
 abbr -a ske 'sk --ansi -i -c \'rg --color=always --line-number "{}"\' --preview "bat --color=always --highlight-line {2} {1}" --delimiter : --bind "enter:execute($EDITOR +{2} {1})"'
 abbr -a skr 'echo (string split -m 1 : (sk --ansi -i -c \'rg -i --color=always --line-number "{}"\'))[1]'
 
+# nix stuff
 abbr rb 'sudo nixos-rebuild switch -I nixos-config=$HOME/.config/nixos/configuration.nix'
+abbr ns 'nix-shell --command fish -p '
 
 # Define some software preferences
 for candidate in nvim hx vim vi
