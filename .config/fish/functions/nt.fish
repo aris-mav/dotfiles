@@ -1,5 +1,11 @@
 function nt
-    cd ~/Documents/notes
+
+    if not set -q NOTES_DIR
+        read -l -P "Enter the notes directory: " ndir
+        set -U NOTES_DIR $ndir
+    end
+
+    cd $NOTES_DIR
 
     set datetime (date +%Y%m%d%H%M%S)
 
