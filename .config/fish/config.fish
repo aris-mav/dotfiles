@@ -67,7 +67,10 @@ if status is-interactive
             if tmux has-session -t main
                 exec tmux attach-session -t main
             else
-                if test (tput cols) -gt 120 # If screen is wide, split it
+                set -l term_width (tput cols)
+                if test $term_width -gt 150 # If screen is wide, split it
+                    exec tmux new-session -s main -n home \; split-window -h \; resize-pane -x (math -s0 $term_width/2 + 25)
+                else if test $term_width -gt 120 
                     exec tmux new-session -s main -n home \; split-window -h \; resize-pane -x 66%
                 else
                     exec tmux new-session -s main -n home 
