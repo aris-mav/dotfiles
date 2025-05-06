@@ -2,10 +2,8 @@
 
 # general stuff
 abbr e '$EDITOR'
-abbr jl 'julia -t auto'
 abbr z 'zellij'
 abbr f 'br'
-abbr fp '$FUZZYFIND --preview="less {}"'
 
 # git stuff
 abbr gC 'git commit'
@@ -20,8 +18,6 @@ abbr gp 'git pull'
 abbr gP 'git push'
 abbr gb 'git branch'
 abbr gacp 'git add . ; git commit ; git push '
-abbr -a ske 'sk --ansi -i -c \'rg --color=always --line-number "{}"\' --preview "bat --color=always --highlight-line {2} {1}" --delimiter : --bind "enter:execute($EDITOR +{2} {1})"'
-abbr -a skr 'echo (string split -m 1 : (sk --ansi -i -c \'rg -i --color=always --line-number "{}"\'))[1]'
 
 # nix stuff
 abbr rb 'sudo nixos-rebuild switch -I nixos-config=$HOME/.config/nixos/configuration.nix'
@@ -35,12 +31,25 @@ for candidate in nvim hx vim vi
     end
 end
 
+# Fuzzyfind stuff
 for candidate in sk fzf
     if type -q $candidate
         set -gx FUZZYFIND $candidate
         break
     end
 end
+if set -q FUZZYFIND
+
+    abbr fp '$FUZZYFIND --preview="less {}"'
+    abbr gaf 'git add (git diff --name-only | $FUZZYFIND --preview="less {}")'
+
+    if test $FUZZYFIND = sk
+        abbr -a ske 'sk --ansi -i -c \'rg --color=always --line-number "{}"\' --preview "bat --color=always --highlight-line {2} {1}" --delimiter : --bind "enter:execute($EDITOR +{2} {1})"'
+        abbr -a skr 'echo (string split -m 1 : (sk --ansi -i -c \'rg -i --color=always --line-number "{}"\'))[1]'
+    end 
+
+end
+
 
 # For interactive sessions
 if status is-interactive
@@ -50,9 +59,10 @@ if status is-interactive
     set fish_cursor_default     block      
     set fish_cursor_insert      line       blink
     set fish_cursor_replace_one underscore blink
-    set fish_cursor_visual      bloch
+    set fish_cursor_visual      block
 
     if type -q tmux 
+
         if not set -q TMUX
             if tmux has-session -t main
                 exec tmux attach-session -t main
@@ -60,10 +70,12 @@ if status is-interactive
                 exec tmux new-session -s main -n home \; split-window -h \; resize-pane -x 66%
             end
         end
+
     else if type -q zellij
 
         set -gx ZELLIJ_AUTO_ATTACH true
         eval (zellij setup --generate-auto-start fish | string collect)
+
     end
 
     # Cosmetic stuff
