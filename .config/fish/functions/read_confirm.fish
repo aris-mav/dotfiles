@@ -1,6 +1,6 @@
-function read_confirm
+function read_confirm --argument prompt
   while true
-    read -l -P 'Do you want to continue? [y/N] ' confirm
+    read -l -P "$prompt [y/N] " confirm
 
     switch $confirm
       case Y y yes Yes
