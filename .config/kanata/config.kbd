@@ -14,6 +14,14 @@
  lctl      lmet lalt      @sp            ralt rctl 
  )
 
+(deflayer nomods
+ grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+ tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+ esc  a    s    d    f    g    h    j    k    l    ;    tab  ret
+ lsft z    x    c    v    b    n    m    ,    .    /    rsft
+ lctl      lmet lalt      spc            ralt rctl 
+ )
+
 (deflayer spc_layer
  _    _    _    _    _    _    _    _    _    _    _    _    _    _
  _    1    2    3    4    5    6    7    8    9    0    _    _    _
@@ -43,7 +51,29 @@
  hold-time-long 140
  hold-time-mid 120
  hold-time-short 100
+
+ left-hand-keys (
+    q w e r t
+    a s d f g
+    z x c v b
+  )
+  right-hand-keys (
+    y u i o p
+    h j k l ;
+    n m , . /
+  )
  )
+
+ (deffakekeys
+  to-base (layer-switch base)
+)
+
+(defalias
+  tap (multi
+    (layer-switch nomods)
+    (on-idle-fakekey to-base tap 20)
+  )
+)
 
 (defalias
 
@@ -51,48 +81,20 @@
  es (tap-hold-press $tap-time $hold-time-long esc (layer-while-held s_spc_layer))
  tb (tap-hold-press $tap-time $hold-time-long tab (layer-while-held s_spc_layer))
 
- a (multi f24 (tap-hold $tap-time $hold-time-long a lmet))
- s (multi f24 (tap-hold $tap-time $hold-time-long s lalt))
- d (multi f24 (tap-hold $tap-time $hold-time-short d lsft))
- f (multi f24 (tap-hold $tap-time $hold-time-long f lctl))
+ a (tap-hold-release-keys $tap-time $hold-time-long  (multi a @tap) lmet $left-hand-keys)
+ s (tap-hold-release-keys $tap-time $hold-time-mid   (multi s @tap) lalt $left-hand-keys)
+ d (tap-hold-release-keys $tap-time $hold-time-short (multi d @tap) lsft $left-hand-keys)
+ f (tap-hold-release-keys $tap-time $hold-time-mid   (multi f @tap) lctl $left-hand-keys)
 
- g (tap-hold-press $tap-time $hold-time-long g (layer-while-held f_layer))
- h (tap-hold-press $tap-time $hold-time-long h (layer-while-held f_layer))
+ g (tap-hold-press $tap-time $hold-time-mid g (layer-while-held f_layer))
+ h (tap-hold-press $tap-time $hold-time-mid h (layer-while-held f_layer))
 
- j (multi f24 (tap-hold $tap-time $hold-time-long j rctl))
- k (multi f24 (tap-hold $tap-time $hold-time-short k rsft))
- l (multi f24 (tap-hold $tap-time $hold-time-long l ralt))
- ; (multi f24 (tap-hold $tap-time $hold-time-long ; rmet))
+ j (tap-hold-release-keys $tap-time $hold-time-mid   (multi j @tap) rctl $right-hand-keys)
+ k (tap-hold-release-keys $tap-time $hold-time-short (multi k @tap) rsft $right-hand-keys)
+ l (tap-hold-release-keys $tap-time $hold-time-mid   (multi l @tap) ralt $right-hand-keys)
+ ; (tap-hold-release-keys $tap-time $hold-time-long  (multi ; @tap) rmet $right-hand-keys)
 
  cw (caps-word 2000)
 
  )
 
-;; INSTRUCTIONS TO RUN IN BACKGROUND (linux)
-;;
-;; Follow steps here : https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md 
-;; (so that the keyboard is recognised without sudo)
-;;
-;; Add the following to a file in ~/.config/systemd/user/kanata.service
-;; ------------------------------------------------------
-;; [Unit]
-;; Description=Kanata keyboard remapper
-;; Documentation=https://github.com/jtroo/kanata
-;; 
-;; [Service]
-;; Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:${HOME}/.local/bin
-;; Environment=DISPLAY=:0
-;; Type=simple
-;; ExecStart=/usr/bin/sh -c "exec $HOME/software/kanata/target/debug/kanata --cfg $HOME/.kanata.kbd"
-;; 
-;; Restart=no
-;; 
-;; [Install]
-;; WantedBy=default.target
-;; ------------------------------------------------------
-;; (of course, edit paths in ExecStart if needed)
-;;
-;; Run systemctl --user start kanata.service to start kanata daemon
-;; Run systemctl --user enable kanata.service so it may autostart whenever the current user logs in.
-;; Run systemctl --user status kanata.service to check if kanata daemon is running or not.
-;; Run systemctl --user restart kanata.service to restart.
