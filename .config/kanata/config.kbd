@@ -81,7 +81,7 @@
  es (tap-hold-press $tap-time $hold-time-long esc (layer-while-held s_spc_layer))
  tb (tap-hold-press $tap-time $hold-time-long tab (layer-while-held s_spc_layer))
 
- a (tap-hold-release-keys $tap-time $hold-time-long  (multi a @tap) lmet $left-hand-keys)
+ a (tap-hold-release-keys $tap-time 300              (multi a @tap) lmet $left-hand-keys)
  s (tap-hold-release-keys $tap-time $hold-time-mid   (multi s @tap) lalt $left-hand-keys)
  d (tap-hold-release-keys $tap-time $hold-time-short (multi d @tap) lsft $left-hand-keys)
  f (tap-hold-release-keys $tap-time $hold-time-mid   (multi f @tap) lctl $left-hand-keys)
@@ -92,7 +92,7 @@
  j (tap-hold-release-keys $tap-time $hold-time-mid   (multi j @tap) rctl $right-hand-keys)
  k (tap-hold-release-keys $tap-time $hold-time-short (multi k @tap) rsft $right-hand-keys)
  l (tap-hold-release-keys $tap-time $hold-time-mid   (multi l @tap) ralt $right-hand-keys)
- ; (tap-hold-release-keys $tap-time $hold-time-long  (multi ; @tap) rmet $right-hand-keys)
+ ; (tap-hold-release-keys $tap-time 300              (multi ; @tap) rmet $right-hand-keys)
 
  cw (caps-word 2000)
 
