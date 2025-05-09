@@ -2,8 +2,8 @@
 
 # general stuff
 abbr e '$EDITOR'
-abbr z 'zellij'
 abbr f 'br'
+abbr y 'wl-copy'
 
 # git stuff
 abbr gC 'git commit'
