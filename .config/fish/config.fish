@@ -4,6 +4,7 @@
 abbr e '$EDITOR'
 abbr f 'br'
 abbr y 'wl-copy'
+abbr xo 'xdg-open'
 
 # git stuff
 abbr gC 'git commit'
