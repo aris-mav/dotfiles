@@ -5,6 +5,7 @@ line-number = "relative"
 mouse = false
 true-color = true
 scrolloff = 1
+shell = ["/usr/bin/fish" , "-c"]
 
 [editor.cursor-shape]
 insert = "bar"
