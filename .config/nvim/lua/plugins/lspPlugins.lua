@@ -38,6 +38,7 @@ return {
                 callback = function(event)
                     local opts = {buffer = event.buf}
 
+                    vim.keymap.set("n", "<leader>r", vim.lsp.buf.references)
                     vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
                     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
                     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
@@ -60,6 +61,9 @@ return {
                     end,
                 }
             })
+
+
+
             -- Alternative, manual loading
             -- -- These are just examples. Replace them with the language
             -- -- servers you have installed in your system

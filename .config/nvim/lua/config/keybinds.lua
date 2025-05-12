@@ -38,9 +38,21 @@ vim.keymap.set({ "n", "v" } , "<leader>y", '\"+y', { remap = true, silent = fals
 vim.keymap.set({ "n", "v" } , "<leader>p", '\"0p', { remap = true, silent = false })
 
 -- Quickfix keymaps
-vim.keymap.set("n", "<leader>q", ":cope <cr>", { remap = true, silent = false })
+function ToggleQuickfix()
+    if vim.fn.getqflist({ winid = 0 }).winid ~= 0 then
+        vim.cmd('cclose')
+    else
+        vim.cmd('copen')
+    end
+end
+vim.keymap.set('n', "<A-q>", ':lua ToggleQuickfix()<CR>', { noremap = true, silent = true })
 vim.keymap.set("n", "<A-n>", ":cn <cr>", { remap = true, silent = false })
 vim.keymap.set("n", "<A-p>", ":cp <cr>", { remap = true, silent = false })
+
+-- Reload config
+vim.keymap.set('n', '<leader>rl', function()
+  dofile(vim.env.MYVIMRC)
+end, { desc = 'Reload init.lua' })
 
 -- Swap windows using alt+hjkl
 vim.keymap.set("n", "<A-h>", "<C-w>h", { noremap = true, silent = true })
