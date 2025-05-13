@@ -27,10 +27,8 @@ return {
                     item.menu = menu_icon[entry.source.name]
 
                     -- Set the fixed width of the completion menu 
-                    local fixed_width = 25
-
-                    -- Set 'fixed_width' to false if not provided.
-                    -- fixed_width = fixed_width or false
+                    -- local fixed_width = 25
+                    local fixed_width = false
 
                     -- Get the completion entry text shown in the completion window.
                     local content = item.abbr
