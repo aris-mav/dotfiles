@@ -1,9 +1,9 @@
--- Automatically install LSP servers with mason
 return {
     {
+        -- Automatically install LSP servers with mason
         'williamboman/mason.nvim',
         lazy = false,
-        opts = {},
+        opts = { },
     },
 
     {
@@ -39,7 +39,6 @@ return {
                     local opts = {buffer = event.buf}
 
                     vim.keymap.set("n", "<leader>r", vim.lsp.buf.references)
-                    vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
                     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
                     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
                     vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
@@ -62,6 +61,24 @@ return {
                 }
             })
 
+            -- Julia lsp config
+            vim.lsp.config['julials'] = {
+                -- Command and arguments to start the server.
+                cmd = { '' },
+                filetypes = { 'julia' },
+                root_markers = { 'Project.toml', 'Manifest.toml' },
+
+                settings = {
+                    require'lspconfig'.julials.setup{
+                        on_new_config = function(new_config, _)
+                            local julia = vim.fn.expand("~/.julia/environments/lsp/")
+                            if require'lspconfig'.util.path.is_file(julia) then
+                                new_config.cmd[1] = julia
+                            end
+                        end
+                    }
+                }
+            }
 
 
             -- Alternative, manual loading
