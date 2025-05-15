@@ -25,6 +25,9 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Use ripgrep
+vim.opt.grepprg = "rg --vimgrep"
+vim.opt.grepformat = "%f:%l:%c:%m"
 
 vim.opt.hlsearch = false -- Do not highlight search results
 vim.opt.incsearch = true -- Highlight search results only as you type
