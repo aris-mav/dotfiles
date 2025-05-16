@@ -39,7 +39,6 @@ return {
                     local opts = {buffer = event.buf}
 
                     vim.keymap.set("n", "<leader>r", vim.lsp.buf.references)
-                    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
                     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
                     vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
                     vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
@@ -56,36 +55,51 @@ return {
                     -- this first function is the "default handler"
                     -- it applies to every language server without a "custom handler"
                     function(server_name)
-                        require('lspconfig')[server_name].setup({})
+                        vim.lsp.enable(server_name)
                     end,
                 }
             })
 
             -- Julia lsp config
-            vim.lsp.config['julials'] = {
-                -- Command and arguments to start the server.
-                cmd = { '' },
-                filetypes = { 'julia' },
-                root_markers = { 'Project.toml', 'Manifest.toml' },
+vim.lsp.config('julials', {
+    cmd = {
+        "julia",
+        "--project=".."~/.julia/environments/lsp/",
+        "--startup-file=no",
+        "--history-file=no",
+        "-e", [[
+            using Pkg
+            Pkg.instantiate()
+            using LanguageServer
+        depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
+        project_path = let
+            dirname(something(
+                ## 1. Finds an explicitly set project (JULIA_PROJECT)
+                Base.load_path_expand((
+                    p = get(ENV, "JULIA_PROJECT", nothing);
+                        p === nothing ? nothing : isempty(p) ? nothing : p
+                    )),
+                        ## 2. Look for a Project.toml file in the current working directory,
+                        ##    or parent directories, with $HOME as an upper boundary
+                        Base.current_project(),
+                        ## 3. First entry in the load path
+                        get(Base.load_path(), 1, nothing),
+                        ## 4. Fallback to default global environment,
+                        ##    this is more or less unreachable
+                    Base.load_path_expand("@v#.#"),
+                ))
+            end
+                    @info "Running language server" VERSION pwd() project_path depot_path
+                    server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path)
+        server.runlinter = true
+            run(server)
+        ]]
+    },
+    filetypes = { 'julia' },
+    root_markers = { "Project.toml", "JuliaProject.toml" },
+    settings = {}
+})
 
-                settings = {
-                    require'lspconfig'.julials.setup{
-                        on_new_config = function(new_config, _)
-                            local julia = vim.fn.expand("~/.julia/environments/lsp/")
-                            if require'lspconfig'.util.path.is_file(julia) then
-                                new_config.cmd[1] = julia
-                            end
-                        end
-                    }
-                }
-            }
-
-
-            -- Alternative, manual loading
-            -- -- These are just examples. Replace them with the language
-            -- -- servers you have installed in your system
-            -- require('lspconfig').gleam.setup({})
-            -- require('lspconfig').ocamllsp.setup({})
         end
     }
 }
