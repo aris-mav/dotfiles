@@ -60,6 +60,9 @@ return {
                 }
             })
 
+            -- enable fish lsp
+            vim.lsp.enable('fish_lsp')
+
             -- Julia lsp config
             vim.lsp.config('julials', {
                 cmd = {
