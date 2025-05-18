@@ -39,6 +39,7 @@ return {
                     local opts = {buffer = event.buf}
 
                     vim.keymap.set("n", "<leader>r", vim.lsp.buf.references)
+                    vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
                     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
                     vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
                     vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)

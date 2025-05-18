@@ -38,11 +38,6 @@ return {
                     live_grep = {
                         -- Use `git ls-files` to get tracked files and pass them to `rg`
                         find_command = { "rg", "--files", "--no-ignore", "--hidden", "--glob", "!**/.git/*" },
-                        -- Optional: customize the theme and layout
-                        theme = "gruvbox",
-                        layout_config = {
-                            preview_width = 0.6,
-                        },
                         path_display = { "smart" },
                     },
                 },
@@ -51,7 +46,7 @@ return {
             vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Buffers' }),
             vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Find Files' }),
             vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = 'Live Grep' }),
-            vim.keymap.set('n', '<leader>d', builtin.diagnostics, { desc = 'Diagnostics' }),
+            vim.keymap.set('n', '<leader>td', builtin.diagnostics, { desc = 'Diagnostics' }),
 
         }
     end,
