@@ -5,23 +5,26 @@ return {
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-cmdline',
     },
     config = function()
         local cmp = require('cmp')
 
         cmp.setup({
 
+            disallow_fuzzy_matching = false,
+            preselect = cmp.PreselectMode.None,
             -- formatting taken from https://github.com/hrsh7th/nvim-cmp/discussions/609#discussioncomment-5727678
             formatting = {
                 fields = { "abbr", "menu", "kind" },
                 format = function(entry, item)
                     -- Define menu shorthand for different completion sources.
                     local menu_icon = {
-                        nvim_lsp = "NLSP",
-                        nvim_lua = "NLUA",
-                        luasnip  = "LSNP",
-                        buffer   = "BUFF",
-                        path     = "PATH",
+                        nvim_lsp = "LSP",
+                        nvim_lua = "LUA",
+                        luasnip  = "SNP",
+                        buffer   = "BUF",
+                        path     = "PTH",
                     }
                     -- Set the menu "icon" to the shorthand for each completion source.
                     item.menu = menu_icon[entry.source.name]
@@ -61,21 +64,44 @@ return {
             sources = {
                 {name = 'nvim_lsp'},
                 {name = 'path' },
+                {name = 'luasnip' },
                 {name = 'buffer', keyword_length = 3 },
             },
             mapping = cmp.mapping.preset.insert({
-                ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-                ['<C-d>'] = cmp.mapping.scroll_docs(4),
-                ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                ['<Space>'] = cmp.mapping.confirm({ select = false }), -- select false is so that it does not auto select the 1st sugggestion
-                ['<Tab>'] = cmp.mapping.select_next_item(),
-                ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+                ['<C-u>'] = cmp.mapping.scroll_docs(-4 ,{ 'i', 'c' }),
+                ['<C-d>'] = cmp.mapping.scroll_docs(4 ,{ 'i', 'c' }),
+                ['<CR>'] = cmp.mapping.confirm({ select = true } ,{ 'i', 'c' }),
+                ['<Space>'] = cmp.mapping.confirm({ select = false } ,{ 'i', 'c' }), -- select false is so that it does not auto select the 1st sugggestion
+                ['<Tab>'] = cmp.mapping.select_next_item( { 'i', 'c' }),
+                ['<S-Tab>'] = cmp.mapping.select_prev_item( { 'i', 'c' }),
             }),
             snippet = {
                 expand = function(args)
                     vim.snippet.expand(args.body)
                 end,
             },
+
+        })
+        -- `:` cmdline setup.
+        cmp.setup.cmdline(':', {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({
+                { name = 'path' }
+            }, {
+                    {
+                        name = 'cmdline',
+                        option = {
+                            ignore_cmds = { 'Man', '!' }
+                        }
+                    }
+                })
+        })
+        -- `/` cmdline setup.
+        cmp.setup.cmdline('/', {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = {
+                { name = 'buffer' }
+            }
         })
     end
 }
