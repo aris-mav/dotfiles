@@ -92,5 +92,11 @@ if status is-interactive
     set fish_color_host cyan
     set fish_color_cwd  blue
 
+    if type -q lsd
+        function ls
+            lsd $argv
+        end
+    end
+
 end
 
