@@ -26,6 +26,13 @@ return {
                     n = {
                         ['dd'] = require('telescope.actions').delete_buffer,
                         ['q'] = require('telescope.actions').close,
+                        ["cd"] = function(prompt_bufnr)
+                            local selection = require("telescope.actions.state").get_selected_entry()
+                            local dir = vim.fn.fnamemodify(selection.path, ":p:h")
+                            require("telescope.actions").close(prompt_bufnr)
+                            -- Depending on what you want put `cd`, `lcd`, `tcd`
+                            vim.cmd(string.format("silent lcd %s", dir))
+                        end,
                     },
                 },
                 layout_strategy = "flex",
@@ -42,8 +49,8 @@ return {
                     preview_cutoff = 120,
                 },
                 sorting_strategy = "ascending",
+                filesize_limit = 0.1, -- MB
             },
-
             pickers = {
                 find_files = {
                     find_command = (is_git_repo()
