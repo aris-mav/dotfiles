@@ -28,6 +28,20 @@ return {
                         ['q'] = require('telescope.actions').close,
                     },
                 },
+                layout_strategy = "flex",
+                layout_config = {
+                    horizontal = {
+                        prompt_position = "bottom",
+                        preview_width = 0.5,
+                    },
+                    vertical = {
+                        mirror = false,
+                    },
+                    width = 0.9,
+                    height = 0.8,
+                    preview_cutoff = 120,
+                },
+                sorting_strategy = "ascending",
             },
 
             pickers = {
