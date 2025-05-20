@@ -15,7 +15,6 @@ git checkout -t origin/master
 git fetch
 git merge
 ```
-
 To addd a new file, `git add -f "filename"`.
 
-On nixos, run `sudo nixos-rebuild switch -I nixos-config=$HOME/.config/nixos/configuration.nix`.
+On nixos, run `sudo nixos-rebuild switch -I nixos-config=$HOME/.installs/nixos/configuration.nix`.
