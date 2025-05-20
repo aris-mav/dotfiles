@@ -4,10 +4,6 @@
 #
 set -o vi
 export EDITOR="nvim"
-export PATH="/home/arismav/.local/bin":$PATH
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-
-export HELIX_RUNTIME=~/src/helix/runtime
 
 # If not running interactively, don't do anything
 case $- in
@@ -16,12 +12,10 @@ case $- in
 esac
 
 # Aliases
-
 alias e='$EDITOR'
-alias f='pipx run --spec ranger-fm ranger'
-alias td='e ~/TODO.md'
+alias f='br'
 
-alias gc='git commit'
+alias gC='git commit'
 alias gf='git fetch'
 alias ga='git add'
 alias gd='git diff'
@@ -141,7 +135,6 @@ fi
 # >>> juliaup initialize >>>
 
 # !! Contents within this block are managed by juliaup !!
-
 case ":$PATH:" in
     *:/home/arismav/.juliaup/bin:*)
         ;;
@@ -153,9 +146,3 @@ esac
 
 # <<< juliaup initialize <<<
 . "$HOME/.cargo/env"
-
-
-
-source /home/arismav/.config/broot/launcher/bash/br
-
-source /data/data/com.termux/files/home/.config/broot/launcher/bash/br
