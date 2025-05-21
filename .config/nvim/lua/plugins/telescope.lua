@@ -39,14 +39,14 @@ return {
                 layout_config = {
                     horizontal = {
                         prompt_position = "bottom",
-                        preview_width = 0.5,
+                        preview_width = 0.55,
+                        preview_cutoff = 60,
                     },
                     vertical = {
-                        mirror = false,
+                        prompt_position = "top",
+                        mirror = true,
+                        preview_cutoff = 1,
                     },
-                    width = 0.9,
-                    height = 0.8,
-                    preview_cutoff = 120,
                 },
                 sorting_strategy = "ascending",
                 filesize_limit = 0.1, -- MB
