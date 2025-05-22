@@ -1,7 +1,7 @@
 # Define abbreviations
 
 # general stuff
-abbr e '$EDITOR'
+abbr e "$EDITOR"
 abbr f 'br'
 abbr y 'wl-copy'
 abbr xo 'xdg-open'
@@ -21,8 +21,8 @@ abbr gb 'git branch'
 abbr gacp 'git add . ; git commit ; git push '
 
 # nix stuff
-abbr rb 'sudo nixos-rebuild switch -I nixos-config=$HOME/.config/nixos/configuration.nix'
-abbr ns 'nix-shell --command fish -p '
+# abbr rb 'sudo nixos-rebuild switch -I nixos-config=$HOME/.config/nixos/configuration.nix'
+# abbr ns 'nix-shell --command fish -p '
 
 # Define some software preferences
 for candidate in nvim hx vim vi
@@ -41,11 +41,10 @@ for candidate in sk fzf
 end
 if set -q FUZZYFIND
 
-    abbr fp '$FUZZYFIND --preview="less {}"'
-    abbr gaf 'git add (git diff --name-only | $FUZZYFIND --preview="less {}")'
+    abbr fp "$FUZZYFIND --preview='less {}'"
+    abbr gaf "git add (git diff --name-only | $FUZZYFIND --preview='less {}')"
 
     if test $FUZZYFIND = sk
-        abbr -a ske 'sk --ansi -i -c \'rg --color=always --line-number "{}"\' --preview "bat --color=always --highlight-line {2} {1}" --delimiter : --bind "enter:execute($EDITOR +{2} {1})"'
         abbr -a skr 'echo (string split -m 1 : (sk --ansi -i -c \'rg -i --color=always --line-number "{}"\'))[1]'
     end 
 
