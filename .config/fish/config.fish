@@ -18,6 +18,7 @@ abbr gs 'git status'
 abbr gp 'git pull'
 abbr gP 'git push'
 abbr gb 'git branch'
+abbr grb 'git rebase'
 abbr gacp 'git add . ; git commit ; git push '
 
 # nix stuff
