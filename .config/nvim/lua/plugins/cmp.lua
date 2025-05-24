@@ -94,7 +94,21 @@ return {
                             ignore_cmds = { 'Man', '!' }
                         }
                     }
-                })
+                }),
+            formatting = {
+                format = function(entry, vim_item)
+                    -- Add menu info to show source
+                    vim_item.menu = ({
+                        path = "[Path]",
+                        cmdline = "[Cmd]"
+                    })[entry.source.name]
+
+                    -- Optional: add kind label
+                    vim_item.kind = "" -- Icon for shell/command
+
+                    return vim_item
+                end
+            }
         })
         -- `/` cmdline setup.
         cmp.setup.cmdline('/', {
