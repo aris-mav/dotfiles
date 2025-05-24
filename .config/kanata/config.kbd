@@ -91,7 +91,7 @@
 
  j (tap-hold-release-keys $tap-time $hold-time-mid   (multi j @tap) rctl $right-hand-keys)
  k (tap-hold-release-keys $tap-time $hold-time-short (multi k @tap) rsft $right-hand-keys)
- l (tap-hold-release-keys $tap-time $hold-time-mid   (multi l @tap) ralt $right-hand-keys)
+ l (tap-hold-release-keys $tap-time $hold-time-mid   (multi l @tap) lalt $right-hand-keys)
  ; (tap-hold-release-keys $tap-time 300              (multi ; @tap) rmet $right-hand-keys)
 
  cw (caps-word 2000)
