@@ -1,9 +1,8 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-#
 set -o vi
 set show-mode-in-prompt on
+set vi-ins-mode-string \1\e[5 q\2
+set vi-cmd-mode-string \1\e[2 q\2
+
 export EDITOR="nvim"
 
 # If not running interactively, don't do anything
@@ -67,9 +66,6 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
 force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
@@ -84,9 +80,9 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u\[\033[01;32m\]@\[\033[01;36m\]\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\]\n\$ '
+    PS1='  ${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u\[\033[01;32m\]@\[\033[01;36m\]\h\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\]\n\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\n\$ '
+    PS1='  ${debian_chroot:+($debian_chroot)}\u@\h:\w\n\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -110,11 +106,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
