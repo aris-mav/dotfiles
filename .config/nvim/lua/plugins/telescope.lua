@@ -67,6 +67,7 @@ return {
             vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Buffers' }),
             vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Find Files' }),
             vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = 'Live Grep' }),
+            vim.keymap.set('n', '<leader>m', builtin.marks, { desc = 'Live Grep' }),
             vim.keymap.set('n', '<leader>td', builtin.diagnostics, { desc = 'Diagnostics' }),
 
         }
