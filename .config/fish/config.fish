@@ -1,59 +1,48 @@
-# Define abbreviations
-
-# general stuff
-abbr e "$EDITOR"
-abbr f 'br'
-abbr y 'wl-copy'
-abbr xo 'xdg-open'
-
-# git stuff
-abbr gC 'git commit'
-abbr gc 'git checkout'
-abbr gr 'git restore'
-abbr gR 'git reset'
-abbr gf 'git fetch'
-abbr ga 'git add'
-abbr gd 'git diff'
-abbr gs 'git status'
-abbr gp 'git pull'
-abbr gP 'git push'
-abbr gb 'git branch'
-abbr grb 'git rebase'
-abbr gacp 'git add . ; git commit ; git push '
-
-# nix stuff
-# abbr rb 'sudo nixos-rebuild switch -I nixos-config=$HOME/.config/nixos/configuration.nix'
-# abbr ns 'nix-shell --command fish -p '
-
-# Define some software preferences
-for candidate in nvim hx vim vi
-    if type -q $candidate
-        set -gx EDITOR $candidate
-        break
-    end
-end
-
-# Fuzzyfind stuff
-for candidate in sk fzf
-    if type -q $candidate
-        set -gx FUZZYFIND $candidate
-        break
-    end
-end
-if set -q FUZZYFIND
-
-    abbr fp "$FUZZYFIND --preview='less {}'"
-    abbr gaf "git add (git diff --name-only | $FUZZYFIND --preview='less {}')"
-
-    if test $FUZZYFIND = sk
-        abbr -a skr 'echo (string split -m 1 : (sk --ansi -i -c \'rg -i --color=always --line-number "{}"\'))[1]'
-    end 
-
-end
-
-
-# For interactive sessions
+# For interactive sessions:
 if status is-interactive
+
+    # git stuff
+    abbr gC 'git commit'
+    abbr gc 'git checkout'
+    abbr gr 'git restore'
+    abbr gR 'git reset'
+    abbr gf 'git fetch'
+    abbr ga 'git add'
+    abbr gd 'git diff'
+    abbr gs 'git status'
+    abbr gp 'git pull'
+    abbr gP 'git push'
+    abbr gb 'git branch'
+    abbr grb 'git rebase'
+    abbr gacp 'git add . ; git commit ; git push '
+
+    # general stuff
+    abbr e "$EDITOR"
+    abbr f "$FILE_BROWSER"
+    abbr xo 'xdg-open'
+    abbr x 'xargs'
+
+    if test "$XDG_SESSION_TYPE" = "wayland"
+        abbr y 'wl-copy -n'
+    else 
+        abbr y 'xclip'
+    end
+
+    if type -q nix
+        abbr rb 'sudo nixos-rebuild switch -I nixos-config=~/.config/nixos/configuration.nix'
+        abbr ns 'nix-shell --command fish -p '
+    end
+
+    if set -q FUZZYFIND
+
+        abbr fp "$FUZZYFIND --preview='less {}'"
+        abbr gaf "git add (git diff --name-only | $FUZZYFIND --preview='less {}')"
+
+        if test $FUZZYFIND = sk
+            abbr -a skr 'echo (string split -m 1 : (sk --ansi -i -c \'rg -i --color=always --line-number "{}"\'))[1]'
+        end 
+
+    end
 
     # vi mode settings
     fish_vi_key_bindings
@@ -62,6 +51,7 @@ if status is-interactive
     set fish_cursor_replace_one underscore blink
     set fish_cursor_visual      block
 
+    # open tmux automatically
     if type -q tmux 
 
         if not set -q TMUX
@@ -88,9 +78,6 @@ if status is-interactive
 
     # Cosmetic stuff
     set fish_greeting # disables the greeting
-    set fish_color_user yellow
-    set fish_color_host cyan
-    set fish_color_cwd  blue
 
     if type -q lsd
         function ls
@@ -99,4 +86,3 @@ if status is-interactive
     end
 
 end
-
