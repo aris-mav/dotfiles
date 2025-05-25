@@ -11,11 +11,11 @@ for candidate in EDITOR FUZZYFIND FILE_BROWSER
     if not set -q {$candidate}
         switch $candidate
             case EDITOR
-                set -U EDITOR (choose_first_available nvim vim vi hx)
+                set -Ux EDITOR (choose_first_available nvim vim vi hx)
             case FUZZYFIND
-                set -U FUZZYFIND (choose_first_available sk fzf)
+                set -Ux FUZZYFIND (choose_first_available sk fzf)
             case FILE_BROWSER
-                set -U FILE_BROWSER (choose_first_available br yazi ranger)
+                set -Ux FILE_BROWSER (choose_first_available br yazi ranger)
         end
     end
 end
