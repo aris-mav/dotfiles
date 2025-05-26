@@ -38,7 +38,7 @@ if status is-interactive
         abbr fp "$FUZZYFIND --preview='less {}'"
         abbr gaf "git add (git diff --name-only | $FUZZYFIND --preview='less {}')"
 
-        if test $FUZZYFIND = sk
+        if test "$FUZZYFIND" = "sk"
             abbr -a skr 'echo (string split -m 1 : (sk --ansi -i -c \'rg -i --color=always --line-number "{}"\'))[1]'
         end 
 
