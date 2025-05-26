@@ -72,7 +72,7 @@ panel-id='timer'
 size=(870, 690)
 
 [org/gnome/control-center]
-last-panel='power'
+last-panel='background'
 window-state=(980, 640, true)
 
 [org/gnome/desktop/a11y]
@@ -115,10 +115,10 @@ exec='alacritty'
 [org/gnome/desktop/background]
 color-shading-type='solid'
 picture-options='zoom'
-picture-uri='file:///usr/share/desktop-base/emerald-theme/wallpaper/gnome-background.xml'
-picture-uri-dark='file:///usr/share/desktop-base/emerald-theme/wallpaper/gnome-background.xml'
-primary-color='#ffffff'
-secondary-color='#000000'
+picture-uri='file:///home/arismav/.local/share/backgrounds/2025-05-26-21-06-51-wallpaper%20(2).jpg'
+picture-uri-dark='file:///home/arismav/.local/share/backgrounds/2025-05-26-21-06-51-wallpaper%20(2).jpg'
+primary-color='#000000000000'
+secondary-color='#000000000000'
 
 [org/gnome/desktop/calendar]
 show-weekdate=false
@@ -246,9 +246,9 @@ report-technical-problems=true
 [org/gnome/desktop/screensaver]
 color-shading-type='solid'
 picture-options='zoom'
-picture-uri='file:///usr/share/desktop-base/emerald-theme/wallpaper/gnome-background.xml'
-primary-color='#ffffff'
-secondary-color='#000000'
+picture-uri='file:///home/arismav/.local/share/backgrounds/2025-05-26-21-06-51-wallpaper%20(2).jpg'
+primary-color='#000000000000'
+secondary-color='#000000000000'
 
 [org/gnome/desktop/search-providers]
 disabled=@as []
@@ -408,7 +408,7 @@ center-new-windows=true
 dynamic-workspaces=true
 
 [org/gnome/nautilus/preferences]
-default-folder-viewer='list-view'
+default-folder-viewer='icon-view'
 migrated-gtk-settings=true
 search-filter-time-type='last_modified'
 search-view='list-view'
@@ -434,7 +434,7 @@ last-folder-path='/home/arismav/.local/share/fonts'
 
 [org/gnome/settings-daemon/plugins/color]
 night-light-enabled=true
-night-light-last-coordinates=(53.471900719942404, -2.2374299999999998)
+night-light-last-coordinates=(53.46290143988481, -2.2374299999999998)
 night-light-schedule-automatic=false
 night-light-schedule-from=22.0
 night-light-temperature=uint32 2112
@@ -455,7 +455,7 @@ sleep-inactive-battery-timeout=900
 [org/gnome/shell]
 app-picker-layout=[{'Alacritty.desktop': <{'position': <0>}>, 'org.gnome.Contacts.desktop': <{'position': <1>}>, 'org.gnome.Weather.desktop': <{'position': <2>}>, 'org.gnome.clocks.desktop': <{'position': <3>}>, 'org.gnome.Maps.desktop': <{'position': <4>}>, 'brave-browser.desktop': <{'position': <5>}>, 'org.gnome.Calendar.desktop': <{'position': <6>}>, 'org.gnome.Totem.desktop': <{'position': <7>}>, 'org.gnome.Calculator.desktop': <{'position': <8>}>, 'simple-scan.desktop': <{'position': <9>}>, 'org.gnome.Settings.desktop': <{'position': <10>}>, 'gnome-system-monitor.desktop': <{'position': <11>}>, 'org.gnome.Evolution.desktop': <{'position': <12>}>, 'org.gnome.Terminal.desktop': <{'position': <13>}>, 'Utilities': <{'position': <14>}>, 'org.gnome.Extensions.desktop': <{'position': <15>}>, 'yelp.desktop': <{'position': <16>}>, 'org.gnome.Nautilus.desktop': <{'position': <17>}>, 'org.gnome.Cheese.desktop': <{'position': <18>}>, 'firefox-esr.desktop': <{'position': <19>}>, 'gimp.desktop': <{'position': <20>}>, 'im-config.desktop': <{'position': <21>}>, 'libreoffice-calc.desktop': <{'position': <22>}>}, {'libreoffice-draw.desktop': <{'position': <0>}>, 'libreoffice-impress.desktop': <{'position': <1>}>, 'libreoffice-startcenter.desktop': <{'position': <2>}>, 'libreoffice-writer.desktop': <{'position': <3>}>, 'org.gnome.Music.desktop': <{'position': <4>}>, 'qtqr.desktop': <{'position': <5>}>, 'org.gnome.Rhythmbox3.desktop': <{'position': <6>}>, 'shotwell.desktop': <{'position': <7>}>, 'org.gnome.Software.desktop': <{'position': <8>}>, 'software-properties-gtk.desktop': <{'position': <9>}>, 'aerc.desktop': <{'position': <10>}>, 'org.gnome.SoundRecorder.desktop': <{'position': <11>}>, 'spotify.desktop': <{'position': <12>}>, 'steam.desktop': <{'position': <13>}>, 'fish.desktop': <{'position': <14>}>, 'synaptic.desktop': <{'position': <15>}>, 'org.gnome.TextEditor.desktop': <{'position': <16>}>, 'timeshift-gtk.desktop': <{'position': <17>}>, 'transmission-gtk.desktop': <{'position': <18>}>, 'org.pwmt.zathura.desktop': <{'position': <19>}>, 'zotero.desktop': <{'position': <20>}>, 'ZSTray.desktop': <{'position': <21>}>, 'display-im6.q16.desktop': <{'position': <22>}>, 'setup-mozc.desktop': <{'position': <23>}>}, {'mpv.desktop': <{'position': <0>}>, 'org.gnome.World.PikaBackup.desktop': <{'position': <1>}>, 'prerex.desktop': <{'position': <2>}>, 'protonvpn-app.desktop': <{'position': <3>}>, 'org.qbittorrent.qBittorrent.desktop': <{'position': <4>}>, 'retroarch.desktop': <{'position': <5>}>, 'signal-desktop.desktop': <{'position': <6>}>, 'sioyek.desktop': <{'position': <7>}>, 'texdoctk.desktop': <{'position': <8>}>, 'info.desktop': <{'position': <9>}>, 'brave-mmjaddejhbokchddkbhecmaladflalcg-Default.desktop': <{'position': <10>}>, 'debian-uxterm.desktop': <{'position': <11>}>, 'vivaldi-stable.desktop': <{'position': <12>}>, 'vprerex.desktop': <{'position': <13>}>, 'debian-xterm.desktop': <{'position': <14>}>, 'org.gnome.eog.desktop': <{'position': <15>}>}]
 command-history=['blur', 'r']
-disabled-extensions=['windowsNavigator@gnome-shell-extensions.gcampax.github.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'light-style@gnome-shell-extensions.gcampax.github.com', 'native-window-placement@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'screenshot-window-sizer@gnome-shell-extensions.gcampax.github.com', 'status-icons@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com']
+disabled-extensions=['windowsNavigator@gnome-shell-extensions.gcampax.github.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'light-style@gnome-shell-extensions.gcampax.github.com', 'native-window-placement@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'screenshot-window-sizer@gnome-shell-extensions.gcampax.github.com', 'status-icons@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com']
 enabled-extensions=['blur-my-shell@aunetx', 'system-monitor@gnome-shell-extensions.gcampax.github.com', 'dynamic-panel-transparency@rockon999.github.io']
 favorite-apps=@as []
 last-selected-power-profile='power-saver'
@@ -517,13 +517,18 @@ sigma=50
 [org/gnome/shell/extensions/dynamic-panel-transparency]
 enable-background-color=true
 enable-maximized-text-color=false
+enable-opacity=false
 enable-text-color=true
 icon-shadow-position=(0, 4, 5)
+maximized-opacity=255
 panel-color=[40, 40, 40]
+remove-panel-styling=true
 text-color=(152, 151, 10)
 text-shadow-position=(0, 3, 5)
-transition-windows-touch=false
-transition-with-overview=false
+transition-speed=500
+transition-windows-touch=true
+transition-with-overview=true
+unmaximized-opacity=125
 
 [org/gnome/shell/extensions/system-monitor]
 show-download=false
