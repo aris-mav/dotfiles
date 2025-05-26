@@ -6,6 +6,9 @@ vim.g.maplocalleader = "\\"
 -- vim.api.nvim_set_keymap('v', '<cr>', 'y<C-w>wpi<cr><C-\\><C-N><C-w>w', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', '<cr>', 'Y<C-w>wpi<cr><C-\\><C-N><C-w>w', { noremap = true, silent = true })
 
+-- Quit with ctrl-q
+vim.keymap.set('n', '<C-q>', ':q<CR>')
+
 -- Open side window to the left using leader v and bottom window using leader s
 vim.keymap.set("n", "<leader>v", ":vs | Ex | vert resize 67 | set wfw | echo '' <cr>", { remap = true, silent = false })
 vim.keymap.set("n", "<leader>s", ":below split | Ex | resize 15 | set wfh | echo '' <cr>", { remap = true, silent = false })
