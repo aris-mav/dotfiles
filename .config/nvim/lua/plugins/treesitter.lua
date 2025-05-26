@@ -32,7 +32,7 @@ return {
                 enable = true,
 
                 -- list of language that will be disabled
-                disable = {},
+                disable = {"csv"},
 
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
                 -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -59,7 +59,6 @@ return {
 
                     -- Automatically jump forward to textobj, similar to targets.vim
                     lookahead = true,
-
 
                     keymaps = {
                         -- You can use the capture groups defined in textobjects.scm
