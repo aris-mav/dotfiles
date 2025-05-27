@@ -39,7 +39,7 @@ function nt
     else if set -ql _flag_view
 
         if test "$FILE_BROWSER" = "br"
-            br --cmd cr/ .
+            br -HI --cmd cr/ .
         else if test "$EDITOR" = "nvim"
             nvim -c "Telescope live_grep"
         else 
