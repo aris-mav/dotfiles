@@ -29,3 +29,10 @@ Run systemctl --user start kanata.service to start kanata daemon
 Run systemctl --user enable kanata.service so it may autostart whenever the current user logs in.
 Run systemctl --user status kanata.service to check if kanata daemon is running or not.
 Run systemctl --user restart kanata.service to restart.
+
+
+To make this start before login, run 
+`loginctl enable-linger`
+or
+`sudo loginctl enable-linger <USERNAME>`
+
