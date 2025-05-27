@@ -1,8 +1,11 @@
 function nt
 
+    argparse 't/todo' 'b/books' 'v/view' 'n/new' -- $argv
+    or return
+
     if not set -q NOTES_DIR
         read -l -P "Enter the notes directory: " ndir
-        set -U NOTES_DIR $ndir
+        set -Ux NOTES_DIR $ndir
     end
 
     cd $NOTES_DIR
@@ -16,16 +19,27 @@ function nt
     end
     set committed_anything false
 
-    # create note in editor
-    set newnote "$datetime.md"
-    $EDITOR $newnote
+    # Open file accordingly
+    if set -ql _flag_todo
+        $EDITOR TODO.md
+    else if set -ql _flag_books
+        $EDITOR books_finished.csv
+    else if set -ql _flag_view
+        # nvim -c "Telescope live_grep"
+        $FILE_BROWSER
+    else if set -ql _flag_new
+        set newnote "$datetime.md"
+        $EDITOR "$newnote"
 
-    # if the new file was saved, commit it
-    if test -f $newnote 
-        set first_line (head -n 1 $newnote)
-        git add $newnote
-        git commit -m "new note $first_line"
-        set committed_anything true
+        # if a new file was saved, commit it
+        if test -f $newnote 
+            set first_line (head -n 1 $newnote)
+            git add $newnote
+            git commit -m "new note $first_line"
+            set committed_anything true
+        end
+    else
+        $EDITOR
     end
 
     # check if any of the tracked files was edited, commit changes
