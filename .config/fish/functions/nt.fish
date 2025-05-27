@@ -3,44 +3,62 @@ function nt
     argparse 't/todo' 'b/books' 'v/view' 'n/new' -- $argv
     or return
 
-    if not set -q NOTES_DIR
-        read -l -P "Enter the notes directory: " ndir
-        set -Ux NOTES_DIR $ndir
-    end
+    if set -q NOTES_DIR
 
-    cd $NOTES_DIR
+        cd $NOTES_DIR
+    else
+        echo "Environment variable 'NOTES_DIR' is not set."
+        echo "Use 'set -Ux NOTES_DIR path/to/notes'."
+        return
+    end
 
     set datetime (date +%Y%m%d%H%M%S)
 
-    # git pull, only if you haven't pulled already, or if the last pull was more than 1h ago.
+    # git pull, only if you haven't pulled already, 
+    # or if the last pull was more than 1h ago.
     if not set -q PREV_PULL || test (math $datetime - $PREV_PULL) -gt 10000
         git pull
         set -gx PREV_PULL $datetime
     end
     set committed_anything false
 
-    # Open file accordingly
-    if set -ql _flag_todo
-        $EDITOR TODO.md
-    else if set -ql _flag_books
-        $EDITOR books_finished.csv
-    else if set -ql _flag_view
-        # nvim -c "Telescope live_grep"
-        $FILE_BROWSER
-    else if set -ql _flag_new
+    # Do something, according to the used flag
+    if set -ql _flag_new
+
         set newnote "$datetime.md"
         $EDITOR "$newnote"
 
-        # if a new file was saved, commit it
+        # if the new file was created, commit it
         if test -f $newnote 
             set first_line (head -n 1 $newnote)
             git add $newnote
             git commit -m "new note $first_line"
             set committed_anything true
         end
+
+    else if set -ql _flag_view
+
+        if test "$FILE_BROWSER" = "br"
+            br --cmd cr/ .
+        else if test "$EDITOR" = "nvim"
+            nvim -c "Telescope live_grep"
+        else 
+            $FILE_BROWSER
+        end
+
+    else if set -ql _flag_todo
+
+        $EDITOR TODO.md
+
+    else if set -ql _flag_books
+
+        $EDITOR + books_finished.tsv
+
     else
-        $EDITOR
-    end
+        # Just go to the folder and exit,
+        # if no flags are provided
+        return 0
+   end
 
     # check if any of the tracked files was edited, commit changes
     for file in (git diff --name-only)
