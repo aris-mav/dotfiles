@@ -52,7 +52,15 @@ function nt
 
     else if set -ql _flag_books
 
+        set -l dt (date +%Y/%m/%d)
+        echo $dt >> books_finished.tsv
+
         $EDITOR + books_finished.tsv
+
+        # if you only add the date but no other details, abort
+        if test (tail -n 1 books_finished.tsv) = $dt
+            git restore books_finished.tsv
+        end
 
     else
         # Just go to the folder and exit,
