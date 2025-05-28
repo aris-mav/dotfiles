@@ -1,6 +1,6 @@
 function nt
 
-    argparse 't/todo' 'b/books' 'v/view' 'n/new' -- $argv
+    argparse 't/todo' 'b/books' 's/search' 'n/new' -- $argv
     or return
 
     if set -q NOTES_DIR
@@ -36,7 +36,7 @@ function nt
             set committed_anything true
         end
 
-    else if set -ql _flag_view
+    else if set -ql _flag_search
 
         if test "$FILE_BROWSER" = "br"
             br -HI --cmd cr/ .
