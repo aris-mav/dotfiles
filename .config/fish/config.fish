@@ -24,8 +24,10 @@ if status is-interactive
 
     if test "$XDG_SESSION_TYPE" = "wayland"
         abbr y 'wl-copy -n'
-    else 
+    else if test "$XDG_SESSION_TYPE" = "x11"
         abbr y 'xclip'
+    else if type -q "clip.exe"
+        abbr y 'clip.exe'
     end
 
     if type -q nix
