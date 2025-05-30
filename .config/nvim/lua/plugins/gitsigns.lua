@@ -2,8 +2,6 @@ return {
     "lewis6991/gitsigns.nvim",
     config = function ()
         vim.opt.signcolumn = "yes"
-        vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", {})
-        vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", {})
         require('gitsigns').setup {
             signs = {
                 add          = { text = '┃' },
@@ -64,17 +62,17 @@ return {
                 end
 
                 -- Navigation
-                map('n', ']c', function()
+                map('n', ']h', function()
                     if vim.wo.diff then
-                        vim.cmd.normal({']c', bang = true})
+                        vim.cmd.normal({']h', bang = true})
                     else
                         gitsigns.nav_hunk('next')
                     end
                 end)
 
-                map('n', '[c', function()
+                map('n', '[h', function()
                     if vim.wo.diff then
-                        vim.cmd.normal({'[c', bang = true})
+                        vim.cmd.normal({'[h', bang = true})
                     else
                         gitsigns.nav_hunk('prev')
                     end
@@ -82,18 +80,18 @@ return {
 
                 -- Actions
                 map('n', '<leader>hs', gitsigns.stage_hunk)
-                map('n', '<leader>hr', gitsigns.reset_hunk)
-
                 map('v', '<leader>hs', function()
                     gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
                 end)
 
+                map('n', '<leader>hr', gitsigns.reset_hunk)
                 map('v', '<leader>hr', function()
                     gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
                 end)
 
                 map('n', '<leader>hS', gitsigns.stage_buffer)
                 map('n', '<leader>hR', gitsigns.reset_buffer)
+
                 map('n', '<leader>hp', gitsigns.preview_hunk)
                 map('n', '<leader>hi', gitsigns.preview_hunk_inline)
 
