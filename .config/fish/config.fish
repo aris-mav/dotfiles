@@ -46,6 +46,9 @@ if status is-interactive
 
     end
 
+    # Bindings
+    bind -Mdefault -Minsert \cZ 'fg 2>/dev/null ; commandline -f repaint'
+
     # vi mode settings
     fish_vi_key_bindings
     set fish_cursor_default     block      
