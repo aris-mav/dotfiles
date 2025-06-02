@@ -47,7 +47,7 @@ if status is-interactive
     end
 
     # Bindings
-    bind -Mdefault -Minsert \cZ 'fg 2>/dev/null ; commandline -f repaint'
+    bind -Mdefault -Minsert \cZ 'fg 2>/dev/null ; commandline -f repaint ; fish_vi_key_bindings insert'
 
     # vi mode settings
     fish_vi_key_bindings
