@@ -10,8 +10,8 @@ vim.g.maplocalleader = "\\"
 vim.keymap.set('n', '<C-q>', ':q<CR>')
 
 -- Open side window to the left using leader v and bottom window using leader s
-vim.keymap.set("n", "<leader>v", ":vs | Ex | vert resize 67 | set wfw | echo '' <cr>", { remap = true, silent = false })
-vim.keymap.set("n", "<leader>s", ":below split | Ex | resize 15 | set wfh | echo '' <cr>", { remap = true, silent = false })
+vim.keymap.set("n", "<leader>sv", ":vs | Ex | execute 'vert resize ' . float2nr(&columns / 3) | set wfw | echo ''<CR>", { remap = true, silent = false })
+vim.keymap.set("n", "<leader>sh", ":below split | Ex | resize 15 | set wfh | echo '' <cr>", { remap = true, silent = false })
 
 -- Map leader-w to :w
 vim.keymap.set("n", "<leader>w", ":w <cr>", { remap = true, silent = false })
@@ -48,11 +48,6 @@ end
 vim.keymap.set('n', "<A-q>", ':lua ToggleQuickfix()<CR>', { noremap = true, silent = true })
 vim.keymap.set("n", "<A-n>", ":cn <cr>", { remap = true, silent = false })
 vim.keymap.set("n", "<A-p>", ":cp <cr>", { remap = true, silent = false })
-
--- Reload config
-vim.keymap.set('n', '<leader>rl', function()
-  dofile(vim.env.MYVIMRC)
-end, { desc = 'Reload init.lua' })
 
 -- Swap windows using alt+hjkl
 vim.keymap.set("n", "<A-h>", "<C-w>h", { noremap = true, silent = true })
