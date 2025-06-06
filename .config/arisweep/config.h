@@ -15,6 +15,6 @@
 // The default is 40
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 100
 
-#define TAPPING_TERM 135
+#define TAPPING_TERM 175
 #define CHORDAL_HOLD
-#define RETRO_TAPPING
+// #define RETRO_TAPPING
