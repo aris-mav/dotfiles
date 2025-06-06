@@ -15,7 +15,7 @@ Documentation=https://github.com/jtroo/kanata
 Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:${HOME}/.local/bin
 Environment=DISPLAY=:0
 Type=simple
-ExecStart=/usr/bin/sh -c "exec $HOME/software/kanata/target/debug/kanata --cfg $HOME/.config/kanata/config.kbd"
+ExecStart=/usr/bin/sh -c "exec $HOME/.cargo/bin/kanata --cfg $HOME/.config/kanata/kanata.kbd"
 
 Restart=no
 
@@ -25,11 +25,19 @@ WantedBy=default.target
 ------------------------------------------------------
 (of course, edit paths in ExecStart if needed)
 
-Run systemctl --user start kanata.service to start kanata daemon
-Run systemctl --user enable kanata.service so it may autostart whenever the current user logs in.
-Run systemctl --user status kanata.service to check if kanata daemon is running or not.
-Run systemctl --user restart kanata.service to restart.
+`systemctl --user start kanata.service` to start kanata daemon
+`systemctl --user enable kanata.service` so it may autostart whenever the current user logs in.
+`systemctl --user status kanata.service` to check if kanata daemon is running or not.
+`systemctl --user restart kanata.service` to restart.
 
+To obtain permissions, run the following:
+
+```
+sudo groupadd uinput
+sudo usermod -aG input $USER
+sudo usermod -aG uinput $USER
+sudo echo ' KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput" ' > /etc/udev/rules.d/kanatathing.rules
+```
 
 To make this start before login, run 
 `loginctl enable-linger`
