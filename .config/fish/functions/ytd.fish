@@ -22,7 +22,7 @@ function ytd
         eyeD3 -a $artist -t $songname -A $album $filename
 
     else if set -ql _flag_p
-        yt-dlp -f "bv[ext=webm][height=720]+ba[ext=webm]" \
+        yt-dlp -f 234+232 \
         -o "%(playlist_index)03d - %(title)s.%(ext)s" \
         $argv
     end
