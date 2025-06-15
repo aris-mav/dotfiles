@@ -36,6 +36,10 @@ if status is-interactive
         abbr ns 'nix-shell --command fish -p '
     end
 
+    if type -q pacman
+        abbr pa 'sudo pacman'
+    end
+
     if set -q FUZZYFIND
 
         abbr fp "$FUZZYFIND --preview='less {}'"
