@@ -23,6 +23,3 @@ To addd a new file, `git add -f "filename"`.
 
 On nixos, run `sudo nixos-rebuild switch -I nixos-config=$HOME/.installs/nixos/configuration.nix`.
 
-# Non-nix config
-
-Run the script `~/.config/installation/getpackages.sh`
