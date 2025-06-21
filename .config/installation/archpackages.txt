@@ -30,3 +30,10 @@ ttyper
 tealdeer
 wikiman
 arch-wiki-docs
+mpv
+bluez
+bluez-utils
+man-db
+gdm
+sudo
+usbutils
