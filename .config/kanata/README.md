@@ -33,10 +33,12 @@ WantedBy=default.target
 To obtain permissions, run the following:
 
 ```
-sudo groupadd uinput
-sudo usermod -aG input $USER
-sudo usermod -aG uinput $USER
-sudo echo ' KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput" ' > /etc/udev/rules.d/kanatathing.rules
+groupadd uinput
+sudo usermod -aG input arismav
+sudo usermod -aG uinput arismav 
+echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' > /etc/udev/rules.d/99-input.rules
+udevadm control --reload-rules && udevadm trigger
+modprobe uinput
 ```
 
 To make this start before login, run 
