@@ -7,7 +7,7 @@ function ytd
         if not type -q yt-dlp
             echo "oi, you need to install yt-dlp"
             return 1
-        else if not type -q eyeD3
+        else if not type -q ffmpeg
             echo "oi, you need to install eyeD3"
             return 1
         end
@@ -18,8 +18,14 @@ function ytd
         read -l -P  "Artist : " artist
         read -l -P  "Album : " album
 
-        yt-dlp -x --audio-format mp3 --audio-quality 0 -o $filename $url
-        eyeD3 -a $artist -t $songname -A $album $filename
+        yt-dlp -x --audio-format mp3 --audio-quality 0 -o tempname.mp3 $url
+        ffmpeg -i tempname.mp3 \
+        -metadata artist=$artist \
+        -metadata title=$songname \
+        -metadata album=$album \
+        -codec copy $filename
+
+        rm tempname.mp3
 
     else if set -ql _flag_p
         yt-dlp -f 234+232 \
