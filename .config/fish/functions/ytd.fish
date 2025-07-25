@@ -28,7 +28,8 @@ function ytd
         rm tempname.mp3
 
     else if set -ql _flag_p
-        yt-dlp -f 234+232 \
+        yt-dlp \
+        -S "res:720,+size"\
         -o "%(playlist_index)03d - %(title)s.%(ext)s" \
         $argv
     end
