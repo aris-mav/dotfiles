@@ -16,7 +16,19 @@ return {
 
         require'nvim-treesitter.configs'.setup {
             -- A list of parser names, or "all"
-            ensure_installed = { "lua", "python", "markdown", "julia", "rust", },
+            ensure_installed = {
+                "lua",
+                "python",
+                "markdown",
+                "markdown_inline",
+                "julia",
+                "rust",
+                "fish",
+                "vim",
+                "tmux",
+                "toml",
+                "gitcommit",
+            },
 
             -- Install parsers synchronously (only applied to `ensure_installed`)
             sync_install = false,
