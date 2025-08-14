@@ -52,17 +52,20 @@ function backup
             # move recent camera files to the other DCIM folder, to have everything in one place
             ssh -p '8022' $TERMUX_PHONE_IP 'mv /storage/emulated/0/DCIM/Camera/  /storage/emulated/0/Pictures/DCIM/Camera/'
 
-            for folder in Pictures Documents Music
+            for folder in Pictures Documents Music Zotero
                 rsync -auv -e 'ssh -p 8022' $TERMUX_PHONE_IP:/storage/emulated/0/$folder/ $HOME/$folder/
             end
+
+
 
     end
 
     if set -ql _flag_P && read_confirm "Sync PC to phone?"
-            echo "Syncing PC to phone"
+        echo "Syncing PC to phone"
 
-            for folder in Pictures Documents Music
-                rsync -auv -e 'ssh -p 8022' $HOME/$folder/ $TERMUX_PHONE_IP:/storage/emulated/0/$folder/
-            end
+        for folder in Pictures Documents Music Zotero
+            rsync -auv -e 'ssh -p 8022' $HOME/$folder/ $TERMUX_PHONE_IP:/storage/emulated/0/$folder/
         end
+    end
+
 end
