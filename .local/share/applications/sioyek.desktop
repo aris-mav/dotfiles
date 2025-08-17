@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Sioyek
+Exec=/home/arismav/software/sioyek/Sioyek-x86_64.AppImage %u
+Icon=/home/arismav/software/sioyek/sioyek_logo.png
+Type=Application
+Categories=Office;Viewer;
+MimeType=application/pdf;
