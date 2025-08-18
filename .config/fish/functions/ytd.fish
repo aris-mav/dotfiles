@@ -18,7 +18,7 @@ function ytd
         read -l -P  "Artist : " artist
         read -l -P  "Album : " album
 
-        yt-dlp -x --audio-format mp3 --audio-quality 0 -o tempname.mp3 $url
+        yt-dlp -x --no-playlist --audio-format mp3 --audio-quality 0 -o tempname.mp3 $url
         ffmpeg -i tempname.mp3 \
         -metadata artist=$artist \
         -metadata title=$songname \
