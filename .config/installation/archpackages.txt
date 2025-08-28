@@ -40,3 +40,4 @@ sudo
 usbutils
 nodejs
 texlive
+syncthing
