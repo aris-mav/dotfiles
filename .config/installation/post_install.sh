@@ -34,7 +34,8 @@ pacman -S --noconfirm gnome gnome-tweaks
 pystemctl enable gdm.service
 systemctl enable bluetooth
 systemctl enable NetworkManager.service
+sudo -u arismav systemctl --user enable syncthing.service
 
-flatpak install vivaldi zotero sioyek
+flatpak install vivaldi zotero
 
 # SETUP BOOTLOADER after this
