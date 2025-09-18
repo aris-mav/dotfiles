@@ -1,6 +1,6 @@
 function nt
 
-    argparse 't/todo' 'b/books' 's/search' 'n/new' -- $argv
+    argparse 't/todo' 'b/bookread' 'B/booktoread' 's/search' 'n/new' -- $argv
     or return
 
     if set -q NOTES_DIR
@@ -50,7 +50,7 @@ function nt
 
         $EDITOR TODO.md
 
-    else if set -ql _flag_books
+    else if set -ql _flag_b
 
         set -l dt (date +%Y/%m/%d)
         echo $dt >> books_finished.tsv
@@ -61,7 +61,8 @@ function nt
         if test (tail -n 1 books_finished.tsv) = $dt
             git restore books_finished.tsv
         end
-
+    else if set -ql _flag_B
+        $EDITOR + books_to_read.tsv
     else
         # Just go to the folder and exit,
         # if no flags are provided
@@ -74,8 +75,10 @@ function nt
             switch $file
                 case 'TODO.md'
                     set commit_msg "Update TODO list"
-                case 'books_finished.csv'
+                case 'books_finished.tsv'
                     set commit_msg "Log finished books"
+                case 'books_to_read.tsv'
+                    set commit_msg "Log books to read"
                 case '*'
                     set first_line (head -n 1 $file)
                     set commit_msg "edits on $first_line"
