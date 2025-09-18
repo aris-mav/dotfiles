@@ -1,6 +1,6 @@
 function backup
 
-    argparse 'p/from-phone' 'P/to-phone' 'u/usb' -- $argv
+    argparse 'p/from-phone' 'P/to-phone' 'u/usb' 's/sync' -- $argv
 
 
     if set -ql _flag_usb
@@ -43,29 +43,33 @@ function backup
     end
 
     # Phone sync 
-    if set -ql _flag_p && read_confirm "Sync phone to PC?"
-
+    if set -ql _flag_p or set -ql _flag_P
         echo "Type sshd on phone terminal to enable ssh connection"
 
-            echo "Syncing phone to PC"
-
-            # move recent camera files to the other DCIM folder, to have everything in one place
-            ssh -p '8022' $TERMUX_PHONE_IP 'mv /storage/emulated/0/DCIM/Camera/  /storage/emulated/0/Pictures/DCIM/Camera/'
-
+        if set -ql _flag_s
             for folder in Pictures Documents Music Zotero
-                rsync -auv -e 'ssh -p 8022' $TERMUX_PHONE_IP:/storage/emulated/0/$folder/ $HOME/$folder/
+            end
+        else
+            if set -ql _flag_p && read_confirm "Sync phone to PC?"
+                echo "Syncing phone to PC"
+
+                # move recent camera files to the other DCIM folder, to have everything in one place
+                ssh -p '8022' $TERMUX_PHONE_IP 'mv /storage/emulated/0/DCIM/Camera/  /storage/emulated/0/Pictures/DCIM/Camera/'
+
+                for folder in Pictures Documents Music Zotero
+                    rsync -auv -e 'ssh -p 8022' $TERMUX_PHONE_IP:/storage/emulated/0/$folder/ $HOME/$folder/
+                end
+
             end
 
+            if set -ql _flag_P && read_confirm "Sync PC to phone?"
+                echo "Syncing PC to phone"
 
-
-    end
-
-    if set -ql _flag_P && read_confirm "Sync PC to phone?"
-        echo "Syncing PC to phone"
-
-        for folder in Pictures Documents Music Zotero
-            rsync -auv -e 'ssh -p 8022' $HOME/$folder/ $TERMUX_PHONE_IP:/storage/emulated/0/$folder/
+                for folder in Pictures Documents Music Zotero
+                    rsync -auv -e 'ssh -p 8022' $HOME/$folder/ $TERMUX_PHONE_IP:/storage/emulated/0/$folder/
+                end
+            end
         end
-    end
 
+    end
 end
