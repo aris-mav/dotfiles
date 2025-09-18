@@ -58,6 +58,7 @@ return {
                     "rust_analyzer",
                     "markdown_oxide"
                 },
+                automatic_installation = false,
                 handlers = {
                     -- this first function is the "default handler"
                     -- it applies to every language server without a "custom handler"
