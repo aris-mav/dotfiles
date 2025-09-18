@@ -51,24 +51,24 @@ return {
                 end,
             })
 
-            require('mason-lspconfig').setup({
-                ensure_installed = {
-                    "lua_ls",
-                    "texlab",
-                    "rust_analyzer",
-                    "markdown_oxide"
-                },
-                automatic_installation = false,
-                handlers = {
-                    function(server_name)
-                        local lspconfig = require('lspconfig')
-                        if lspconfig[server_name] then
-                            lspconfig[server_name].setup{}
-                        end
-                    end,
-                }
-            })
+            -- Detect Termux
+            local is_termux = os.getenv("PREFIX") and os.getenv("PREFIX"):match("com.termux")
 
+            if not is_termux then
+                require('mason-lspconfig').setup({
+                    ensure_installed = {
+                        "lua_ls",
+                        "texlab",
+                        "rust_analyzer",
+                        "markdown_oxide"
+                    },
+                    handlers = {
+                        function(server_name)
+                            vim.lsp.enable(server_name)
+                        end,
+                    }
+                })
+            end
             -- enable fish lsp
             vim.lsp.enable('fish_lsp')
 
