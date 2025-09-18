@@ -60,10 +60,11 @@ return {
                 },
                 automatic_installation = false,
                 handlers = {
-                    -- this first function is the "default handler"
-                    -- it applies to every language server without a "custom handler"
                     function(server_name)
-                        vim.lsp.enable(server_name)
+                        local lspconfig = require('lspconfig')
+                        if lspconfig[server_name] then
+                            lspconfig[server_name].setup{}
+                        end
                     end,
                 }
             })
