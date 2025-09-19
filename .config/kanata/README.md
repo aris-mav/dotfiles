@@ -3,6 +3,28 @@
 Follow steps here : https://github.com/jtroo/kanata/blob/main/docs/setup-linux.md 
 (so that the keyboard is recognised without sudo)
 
+1. If the uinput group does not exist, create a new group
+```
+sudo groupadd uinput
+```
+2. Add your user to the input and the uinput group
+```
+sudo usermod -aG input $USER
+sudo usermod -aG uinput $USER
+```
+Make sure that it's effective by running groups. You might have to logout and login.
+
+3. Make sure the uinput device file has the right permissions.
+Add a udev rule (in either /etc/udev/rules.d or /lib/udev/rules.d) with the following content:
+```
+KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+```
+4. Make sure the uinput drivers are loaded
+You may need to run this command whenever you start kanata for the first time:
+```
+sudo modprobe uinput
+```
+
 Add the following to a file in ~/.config/systemd/user/kanata.service
 
 ------------------------------------------------------
