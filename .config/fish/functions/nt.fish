@@ -79,6 +79,8 @@ function nt
                     set commit_msg "Log finished books"
                 case 'books_to_read.tsv'
                     set commit_msg "Log books to read"
+                case 'zotero_library.bib'
+                    set commit_msg "zotero updates"
                 case '*'
                     set first_line (head -n 1 $file)
                     set commit_msg "edits on $first_line"
