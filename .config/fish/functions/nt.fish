@@ -1,6 +1,6 @@
 function nt
 
-    argparse 't/todo' 'b/bookread' 'B/booktoread' 's/search' 'n/new' -- $argv
+    argparse 't/todo' 'b/bookread' 'B/booktoread' 's/search' 'n/new' 'r/random' -- $argv
     or return
 
     if set -q NOTES_DIR
@@ -63,6 +63,8 @@ function nt
         end
     else if set -ql _flag_B
         $EDITOR + books_to_read.tsv
+    else if set -ql _flag_r 
+        cat (ls *.md | shuf -n 1)
     else
         # Just go to the folder and exit,
         # if no flags are provided
