@@ -4,7 +4,6 @@ function nt
     or return
 
     if set -q NOTES_DIR
-
         cd $NOTES_DIR
     else
         echo "Environment variable 'NOTES_DIR' is not set."
@@ -13,6 +12,14 @@ function nt
     end
 
     set datetime (date +%Y%m%d%H%M%S)
+    set committed_anything false
+
+    # check for zotero updates, commit them
+    if not git diff --quiet zotero_library.bib
+        git add zotero_library.bib
+        git commit -m "zotero updates"
+        set committed_anything true
+    end
 
     # git pull, only if you haven't pulled already, 
     # or if the last pull was more than 1h ago.
@@ -20,7 +27,6 @@ function nt
         git pull
         set -gx PREV_PULL $datetime
     end
-    set committed_anything false
 
     # Do something, according to the used flag
     if set -ql _flag_new
@@ -81,8 +87,6 @@ function nt
                     set commit_msg "Log finished books"
                 case 'books_to_read.tsv'
                     set commit_msg "Log books to read"
-                case 'zotero_library.bib'
-                    set commit_msg "zotero updates"
                 case '*'
                     set first_line (head -n 1 $file)
                     set commit_msg "edits on $first_line"
