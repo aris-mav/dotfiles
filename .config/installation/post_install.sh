@@ -20,7 +20,7 @@ fish -c "fish_add_path /home/arismav/.cargo/bin"
 
 # setup kanata
 cargo install kanata --features cmd
-groupadd uinput
+sudo groupadd --system uinput
 sudo usermod -aG input arismav
 sudo usermod -aG uinput arismav 
 echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' > /etc/udev/rules.d/99-input.rules

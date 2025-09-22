@@ -55,7 +55,7 @@ WantedBy=default.target
 To obtain permissions, run the following:
 
 ```
-groupadd uinput
+sudo groupadd --system uinput
 sudo usermod -aG input arismav
 sudo usermod -aG uinput arismav 
 echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' > /etc/udev/rules.d/99-input.rules
