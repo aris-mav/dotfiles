@@ -70,7 +70,7 @@ function nt
     else if set -ql _flag_B
         $EDITOR + books_to_read.tsv
     else if set -ql _flag_r 
-        cat (ls *.md | shuf -n 1)
+        cat (ls -1 *.md | shuf -n 1)
     else
         # Just go to the folder and exit,
         # if no flags are provided
