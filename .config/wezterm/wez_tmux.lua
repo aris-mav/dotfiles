@@ -4,6 +4,13 @@ local action = wezterm.action
 
 local module = {}
 
+local directions = {
+    Left =  {"h", "LeftArrow"},
+    Down =  {"j", "DownArrow"},
+    Up =    {"k", "UpArrow"},
+    Right = {"l", "RightArrow"},
+}
+
 function module.apply_to_config(config)
 
     config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
@@ -22,27 +29,6 @@ function module.apply_to_config(config)
             action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
         },
 
-        -- resizing
-        {
-            key = "h",
-            mods = "ALT|SHIFT",
-            action = action.AdjustPaneSize({ "Left", 2 }),
-        },
-        {
-            key = "l",
-            mods = "ALT|SHIFT",
-            action = action.AdjustPaneSize({ "Right", 2 }),
-        },
-        {
-            key = "j",
-            mods = "ALT|SHIFT",
-            action = action.AdjustPaneSize({ "Down", 2 }),
-        },
-        {
-            key = "k",
-            mods = "ALT|SHIFT",
-            action = action.AdjustPaneSize({ "Up", 2 }),
-        },
         -- zoom toggle
         {
             key = "z",
@@ -76,7 +62,7 @@ function module.apply_to_config(config)
         },
     }
 
-    -- switch tabs
+    -- go to tab n
     for i = 1, 9 do
         table.insert(config.keys, {
             key = tostring(i),
@@ -88,6 +74,39 @@ function module.apply_to_config(config)
             mods = "ALT",
             action = action.ActivateTab(i - 1),
         })
+    end
+
+    -- resizing
+    for dir, keys in pairs(directions) do
+        for _, k in ipairs(keys) do
+            table.insert(config.keys, {
+                key = k,
+                mods = "ALT|SHIFT",
+                action = action.AdjustPaneSize({ dir, 2 }),
+            })
+        end
+    end
+
+    -- movements
+    for dir, keys in pairs(directions) do
+        for _, k in ipairs(keys) do
+            table.insert(config.keys, {
+                key = k,
+                mods = "ALT",
+                action = action.ActivatePaneDirection(dir)
+                    or action.ActivateTab(dir),
+                -- action = wezterm.action_callback(
+                --     function(win, pane)
+                --         local tab = pane:tab()
+                --
+                --         if tab:get_pane_direction(dir) ~= nil then
+                --             win:perform_action(action.ActivatePaneDirection(dir), pane)
+                --             return
+                --         end
+                --         action.ActivateTab(dir)
+                --     end),
+            })
+        end
     end
 end
 
