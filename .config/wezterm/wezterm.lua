@@ -1,28 +1,32 @@
--- Pull in the wezterm API
 local wezterm = require 'wezterm'
+local mux = wezterm.mux
 
--- This will hold the configuration.
-local config = wezterm.config_builder()
+-- List of your modules
+local modules = {
+    "appearance",
+    "wez_tmux",
+}
 
--- This is where you actually apply your config choices.
+local config = {}
 
-config.initial_cols = 120
-config.initial_rows = 28
+-- Apply each module to the config
+for _, name in ipairs(modules) do
+  local ok, mod = pcall(require, name)
+  if ok and mod.apply_to_config then
+    mod.apply_to_config(config)
+  else
+    wezterm.log_error('Failed to load module: ' .. name)
+  end
+end
 
-config.font_size = 20
-config.color_scheme = 'GruvboxDark'
-config.font = wezterm.font('JetBrains Mono')
-
-config.use_fancy_tab_bar = false
-config.hide_tab_bar_if_only_one_tab = true
-
+-- set shell
 config.default_prog = { 'fish', '-l' }
 
-local mux = wezterm.mux
+-- start with a split
 wezterm.on('gui-startup', function(cmd)
   local tab, pane, window = mux.spawn_window(cmd or {})
   window:gui_window():maximize()
+  pane:split { size = 0.66 }
 end)
 
--- Finally, return the configuration to wezterm:
 return config
