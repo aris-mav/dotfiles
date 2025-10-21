@@ -107,6 +107,7 @@ video/3gpp=mpv.desktop
 video/3gpp2=mpv.desktop
 video/dv=mpv.desktop
 video/vnd.avi=mpv.desktop
+audio/x-m4b=mpv.desktop
 
 [Added Associations]
 x-scheme-handler/http=com.vivaldi.Vivaldi.desktop;
@@ -212,3 +213,4 @@ video/3gpp=mpv.desktop;
 video/3gpp2=mpv.desktop;
 video/dv=mpv.desktop;
 video/vnd.avi=mpv.desktop;
+audio/x-m4b=mpv.desktop;
