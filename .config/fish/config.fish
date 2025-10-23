@@ -15,7 +15,7 @@ if status is-interactive
     abbr gb 'git branch'
     abbr gl 'git log'
     abbr grb 'git rebase'
-    abbr gacp 'git add . ; git commit ; git push '
+    abbr gacp 'git add -u ; git commit ; git push '
 
     # general stuff
     abbr e "$EDITOR"
