@@ -2,7 +2,7 @@
 
 To install, follow these steps:
 
-(method taken from [this blog](https://drewdevault.com/2019/12/30/dotfiles.html))
+(method taken from [this blog](https://www.atlassian.com/git/tutorials/dotfiles))
 
 1. Install git.
 2. Make ssh key by running `ssh-keygen -t ed25519 -C "mail@example.com"`.
@@ -10,14 +10,19 @@ To install, follow these steps:
 4. Run these:
 ```
 cd ~ 
-git init
-echo \* > .gitignore
-git remote add origin git@github.com:aris-mav/dotfiles.git
-git fetch
-git checkout -f home
-```
-To addd a new file, `git add -f "filename"`.
 
+# 1. Clone the bare repo
+git clone --bare https://github.com/aris-mav/dotfiles.git $HOME/.dotfiles.git
+
+# 2. Define the alias (temporary for this shell)
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME'
+
+# 3. Checkout the home branch into $HOME
+dotfiles checkout home
+
+# 4. Hide untracked files
+dotfiles config --local status.showUntrackedFiles no
+```
 
 # Nix config
 
