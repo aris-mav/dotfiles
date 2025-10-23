@@ -51,18 +51,6 @@ return {
                 sorting_strategy = "ascending",
                 filesize_limit = 0.1, -- MB
             },
-            pickers = {
-                find_files = {
-                    find_command = (is_git_repo()
-                        and { "git", "ls-files", "--cached", "--others", "--exclude-standard" }
-                        or { "rg", "--files","--no-ignore", "--hidden", "--glob", "!**/.git/*" }),
-                    live_grep = {
-                        -- Use `git ls-files` to get tracked files and pass them to `rg`
-                        find_command = { "rg", "--files", "--no-ignore", "--hidden", "--glob", "!**/.git/*" },
-                        path_display = { "smart" },
-                    },
-                },
-            },
             vim.keymap.set('n', '<leader>t', builtin.builtin, { desc = 'Telescope Builtins' }),
             vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Buffers' }),
             vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Find Files' }),
