@@ -71,6 +71,14 @@ verbs: [
         execution: "git difftool -y {file}"
     }
 
+
+    {
+        invocation: nautilus
+        shortcut: na
+        leave_broot: true
+        execution: "nautilus {directory}"
+    }
+
     # On ctrl-b, propose the creation of a copy of the selection.
     # While this might occasionally be useful, this verb is mostly here
     # as an example to demonstrate rare standard groups like {file-stem}
