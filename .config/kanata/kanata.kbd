@@ -10,14 +10,14 @@
  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
  @es  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   @tb  ret
- lsft z    x    c    v    b    n    m    ,    .    /    rsft
+ lsft z    x    @c   v    b    n    @m   ,    .    /    rsft
  lctl      lmet lalt      @sp            ralt rctl 
  )
 
 (deflayer nomods
  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
- esc  a    s    d    f    g    h    j    k    l    ;    tab  ret
+ esc  a    s    d    f    g    h    j    k    l    ;    '    ret
  lsft z    x    c    v    b    n    m    ,    .    /    rsft
  lctl      lmet lalt      spc            ralt rctl 
  )
@@ -25,7 +25,7 @@
 (deflayer spc_layer
  _    _    _    _    _    _    _    _    _    _    _    _    _    _
  _    1    2    3    4    5    6    7    8    9    0    _    _    _
- _    lmet lalt lsft lctl -    left down up   rght '    _    _
+ _    lmet lalt lsft lctl -    left down up   rght '    tab  _
  _    caps del  @cw  bspc =    `    ret  [    ]    \    _
  _         _    _         XX             _    _ 
  )
@@ -33,16 +33,16 @@
 (deflayer s_spc_layer
  _    _    _    _    _    _    _    _    _    _    _    _    _    _
  _    S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8  S-9  S-0  _    _    _
- _    lmet lalt lsft lctl S--  home pgdn pgup end  S-'  _    _
+ _    lmet lalt lsft lctl S--  home pgdn pgup end  S-'  tab    _
  _    caps del  @cw  bspc S-=  S-`  ret  S-[  S-]  S-\  _
  _         _    _         XX             _    _ 
  )
 
 (deflayer f_layer
  _    _    _    _    _    _    _    _    _    _    _    _    _    _
- _    _    @mwd @mau @mwu _    _    f1   f2   f3   f4   _    _    _
+ _    _    mmid @mau @mwu _    _    f1   f2   f3   f4   _    _    _
  _    mrgt @mal @mad @mar _    _    f5   f6   f7   f8   _    _
- _    _    _    _    _    _    _    f9   f10  f11  f12  _
+ _    _    _    _    @mwd _    _    f9   f10  f11  f12  _
  _         _    _         mlft           _    _ 
  )
 
@@ -78,16 +78,20 @@
 (defalias
 
  sp (tap-hold-press $tap-time $hold-time-long spc (layer-while-held spc_layer))
+
  es (tap-hold-press $tap-time $hold-time-long esc (layer-while-held s_spc_layer))
- tb (tap-hold-press $tap-time $hold-time-long tab (layer-while-held s_spc_layer))
+ tb (tap-hold-press $tap-time $hold-time-long '   (layer-while-held s_spc_layer))
 
  a (tap-hold-release-keys $tap-time $hold-time-mid   (multi a @tap) rmet $left-hand-keys)
  s (tap-hold-release-keys $tap-time $hold-time-mid   (multi s @tap) lalt $left-hand-keys)
  d (tap-hold-release-keys $tap-time $hold-time-short (multi d @tap) lsft $left-hand-keys)
  f (tap-hold-release-keys $tap-time $hold-time-mid   (multi f @tap) lctl $left-hand-keys)
 
- g (tap-hold-press $tap-time $hold-time-mid g (layer-while-held f_layer))
- h (tap-hold-press $tap-time $hold-time-mid h (layer-while-held f_layer))
+ g (tap-hold-release-keys $tap-time $hold-time-mid   (multi g @tap) (layer-while-held f_layer) $right-hand-keys)
+ h (tap-hold-release-keys $tap-time $hold-time-mid   (multi h @tap) (layer-while-held f_layer) $right-hand-keys)
+
+ c (tap-hold-release-keys $tap-time $hold-time-mid   (multi c @tap) (layer-while-held f_layer) $right-hand-keys)
+ m (tap-hold-release-keys $tap-time $hold-time-mid   (multi m @tap) (layer-while-held f_layer) $right-hand-keys)
 
  j (tap-hold-release-keys $tap-time $hold-time-mid   (multi j @tap) rctl $right-hand-keys)
  k (tap-hold-release-keys $tap-time $hold-time-short (multi k @tap) rsft $right-hand-keys)
@@ -99,10 +103,10 @@
  mwl (mwheel-left 50 60)
  mwr (mwheel-right 50 60)
 
- mau (movemouse-accel-up 2 275 1 4)
- mal (movemouse-accel-left 2 275 1 4)
- mad (movemouse-accel-down 2 275 1 4)
- mar (movemouse-accel-right 2 275 1 4)
+ mau (movemouse-accel-up 3 300 1 5)
+ mal (movemouse-accel-left 3 300 1 5)
+ mad (movemouse-accel-down 3 300 1 5)
+ mar (movemouse-accel-right 3 300 1 5)
 
  cw (caps-word 2000)
 
