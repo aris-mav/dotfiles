@@ -48,7 +48,7 @@ return {
                         preview_cutoff = 1,
                     },
                 },
-                sorting_strategy = "ascending",
+                sorting_strategy = "descending",
                 filesize_limit = 0.1, -- MB
             },
             vim.keymap.set('n', '<leader>t', builtin.builtin, { desc = 'Telescope Builtins' }),
