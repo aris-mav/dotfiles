@@ -23,7 +23,7 @@ input {
 
         // Enable numlock on startup, omitting this setting disables it.
         // numlock 
-        repeat-delay 100
+        repeat-delay 150
         repeat-rate 25
         track-layout "global"
     }
@@ -88,7 +88,7 @@ output "eDP-1" {
     // for the resolution.
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "1920x1080@120.030"
+    // mode "1920x1080@120.030"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
     scale 1
@@ -141,7 +141,8 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.5; }
+    // default-column-width { proportion 0.5; }
+    default-column-width { proportion 1.0; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
