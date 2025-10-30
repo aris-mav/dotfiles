@@ -92,10 +92,4 @@ if status is-interactive
     # Cosmetic stuff
     set fish_greeting # disables the greeting
 
-    if type -q lsd
-        function ls
-            lsd $argv
-        end
-    end
-
 end
