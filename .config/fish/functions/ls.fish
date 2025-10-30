@@ -13,7 +13,6 @@ function ls
             # lsd always uses color by default and shows indicators, so no extra opts needed.
             # But ensure consistency with user expectations.
             set -g __fish_ls_color_opt --color=auto
-            set -g __fish_ls_indicators_opt -F
 
         # OpenBSD ships a command called "colorls" that takes "-G" and "-F",
         # but there's also a ruby implementation that doesn't understand "-F".
