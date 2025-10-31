@@ -9,7 +9,7 @@
 (deflayer base
  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
- @es  @a   @s   @d   @f   @g   @h   @j   @k   @l   @;   @tb  ret
+ @es  @a   @s   @d   @f   g    h    @j   @k   @l   @;   @tb  ret
  lsft z    x    @c   v    b    n    @m   ,    .    /    rsft
  lctl      lmet lalt      @sp            ralt rctl 
  )
@@ -86,9 +86,6 @@
  s (tap-hold-release-keys $tap-time $hold-time-mid   (multi s @tap) lalt $left-hand-keys)
  d (tap-hold-release-keys $tap-time $hold-time-short (multi d @tap) lsft $left-hand-keys)
  f (tap-hold-release-keys $tap-time $hold-time-mid   (multi f @tap) lctl $left-hand-keys)
-
- g (tap-hold-release-keys $tap-time $hold-time-mid   (multi g @tap) (layer-while-held f_layer) $right-hand-keys)
- h (tap-hold-release-keys $tap-time $hold-time-mid   (multi h @tap) (layer-while-held f_layer) $right-hand-keys)
 
  c (tap-hold-release-keys $tap-time $hold-time-mid   (multi c @tap) (layer-while-held f_layer) $right-hand-keys)
  m (tap-hold-release-keys $tap-time $hold-time-mid   (multi m @tap) (layer-while-held f_layer) $right-hand-keys)
