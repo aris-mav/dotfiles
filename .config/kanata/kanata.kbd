@@ -8,7 +8,7 @@
 
 (deflayer base
  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
- tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+ tab  @q   @w   @e   @r   t    y    @u   @i   @o   @p   [    ]    \
  @es  @a   @s   @d   @f   g    h    @j   @k   @l   @;   @tb  ret
  lsft z    x    @c   v    b    n    @m   ,    .    /    rsft
  lctl      lmet lalt      @sp            ralt rctl 
@@ -77,24 +77,41 @@
 
 (defalias
 
+
  sp (tap-hold-press $tap-time $hold-time-long spc (layer-while-held spc_layer))
 
  es (tap-hold-press $tap-time $hold-time-long esc (layer-while-held s_spc_layer))
  tb (tap-hold-press $tap-time $hold-time-long '   (layer-while-held s_spc_layer))
 
+
+ ;; Home row mods
  a (tap-hold-release-keys $tap-time $hold-time-mid   (multi a @tap) rmet $left-hand-keys)
  s (tap-hold-release-keys $tap-time $hold-time-mid   (multi s @tap) lalt $left-hand-keys)
  d (tap-hold-release-keys $tap-time $hold-time-short (multi d @tap) lsft $left-hand-keys)
  f (tap-hold-release-keys $tap-time $hold-time-mid   (multi f @tap) lctl $left-hand-keys)
 
- c (tap-hold-release-keys $tap-time $hold-time-mid   (multi c @tap) (layer-while-held f_layer) $left-hand-keys)
-
- m (tap-hold-release-keys $tap-time $hold-time-mid   (multi m @tap) (layer-while-held f_layer) $right-hand-keys)
-
  j (tap-hold-release-keys $tap-time $hold-time-mid   (multi j @tap) rctl $right-hand-keys)
  k (tap-hold-release-keys $tap-time $hold-time-short (multi k @tap) rsft $right-hand-keys)
  l (tap-hold-release-keys $tap-time $hold-time-mid   (multi l @tap) lalt $right-hand-keys)
  ; (tap-hold-release-keys $tap-time $hold-time-mid   (multi ; @tap) rmet $right-hand-keys)
+
+
+ ;; Top row mods
+ q (tap-hold-release-keys $tap-time $hold-time-mid   (multi q @tap) (multi lctl lsft) $left-hand-keys)
+ w (tap-hold-release-keys $tap-time $hold-time-mid   (multi w @tap) (multi lalt lsft) $left-hand-keys)
+ e (tap-hold-release-keys $tap-time $hold-time-mid   (multi e @tap) (multi lalt lctrl) $left-hand-keys)
+ r (tap-hold-release-keys $tap-time $hold-time-mid   (multi r @tap) (multi lmet lsft) $left-hand-keys)
+
+ u (tap-hold-release-keys $tap-time $hold-time-mid   (multi u @tap) (multi rctl rsft) $left-hand-keys)
+ o (tap-hold-release-keys $tap-time $hold-time-mid   (multi o @tap) (multi lalt rsft) $left-hand-keys)
+ i (tap-hold-release-keys $tap-time $hold-time-mid   (multi i @tap) (multi lalt rctrl) $left-hand-keys)
+ p (tap-hold-release-keys $tap-time $hold-time-mid   (multi p @tap) (multi rmet rsft) $left-hand-keys)
+
+
+ ;; Bottom row mods
+ c (tap-hold-release-keys $tap-time $hold-time-mid   (multi c @tap) (layer-while-held f_layer) $left-hand-keys)
+ m (tap-hold-release-keys $tap-time $hold-time-mid   (multi m @tap) (layer-while-held f_layer) $right-hand-keys)
+
 
  mwu (mwheel-up 50 60)
  mwd (mwheel-down 50 60)
