@@ -61,24 +61,20 @@ vim.keymap.set("t", "<A-j>", "<C-\\><C-N><C-w>j", { noremap = true, silent = tru
 vim.keymap.set("t", "<A-k>", "<C-\\><C-N><C-w>k", { noremap = true, silent = true })
 vim.keymap.set("t", "<A-l>", "<C-\\><C-N><C-w>l", { noremap = true, silent = true })
 
--- Open DOI's properly
-vim.keymap.set("n", "gx",
-    function()
-        local word = vim.fn.expand("<cWORD>")
-        -- Remove wrapping parentheses or brackets
-        local clean = word:match("^%((.+)%)$") or word:match("^%[(.+)%]$") or word
-        -- Match DOI pattern: starts with "10." followed by digits and a slash and text
-        local doi = clean:match("(10%.%d+/%S-)[%)%]%}]?$")
-        if doi then
-            local url = "https://doi.org/" .. doi
-            -- Change 'xdg-open' to 'open' on macOS, or 'start' on Windows
-            vim.fn.jobstart({ "xdg-open", url }, { detach = true })
-        else
-            vim.cmd("normal! gx")
-        end
-    end,
-    { noremap = true, silent = true }
-)
+vim.keymap.set("n", "gx", function()
+    local word = vim.fn.expand("<cWORD>")
+    -- Remove wrapping parentheses or brackets
+    local clean = word:match("^%((.+)%)$") or word:match("^%[(.+)%]$") or word
+    -- Match DOI pattern, stopping before ), ], } or whitespace
+    local doi = clean:match("(10%.%d+/%S-[^%)%]%}%s]*)")
+    if doi then
+        local url = "https://doi.org/" .. doi
+        -- Change 'xdg-open' to 'open' on macOS, or 'start' on Windows
+        vim.fn.jobstart({ "xdg-open", url }, { detach = true })
+    else
+        vim.cmd("normal! gx")
+    end
+end, { noremap = true, silent = true })
 
 -- dd on Quickfix
 vim.api.nvim_create_autocmd('FileType', {
