@@ -87,7 +87,8 @@
  d (tap-hold-release-keys $tap-time $hold-time-short (multi d @tap) lsft $left-hand-keys)
  f (tap-hold-release-keys $tap-time $hold-time-mid   (multi f @tap) lctl $left-hand-keys)
 
- c (tap-hold-release-keys $tap-time $hold-time-mid   (multi c @tap) (layer-while-held f_layer) $right-hand-keys)
+ c (tap-hold-release-keys $tap-time $hold-time-mid   (multi c @tap) (layer-while-held f_layer) $left-hand-keys)
+
  m (tap-hold-release-keys $tap-time $hold-time-mid   (multi m @tap) (layer-while-held f_layer) $right-hand-keys)
 
  j (tap-hold-release-keys $tap-time $hold-time-mid   (multi j @tap) rctl $right-hand-keys)
