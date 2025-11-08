@@ -24,7 +24,7 @@
 # you can launch broot with `br -H`).
 # A popular flag is the `g` one which displays git related info.
 #
-default_flags: -ih
+# default_flags: -ih
 
 ###############################################################
 # Terminal's title
