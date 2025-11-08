@@ -5,17 +5,21 @@ function backup
 
     if set -ql _flag_usb
 
-        set SANDISKDIR "/media/arismav/ARISSANDISK/"
+        set SANDISKDIR "/run/media/arismav/sandisk256/"
 
         if test -d $SANDISKDIR         
 
-            echo "syncing reads with usb drive"
-            rsync -au --no-times ~/Documents/reads/ "$SANDISKDIR/reads/"
-            echo "syncing music with usb drive"
-            rsync -au --no-times ~/Music/ "$SANDISKDIR/Music/"
-        else
-            echo "sandisk usb drive not connected"
+            if type -q unison
+                for folder in Pictures Documents Music Zotero Videos
+                    unison ~/$folder $SANDISKDIR/$folder
+                end
+                # else
+                #     for folder in Pictures Documents Music Zotero Videos
+                #         rsync -auv --delete ~/$folder $SANDISKDIR/$folder
+            end
         end
+    else
+        echo "sandisk usb drive not connected"
     end
 
 
