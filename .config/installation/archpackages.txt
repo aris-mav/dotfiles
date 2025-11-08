@@ -9,7 +9,7 @@ ripgrep
 ripgrep-all
 sed
 sd
-vivaldi
+firefox
 fish
 skim
 gcc
