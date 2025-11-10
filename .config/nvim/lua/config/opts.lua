@@ -41,7 +41,7 @@ vim.g.netrw_banner = 0
 -- vim.opt.clipboard = "unnamedplus"
 
 -- Wrap text
--- vim.opt.textwidth = 80
+vim.opt.textwidth = 50
 vim.opt.wrap = false
 
 vim.opt.undofile = true
