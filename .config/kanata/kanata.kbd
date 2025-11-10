@@ -127,3 +127,10 @@
 
  )
 
+(defcfg
+ linux-dev-names-exclude (
+     "DPB Ferris sweep Consumer Control"
+     "DPB Ferris sweep System Control"
+     "DPB Ferris sweep"
+     )
+ )
