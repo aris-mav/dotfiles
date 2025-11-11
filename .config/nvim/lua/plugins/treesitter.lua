@@ -50,7 +50,8 @@ return {
                 disable = {
                     "csv",
                     "tsv",
-                    "tex"
+                    "tex",
+                    "latex"
                 },
 
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
