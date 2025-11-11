@@ -10,8 +10,8 @@ function backup
         if test -d $SANDISKDIR         
 
             if type -q unison
-                for folder in Pictures Documents Music Zotero Videos
-                    unison ~/$folder $SANDISKDIR/$folder
+                for folder in Pictures Documents Music Zotero
+                    unison -auto ~/$folder $SANDISKDIR/$folder
                 end
                 # else
                 #     for folder in Pictures Documents Music Zotero Videos
