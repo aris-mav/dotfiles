@@ -4,7 +4,10 @@ return {
     build = function()
         require("nvim-treesitter.install").update({ with_sync = true })()
     end,
-    dependencies = {'HiPhish/rainbow-delimiters.nvim', 'nvim-treesitter/nvim-treesitter-textobjects'},
+    dependencies = {
+        'HiPhish/rainbow-delimiters.nvim',
+        'nvim-treesitter/nvim-treesitter-textobjects',
+    },
     rainbow = {
         enable = true,
         extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
@@ -44,7 +47,11 @@ return {
                 enable = true,
 
                 -- list of language that will be disabled
-                disable = {"csv", "tsv"},
+                disable = {
+                    "csv",
+                    "tsv",
+                    "tex"
+                },
 
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
                 -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
