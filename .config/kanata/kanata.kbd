@@ -55,7 +55,7 @@
  left-hand-keys (
     q w e r t
     a s d f g
-    z x c v b
+    z x c v 
   )
   right-hand-keys (
     y u i o p
@@ -97,14 +97,14 @@
 
 
  ;; Top row mods
- q (tap-hold-release-keys $tap-time $hold-time-mid   (multi q @tap) (multi lctl lsft) $left-hand-keys)
+ q (tap-hold-release-keys $tap-time $hold-time-mid   (multi q @tap) (multi lmet lsft) $left-hand-keys)
  w (tap-hold-release-keys $tap-time $hold-time-mid   (multi w @tap) (multi lalt lsft) $left-hand-keys)
  e (tap-hold-release-keys $tap-time $hold-time-mid   (multi e @tap) (multi lalt lctrl) $left-hand-keys)
- r (tap-hold-release-keys $tap-time $hold-time-mid   (multi r @tap) (multi lmet lsft) $left-hand-keys)
+ r (tap-hold-release-keys $tap-time $hold-time-mid   (multi r @tap) (multi lctl lsft) $left-hand-keys)
 
  u (tap-hold-release-keys $tap-time $hold-time-mid   (multi u @tap) (multi rctl rsft) $left-hand-keys)
- o (tap-hold-release-keys $tap-time $hold-time-mid   (multi o @tap) (multi lalt rsft) $left-hand-keys)
  i (tap-hold-release-keys $tap-time $hold-time-mid   (multi i @tap) (multi lalt rctrl) $left-hand-keys)
+ o (tap-hold-release-keys $tap-time $hold-time-mid   (multi o @tap) (multi lalt rsft) $left-hand-keys)
  p (tap-hold-release-keys $tap-time $hold-time-mid   (multi p @tap) (multi rmet rsft) $left-hand-keys)
 
 
