@@ -30,3 +30,21 @@ if ! test "$fish_color_user" = "yellow"
     set fish_color_host cyan
     set fish_color_cwd  blue
 end
+
+if not set -q NEWT_COLORS
+    set -Ux NEWT_COLORS '
+    root=,black
+    window=white,black
+    border=orange,black
+    shadow=,black
+    title=brightyellow,black
+    textbox=white,black
+    label=brightwhite,black
+    listbox=white,black
+    actlistbox=black,brightblack
+    button=black,brightyellow
+    actbutton=black,brightgreen
+    entry=white,black
+    disentry=brightblack,black
+    '
+end
