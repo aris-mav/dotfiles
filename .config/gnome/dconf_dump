@@ -61,6 +61,11 @@ window-width=1829
 is-maximized=true
 window-size=(960, 600)
 
+[org/gnome/calendar]
+active-view='month'
+window-maximized=true
+window-size=(768, 600)
+
 [org/gnome/cheese]
 burst-delay=1000
 camera='Laptop Camera (V4L2)'
@@ -176,7 +181,7 @@ text-scaling-factor=1.8000000000000005
 toolkit-accessibility=true
 
 [org/gnome/desktop/notifications]
-application-children=['gnome-power-panel', 'firefox', 'org-gnome-console', 'vivaldi-stable', 'org-gnome-tweaks', 'org-gnome-geary', 'org-gnome-nautilus', 'signal-desktop', 'org-gnome-evince', 'org-gnome-fileroller', 'org-gnome-software', 'gnome-network-panel', 'org-gnome-characters', 'sioyek', 'steam', 'gnome-datetime-panel', 'org-signal-signal', 'org-zotero-zotero', 'org-gnome-settings', 'libreoffice-writer', 'com-vivaldi-vivaldi', 'alacritty', 'org-wezfurlong-wezterm', 'gnome-about-panel']
+application-children=['gnome-power-panel', 'firefox', 'org-gnome-console', 'vivaldi-stable', 'org-gnome-tweaks', 'org-gnome-geary', 'org-gnome-nautilus', 'signal-desktop', 'org-gnome-evince', 'org-gnome-fileroller', 'org-gnome-software', 'gnome-network-panel', 'org-gnome-characters', 'sioyek', 'steam', 'gnome-datetime-panel', 'org-signal-signal', 'org-zotero-zotero', 'org-gnome-settings', 'libreoffice-writer', 'com-vivaldi-vivaldi', 'alacritty', 'org-wezfurlong-wezterm', 'gnome-about-panel', 'org-gnome-diskutility', 'org-pwmt-zathura']
 show-banners=true
 
 [org/gnome/desktop/notifications/application/alacritty]
@@ -212,6 +217,9 @@ application-id='org.gnome.Characters.desktop'
 [org/gnome/desktop/notifications/application/org-gnome-console]
 application-id='org.gnome.Console.desktop'
 
+[org/gnome/desktop/notifications/application/org-gnome-diskutility]
+application-id='org.gnome.DiskUtility.desktop'
+
 [org/gnome/desktop/notifications/application/org-gnome-evince]
 application-id='org.gnome.Evince.desktop'
 
@@ -245,6 +253,9 @@ application-id='org.gnome.Totem.desktop'
 [org/gnome/desktop/notifications/application/org-gnome-tweaks]
 application-id='org.gnome.tweaks.desktop'
 
+[org/gnome/desktop/notifications/application/org-pwmt-zathura]
+application-id='org.pwmt.zathura.desktop'
+
 [org/gnome/desktop/notifications/application/org-qbittorrent-qbittorrent]
 application-id='org.qbittorrent.qBittorrent.desktop'
 
@@ -276,7 +287,7 @@ application-id='vivaldi-stable.desktop'
 application-id='ZSTray.desktop'
 
 [org/gnome/desktop/peripherals/keyboard]
-delay=uint32 150
+delay=uint32 232
 repeat-interval=uint32 30
 
 [org/gnome/desktop/peripherals/mouse]
@@ -312,7 +323,6 @@ event-sounds=true
 theme-name='__custom'
 
 [org/gnome/desktop/wm/keybindings]
-close=['<Super>q']
 move-to-workspace-1=['<Shift><Super>1']
 move-to-workspace-2=['<Shift><Super>2']
 move-to-workspace-3=['<Shift><Super>3']
@@ -456,12 +466,12 @@ col-6-width=1846
 
 [org/gnome/gnome-system-monitor/proctree]
 col-0-visible=true
-col-0-width=855
+col-0-width=1305
 col-15-visible=true
 col-15-width=311
 col-26-visible=false
 col-26-width=0
-columns-order=[0, 1, 2, 3, 4, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+columns-order=[0, 1, 2, 3, 4, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 7]
 sort-col=15
 sort-order=0
 
@@ -492,7 +502,7 @@ search-filter-time-type='last_modified'
 search-view='list-view'
 
 [org/gnome/nautilus/window-state]
-initial-size=(1280, 657)
+initial-size=(2014, 729)
 initial-size-file-chooser=(890, 550)
 maximized=false
 
@@ -552,7 +562,7 @@ last-folder-path='/home/arismav/Downloads'
 last-folder-path='/home/arismav/.local/share/fonts'
 
 [org/gnome/portal/filechooser/org.signal.Signal]
-last-folder-path='/home/arismav/Documents/personal_papers'
+last-folder-path='/home/arismav/Documents/personal_papers/msc'
 
 [org/gnome/portal/filechooser/org.zotero.Zotero]
 last-folder-path='/home/arismav/Documents'
@@ -562,7 +572,7 @@ last-folder-path='/home/arismav/Documents/reads/articles'
 
 [org/gnome/settings-daemon/plugins/color]
 night-light-enabled=true
-night-light-last-coordinates=(50.835615460695116, 4.6961411999999996)
+night-light-last-coordinates=(50.884693415409956, 4.6752561999999998)
 night-light-schedule-automatic=false
 night-light-schedule-from=22.0
 night-light-temperature=uint32 2112
@@ -587,17 +597,19 @@ sleep-inactive-battery-timeout=900
 [org/gnome/shell]
 app-picker-layout=[{'Alacritty.desktop': <{'position': <0>}>, 'org.gnome.Contacts.desktop': <{'position': <1>}>, 'org.gnome.Weather.desktop': <{'position': <2>}>, 'org.gnome.clocks.desktop': <{'position': <3>}>, 'org.gnome.Maps.desktop': <{'position': <4>}>, 'brave-browser.desktop': <{'position': <5>}>, 'org.gnome.Calendar.desktop': <{'position': <6>}>, 'org.gnome.Totem.desktop': <{'position': <7>}>, 'org.gnome.Calculator.desktop': <{'position': <8>}>, 'simple-scan.desktop': <{'position': <9>}>, 'org.gnome.Settings.desktop': <{'position': <10>}>, 'gnome-system-monitor.desktop': <{'position': <11>}>, 'org.gnome.Evolution.desktop': <{'position': <12>}>, 'org.gnome.Terminal.desktop': <{'position': <13>}>, 'Utilities': <{'position': <14>}>, 'org.gnome.Extensions.desktop': <{'position': <15>}>, 'yelp.desktop': <{'position': <16>}>, 'org.gnome.Nautilus.desktop': <{'position': <17>}>, 'org.gnome.Cheese.desktop': <{'position': <18>}>, 'firefox-esr.desktop': <{'position': <19>}>, 'gimp.desktop': <{'position': <20>}>, 'im-config.desktop': <{'position': <21>}>, 'libreoffice-calc.desktop': <{'position': <22>}>}, {'libreoffice-draw.desktop': <{'position': <0>}>, 'libreoffice-impress.desktop': <{'position': <1>}>, 'libreoffice-startcenter.desktop': <{'position': <2>}>, 'libreoffice-writer.desktop': <{'position': <3>}>, 'org.gnome.Music.desktop': <{'position': <4>}>, 'qtqr.desktop': <{'position': <5>}>, 'org.gnome.Rhythmbox3.desktop': <{'position': <6>}>, 'shotwell.desktop': <{'position': <7>}>, 'org.gnome.Software.desktop': <{'position': <8>}>, 'software-properties-gtk.desktop': <{'position': <9>}>, 'aerc.desktop': <{'position': <10>}>, 'org.gnome.SoundRecorder.desktop': <{'position': <11>}>, 'spotify.desktop': <{'position': <12>}>, 'steam.desktop': <{'position': <13>}>, 'fish.desktop': <{'position': <14>}>, 'synaptic.desktop': <{'position': <15>}>, 'org.gnome.TextEditor.desktop': <{'position': <16>}>, 'timeshift-gtk.desktop': <{'position': <17>}>, 'transmission-gtk.desktop': <{'position': <18>}>, 'org.pwmt.zathura.desktop': <{'position': <19>}>, 'zotero.desktop': <{'position': <20>}>, 'ZSTray.desktop': <{'position': <21>}>, 'display-im6.q16.desktop': <{'position': <22>}>, 'setup-mozc.desktop': <{'position': <23>}>}, {'mpv.desktop': <{'position': <0>}>, 'org.gnome.World.PikaBackup.desktop': <{'position': <1>}>, 'prerex.desktop': <{'position': <2>}>, 'protonvpn-app.desktop': <{'position': <3>}>, 'org.qbittorrent.qBittorrent.desktop': <{'position': <4>}>, 'retroarch.desktop': <{'position': <5>}>, 'signal-desktop.desktop': <{'position': <6>}>, 'sioyek.desktop': <{'position': <7>}>, 'texdoctk.desktop': <{'position': <8>}>, 'info.desktop': <{'position': <9>}>, 'brave-mmjaddejhbokchddkbhecmaladflalcg-Default.desktop': <{'position': <10>}>, 'debian-uxterm.desktop': <{'position': <11>}>, 'vivaldi-stable.desktop': <{'position': <12>}>, 'vprerex.desktop': <{'position': <13>}>, 'debian-xterm.desktop': <{'position': <14>}>, 'org.gnome.eog.desktop': <{'position': <15>}>}]
 command-history=['blur', 'r']
-disabled-extensions=['screenshot-window-sizer@gnome-shell-extensions.gcampax.github.com', 'native-window-placement@gnome-shell-extensions.gcampax.github.com', 'light-style@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'window-list@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'status-icons@gnome-shell-extensions.gcampax.github.com']
+disable-user-extensions=false
+disabled-extensions=['screenshot-window-sizer@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'window-list@gnome-shell-extensions.gcampax.github.com', 'status-icons@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'native-window-placement@gnome-shell-extensions.gcampax.github.com', 'light-style@gnome-shell-extensions.gcampax.github.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com']
 enabled-extensions=['blur-my-shell@aunetx', 'system-monitor@gnome-shell-extensions.gcampax.github.com', 'dynamic-panel-transparency@rockon999.github.io', 'windowsNavigator@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com']
 favorite-apps=@as []
 last-selected-power-profile='power-saver'
+remember-mount-password=true
 welcome-dialog-last-shown-version='47.2'
 
 [org/gnome/shell/app-switcher]
 current-workspace-only=true
 
 [org/gnome/shell/extensions/auto-move-windows]
-application-list=['Alacritty.desktop:2', 'com.vivaldi.Vivaldi.desktop:1', 'org.signal.Signal.desktop:1', 'zotero.desktop:3', 'sioyek.desktop:3', 'firefox.desktop:1']
+application-list=['Alacritty.desktop:2', 'org.signal.Signal.desktop:1', 'zotero.desktop:3', 'firefox.desktop:1', 'org.pwmt.zathura.desktop:3']
 
 [org/gnome/shell/extensions/blur-my-shell]
 pipelines={'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_000000000000'>, 'params': <{'radius': <30>, 'brightness': <0.59999999999999998>}>}>]>}, 'pipeline_default_rounded': {'name': <'Default rounded'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_000000000001'>, 'params': <{'radius': <30>, 'brightness': <0.59999999999999998>}>}>]>}, 'pipeline_26493215630915': {'name': <'New pipeline'>, 'effects': <@av []>}}
@@ -674,7 +686,7 @@ show-upload=false
 name=''
 
 [org/gnome/shell/extensions/workspace-indicator]
-embed-previews=true
+embed-previews=false
 
 [org/gnome/shell/keybindings]
 screenshot=@as []
@@ -694,12 +706,12 @@ locations=[<(uint32 2, <('Manchester', 'EGCC', true, [(0.93113315593897483, -0.0
 locations=@av []
 
 [org/gnome/software]
-check-timestamp=int64 1761805466
+check-timestamp=int64 1762939114
 first-run=false
-flatpak-purge-timestamp=int64 1761809107
-install-timestamp=int64 1748288060
+flatpak-purge-timestamp=int64 1762930821
+install-timestamp=int64 1762891897
 online-updates-timestamp=int64 1748287726
-update-notification-timestamp=int64 1748288094
+update-notification-timestamp=int64 1762842627
 
 [org/gnome/system/location]
 enabled=true
