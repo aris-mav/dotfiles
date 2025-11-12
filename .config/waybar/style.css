@@ -1,21 +1,21 @@
 * {
     border: none;
-    border-radius: 0;
+    border-radius: 10;
     min-height: 0;
     font-family: JetBrainsMono Nerd Font;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 23px;
 }
 
 window#waybar {
     background-color: #282828;
     transition-property: background-color;
     transition-duration: 0.5s;
-    border-radius: 7px;
+    border-radius: 10px;
 }
 
-window#waybar>box {
-}
+/* window#waybar>box { */
+/* } */
 
 window#waybar.hidden {
     opacity: 0.5;
@@ -32,7 +32,7 @@ window#waybar.hidden {
     padding: 4px 10px;
     margin: 4px 2px;
     border-radius: 7px;
-    background-color: #3c3836;
+    /* background-color: #3c3836; */
     color: #ebdbb2;
 }
 
@@ -69,55 +69,65 @@ window#waybar.hidden {
     color: #ebdbb2;
 }
 
-
 #custom-logo {
     padding-right: 7px;
     padding-left: 2px;
     margin-left: 2px;
-    font-size: 15px;
+    font-size: 25px;
     border-radius: 5px 0px 0px 5px;
     color: #458588;
 }
 
 
-#battery { margin-right: 6px; }
-#battery.warning { background-color: #fb4934; }
-#battery.critical { background-color: #cc241d; }
-#battery.charging { background-color: #98971a; }
+#battery { margin-right: 6px; 
+    background-color: #282828;
+    /* background-color: #3c3836; */
+}
+/* #battery.warning { background-color: #fb4934; } */
+/* #battery.critical { background-color: #cc241d; } */
+/* #battery.charging { background-color: #98971a; } */
 
 #backlight {
-    background-color: #fabd2f;
+    /* background-color: #fabd2f; */
+    background-color: #282828;
 }
 
 #custom-power {
-    background-color: #d65d0e;
+    /* background-color: #d65d0e; */
+    background-color: #282828;
 }
 
 #network {
-    background-color: #d79921;
+    /* background-color: #d79921; */
     padding-right: 17px;
+    background-color: #282828;
 }
 
 #wireplumber {
-    background-color: #458588
+    /* background-color: #458588 */
+    background-color: #282828;
 }
 
 #memory {
-    background-color: #b16286;
+    /* background-color: #b16286; */
+    background-color: #282828;
 }
 
 #clock {
     font-family: JetBrainsMono Nerd Font;
-    background-color: #689d6a;
+    background-color: #282828;
+    /* background-color: #689d6a; */
 }
 
 tooltip {
     border-radius: 8px;
     padding: 15px;
-    background-color: #1d2021;
+    background-color: #282828;
+    /* background-color: #1d2021; */
 }
 
 tooltip label {
     padding: 5px;
-    background-color: #1d2021;
+    background-color: #282828;
+    /* background-color: #1d2021; */
 }
