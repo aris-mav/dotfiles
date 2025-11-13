@@ -47,17 +47,19 @@ vim.g.netrw_banner = 0
 
 vim.api.nvim_create_augroup("SpellCheckForSpecificFiletypes", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-  group = "SpellCheckForSpecificFiletypes",
-  pattern = { "markdown", "tex", "txt" },
-  callback = function()
-    vim.opt_local.spell = true
-    vim.opt_local.spelllang = { "en_gb", "el" }
-  end,
+    group = "SpellCheckForSpecificFiletypes",
+    pattern = { "markdown", "tex", "txt" },
+    callback = function()
+        vim.opt_local.spell = true
+        vim.opt_local.spelllang = { "en_gb", "el" }
+
+        -- Wrap text
+        vim.opt.textwidth = 50
+        vim.opt.wrap = false
+
+    end,
 })
 
--- Wrap text
-vim.opt.textwidth = 50
-vim.opt.wrap = false
 
 vim.opt.undofile = true
 
