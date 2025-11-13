@@ -1,0 +1,38 @@
+{
+  "keyMappings": "# Insert your preferred key mappings here.\n\n\nmap <a-j>  nextTab\nmap <a-k> previousTab\nmap <a-h> goBack\nmap <a-l> goForward",
+  "settingsVersion": "2.3",
+  "exclusionRules": [
+    {
+      "passKeys": "",
+      "pattern": "https?://mail.google.com/*"
+    },
+    {
+      "passKeys": "esc",
+      "pattern": "https?://mail.proton.me/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://mail.proton.me/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://monkeytype.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://outlook.live.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://outlook.office365.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://web.whatsapp.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://config.qmk.fm/*"
+    }
+  ]
+}
