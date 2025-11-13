@@ -48,19 +48,21 @@ vim.g.netrw_banner = 0
 vim.api.nvim_create_augroup("SpellCheckForSpecificFiletypes", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     group = "SpellCheckForSpecificFiletypes",
-    pattern = { "markdown", "tex", "txt" },
+    pattern = {
+        "markdown",
+        "tex",
+        "txt",
+        "typst",
+    },
     callback = function()
-        vim.opt_local.spell = true
         vim.opt_local.spelllang = { "en_gb", "el" }
-
-        -- Wrap text
-        vim.opt.textwidth = 50
-        vim.opt.wrap = false
-
+        vim.opt_local.spell = true
+        vim.opt_local.textwidth = 50
     end,
 })
 
 
+vim.opt.wrap = false
 vim.opt.undofile = true
 
 -- Ignore case in search
