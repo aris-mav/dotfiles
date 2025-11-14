@@ -1,20 +1,34 @@
 #pragma once
-// Set the mouse settings to a comfortable speed/accuracy trade-off,
-// assuming a screen refresh rate of 60 Htz or higher
-// The default is 50. This makes the mouse ~3 times faster and more accurate
-#define MOUSEKEY_INTERVAL 16
-// The default is 20. Since we made the mouse about 3 times faster with the previous setting,
-// give it more time to accelerate to max speed to retain precise control over short distances.
+
+// Delay between pressing a movement key and cursor movement
+#define MOUSEKEY_DELAY 10 
+
+// Time between cursor movements in milliseconds
+#define MOUSEKEY_INTERVAL 20
+
+// Step size
+#define MOUSEKEY_MOVE_DELTA	8
+
+// Maximum cursor speed at which acceleration stops
+#define MOUSEKEY_MAX_SPEED	8
+
+// Time until max speed is reached
 #define MOUSEKEY_TIME_TO_MAX 30
-// The default is 300. Let's try and make this as low as possible while keeping the cursor responsive
-#define MOUSEKEY_DELAY 100
-// It makes sense to use the same delay for the mouseweel
-#define MOUSEKEY_WHEEL_DELAY 100
-// The default is 100
-#define MOUSEKEY_WHEEL_INTERVAL 50
-// The default is 40
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 100
+
+// Delay between pressing a wheel key and wheel movement
+#define MOUSEKEY_WHEEL_DELAY 10	
+
+// Time between wheel movements
+#define MOUSEKEY_WHEEL_INTERVAL	80	
+
+// Wheel movement step size
+#define MOUSEKEY_WHEEL_DELTA 1	
+
+// Maximum number of scroll steps per scroll action
+#define MOUSEKEY_WHEEL_MAX_SPEED 3	
+
+// Time until maximum scroll speed is reached
+#define MOUSEKEY_WHEEL_TIME_TO_MAX	40	
 
 #define TAPPING_TERM 175
 #define CHORDAL_HOLD
-// #define RETRO_TAPPING
