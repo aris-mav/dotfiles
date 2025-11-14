@@ -25,8 +25,8 @@ vim.keymap.set("n", "<leader>s", ":setlocal spell spelllang=en_us <cr>", { remap
 -- Keep cursor centered after some big movements
 vim.keymap.set("n", "n", "nzzzv", { remap = true, silent = false })
 vim.keymap.set("n", "N", "Nzzzv", { remap = true, silent = false })
-vim.keymap.set("n", "<C-f>", "<C-f>zzzv", { remap = true, silent = false })
-vim.keymap.set("n", "<C-b>", "<C-b>zzzv", { remap = true, silent = false })
+-- vim.keymap.set("n", "<C-f>", "<C-f>zzzv", { remap = true, silent = false })
+-- vim.keymap.set("n", "<C-b>", "<C-b>zzzv", { remap = true, silent = false })
 vim.keymap.set("n", "<C-d>", "<C-d>zzzv", { remap = true, silent = false })
 vim.keymap.set("n", "<C-u>", "<C-u>zzzv", { remap = true, silent = false })
 
