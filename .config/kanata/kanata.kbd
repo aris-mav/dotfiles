@@ -81,7 +81,7 @@
  sp (tap-hold-press $tap-time $hold-time-long spc (layer-while-held spc_layer))
 
  es (tap-hold-press $tap-time $hold-time-long esc (layer-while-held s_spc_layer))
- tb (tap-hold-press $tap-time $hold-time-long '   (layer-while-held s_spc_layer))
+ tb (tap-hold-press $tap-time $hold-time-long tab (layer-while-held s_spc_layer))
 
 
  ;; Home row mods
