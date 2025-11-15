@@ -102,10 +102,10 @@
  e (tap-hold-release-keys $tap-time $hold-time-mid   (multi e @tap) (multi lalt lctrl) $left-hand-keys)
  r (tap-hold-release-keys $tap-time $hold-time-mid   (multi r @tap) (multi lctl lsft) $left-hand-keys)
 
- u (tap-hold-release-keys $tap-time $hold-time-mid   (multi u @tap) (multi rctl rsft) $left-hand-keys)
- i (tap-hold-release-keys $tap-time $hold-time-mid   (multi i @tap) (multi lalt rctrl) $left-hand-keys)
- o (tap-hold-release-keys $tap-time $hold-time-mid   (multi o @tap) (multi lalt rsft) $left-hand-keys)
- p (tap-hold-release-keys $tap-time $hold-time-mid   (multi p @tap) (multi rmet rsft) $left-hand-keys)
+ u (tap-hold-release-keys $tap-time $hold-time-mid   (multi u @tap) (multi rctl rsft) $right-hand-keys)
+ i (tap-hold-release-keys $tap-time $hold-time-mid   (multi i @tap) (multi lalt rctrl) $right-hand-keys)
+ o (tap-hold-release-keys $tap-time $hold-time-mid   (multi o @tap) (multi lalt rsft) $right-hand-keys)
+ p (tap-hold-release-keys $tap-time $hold-time-mid   (multi p @tap) (multi rmet rsft) $right-hand-keys)
 
 
  ;; Bottom row mods
