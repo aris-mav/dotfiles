@@ -56,8 +56,8 @@ function module.apply_to_config(config)
         },
         -- copy mode
         {
-            key = "Space",
-            mods = "LEADER",
+            key = "[",
+            mods = "ALT",
             action = action.ActivateCopyMode
         },
     }
