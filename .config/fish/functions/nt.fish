@@ -17,7 +17,7 @@ function nt
     # check for zotero updates, commit them
     if not git diff --quiet zotero_library.bib
         git add zotero_library.bib
-        git commit -m "zotero updates"
+        git commit --allow-empty-message -m ""
         set committed_anything true
     end
 
@@ -87,18 +87,18 @@ function nt
         if test -f "$file"
             switch $file
                 case 'TODO.md'
-                    set commit_msg "Update TODO list"
+                    set commit_msg ""
                 case 'books_finished.tsv'
-                    set commit_msg "Log finished books"
+                    set commit_msg ""
                 case 'books_to_read.tsv'
-                    set commit_msg "Log books to read"
+                    set commit_msg ""
                 case '*'
                     set first_line (head -n 1 $file)
                     set commit_msg "edits on $first_line"
             end
 
             git add "$file"
-            git commit -m "$commit_msg"
+            git commit --allow-empty-message -m "$commit_msg"
             set committed_anything true
         end
     end
