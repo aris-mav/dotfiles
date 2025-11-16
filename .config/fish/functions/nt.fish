@@ -23,9 +23,10 @@ function nt
 
     # git pull, only if you haven't pulled already, 
     # or if the last pull was more than 1h ago.
-    if not set -q PREV_PULL || test (math $datetime - $PREV_PULL) -gt 10000
+    if not test -e $NOTES_DIR/.last_pull_datetime \
+        || test (math $datetime - (cat $NOTES_DIR/.last_pull_datetime) ) -gt 10000
         git pull
-        set -gx PREV_PULL $datetime
+        echo $datetime > $NOTES_DIR/.last_pull_datetime 
     end
 
     # Do something, according to the used flag
