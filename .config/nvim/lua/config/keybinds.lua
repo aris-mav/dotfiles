@@ -9,6 +9,9 @@ vim.g.maplocalleader = "\\"
 -- Quit with ctrl-q
 vim.keymap.set('n', '<C-q>', ':q<CR>')
 
+-- command line thing
+vim.keymap.set('n', '<leader>;', 'q:i')
+
 -- Open side window to the left using leader v and bottom window using leader s
 vim.keymap.set("n", "<leader>sv", ":vs | Ex | execute 'vert resize ' . float2nr(&columns / 3) | set wfw | echo ''<CR>", { remap = true, silent = false })
 vim.keymap.set("n", "<leader>sh", ":below split | Ex | resize 15 | set wfh | echo '' <cr>", { remap = true, silent = false })
