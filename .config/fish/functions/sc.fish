@@ -2,7 +2,12 @@ function sc
 
     argparse 'p/phone' 'u/usb'  -- $argv
 
-    set -l syncfolders Pictures Documents Music Zotero
+
+    if test (whoami) = "arismav"
+        set syncfolders Documents Music Zotero Pictures 
+    else 
+        set syncfolders Documents Music Zotero
+    end
 
     if set -ql _flag_usb
 
@@ -17,7 +22,7 @@ function sc
                 for folder in $syncfolders
                     if type -q unison
                         unison -auto ~/$folder $FLASH_DRIVE_DIR/$folder
-                    else
+                    else if read_confirm "Use rsync?"
                         rsync -auv ~/$folder $FLASH_DRIVE_DIR/$folder
                     end
                 end
@@ -49,7 +54,8 @@ function sc
             echo "ssh connection needs troubleshooting"
 
         else
-            set -l syncfolders Pictures Documents Music Zotero
+
+            set -l syncfolders Documents Music Zotero Pictures 
 
             ## move recent camera files to the other DCIM folder, to have everything in one place
             # ssh -p '8022' $TERMUX_PHONE_IP 'mv /storage/emulated/0/DCIM/Camera/  /storage/emulated/0/Pictures/DCIM/Camera/'
