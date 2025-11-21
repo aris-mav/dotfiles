@@ -7,6 +7,7 @@ bluez
 bluez-utils
 broot
 fastfetch
+fd
 firefox
 fish
 flatpak
