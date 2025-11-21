@@ -2,11 +2,14 @@ function sc
 
     argparse 'p/phone' 'u/usb'  -- $argv
 
-
     if test (whoami) = "arismav"
-        set syncfolders Documents Music Zotero Pictures 
+        set syncfolders Documents Music Zotero Pictures
     else 
         set syncfolders Documents Music Zotero
+    end
+
+    if not set -q UNISON 
+        echo "you might want to `set -Ux UNISON .config/unison`"
     end
 
     if set -ql _flag_usb
@@ -26,6 +29,7 @@ function sc
                         rsync -auv ~/$folder $FLASH_DRIVE_DIR/$folder
                     end
                 end
+                rsync -auv ~/Zotero/zotero.sqlite $FLASH_DRIVE_DIR/Zotero/zotero.sqlite
             end
         else
             echo "usb drive not connected"

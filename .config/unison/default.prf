@@ -1,0 +1,6 @@
+# Unison preferences file
+ignore = Name {notes/.git}
+ignore = Name {zotero*}
+ignore = Name {.zotero*}
+ignore = Name {better-bibtex.*}
+ignore = Name {.last_pull_datetime}
