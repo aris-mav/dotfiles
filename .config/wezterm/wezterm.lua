@@ -1,10 +1,12 @@
 local wezterm = require 'wezterm'
-local mux = wezterm.mux
 
 -- List of your modules
 local modules = {
     "appearance",
     "wez_tmux",
+    "fullscreen",
+    "autosplit",
+    "font",
 }
 
 local config = {}
@@ -21,12 +23,5 @@ end
 
 -- set shell
 config.default_prog = { 'fish', '-l' }
-
--- start with a split
-wezterm.on('gui-startup', function(cmd)
-  local tab, pane, window = mux.spawn_window(cmd or {})
-  window:gui_window():maximize()
-  pane:split { size = 0.66 }
-end)
 
 return config

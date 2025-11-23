@@ -9,15 +9,13 @@ function M.apply_to_config(config)
         brightness = 0.8,
     }
 
+    -- no top bar, but allow resizing from sides
     config.window_decorations = "RESIZE"
 
-    config.initial_cols = 120
-    config.initial_rows = 28
-
-    config.font_size = 20
+    -- config.initial_cols = 120
+    -- config.initial_rows = 28
 
     config.color_scheme = 'GruvboxDark'
-    config.font = wezterm.font('JetBrains Mono Nerd Font')
 
     config.use_fancy_tab_bar = false
     config.hide_tab_bar_if_only_one_tab = true
