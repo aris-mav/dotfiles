@@ -1,0 +1,16 @@
+# Enter copy mode with vi keys
+bind-key -n M-[ copy-mode
+unbind-key Space
+
+# Exit copy mode with i
+# bind -T copy-mode-vi i send-keys -X cancel
+
+# Start selection with 'v' and copy with 'y'
+bind -T copy-mode-vi v send -X begin-selection
+bind -T copy-mode-vi y send -X copy-selection-and-cancel
+
+# Paste with p (like Vim's p)
+bind-key p paste-buffer
+
+# For Wayland:
+# bind-key -T copy-mode-vi y send -X copy-pipe-and-cancel "wl-copy"

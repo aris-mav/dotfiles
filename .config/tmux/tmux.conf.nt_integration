@@ -1,0 +1,3 @@
+bind -n M-t run-shell "tmux split-window 'nt -t'"
+bind -n M-+ run-shell "tmux split-window 'nt -n'"
+bind -n M-= run-shell "tmux new-window -n 'notes' 'nt -s'"

@@ -1,0 +1,28 @@
+# Pane navigation
+bind -n M-Left  if-shell '[ "$(tmux display -p "#{pane_at_left}"  )" = "0" ]' {select-pane -L} {previous-window}
+bind -n M-Right if-shell '[ "$(tmux display -p "#{pane_at_right}" )" = "0" ]' {select-pane -R} {next-window}
+bind -n M-Up    if-shell '[ "$(tmux display -p "#{pane_at_top}"   )" = "0" ]' {select-pane -U} {previous-window}
+bind -n M-Down  if-shell '[ "$(tmux display -p "#{pane_at_bottom}")" = "0" ]' {select-pane -D} {next-window}
+
+bind -n M-h if-shell '[ "$(tmux display -p "#{pane_at_left}"  )" = "0" ]' {select-pane -L} {previous-window}
+bind -n M-l if-shell '[ "$(tmux display -p "#{pane_at_right}" )" = "0" ]' {select-pane -R} {next-window}
+bind -n M-k if-shell '[ "$(tmux display -p "#{pane_at_top}"   )" = "0" ]' {select-pane -U} {previous-window}
+bind -n M-j if-shell '[ "$(tmux display -p "#{pane_at_bottom}")" = "0" ]' {select-pane -D} {next-window}
+
+# Resize pane using Alt + Shift + Arrow Keys
+bind -n M-S-Left  resize-pane -L 
+bind -n M-S-Right resize-pane -R
+bind -n M-S-Up    resize-pane -U
+bind -n M-S-Down  resize-pane -D
+
+# Alt+number to switch to corresponding window
+bind -n M-1 select-window -t :1
+bind -n M-2 select-window -t :2
+bind -n M-3 select-window -t :3
+bind -n M-4 select-window -t :4
+bind -n M-5 select-window -t :5
+bind -n M-6 select-window -t :6
+bind -n M-7 select-window -t :7
+bind -n M-8 select-window -t :8
+bind -n M-9 select-window -t :9
+bind -n M-0 select-window -t :0

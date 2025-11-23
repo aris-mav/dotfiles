@@ -1,0 +1,20 @@
+# Remap prefix
+unbind-key C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+bind h split-window -h
+bind v split-window -v
+
+bind -n M-z resize-pane -Z
+
+bind n run-shell ' \
+         tmux new-window; \
+         width=$(tmux display -p "#{window_width}"); \
+         if [ "$width" -gt 150 ]; then \
+         tmux split-window -h; \
+         tmux resize-pane -x $((width / 2 + 25)); \
+         elif [ "$width" -gt 120 ]; then \
+         tmux split-window -h; \
+         tmux resize-pane -x $((width * 66 / 100)); \
+         fi'
