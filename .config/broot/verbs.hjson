@@ -86,7 +86,7 @@ verbs: [
         invocation: yank
         shortcut: y
         leave_broot: false
-        execution: "wl-copy {file}"
+        execution: "$YANKTEXT {file}"
     }
 
     {

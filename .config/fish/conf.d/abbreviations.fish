@@ -17,16 +17,10 @@
     # general stuff
     abbr e "$EDITOR"
     abbr f "$FILE_BROWSER"
+    abbr y "$YANKTEXT"
     abbr xo 'xdg-open'
     abbr x 'xargs'
 
-    if test "$XDG_SESSION_TYPE" = "wayland"
-        abbr y 'wl-copy -n'
-    else if test "$XDG_SESSION_TYPE" = "x11"
-        abbr y 'xclip'
-    else if type -q "clip.exe"
-        abbr y 'clip.exe'
-    end
 
     if type -q nix
         abbr rb 'sudo nixos-rebuild switch -I nixos-config=~/.config/nixos/configuration.nix'

@@ -1,4 +1,4 @@
-for candidate in EDITOR FUZZYFIND FILE_BROWSER
+for candidate in EDITOR FUZZYFIND FILE_BROWSER YANKTEXT
     if not set -q {$candidate}
         switch $candidate
         case EDITOR
@@ -30,6 +30,15 @@ for candidate in EDITOR FUZZYFIND FILE_BROWSER
             entry=white,black
             disentry=brightblack,black
             '
+        case YANKTEXT
+            if test "$XDG_SESSION_TYPE" = "wayland"
+                set -Ux YANKTEXT 'wl-copy -n'
+            else if test "$XDG_SESSION_TYPE" = "x11"
+                set -Ux YANKTEXT 'xclip'
+            else if type -q "clip.exe"
+                set -Ux YANKTEXT 'clip.exe'
+            end
+
         end
     end
 end
