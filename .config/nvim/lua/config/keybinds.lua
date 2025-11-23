@@ -5,16 +5,15 @@ vim.g.maplocalleader = "\\"
 -- Slime thing (if plugin is not available)
 -- vim.api.nvim_set_keymap('v', '<cr>', 'y<C-w>wpi<cr><C-\\><C-N><C-w>w', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', '<cr>', 'Y<C-w>wpi<cr><C-\\><C-N><C-w>w', { noremap = true, silent = true })
+-- Open side window to the left using leader v and bottom window using leader s
+-- vim.keymap.set("n", "<leader>sv", ":vs | Ex | execute 'vert resize ' . float2nr(&columns / 3) | set wfw | echo ''<CR>", { remap = true, silent = false })
+-- vim.keymap.set("n", "<leader>sh", ":below split | Ex | resize 15 | set wfh | echo '' <cr>", { remap = true, silent = false })
 
 -- Quit with ctrl-q
 vim.keymap.set('n', '<C-q>', ':q<CR>')
 
 -- command line thing
 vim.keymap.set('n', '<leader>;', 'q:i')
-
--- Open side window to the left using leader v and bottom window using leader s
-vim.keymap.set("n", "<leader>sv", ":vs | Ex | execute 'vert resize ' . float2nr(&columns / 3) | set wfw | echo ''<CR>", { remap = true, silent = false })
-vim.keymap.set("n", "<leader>sh", ":below split | Ex | resize 15 | set wfh | echo '' <cr>", { remap = true, silent = false })
 
 -- Map leader-w to :w
 vim.keymap.set("n", "<leader>w", ":w <cr>", { remap = true, silent = false })

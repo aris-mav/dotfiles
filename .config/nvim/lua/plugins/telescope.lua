@@ -1,24 +1,13 @@
 return {
     'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    -- lazy = true,
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        'nvim-telescope/telescope-symbols.nvim',
+    },
 
     config = function()
 
-        local telescopeConfig = require("telescope.config")
-        local util = require("telescope.utils")
         local builtin = require('telescope.builtin')
-        local is_git_repo = function()
-            return util.get_os_command_output({ "git", "rev-parse", "--is-inside-work-tree" })[1] == "true"
-        end
-        -- Clone the default Telescope configuration
-        local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
-
-        -- I want to search in hidden/dot files.
-        table.insert(vimgrep_arguments, "--hidden")
-        -- I don't want to search in the `.git` directory.
-        table.insert(vimgrep_arguments, "--glob")
-        table.insert(vimgrep_arguments, "!**/.git/*")
 
         require('telescope').setup {
             defaults = {
@@ -51,13 +40,36 @@ return {
                 sorting_strategy = "descending",
                 filesize_limit = 0.1, -- MB
             },
-            vim.keymap.set('n', '<leader>t', builtin.builtin, { desc = 'Telescope Builtins' }),
-            vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Buffers' }),
-            vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Find Files' }),
-            vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = 'Live Grep' }),
-            vim.keymap.set('n', '<leader>m', builtin.marks, { desc = 'Live Grep' }),
-            vim.keymap.set('n', '<leader>td', builtin.diagnostics, { desc = 'Diagnostics' }),
-
         }
+
+        vim.keymap.set('n', '<leader>t', builtin.builtin, { desc = 'Telescope Builtins' })
+        vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Buffers' })
+        vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Find Files' })
+        vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = 'Live Grep' })
+        vim.keymap.set('n', '<leader>m', builtin.marks, { desc = 'Live Grep' })
+        vim.keymap.set('n', '<leader>td', builtin.diagnostics, { desc = 'Diagnostics' })
+
+        for _, sym in ipairs(
+            {
+                'latex',
+                'julia',
+                'kaomoji',
+                'emoji',
+                'gitmoji',
+                'math',
+                'nerd',
+                '',
+            }
+        ) do
+
+            vim.keymap.set('n',
+                "<leader>s" .. string.sub(sym, 1, 1),
+                function()
+                    builtin.symbols({ sources = { sym } })
+                end,
+                { desc = "Symbols: " .. sym }
+            )
+        end
+
     end,
 }
