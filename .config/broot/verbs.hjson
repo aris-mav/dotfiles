@@ -82,6 +82,12 @@ verbs: [
         execution: "git difftool -y {file}"
     }
 
+    {
+        invocation: yank
+        shortcut: y
+        leave_broot: false
+        execution: "wl-copy {file}"
+    }
 
     {
         invocation: nautilus
