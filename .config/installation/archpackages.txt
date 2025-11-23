@@ -22,6 +22,7 @@ less
 lsd
 make
 man-db
+mpd
 mpv
 neovim
 networkmanager
@@ -32,6 +33,7 @@ pass
 pipewire
 ripgrep
 ripgrep-all
+rmpc
 sd
 sed
 skim

@@ -1,9 +1,9 @@
 # Enter copy mode with vi keys
-bind-key -n M-[ copy-mode
+# bind-key -n M-[ copy-mode
 unbind-key Space
 
 # Exit copy mode with i
-# bind -T copy-mode-vi i send-keys -X cancel
+bind -T copy-mode-vi i send-keys -X cancel
 
 # Start selection with 'v' and copy with 'y'
 bind -T copy-mode-vi v send -X begin-selection

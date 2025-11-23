@@ -2,11 +2,10 @@
 unbind-key C-b
 set-option -g prefix C-a
 bind-key C-a send-prefix
+bind -n M-z resize-pane -Z
 
 bind h split-window -h
 bind v split-window -v
-
-bind -n M-z resize-pane -Z
 
 bind n run-shell ' \
          tmux new-window; \
@@ -18,3 +17,5 @@ bind n run-shell ' \
          tmux split-window -h; \
          tmux resize-pane -x $((width * 66 / 100)); \
          fi'
+
+bind -n M-m run-shell "tmux new-window -n 'music' 'rmpc'"
