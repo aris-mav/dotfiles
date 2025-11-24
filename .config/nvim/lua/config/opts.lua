@@ -7,6 +7,11 @@ vim.o.background = "dark"
 vim.opt.termguicolors = true
 vim.cmd([[colorscheme gruvbox]])
 
+-- Enable cursorline and highlight only the line number, not the entire line
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
+vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "Orange" })
+
 -- Remove border between vertical windows
 -- vim.cmd[[:hi VertSplit ctermfg=bg ctermbg=bg guifg=bg guibg=bg]]
 vim.cmd[[set fillchars+=vert:\ ]]
