@@ -24,7 +24,7 @@ function sc
             if read_confirm "Sync with $FLASH_DRIVE_DIR ?"     
                 for folder in $syncfolders
                     if type -q unison
-                        unison -auto ~/$folder $FLASH_DRIVE_DIR/$folder
+                        unison -auto -fat ~/$folder $FLASH_DRIVE_DIR/$folder
                     else if read_confirm "Use rsync?"
                         rsync -auv ~/$folder $FLASH_DRIVE_DIR/$folder
                     end
