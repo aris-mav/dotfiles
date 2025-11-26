@@ -1,6 +1,5 @@
 # Unison preferences file
-ignore = Name {notes/.git}
+ignore = Name {*/.git}
 ignore = Name {zotero*}
 ignore = Name {.zotero*}
 ignore = Name {better-bibtex.*}
-perms = 0
