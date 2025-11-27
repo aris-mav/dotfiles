@@ -18,4 +18,12 @@ bind n run-shell ' \
          tmux resize-pane -x $((width * 66 / 100)); \
          fi'
 
+
+# External programs
+
 bind -n M-m run-shell "tmux new-window -n 'music' 'rmpc'"
+bind -n M-b run-shell "tmux new-window -n 'bottom' 'btm'"
+
+bind -n M-t run-shell "tmux split-window 'nt -t'"
+bind -n M-+ run-shell "tmux split-window 'nt -n'"
+bind -n M-= run-shell "tmux new-window -n 'notes' 'nt -s'"

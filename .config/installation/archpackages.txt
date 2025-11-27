@@ -5,7 +5,9 @@ bat
 biber
 bluez
 bluez-utils
+bottom
 broot
+exfatprogs
 fastfetch
 fd
 firefox
