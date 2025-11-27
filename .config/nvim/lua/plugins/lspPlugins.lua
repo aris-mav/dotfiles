@@ -69,22 +69,45 @@ return {
                     }
                 })
             end
+
             -- enable fish lsp
             vim.lsp.enable('fish_lsp')
 
             -- Julia lsp config
-            vim.lsp.config('julials', {
-                cmd = {
-                    "julia",
-                    "--project=".."~/.julia/environments/lsp/",
-                    "--startup-file=no",
-                    "--history-file=no",
-                    vim.fn.expand("~/.config/nvim/lua/lsp/") .. "julials_start.jl"
-                },
-                filetypes = { 'julia' },
-                root_markers = { "Project.toml", "JuliaProject.toml" },
-                settings = {}
-            })
+            local version = vim.fn.system("julia --version"):match("(%d+%.%d+%.%d+)")
+
+            if version then
+                -- extract major and minor as numbers
+                local major, minor = version:match("^(%d+)%.(%d+)%.")
+
+                if minor == 12 then
+                    vim.lsp.config("jetls", {
+                        cmd = {
+                            "jetls",
+                            "--threads=auto",
+                            "--",
+                        },
+                        filetypes = {"julia"},
+                    })
+                    vim.lsp.enable("jetls")
+
+                else
+                    vim.lsp.config('julials', {
+                        cmd = {
+                            "julia",
+                            "--project=".."~/.julia/environments/lsp/",
+                            "--startup-file=no",
+                            "--history-file=no",
+                            vim.fn.expand("~/.config/nvim/lua/lsp/") .. "julials_start.jl"
+                        },
+                        filetypes = { 'julia' },
+                        root_markers = { "Project.toml", "JuliaProject.toml" },
+                        settings = {}
+                    })
+                    vim.lsp.enable("julials")
+
+                end
+            end
 
         end
     }
