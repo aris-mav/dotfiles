@@ -80,7 +80,7 @@ return {
                 -- extract major and minor as numbers
                 local major, minor = version:match("^(%d+)%.(%d+)%.")
 
-                if minor == 12 then
+                if tonumber(minor) >= 12 then
                     vim.lsp.config("jetls", {
                         cmd = {
                             "jetls",
@@ -92,6 +92,7 @@ return {
                     vim.lsp.enable("jetls")
 
                 else
+                    vim.print("why")
                     vim.lsp.config('julials', {
                         cmd = {
                             "julia",
