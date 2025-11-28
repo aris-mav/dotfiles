@@ -29,6 +29,7 @@ mpv
 neovim
 networkmanager
 nodejs
+noto-fonts
 openssh
 otf-ipafont
 pass
