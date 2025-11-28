@@ -30,6 +30,9 @@ function sc
                     end
                 end
                 rsync -auv ~/Zotero/zotero.sqlite $FLASH_DRIVE_DIR/Zotero/zotero.sqlite
+
+                git --git-dir=$FLASH_DRIVE_DIR/dotfiles.git/ fetch
+                git --git-dir=$FLASH_DRIVE_DIR/notes.git/ fetch
             end
         else
             echo "usb drive not connected"
