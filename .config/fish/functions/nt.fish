@@ -11,7 +11,6 @@ function nt
         return
     end
 
-    set datetime (date +%Y%m%d%H%M%S)
     set committed_anything false
 
     # check for zotero updates, commit them
@@ -21,17 +20,20 @@ function nt
         set committed_anything true
     end
 
+
+    set now (date +%s)
     # git pull, only if you haven't pulled already, 
     # or if the last pull was more than 1h ago.
-    if not test -e $NOTES_DIR/.last_pull_datetime \
-        || test (math $datetime - (cat $NOTES_DIR/.last_pull_datetime) ) -gt 10000
+    if not test -e $NOTES_DIR/.last_pull_time \
+        || test (math $now - (cat $NOTES_DIR/.last_pull_time) ) -gt 3600
         git pull
-        echo $datetime > $NOTES_DIR/.last_pull_datetime 
+        echo $now > $NOTES_DIR/.last_pull_time 
     end
 
     # Do something, according to the used flag
     if set -ql _flag_new
 
+        set datetime (date +%Y%m%d%H%M%S)
         set newnote "$datetime.md"
         $EDITOR "$newnote"
 
