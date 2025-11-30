@@ -46,6 +46,7 @@ case "$mode" in
         fi
         ;;
     s )
+        # Search in notes
         if [ "$FILE_BROWSER" = "br" ]; then
             $SHELL -c "br -HI --cmd cr/ ."
         elif [ "$EDITOR" = "nvim" ] ; then
@@ -55,6 +56,7 @@ case "$mode" in
         fi
         ;;
     b )
+        # Log book you just finished
         dt=$(date +%Y/%m/%d)
         echo "$dt" >> books_finished.tsv
 
@@ -65,12 +67,15 @@ case "$mode" in
         fi
         ;;
     B )
+        # Log book you want to read
         $EDITOR + books_to_read.tsv
         ;;
     t )
+        # Edit your TODO list
         $EDITOR TODO.md
         ;;
     r )
+        # Print a random note
         if command -v glow >/dev/null 2>&1; then
             file=$(ls -1 *.md | shuf -n 1)
             glow "$file"
@@ -80,7 +85,13 @@ case "$mode" in
         fi
         ;;
     * )
-        echo "Invalid mode: $mode" >&2
+        echo "Provide one argument:"
+        echo "	n (new note)"
+        echo "	s (search notes)"
+        echo "	t (edit TODO list)"
+        echo "	r (print a random note)"
+        echo "	b (log a book you finished)"
+        echo "	B (log a book you want to read)"
         exit 1
         ;;
 esac
