@@ -21,9 +21,12 @@ bind n run-shell ' \
 
 # External programs
 
-bind -n M-m run-shell "tmux new-window -n 'music' 'rmpc'"
-bind -n M-b run-shell "tmux new-window -n 'bottom' 'btm'"
+bind -n M-m run-shell \
+         "~/.config/tmux/scripts/open_window.sh music rmpc "
+bind -n M-b run-shell \
+         "~/.config/tmux/scripts/open_window.sh bottom btm "
+bind -n M-= run-shell \
+            "~/.config/tmux/scripts/open_window.sh notes '~/.config/scripts/nt.sh s'"
 
-bind -n M-t run-shell "tmux split-window 'nt -t'"
-bind -n M-+ run-shell "tmux split-window 'nt -n'"
-bind -n M-= run-shell "tmux new-window -n 'notes' 'nt -s'"
+bind -n M-t run-shell "tmux split-window '~/.config/scripts/nt.sh s'"
+bind -n M-+ run-shell "tmux split-window '~/.config/scripts/nt.sh n'"
