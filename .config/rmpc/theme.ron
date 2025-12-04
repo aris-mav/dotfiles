@@ -40,10 +40,10 @@
         trace: (fg: "magenta", bg: "black"),
     ),
     progress_bar: (
-        symbols: ["[", "-", ">", " ", "]"],
-        track_style: (fg: "#1e2030"),
+        symbols: ["[", "-", " ", " ", "] "],
+        track_style: (fg: "green"),
         elapsed_style: (fg: "green"),
-        thumb_style: (fg: "green", bg: "#1e2030"),
+        thumb_style: (fg: "green"),
         use_track_when_empty: false,
     ),
     scrollbar: (
@@ -105,9 +105,9 @@
         rows: [
             (
                 left: [
-                    (kind: Text("["), style: (fg: "yellow", modifiers: "Bold")),
-                    (kind: Property(Status(StateV2(playing_label: "Playing", paused_label: "Paused", stopped_label: "Stopped"))), style: (fg: "yellow", modifiers: "Bold")),
-                    (kind: Text("]"), style: (fg: "yellow", modifiers: "Bold"))
+                    // (kind: Text("["), style: (fg: "yellow", modifiers: "Bold")),
+                    (kind: Property(Status(StateV2(playing_label: "Playing ", paused_label: "Paused ", stopped_label: "Stopped "))), style: (fg: "yellow", modifiers: "Bold")),
+                    // (kind: Text("]"), style: (fg: "yellow", modifiers: "Bold"))
                 ],
                 center: [
                     (kind: Property(Song(Title)), style: (fg: "yellow", modifiers: "Bold"),
