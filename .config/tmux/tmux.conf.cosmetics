@@ -3,9 +3,14 @@ set-option -g pane-border-style 'fg=black'
 set-option -g pane-active-border-style 'fg=black'
 
 # Status bar
-set -g status-style "#{?client_prefix, fg=yellow,bg=black, fg=green,bg=black}"
+set -g status-style 'bg=black,fg=green'
+set -ag status-style "#{?client_prefix, fg=yellow,bg=black}"
+
+set -g prompt-cursor-colour 'white'
+
 set -g message-style 'bg=black,fg=yellow'
 set -g message-command-style 'bg=black,fg=yellow'
+
 set -g status-left ''
 set -g status-right '[#S][#(whoami)@#H]'
 set -g window-status-format '#I-#W'
