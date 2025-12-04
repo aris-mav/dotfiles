@@ -15,6 +15,9 @@ vim.keymap.set('n', '<C-q>', ':q<CR>')
 -- command line thing
 vim.keymap.set('n', '<leader>;', 'q:i')
 
+-- pipe selection to command
+vim.keymap.set('v', '|', ':!')
+
 -- Map leader-w to :w
 vim.keymap.set("n", "<leader>w", ":w <cr>", { remap = true, silent = false })
 
