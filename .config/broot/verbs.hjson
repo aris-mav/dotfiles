@@ -139,7 +139,7 @@ verbs: [
     # Here's an example of a shortcut bringing you to your home directory
     {
         invocation: home
-        key: ctrl-home
+        key: home
         execution: ":focus ~"
     }
 
