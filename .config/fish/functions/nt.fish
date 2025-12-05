@@ -47,12 +47,38 @@ function nt
 
     else if set -ql _flag_search
 
-        if test "$FILE_BROWSER" = "br"
+        if type -q bat
+            set prevcommand 'bat --style=numbers --color=always --highlight-line {2} {1}' 
+        else
+            set prevcommand 'less {1}'
+        end
+
+        if type -q rg
+
+            if type -q sk 
+
+                sk --ansi \
+                --cmd 'rg --line-number --no-heading --color=always "{}"' \
+                --delimiter : \
+                --preview "$prevcommand" \
+                --preview-window=right:66%:wrap \
+                --bind 'Enter:execute($EDITOR {1}),ctrl-q:abort'
+            else if type -q fzf
+
+                rg --line-number --no-heading --color=always "" \
+                | fzf --ansi --delimiter : \
+                --bind 'change:reload:rg --line-number --no-heading --color=always {q} || true' \
+                --preview "$prevcommand" \
+                --preview-window=right:66%:wrap
+
+            end
+
+        else if type -q br
             br -HI --cmd cr/ .
+
         else if test "$EDITOR" = "nvim"
             nvim -c "Telescope live_grep"
-        else 
-            $FILE_BROWSER
+
         end
 
     else if set -ql _flag_todo
