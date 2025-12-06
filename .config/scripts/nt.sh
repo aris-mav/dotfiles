@@ -47,38 +47,40 @@ case "$mode" in
         ;;
     s )
         # Search in notes
+        if command -v bat >/dev/null 2>&1; then
+            previewcmd='bat --style=numbers --color=always --highlight-line {2} {1}'
+        else
+            previewcmd='less {1}'
+        fi
+
         if command -v rg >/dev/null 2>&1; then
+            grepcmd='rg --line-number --no-heading --color=always'
+        else
+            # grep fallback (keep filename:line:match format)
+            grepcmd='grep -R -n --color=always -H'
+        fi
 
-            if command -v bat >/dev/null 2>&1; then
-                prevcommand='bat --style=numbers --color=always --highlight-line {2} {1}'
-            else
-                prevcommand='less {1}'
-            fi
-            # Detect sk
-            if command -v sk >/dev/null 2>&1; then
+        if command -v sk >/dev/null 2>&1; then
 
-                sk --ansi \
-                    --cmd 'rg --line-number --no-heading --color=always "{}"' \
-                    --delimiter : \
-                    --preview "$prevcommand" \
-                    --preview-window=right:66%:wrap \
-                    --bind 'Enter:execute($EDITOR {1}),ctrl-q:abort'
+            sk --ansi \
+                --cmd  "$grepcmd '{}'" \
+                --delimiter : \
+                --preview "$previewcmd" \
+                --preview-window="right:66%:wrap" \
+                --bind "Enter:execute($EDITOR {1}),ctrl-q:abort"
 
-            elif command -v fzf >/dev/null 2>&1; then
+        elif command -v fzf >/dev/null 2>&1; then
 
-                rg --line-number --no-heading --color=always "" \
-                    | fzf --ansi --delimiter : \
-                    --bind 'change:reload:rg --line-number --no-heading --color=always {q} || true' \
-                    --preview "$prevcommand" \
-                    --preview-window 'right:66%:wrap'
+            $grepcmd "" 2>/dev/null | \
+                fzf --ansi \
+                --delimiter : \
+                --bind "change:reload:$grepcmd {q} || true" \
+                --preview "$previewcmd" \
+                --preview-window="right:66%:wrap"
 
-            fi
-
-        # Else detect broot (br)
         elif command -v br >/dev/null 2>&1; then
             br -HI --cmd cr/ .
 
-            # Else fallback to nvim Telescope
         elif [ "$EDITOR" = "nvim" ]; then
             nvim -c "Telescope live_grep"
         fi

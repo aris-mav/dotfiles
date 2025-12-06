@@ -48,30 +48,33 @@ function nt
     else if set -ql _flag_search
 
         if type -q bat
-            set prevcommand 'bat --style=numbers --color=always --highlight-line {2} {1}' 
+            set previewcmd 'bat --style=numbers --color=always --highlight-line {2} {1}' 
         else
-            set prevcommand 'less {1}'
+            set previewcmd 'less {1}'
         end
 
         if type -q rg
+            set grepcmd 'rg --line-number --no-heading --color=always'
+        else
+            set grepcmd 'grep -R -n --color=always -H'
+        end
 
-            if type -q sk 
+        if type -q sk
 
-                sk --ansi \
-                --cmd 'rg --line-number --no-heading --color=always "{}"' \
-                --delimiter : \
-                --preview "$prevcommand" \
-                --preview-window=right:66%:wrap \
-                --bind 'Enter:execute($EDITOR {1}),ctrl-q:abort'
-            else if type -q fzf
+            sk --ansi \
+            --cmd  "$grepcmd '{}'" \
+            --delimiter : \
+            --preview "$previewcmd" \
+            --preview-window=right:66%:wrap \
+            --bind 'Enter:execute($EDITOR {1}),ctrl-q:abort'
 
-                rg --line-number --no-heading --color=always "" \
-                | fzf --ansi --delimiter : \
-                --bind 'change:reload:rg --line-number --no-heading --color=always {q} || true' \
-                --preview "$prevcommand" \
-                --preview-window=right:66%:wrap
+        else if type -q fzf
 
-            end
+            fzf --ansi \
+            --delimiter : \
+            --bind "change:reload:$grepcmd {q} || true" \
+            --preview "$previewcmd" \
+            --preview-window=right:66%:wrap
 
         else if type -q br
             br -HI --cmd cr/ .
