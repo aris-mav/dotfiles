@@ -13,14 +13,6 @@ function nt
 
     set committed_anything false
 
-    # check for zotero updates, commit them
-    if not git diff --quiet zotero_library.bib
-        git add zotero_library.bib
-        git commit --allow-empty-message -m ""
-        set committed_anything true
-    end
-
-
     set now (date +%s)
     # git pull, only if you haven't pulled already, 
     # or if the last pull was more than 1h ago.

@@ -11,13 +11,6 @@ fi
 
 committed_anything=false
 
-# Commit zotero_library.bib if changed
-if ! git diff --quiet zotero_library.bib ; then
-    git add zotero_library.bib
-    git commit --allow-empty-message -m ""
-    committed_anything=true
-fi
-
 now=$(date +%s)
 last_pull=0
 if [ -f ".last_pull_time" ]; then
