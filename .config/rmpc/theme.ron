@@ -13,12 +13,12 @@
     modal_background_color: None,
     modal_backdrop: false,
     preview_label_style: (fg: "yellow"),
-    preview_metadata_group_style: (fg: "yellow", modifiers: "Bold"),
+    preview_metadata_group_style: (fg: "yellow", modifiers: ""),
     tab_bar: (
         active_style: (fg: "blue", bg: "black", modifiers: "Bold"),
         inactive_style: (),
     ),
-    highlighted_item_style: (fg: "yellow", modifiers: "Bold"),
+    highlighted_item_style: (fg: "yellow", modifiers: ""),
     current_item_style: (fg: "blue", bg: "black", modifiers: "Bold"),
     borders_style: (fg: "green"),
     highlight_border_style: (fg: "green"),
@@ -106,11 +106,11 @@
             (
                 left: [
                     // (kind: Text("["), style: (fg: "yellow", modifiers: "Bold")),
-                    (kind: Property(Status(StateV2(playing_label: "Playing ", paused_label: "Paused ", stopped_label: "Stopped "))), style: (fg: "yellow", modifiers: "Bold")),
+                    (kind: Property(Status(StateV2(playing_label: "Playing ", paused_label: "Paused ", stopped_label: "Stopped "))), style: (fg: "yellow", modifiers: "")),
                     // (kind: Text("]"), style: (fg: "yellow", modifiers: "Bold"))
                 ],
                 center: [
-                    (kind: Property(Song(Title)), style: (fg: "yellow", modifiers: "Bold"),
+                    (kind: Property(Song(Title)), style: (fg: "yellow", modifiers: ""),
                         default: (kind: Text("No Song"), style: (modifiers: "Bold"))
                     )
                 ],
@@ -129,8 +129,8 @@
                     (kind: Text(" kbps)"))
                 ],
                 center: [
-                    (kind: Property(Song(Artist)), style: (fg: "white", modifiers: "Bold"),
-                        default: (kind: Text("Unknown"), style: (fg: "yellow", modifiers: "Bold"))
+                    (kind: Property(Song(Artist)), style: (fg: "white", modifiers: ""),
+                        default: (kind: Text("Unknown"), style: (fg: "yellow", modifiers: ""))
                     ),
                     (kind: Text(" - ")),
                     (kind: Property(Song(Album)),
