@@ -9,7 +9,7 @@ function sc
     end
 
     if not set -q UNISON 
-        echo "you might want to `set -Ux UNISON .config/unison`"
+        echo "you might want to `set -Ux UNISON ~/.config/unison`"
     end
 
     if set -ql _flag_usb
