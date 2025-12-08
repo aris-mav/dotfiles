@@ -62,7 +62,8 @@ case "$mode" in
                 --delimiter : \
                 --preview "$previewcmd" \
                 --preview-window="right:66%:wrap" \
-                --bind "Enter:execute($EDITOR {1}),ctrl-q:abort"
+                --bind "Enter:execute($EDITOR {1}),ctrl-q:abort" \
+                --reverse
 
         elif command -v fzf >/dev/null 2>&1; then
 
@@ -73,7 +74,8 @@ case "$mode" in
                 --bind "enter:become($EDITOR {1})" \
                 --bind "ctrl-q:abort" \
                 --preview "$previewcmd" \
-                --preview-window=right:66%:wrap
+                --preview-window=right:66%:wrap \
+                --height 100%
 
         elif command -v br >/dev/null 2>&1; then
             br -HI --cmd cr/ .

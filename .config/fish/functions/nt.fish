@@ -60,7 +60,8 @@ function nt
             --delimiter : \
             --preview "$previewcmd" \
             --preview-window=right:66%:wrap \
-            --bind 'Enter:execute($EDITOR {1}),ctrl-q:abort'
+            --bind 'Enter:execute($EDITOR {1}),ctrl-q:abort' \
+            --reverse
 
         else if type -q fzf
 
@@ -70,7 +71,8 @@ function nt
             --bind "enter:become($EDITOR {1})" \
             --bind "ctrl-q:abort" \
             --preview "$previewcmd" \
-            --preview-window=right:66%:wrap
+            --preview-window=right:66%:wrap \
+            --height 100%
 
         else if type -q br
             br -HI --cmd cr/ .
