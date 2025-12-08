@@ -73,41 +73,34 @@ return {
             -- enable fish lsp
             vim.lsp.enable('fish_lsp')
 
-            -- Julia lsp config
-            local version = vim.fn.system("julia --version"):match("(%d+%.%d+%.%d+)")
 
-            if version then
-                -- extract major and minor as numbers
-                local major, minor = version:match("^(%d+)%.(%d+)%.")
+            -- CHOOSE A JULIA LSP USING THE $JULIALSP ENVIRONMENT VARIABLE
+            if os.getenv("JULIALSP") == "jetls" then
+                vim.lsp.config("jetls", {
+                    cmd = {
+                        "jetls",
+                        "--threads=auto",
+                        "--",
+                    },
+                    filetypes = {"julia"},
+                })
+                vim.lsp.enable("jetls")
 
-                if tonumber(minor) >= 12 then
-                    vim.lsp.config("jetls", {
-                        cmd = {
-                            "jetls",
-                            "--threads=auto",
-                            "--",
-                        },
-                        filetypes = {"julia"},
-                    })
-                    vim.lsp.enable("jetls")
+            elseif os.getenv("JULIALSP") == "julials" then
+                vim.lsp.config('julials', {
+                    cmd = {
+                        "julia",
+                        "--project=".."~/.julia/environments/lsp/",
+                        "--startup-file=no",
+                        "--history-file=no",
+                        vim.fn.expand("~/.config/nvim/lua/lsp/") .. "julials_start.jl"
+                    },
+                    filetypes = { 'julia' },
+                    root_markers = { "Project.toml", "JuliaProject.toml" },
+                    settings = {}
+                })
+                vim.lsp.enable("julials")
 
-                else
-                    vim.print("why")
-                    vim.lsp.config('julials', {
-                        cmd = {
-                            "julia",
-                            "--project=".."~/.julia/environments/lsp/",
-                            "--startup-file=no",
-                            "--history-file=no",
-                            vim.fn.expand("~/.config/nvim/lua/lsp/") .. "julials_start.jl"
-                        },
-                        filetypes = { 'julia' },
-                        root_markers = { "Project.toml", "JuliaProject.toml" },
-                        settings = {}
-                    })
-                    vim.lsp.enable("julials")
-
-                end
             end
 
         end
