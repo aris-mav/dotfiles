@@ -68,8 +68,10 @@ case "$mode" in
                 fzf --ansi \
                 --delimiter : \
                 --bind "change:reload:$grepcmd {q} || true" \
+                --bind "enter:become($EDITOR {1})" \
+                --bind "ctrl-q:abort" \
                 --preview "$previewcmd" \
-                --preview-window="right:66%:wrap"
+                --preview-window=right:66%:wrap
 
         elif command -v br >/dev/null 2>&1; then
             br -HI --cmd cr/ .
