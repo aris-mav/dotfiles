@@ -1,4 +1,4 @@
-for candidate in EDITOR FUZZYFIND FILE_BROWSER YANKTEXT
+for candidate in EDITOR FUZZYFIND FILE_BROWSER YANKTEXT FZF_DEFAULT_OPTS
     if not set -q {$candidate}
         switch $candidate
         case EDITOR
@@ -38,6 +38,9 @@ for candidate in EDITOR FUZZYFIND FILE_BROWSER YANKTEXT
             else if type -q "clip.exe"
                 set -Ux YANKTEXT 'clip.exe'
             end
+
+        case FZF_DEFAULT_OPTS
+            set -Ux FZF_DEFAULT_OPTS '--height 10% --layout reverse --border none --style minimal'
 
         end
     end
