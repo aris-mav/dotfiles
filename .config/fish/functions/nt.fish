@@ -68,7 +68,7 @@ function nt
             fzf --ansi \
             --delimiter : \
             --bind "change:reload:$grepcmd {q} || true" \
-            --bind "enter:become($EDITOR {1})" \
+            --bind "enter:execute($EDITOR {1})" \
             --bind "ctrl-q:abort" \
             --preview "$previewcmd" \
             --preview-window=right:66%:wrap \
