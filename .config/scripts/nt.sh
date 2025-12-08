@@ -42,6 +42,8 @@ case "$mode" in
         # Search in notes
         if command -v bat >/dev/null 2>&1; then
             previewcmd='bat --style=numbers --color=always --highlight-line {2} {1}'
+        elif command -v batcat >/dev/null 2>&1; then
+            previewcmd='batcat --style=numbers --color=always --highlight-line {2} {1}'
         else
             previewcmd='less {1}'
         fi

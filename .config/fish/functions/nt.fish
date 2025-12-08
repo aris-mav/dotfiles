@@ -41,6 +41,8 @@ function nt
 
         if type -q bat
             set previewcmd 'bat --style=numbers --color=always --highlight-line {2} {1}' 
+        else if type -q batcat
+            set previewcmd 'batcat --style=numbers --color=always --highlight-line {2} {1}' 
         else
             set previewcmd 'less {1}'
         end
