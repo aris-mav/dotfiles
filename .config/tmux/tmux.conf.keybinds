@@ -7,17 +7,8 @@ bind -n M-z resize-pane -Z
 bind h split-window -h
 bind v split-window -v
 
-bind n run-shell ' \
-         tmux new-window; \
-         width=$(tmux display -p "#{window_width}"); \
-         if [ "$width" -gt 150 ]; then \
-         tmux split-window -h; \
-         tmux resize-pane -x $((width / 2 + 25)); \
-         elif [ "$width" -gt 120 ]; then \
-         tmux split-window -h; \
-         tmux resize-pane -x $((width * 66 / 100)); \
-         fi'
-
+bind n run-shell \
+         "~/.config/tmux/scripts/new_win_split.sh"
 
 # External programs
 
