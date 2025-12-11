@@ -48,9 +48,9 @@ function nt
         end
 
         if type -q rg
-            set grepcmd 'rg --line-number --no-heading --color=always'
+            set grepcmd 'rg --line-number --no-heading --smart-case --color=always'
         else
-            set grepcmd 'grep -R -n --color=always -H'
+            set grepcmd 'grep -R -n -i --color=always -H'
         end
 
         if type -q sk

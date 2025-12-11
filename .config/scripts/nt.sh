@@ -49,10 +49,10 @@ case "$mode" in
         fi
 
         if command -v rg >/dev/null 2>&1; then
-            grepcmd='rg --line-number --no-heading --color=always'
+            grepcmd='rg --line-number --no-heading --color=always --smart-case'
         else
             # grep fallback (keep filename:line:match format)
-            grepcmd='grep -R -n --color=always -H'
+            grepcmd='grep -R -n -i --color=always -H'
         fi
 
         if command -v sk >/dev/null 2>&1; then
@@ -67,8 +67,7 @@ case "$mode" in
 
         elif command -v fzf >/dev/null 2>&1; then
 
-            $grepcmd "" 2>/dev/null | \
-                fzf --ansi \
+            fzf --ansi \
                 --delimiter : \
                 --bind "change:reload:$grepcmd {q} || true" \
                 --bind "enter:execute($EDITOR {1})" \
