@@ -70,15 +70,21 @@ case "$mode" in
             grepcmd='grep -R -n -i --color=always -H'
         fi
 
+        if [ $(tput cols) -gt 100 ]; then
+            prevwin='right:66%:wrap'
+        else
+            prevwin='up:66%:wrap'
+        fi
+
         if command -v sk >/dev/null 2>&1; then
 
             sk --ansi \
                 --cmd  "$grepcmd '{}'" \
                 --delimiter : \
                 --preview "$previewcmd" \
-                --preview-window="right:66%:wrap" \
+                --preview-window="$prevwin" \
                 --bind "Enter:execute($EDITOR {1}),ctrl-q:abort" \
-                --reverse
+                --reverse --height 100%
 
         elif command -v fzf >/dev/null 2>&1; then
 
@@ -88,8 +94,8 @@ case "$mode" in
                 --bind "enter:execute($EDITOR {1})" \
                 --bind "ctrl-q:abort" \
                 --preview "$previewcmd" \
-                --preview-window=right:66%:wrap \
-                --height 100%
+                --preview-window="$prevwin" \
+                --reverse --height 100%
 
         elif command -v br >/dev/null 2>&1; then
             br -HI --cmd cr/ .
