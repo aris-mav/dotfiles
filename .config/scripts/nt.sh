@@ -125,11 +125,12 @@ case "$mode" in
         ;;
     r )
         # Print a random note
-        if command -v glow >/dev/null 2>&1; then
-            file=$(ls -1 *.md | shuf -n 1)
-            glow "$file"
+        file=$(ls -1 *.md | shuf -n 1)
+        if command -v bat >/dev/null 2>&1; then
+            bat -p "$file"
+        elif command -v batcat >/dev/null 2>&1; then
+            batcat -p "$file"
         else
-            file=$(ls -1 *.md | shuf -n 1)
             cat "$file"
         fi
         ;;
