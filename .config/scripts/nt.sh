@@ -1,5 +1,20 @@
 #!/bin/sh
 
+args_error() {
+    echo "Provide one argument:"
+    echo "	n (new note)"
+    echo "	s (search notes)"
+    echo "	t (edit TODO list)"
+    echo "	r (print a random note)"
+    echo "	b (log a book you finished)"
+    echo "	B (log a book you want to read)"
+    exit 1
+}
+
+if [ $# -gt 1 ]; then
+    args_error
+fi
+
 mode=$1
 
 if [ -n "$NOTES_DIR" ]; then
@@ -113,14 +128,7 @@ case "$mode" in
         fi
         ;;
     * )
-        echo "Provide one argument:"
-        echo "	n (new note)"
-        echo "	s (search notes)"
-        echo "	t (edit TODO list)"
-        echo "	r (print a random note)"
-        echo "	b (log a book you finished)"
-        echo "	B (log a book you want to read)"
-        exit 1
+        args_error
         ;;
 esac
 
