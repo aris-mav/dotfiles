@@ -76,17 +76,7 @@ case "$mode" in
             prevwin='up:66%:wrap'
         fi
 
-        if command -v sk >/dev/null 2>&1; then
-
-            sk --ansi \
-                --cmd  "$grepcmd '{}'" \
-                --delimiter : \
-                --preview "$previewcmd" \
-                --preview-window="$prevwin" \
-                --bind "Enter:execute($EDITOR {1}),ctrl-q:abort" \
-                --reverse --height 100%
-
-        elif command -v fzf >/dev/null 2>&1; then
+        if command -v fzf >/dev/null 2>&1; then
 
             fzf --ansi \
                 --delimiter : \
@@ -95,6 +85,16 @@ case "$mode" in
                 --bind "ctrl-q:abort" \
                 --preview "$previewcmd" \
                 --preview-window="$prevwin" \
+                --reverse --height 100%
+
+        elif command -v sk >/dev/null 2>&1; then
+
+            sk --ansi \
+                --cmd  "$grepcmd '{}'" \
+                --delimiter : \
+                --preview "$previewcmd" \
+                --preview-window="$prevwin" \
+                --bind "Enter:execute($EDITOR {1}),ctrl-q:abort" \
                 --reverse --height 100%
 
         elif command -v br >/dev/null 2>&1; then
