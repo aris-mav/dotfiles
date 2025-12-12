@@ -48,7 +48,7 @@ function nt
         end
 
         if type -q rg
-            set grepcmd 'rg --line-number --no-heading --smart-case --color=always'
+            set grepcmd 'rg --multiline --line-number --no-heading --smart-case --color=always'
         else
             set grepcmd 'grep -R -n -i --color=always -H'
         end

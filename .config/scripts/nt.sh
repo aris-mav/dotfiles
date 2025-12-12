@@ -49,7 +49,7 @@ case "$mode" in
         fi
 
         if command -v rg >/dev/null 2>&1; then
-            grepcmd='rg --line-number --no-heading --color=always --smart-case'
+            grepcmd='rg --multiline --line-number --no-heading --color=always --smart-case'
         else
             # grep fallback (keep filename:line:match format)
             grepcmd='grep -R -n -i --color=always -H'
