@@ -127,6 +127,9 @@ case "$mode" in
             cat "$file"
         fi
         ;;
+    no_args )
+        # use this if you just want to pull the remote
+        ;;
     * )
         args_error
         ;;
