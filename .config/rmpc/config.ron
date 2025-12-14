@@ -120,12 +120,21 @@
         album_sort_by: Date,
     ),
     tabs: [
-        (
-            name: "Queue",
-            pane: Split(
-                direction: Horizontal,
-                panes: [ (size: "30%", pane: Pane(AlbumArt)), (size: "70%", pane: Pane(Queue))],
-            ),
+        (name: "Queue", pane: Split(direction: Horizontal, panes: [
+
+                (size: "30%", borders: "NONE", pane: Split(direction: Vertical, panes: [
+
+                            (size: "50%", borders: "NONE", pane: Pane(AlbumArt)),
+
+                        ])
+                ),
+                (size: "70%", borders: "NONE", pane: Split(direction: Vertical, panes: [
+
+                            (size: "100%", borders: "NONE", pane: Pane(Queue)),
+
+                        ])
+                ),
+            ])
         ),
         (
             name: "Directories",
