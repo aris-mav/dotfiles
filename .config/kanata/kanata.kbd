@@ -49,16 +49,18 @@
 
 (defvar
  tap-time 200
- hold-time-long 140
+ hold-time-long 150
  hold-time-mid 120
  hold-time-short 100
 
  left-hand-keys (
+    1 2 3 4 5
     q w e r t
     a s d f g
     z x c v 
   )
   right-hand-keys (
+    6 7 8 9 0
     y u i o p
     h j k l ;
     n m , . /
@@ -85,15 +87,15 @@
  ap (tap-hold-release-keys $tap-time $hold-time-mid  (multi '   @tap) (layer-while-held s_spc_layer) $right-hand-keys)
 
  ;; Home row mods
- a (tap-hold-release-keys $tap-time $hold-time-long   (multi a @tap) rmet $left-hand-keys)
- s (tap-hold-release-keys $tap-time $hold-time-mid   (multi s @tap) lalt $left-hand-keys)
+ a (tap-hold-release-keys $tap-time $hold-time-long  (multi a @tap) rmet $left-hand-keys)
+ s (tap-hold-release-keys $tap-time $hold-time-long  (multi s @tap) lalt $left-hand-keys)
  d (tap-hold-release-keys $tap-time $hold-time-short (multi d @tap) lsft $left-hand-keys)
  f (tap-hold-release-keys $tap-time $hold-time-mid   (multi f @tap) lctl $left-hand-keys)
 
  j (tap-hold-release-keys $tap-time $hold-time-mid   (multi j @tap) rctl $right-hand-keys)
  k (tap-hold-release-keys $tap-time $hold-time-short (multi k @tap) rsft $right-hand-keys)
- l (tap-hold-release-keys $tap-time $hold-time-mid   (multi l @tap) lalt $right-hand-keys)
- ; (tap-hold-release-keys $tap-time $hold-time-long   (multi ; @tap) rmet $right-hand-keys)
+ l (tap-hold-release-keys $tap-time $hold-time-long  (multi l @tap) lalt $right-hand-keys)
+ ; (tap-hold-release-keys $tap-time $hold-time-long  (multi ; @tap) rmet $right-hand-keys)
 
 
  ;; Top row mods
