@@ -6,7 +6,7 @@ set font "JetBrainsMono 10"
 set recolor-lightcolor          "rgba(40,40,40,1)"     # bg
 set recolor-darkcolor           "rgba(235,219,178,1)"  # fg
 set recolor-keephue             "true"                 # keep original color
-set recolor                     "true"                 # switch to dark immediately
+set recolor                     "false"                 # switch to dark immediately
 
 set notification-error-bg       "rgba(40,40,40,1)"     # bg
 set notification-error-fg       "rgba(251,73,52,1)"    # bright:red
