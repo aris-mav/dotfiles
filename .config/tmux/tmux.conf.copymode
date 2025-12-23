@@ -1,5 +1,5 @@
 # Enter copy mode with vi keys
-# bind-key -n M-[ copy-mode
+bind-key -n M-c copy-mode
 unbind-key Space
 
 # Exit copy mode with i
