@@ -80,7 +80,7 @@ case "$mode" in
 
             fzf --ansi \
                 --delimiter : \
-                --bind "change:reload:$grepcmd {q} || true" \
+                --bind "change:reload:sleep 0.1;$grepcmd {q} || true" \
                 --bind "enter:execute($EDITOR {1})" \
                 --bind "ctrl-q:abort" \
                 --preview "$previewcmd" \
