@@ -30,6 +30,11 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- set greek keymap and disable it 
+-- (then toggle with C-6 on insert mode)
+vim.bo.keymap = 'greek'
+vim.bo.iminsert = 0
+
 -- Use ripgrep
 if vim.fn.executable("rg") == 1 then
   vim.opt.grepprg = "rg --vimgrep"
