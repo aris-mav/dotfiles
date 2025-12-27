@@ -1,16 +1,16 @@
 function ytd
 
-    argparse 's/song' 'p/playlist' -- $argv
+    argparse 's/song' 'p/playlist' 'v/video' -- $argv
     
-    if set -ql _flag_s
+    if not type -q yt-dlp
+        echo "oi, you need to install yt-dlp"
+        return 1
+    else if not type -q ffmpeg
+        echo "oi, you need to install ffmpeg"
+        return 1
+    end
 
-        if not type -q yt-dlp
-            echo "oi, you need to install yt-dlp"
-            return 1
-        else if not type -q ffmpeg
-            echo "oi, you need to install eyeD3"
-            return 1
-        end
+    if set -ql _flag_s
 
         read -l -P  "YouTube url : " url
         read -l -P  "file name : " filename
@@ -26,6 +26,9 @@ function ytd
         -codec copy $filename
 
         rm tempname.mp3
+
+    else if set -ql _flag_v
+        yt-dlp -S "res:720,+size" $argv
 
     else if set -ql _flag_p
         yt-dlp \
