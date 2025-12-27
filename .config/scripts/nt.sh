@@ -70,6 +70,21 @@ case "$mode" in
             grepcmd='grep -R -n -i --color=always -H'
         fi
 
+        case "$EDITOR" in
+            nvim|vim|vi )
+                editcommand="$EDITOR +{2} {1}"
+                ;;
+            helix|hx )
+                editcommand="$EDITOR {1}:{2}"
+                ;;
+            nano )
+                editcommand="$EDITOR +{2},1 {1}"
+                ;;
+            * )
+                editcommand="$EDITOR {1}"
+                ;;
+        esac
+
         if [ $(tput cols) -gt 100 ]; then
             prevwin='right:66%:wrap'
         else
@@ -81,7 +96,7 @@ case "$mode" in
             fzf --ansi \
                 --delimiter : \
                 --bind "change:reload:sleep 0.1;$grepcmd {q} || true" \
-                --bind "enter:execute($EDITOR {1})" \
+                --bind "enter:execute($editcommand)" \
                 --bind "ctrl-q:abort" \
                 --preview "$previewcmd" \
                 --preview-window="$prevwin" \
@@ -94,7 +109,8 @@ case "$mode" in
                 --delimiter : \
                 --preview "$previewcmd" \
                 --preview-window="$prevwin" \
-                --bind "Enter:execute($EDITOR {1}),ctrl-q:abort" \
+                --bind "Enter:execute($editcommand)" \
+                --bind "ctrl-q:abort" \
                 --reverse --height 100%
 
         elif command -v br >/dev/null 2>&1; then
