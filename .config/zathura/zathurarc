@@ -1,6 +1,8 @@
 # open in fullscreen
 include ./windowsize
 
+set selection-clipboard clipboard
+
 set font "JetBrainsMono 10"
 
 set recolor-lightcolor          "rgba(40,40,40,1)"     # bg
