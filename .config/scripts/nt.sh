@@ -144,9 +144,7 @@ case "$input" in
 
         tmp=$(mktemp) || exit 1
 
-        if command -v fd >/dev/null 2>&1; then
-            fd "$input" > "$tmp"
-        elif command -v rg >/dev/null 2>&1; then
+        if command -v rg >/dev/null 2>&1; then
             ls | rg -S "$input" > "$tmp"
         else
             ls | grep -i "$input" > "$tmp"
