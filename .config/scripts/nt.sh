@@ -1,21 +1,20 @@
 #!/bin/sh
 
-args_error() {
+help_msg() {
     echo "Provide one argument:"
-    echo "	n (new note)"
-    echo "	s (search notes)"
-    echo "	t (edit TODO list)"
-    echo "	r (print a random note)"
-    echo "	b (log a book you finished)"
-    echo "	B (log a book you want to read)"
-    exit 1
+    echo "	n   - new note"
+    echo "	t   - edit TODO list"
+    echo "	r   - view a random note"
+    echo "	s   - search content in all notes"
+    echo "	[x] - edit filename(s) containing [x]"
 }
 
 if [ $# -gt 1 ]; then
-    args_error
+    help_msg
+    exit 1
 fi
 
-mode=$1
+input=$1
 
 if [ -n "$NOTES_DIR" ]; then
     cd "$NOTES_DIR" || { echo "Failed to cd into $NOTES_DIR"; exit 1; }
@@ -37,7 +36,7 @@ if [ $(( now - last_pull )) -gt 3600 ]; then
     echo "$now" > ".last_pull_time"
 fi
 
-case "$mode" in
+case "$input" in
     n )
         # Make a new note
         datetime=$(date +%Y%m%d%H%M%S)
@@ -120,21 +119,6 @@ case "$mode" in
             nvim -c "Telescope live_grep"
         fi
         ;;
-    b )
-        # Log book you just finished
-        dt=$(date +%Y/%m/%d)
-        echo "$dt" >> books_finished.tsv
-
-        $EDITOR + books_finished.tsv
-
-        if [ "$(tail -n 1 books_finished.tsv)" = "$dt" ]; then
-            git restore books_finished.tsv
-        fi
-        ;;
-    B )
-        # Log book you want to read
-        $EDITOR + books_to_read.tsv
-        ;;
     t )
         # Edit your TODO list
         $EDITOR TODO.md
@@ -153,8 +137,53 @@ case "$mode" in
     no_args )
         # use this if you just want to pull the remote
         ;;
+    --help|-h )
+        help_msg
+        ;;
     * )
-        args_error
+
+        tmp=$(mktemp) || { echo "mktemp failed" >&2; exit 1; }
+
+        if command -v fd >/dev/null 2>&1; then
+            fd "$input" > "$tmp"
+        elif command -v find >/dev/null 2>&1; then
+            find . -iname "$input" > "$tmp"
+        fi
+
+        count=$(wc -l < "$tmp")
+
+        if [ "$count" -eq 1 ]; then
+            IFS= read -r file < "$tmp"
+            "$EDITOR" "$file"
+        elif [ "$count" -gt 1 ]; then
+
+            if command -v fzf >/dev/null 2>&1; then
+                file=$(fzf < "$tmp")
+            elif command -v sk >/dev/null 2>&1; then
+                file=$(sk < "$tmp")
+            fi
+
+            if [ -f "$file" ]; then 
+
+                if [ "$file" = "books_finished.tsv" ]; then 
+                    # Log book you just finished
+                    dt=$(date +%Y/%m/%d)
+                    echo "$dt" >> "$file"
+
+                    $EDITOR + "$file"
+
+                    if [ "$(tail -n 1 "$file")" = "$dt" ]; then
+                        git restore "$file"
+                    fi
+                else
+                    $EDITOR $file 
+                fi
+            fi
+        else
+            echo "No matches"
+        fi
+
+        rm "$tmp"
         ;;
 esac
 
@@ -164,12 +193,12 @@ for file in $(git diff --name-only); do
     fi
 
     case "$file" in
-        TODO.md | books_finished.tsv | books_to_read.tsv)
-            commit_msg=""
-            ;;
-        *)
+        [0-9]*.md)
             first_line=$(head -n 1 "$file")
             commit_msg="edits on $first_line"
+            ;;
+        *)
+            commit_msg=""
             ;;
     esac
 
