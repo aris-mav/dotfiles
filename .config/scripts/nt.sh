@@ -121,7 +121,7 @@ case "$input" in
         ;;
     t )
         # Edit your TODO list
-        $EDITOR TODO.md
+        $EDITOR TODO.txt
         ;;
     r )
         # Print a random note
