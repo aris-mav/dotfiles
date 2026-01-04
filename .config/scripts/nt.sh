@@ -6,7 +6,7 @@ help_msg() {
     echo "	t   - edit TODO list"
     echo "	r   - view a random note"
     echo "	s   - search content in all notes"
-    echo "	[x] - edit filename(s) containing [x]"
+    echo "	[x] - edit filename containing [x]"
 }
 
 if [ $# -gt 1 ]; then
@@ -135,19 +135,21 @@ case "$input" in
         fi
         ;;
     no_args )
-        # use this if you just want to pull the remote
+        # use this option if you just want to pull the remote
         ;;
     --help|-h )
         help_msg
         ;;
     * )
 
-        tmp=$(mktemp) || { echo "mktemp failed" >&2; exit 1; }
+        tmp=$(mktemp) || exit 1
 
         if command -v fd >/dev/null 2>&1; then
             fd "$input" > "$tmp"
-        elif command -v find >/dev/null 2>&1; then
-            find . -iname "$input" > "$tmp"
+        elif command -v rg >/dev/null 2>&1; then
+            ls | rg -S "$input" > "$tmp"
+        else
+            ls | grep -i "$input" > "$tmp"
         fi
 
         count=$(wc -l < "$tmp")
@@ -180,7 +182,8 @@ case "$input" in
                 fi
             fi
         else
-            echo "No matches"
+            echo "No file matches for '$input'."
+            exit 1
         fi
 
         rm "$tmp"
