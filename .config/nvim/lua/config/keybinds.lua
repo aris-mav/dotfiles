@@ -12,6 +12,9 @@ vim.g.maplocalleader = "\\"
 -- Quit with ctrl-q
 vim.keymap.set('n', '<C-q>', ':q<CR>')
 
+-- Quit with leader-q
+vim.keymap.set('n', '<leader>q', ':q<CR>')
+
 -- command line thing
 vim.keymap.set('n', '<leader>;', 'q:i')
 
