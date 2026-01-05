@@ -1,12 +1,12 @@
 #!/bin/sh
 
 help_msg() {
-    echo "Provide one argument:"
-    echo "	n   - new note"
-    echo "	t   - edit TODO list"
-    echo "	r   - view a random note"
-    echo "	s   - search content in all notes"
-    echo "	[x] - edit filename containing [x]"
+    echo "Provide one of the follwing options:"
+    echo "	some_text    - edit filename containing some_text"
+    echo "	-n/--new     - new note"
+    echo "	-r/--random  - view a random note"
+    echo "	-s/--search  - search content in all notes"
+    echo "	-h/--help    - print this message"
 }
 
 if [ $# -gt 1 ]; then
@@ -37,7 +37,7 @@ if [ $(( now - last_pull )) -gt 3600 ]; then
 fi
 
 case "$input" in
-    n )
+    -n|--new )
         # Make a new note
         datetime=$(date +%Y%m%d%H%M%S)
         newnote="$datetime.md"
@@ -52,7 +52,7 @@ case "$input" in
             committed_anything=true
         fi
         ;;
-    s )
+    -s|--search )
         # Search in notes
         if command -v bat >/dev/null 2>&1; then
             previewcmd='bat --style=numbers --color=always --highlight-line {2} {1}'
@@ -119,11 +119,7 @@ case "$input" in
             nvim -c "Telescope live_grep"
         fi
         ;;
-    t )
-        # Edit your TODO list
-        $EDITOR TODO.txt
-        ;;
-    r )
+    -r )
         # Print a random note
         file=$(ls -1 *.md | shuf -n 1)
         if command -v bat >/dev/null 2>&1; then
@@ -134,11 +130,16 @@ case "$input" in
             cat "$file"
         fi
         ;;
-    no_args )
-        # use this option if you just want to pull the remote
-        ;;
     --help|-h )
         help_msg
+        ;;
+    -* )
+        echo "$input flag not valid."
+        help_msg
+        exit 1
+        ;;
+    no_args )
+        # use this option if you just want to pull the remote
         ;;
     * )
 

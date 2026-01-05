@@ -17,7 +17,7 @@ bind -n M-m run-shell \
 bind -n M-b run-shell \
          "~/.config/tmux/scripts/open_window.sh bottom btm "
 bind -n M-= run-shell \
-            "~/.config/tmux/scripts/open_window.sh notes '~/.config/scripts/nt.sh s'"
+            "~/.config/tmux/scripts/open_window.sh notes '~/.config/scripts/nt.sh -s'"
 
-bind -n M-t run-shell "tmux split-window '~/.config/scripts/nt.sh t'"
-bind -n M-+ run-shell "tmux split-window '~/.config/scripts/nt.sh n'"
+bind -n M-t run-shell "tmux split-window '~/.config/scripts/nt.sh TODO'"
+bind -n M-+ run-shell "tmux split-window '~/.config/scripts/nt.sh -n'"
