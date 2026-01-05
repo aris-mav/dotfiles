@@ -87,22 +87,35 @@ return {
                 vim.lsp.enable("jetls")
 
             elseif os.getenv("JULIALSP") == "julials" then
-                vim.lsp.config('julials', {
-                    cmd = {
-                        "julia",
-                        "--project=".."~/.julia/environments/lsp/",
-                        "--startup-file=no",
-                        "--history-file=no",
-                        vim.fn.expand("~/.config/nvim/lua/lsp/") .. "julials_start.jl"
-                    },
-                    filetypes = { 'julia' },
-                    root_markers = { "Project.toml", "JuliaProject.toml" },
-                    settings = {}
-                })
+
+                if vim.fn.isdirectory(vim.fn.expand("~/.julia/environments/nvim-lspconfig")) ~= 1
+                    and vim.fn.executable("julia") == 1 then
+                    -- run your command here
+                    vim.fn.system('julia --project=~/.julia/environments/nvim-lspconfig -e "using Pkg; Pkg.add(\\"LanguageServer\\"); Pkg.add(\\"SymbolServer\\"); Pkg.add(\\"StaticLint\\")"')
+                    print("Julia packages installed or already up to date.")
+                end
+
+                local v = vim.version()
+
+                if not ((v.major > 0) or (v.major == 0 and v.minor >= 11)) then
+                    -- the config below should be unncessary in versions above 0.11, according to 
+                    -- https://github.com/julia-vscode/LanguageServer.jl/wiki/Vim-and-Neovim
+                    vim.lsp.config('julials', {
+                        cmd = {
+                            "julia",
+                            "--project=".."~/.julia/environments/nvim-lspconfig/",
+                            "--startup-file=no",
+                            "--history-file=no",
+                            vim.fn.expand("~/.config/nvim/lua/lsp/") .. "julials_start.jl"
+                        },
+                        filetypes = { 'julia' },
+                        root_markers = { "Project.toml", "JuliaProject.toml" },
+                        settings = {}
+                    })
+                end
+
                 vim.lsp.enable("julials")
-
             end
-
         end
     }
 }
