@@ -13,7 +13,13 @@ vim.g.maplocalleader = "\\"
 vim.keymap.set('n', '<C-q>', ':q<CR>')
 
 -- Quit with leader-q
-vim.keymap.set('n', '<leader>q', ':q<CR>')
+vim.keymap.set('n', '<leader>q', function()
+  if vim.fn.winnr('$') > 1 then
+    vim.cmd('q')
+  else
+    vim.cmd('bd')
+  end
+end)
 
 -- command line thing
 vim.keymap.set('n', '<leader>;', 'q:i')
