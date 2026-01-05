@@ -180,7 +180,7 @@ case "$input" in
                 fi
             fi
         else
-            echo "No file matches for '$input'."
+            echo "No file matches for '$input' in $NOTES_DIR."
             exit 1
         fi
 
