@@ -27,7 +27,7 @@ return {
                 layout_strategy = "flex",
                 layout_config = {
                     horizontal = {
-                        prompt_position = "bottom",
+                        prompt_position = "top",
                         preview_width = 0.55,
                         preview_cutoff = 60,
                     },
@@ -37,7 +37,7 @@ return {
                         preview_cutoff = 1,
                     },
                 },
-                sorting_strategy = "descending",
+                sorting_strategy = "ascending",
                 filesize_limit = 0.1, -- MB
             },
         }
