@@ -3,6 +3,32 @@ if vim.g.did_after_julia then
 end
 vim.g.did_after_julia = true
 
+-- modify quit, so that you don't quit easily when LSP is running
+local function julia_ls_running()
+  for _, client in ipairs(vim.lsp.get_clients()) do
+    if client.name == "julials" then
+      return true
+    end
+  end
+  return false
+end
+local function quitvim()
+    if vim.fn.winnr('$') > 1 or not julia_ls_running() then
+        vim.cmd('q')
+    else
+        print("LanguageServer.jl is running. Use :q to quit.")
+    end
+end
+
+-- Quit with ctrl-q or <leader>q
+vim.keymap.set('n', '<C-q>', quitvim)
+vim.keymap.set('n', '<leader>q', quitvim)
+vim.keymap.set('n', 'ZZ', function()
+    if vim.fn.expand('%') ~= '' then
+        vim.cmd('write')
+    end
+    quitvim()
+end)
 -- choose lsp using the $JULIALSP environment variable
 if os.getenv("JULIALSP") == "jetls" then
     vim.lsp.config("jetls", {
