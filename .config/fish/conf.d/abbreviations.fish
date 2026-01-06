@@ -14,6 +14,8 @@
     abbr grb 'git rebase'
     abbr gacp 'git add -u ; git commit ; git push '
 
+    abbr gx 'git annex'
+
     # general stuff
     abbr e "$EDITOR"
     abbr f "$FILE_BROWSER"
