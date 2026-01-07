@@ -18,7 +18,7 @@
         active_style: (fg: "blue", bg: "black", modifiers: "Bold"),
         inactive_style: (),
     ),
-    highlighted_item_style: (fg: "light_yellow", modifiers: None),
+    highlighted_item_style: (fg: "yellow", modifiers: ""),
     current_item_style: (fg: "blue", bg: "black", modifiers: "Bold"),
     borders_style: (fg: "green"),
     highlight_border_style: (fg: "green"),
