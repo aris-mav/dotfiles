@@ -17,6 +17,7 @@ fwupd
 gcc
 gdm
 git
+git-annex
 git-delta
 glow
 iw
