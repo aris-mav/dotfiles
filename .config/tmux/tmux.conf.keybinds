@@ -21,5 +21,5 @@ bind -n M-= run-shell \
 bind -n M-t run-shell \
          "~/.config/tmux/scripts/open_window.sh TODO '~/.config/scripts/nt.sh TODO.txt'"
 
-bind C-f display-popup -d "#{pane_current_path}" -E "fish"
+bind C-f display-popup -d "#{pane_current_path}" -S fg=green -b rounded -E "fish"
 bind C-t display-popup -B -E "ttyper -w 40"
