@@ -54,6 +54,11 @@ case "$input" in
         ;;
     -s|--search )
         # Search in notes
+        
+        validfiles=$(mktemp)
+        trap 'rm -f "$validfiles"' EXIT INT TERM
+        ls > $validfiles
+
         if command -v bat >/dev/null 2>&1; then
             previewcmd='bat --style=numbers --color=always --highlight-line {2} {1}'
         elif command -v batcat >/dev/null 2>&1; then
@@ -63,10 +68,10 @@ case "$input" in
         fi
 
         if command -v rg >/dev/null 2>&1; then
-            grepcmd='rg --multiline --line-number --no-heading --color=always --smart-case'
-        else
+            grepcmd="xargs rg --multiline --line-number --no-heading --color=always --smart-case < $validfiles"
+        elif command -v grep >/dev/null 2>&1; then
             # grep fallback (keep filename:line:match format)
-            grepcmd='grep -R -n -i --color=always -H'
+            grepcmd="xargs grep -n -i --color=always -H < $validfiles"
         fi
 
         case "$EDITOR" in
@@ -94,12 +99,16 @@ case "$input" in
 
             fzf --ansi \
                 --delimiter : \
-                --bind "change:reload:sleep 0.1;$grepcmd {q} || true" \
-                --bind "enter:execute($editcommand)" \
-                --bind "ctrl-q:abort" \
                 --preview "$previewcmd" \
                 --preview-window="$prevwin" \
-                --reverse --height 100%
+                --reverse --height 100% \
+                --bind "enter:execute($editcommand)" \
+                --bind "ctrl-q:abort" \
+                --bind "change:reload:sleep 0.5;$grepcmd {q} || true" \
+                --bind "ctrl-o:execute-silent(ls > $validfiles)+clear-query" \
+                --bind "ctrl-i:execute-silent(
+                    printf '%s\n' {*} | awk -F: '{print \$1}' | sort -u > $validfiles
+                    )+clear-query" 
 
         elif command -v sk >/dev/null 2>&1; then
 
