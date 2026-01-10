@@ -56,7 +56,7 @@ case "$input" in
         # Search in notes
         
         validfiles=$(mktemp)
-        trap 'rm -f "$validfiles"' EXIT INT TERM
+        trap 'rm -f "$validfiles"' 0 INT TERM
         ls > $validfiles
 
         if command -v bat >/dev/null 2>&1; then
@@ -68,10 +68,10 @@ case "$input" in
         fi
 
         if command -v rg >/dev/null 2>&1; then
-            grepcmd="xargs rg --multiline --line-number --no-heading --color=always --smart-case < $validfiles"
+            grepcmd="xargs rg --multiline --line-number --no-heading --color=always --smart-case -- < $validfiles"
         elif command -v grep >/dev/null 2>&1; then
             # grep fallback (keep filename:line:match format)
-            grepcmd="xargs grep -n -i --color=always -H < $validfiles"
+            grepcmd="xargs grep -n -i --color=always -H -- < $validfiles"
         fi
 
         case "$EDITOR" in
@@ -104,9 +104,9 @@ case "$input" in
                 --reverse --height 100% \
                 --bind "enter:execute($editcommand)" \
                 --bind "ctrl-q:abort" \
-                --bind "change:reload:sleep 0.5;$grepcmd {q} || true" \
+                --bind "change:reload:sleep 0.2;$grepcmd {q} || true" \
                 --bind "ctrl-o:execute-silent(ls > $validfiles)+clear-query" \
-                --bind "ctrl-i:execute-silent(
+                --bind "ctrl-l:execute-silent(
                     printf '%s\n' {*} | awk -F: '{print \$1}' | sort -u > $validfiles
                     )+clear-query" 
 
@@ -153,19 +153,17 @@ case "$input" in
     * )
 
         tmp=$(mktemp) || exit 1
+        trap 'rm -f "$tmp"' 0 INT TERM
 
         if command -v rg >/dev/null 2>&1; then
-            ls | rg -S "$input" > "$tmp"
+            ls | rg -S -- "$input" > "$tmp"
         else
-            ls | grep -i "$input" > "$tmp"
+            ls | grep -i -- "$input" > "$tmp"
         fi
 
         count=$(wc -l < "$tmp")
 
-        if [ "$count" -eq 1 ]; then
-            IFS= read -r file < "$tmp"
-            "$EDITOR" "$file"
-        elif [ "$count" -gt 1 ]; then
+        if [ "$count" -gt 1 ]; then
 
             if command -v fzf >/dev/null 2>&1; then
                 file=$(fzf < "$tmp")
@@ -173,28 +171,31 @@ case "$input" in
                 file=$(sk < "$tmp")
             fi
 
-            if [ -f "$file" ]; then 
+            echo "$file" > "$tmp"
 
-                if [ "$file" = "books_finished.tsv" ]; then 
-                    # Log book you just finished
-                    dt=$(date +%Y/%m/%d)
-                    echo "$dt" >> "$file"
-
-                    $EDITOR + "$file"
-
-                    if [ "$(tail -n 1 "$file")" = "$dt" ]; then
-                        git restore "$file"
-                    fi
-                else
-                    $EDITOR $file 
-                fi
-            fi
-        else
+        elif [ "$count" -eq 0 ]; then
             echo "No file matches for '$input' in $NOTES_DIR."
             exit 1
         fi
 
-        rm "$tmp"
+        IFS= read -r file < "$tmp"
+
+        if [ -f "$file" ]; then 
+
+            if [ "$file" = "books_finished.tsv" ]; then 
+                # Log book you just finished
+                dt=$(date +%Y/%m/%d)
+                echo "$dt" >> "$file"
+
+                $EDITOR + "$file"
+
+                if [ "$(tail -n 1 "$file")" = "$dt" ]; then
+                    git restore "$file"
+                fi
+            else
+                "$EDITOR" "$file"
+            fi
+        fi
         ;;
 esac
 
