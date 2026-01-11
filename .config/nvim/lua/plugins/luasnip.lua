@@ -6,7 +6,7 @@ return {
 	build = "make install_jsregexp",
 
 	config = function()
-		local luasnip = require("luasnip")
+		local ls = require("luasnip")
 		local cmp = require("cmp")
 
 		cmp.setup({
@@ -14,8 +14,8 @@ return {
 			mapping = {
 				['<CR>'] = cmp.mapping(function(fallback)
 					if cmp.visible() then
-						if luasnip.expandable() then
-							luasnip.expand()
+						if ls.expandable() then
+							ls.expand()
 						else
 							cmp.confirm({
 								select = true,
@@ -29,8 +29,8 @@ return {
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
-					elseif luasnip.locally_jumpable(1) then
-						luasnip.jump(1)
+					elseif ls.locally_jumpable(1) then
+						ls.jump(1)
 					else
 						fallback()
 					end
@@ -39,8 +39,8 @@ return {
 				["<S-Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_prev_item()
-					elseif luasnip.locally_jumpable(-1) then
-						luasnip.jump(-1)
+					elseif ls.locally_jumpable(-1) then
+						ls.jump(-1)
 					else
 						fallback()
 					end
