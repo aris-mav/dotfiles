@@ -104,6 +104,7 @@ case "$input" in
                 --reverse --height 100% \
                 --bind "enter:execute($editcommand)" \
                 --bind "ctrl-q:abort" \
+                --bind "ctrl-p:execute(~/.config/scripts/pd_prev.sh {1})" \
                 --bind "change:reload:sleep 0.2;$grepcmd {q} || true" \
                 --bind "ctrl-o:execute-silent(ls > $validfiles)+clear-query" \
                 --bind "ctrl-l:execute-silent(
