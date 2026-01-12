@@ -10,7 +10,10 @@ return {
 		local ls = require("luasnip")
 		local cmp = require("cmp")
 
-        require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})
+        require("luasnip").filetype_extend("tex", { "math" })
+        require("luasnip").filetype_extend("markdown", { "math" })
+
+        require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/LuaSnip/"})
 
         vim.cmd[[ 
         " Use Tab to expand and jump through snippets
