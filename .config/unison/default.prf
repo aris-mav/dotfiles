@@ -1,5 +1,5 @@
 # Unison preferences file
-ignore = Name {*/.git}
+ignore = Name {notes/*}
 ignore = Name {zotero*}
 ignore = Name {.zotero*}
 ignore = Name {better-bibtex.*}
