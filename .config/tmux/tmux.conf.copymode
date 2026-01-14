@@ -1,9 +1,7 @@
 # Enter copy mode with vi keys
 
 #bind-key -n M-c copy-mode # overlaps with my nvim quickfix toggle
-bind-key -n M-y copy-mode 
-
-unbind-key Space
+bind-key -n M-\; copy-mode 
 
 # Exit copy mode with i
 bind -T copy-mode-vi i send-keys -X cancel

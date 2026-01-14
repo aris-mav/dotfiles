@@ -1,17 +1,19 @@
+# unused and annoying
+unbind-key Space
+
 # Remap prefix
 unbind-key C-b
 set-option -g prefix C-a
 bind-key C-a send-prefix
-bind -n M-z resize-pane -Z
 
-bind h split-window -h
-bind v split-window -v
-
+# Fullscreen pane
+bind -n M-z resize-pane -Z ""
+ 
+# New window with two splits if screen is big enough
 bind n run-shell \
          "~/.config/tmux/scripts/new_win_split.sh"
 
 # External programs
-
 bind -n M-m run-shell \
          "~/.config/tmux/scripts/open_window.sh music rmpc "
 bind -n M-b run-shell \
@@ -21,5 +23,6 @@ bind -n M-= run-shell \
 bind -n M-t run-shell \
          "~/.config/tmux/scripts/open_window.sh TODO '~/.config/scripts/nt.sh TODO.txt'"
 
+# Popups
 bind C-f display-popup -d "#{pane_current_path}" -S fg=green -b rounded -E "fish"
 bind C-t display-popup -B -E "ttyper -w 40"
