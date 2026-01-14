@@ -14,7 +14,7 @@ return { -- these are meant to be shared between tex and md files
     s(
         {
             trig="upright",
-            dscr="Latex mathrm for non-italic symbols in equations",
+            dscr="non-italic symbols in equations",
         },
         {
             t("\\mathrm{"),
@@ -65,6 +65,20 @@ return { -- these are meant to be shared between tex and md files
             i(3, ""),
             t("}{\\mathrm{d}"),
             i(4, ""),
+            t("}")
+        }
+    ),
+
+    s(
+        {
+            trig="underset",
+            descr="place text in first {} under text in second {}"
+        },
+        {
+            t("\\underset{"),
+            i(1, ""),
+            t("}{"),
+            i(2, ""),
             t("}")
         }
     ),
