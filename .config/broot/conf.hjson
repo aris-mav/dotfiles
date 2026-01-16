@@ -295,6 +295,7 @@ imports: [
         luma: light
         # (un)comment to choose your preferred skin
         //file: skins/solarized-light.hjson
-        file: skins/white.hjson
+        //file: skins/white.hjson
+        file: skins/light-gruvbox.hjson
     }
 ]
