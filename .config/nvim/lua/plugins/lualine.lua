@@ -6,8 +6,8 @@ return {
     config = function()
         require('lualine').setup {
             options = {
+                -- theme = 'gruvbox',
                 icons_enabled = true,
-                theme = 'gruvbox',
                 component_separators = { left = '', right = ''},
                 section_separators = { left = '', right = ''},
                 disabled_filetypes = {
