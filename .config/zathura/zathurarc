@@ -1,6 +1,6 @@
 # open in fullscreen
 include ./windowsize
-include ./colours
+include ./themes/gruvbox/dark
 
 set selection-clipboard clipboard
 set font "JetBrainsMono 10"
