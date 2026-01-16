@@ -3,7 +3,7 @@ return {
 	priority = 1000,
     config = function()
         require("gruvbox").setup({
-            transparent_mode = false,
+            transparent_mode = true,
             terminal_colors = true, -- add neovim terminal colors
             undercurl = true,
             underline = true,
