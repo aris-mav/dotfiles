@@ -3,7 +3,7 @@ vim.wo.relativenumber = true
 vim.wo.number = true
 
 -- Set colors
-vim.o.background = "dark"
+vim.o.background = "light"
 vim.opt.termguicolors = true
 vim.cmd([[colorscheme gruvbox]])
 

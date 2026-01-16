@@ -1,6 +1,6 @@
 general.import = [
     "font.toml", 
-    "gruvbox_dark.toml",
+    "gruvbox_light.toml",
     "window.toml"
 ]
 
