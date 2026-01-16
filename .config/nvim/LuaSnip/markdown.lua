@@ -4,13 +4,15 @@ return {
         t("["),
         i(1, "text"),
         t("]("),
-        i(2, "url"),
+        f(function()
+            return vim.fn.getreg('+'):gsub("%s+", "")
+        end),
         t(")"),
     }),
 
     s("eqn", {
         t("$$ "),
-        i(1, "text"),
+        i(1, "maths"),
         t(" $$"),
     }),
 
