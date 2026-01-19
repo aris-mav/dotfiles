@@ -11,7 +11,10 @@
     abbr gP 'git push'
     abbr gb 'git branch'
     abbr gl 'git log'
+    abbr gm 'git merge'
     abbr grb 'git rebase'
+    abbr gcp 'git cherry-pick'
+    abbr gau 'git add -u'
     abbr gacp 'git add -u ; git commit ; git push '
 
     abbr gx 'git annex'
