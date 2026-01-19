@@ -3,11 +3,19 @@ bind -n M-Left  if-shell '[ "$(tmux display -p "#{pane_at_left}"  )" = "0" ]' {s
 bind -n M-Right if-shell '[ "$(tmux display -p "#{pane_at_right}" )" = "0" ]' {select-pane -R} {next-window}
 bind -n M-Up    if-shell '[ "$(tmux display -p "#{pane_at_top}"   )" = "0" ]' {select-pane -U} {previous-window}
 bind -n M-Down  if-shell '[ "$(tmux display -p "#{pane_at_bottom}")" = "0" ]' {select-pane -D} {next-window}
+bind Left  if-shell '[ "$(tmux display -p "#{pane_at_left}"  )" = "0" ]' {select-pane -L} {previous-window}
+bind Right if-shell '[ "$(tmux display -p "#{pane_at_right}" )" = "0" ]' {select-pane -R} {next-window}
+bind Up    if-shell '[ "$(tmux display -p "#{pane_at_top}"   )" = "0" ]' {select-pane -U} {previous-window}
+bind Down  if-shell '[ "$(tmux display -p "#{pane_at_bottom}")" = "0" ]' {select-pane -D} {next-window}
 
 bind -n M-h if-shell '[ "$(tmux display -p "#{pane_at_left}"  )" = "0" ]' {select-pane -L} {previous-window}
 bind -n M-l if-shell '[ "$(tmux display -p "#{pane_at_right}" )" = "0" ]' {select-pane -R} {next-window}
 bind -n M-k if-shell '[ "$(tmux display -p "#{pane_at_top}"   )" = "0" ]' {select-pane -U} {previous-window}
 bind -n M-j if-shell '[ "$(tmux display -p "#{pane_at_bottom}")" = "0" ]' {select-pane -D} {next-window}
+bind h if-shell '[ "$(tmux display -p "#{pane_at_left}"  )" = "0" ]' {select-pane -L} {previous-window}
+bind l if-shell '[ "$(tmux display -p "#{pane_at_right}" )" = "0" ]' {select-pane -R} {next-window}
+bind k if-shell '[ "$(tmux display -p "#{pane_at_top}"   )" = "0" ]' {select-pane -U} {previous-window}
+bind j if-shell '[ "$(tmux display -p "#{pane_at_bottom}")" = "0" ]' {select-pane -D} {next-window}
 
 # Resize pane using Alt + Shift + Arrow Keys
 bind -n M-S-Left  resize-pane -L 
