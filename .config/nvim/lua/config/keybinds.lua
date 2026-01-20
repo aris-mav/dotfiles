@@ -71,6 +71,9 @@ vim.keymap.set("n", "gx", function()
     -- Match DOI pattern, stopping before ), ], } or whitespace
     local doi = clean:match("(10%.%d+/%S-[^%)%]%}%s]*)")
     if doi then
+        -- Remove any dots at the very end of the DOI string
+        doi = doi:gsub("%.+$", "")
+        -- convert to url
         local url = "https://doi.org/" .. doi
         -- Change 'xdg-open' to 'open' on macOS, or 'start' on Windows
         vim.fn.jobstart({ "xdg-open", url }, { detach = true })
