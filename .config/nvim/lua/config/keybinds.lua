@@ -86,7 +86,7 @@ end, { noremap = true, silent = true })
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
-    vim.keymap.set("n", "<leader>v", function()
+    vim.keymap.set("n", "gp", function()
       vim.cmd("w")
       vim.cmd("!~/.config/scripts/pd_prev.sh %:p")
     end, { buffer = true, silent = true })
