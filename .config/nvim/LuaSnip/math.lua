@@ -73,9 +73,7 @@ local function is_in_math()
   end
 end
 
-
-
-return { -- these are meant to be shared between tex and md files
+local snippets = { -- these are meant to be shared between tex and md files
 
     s(
         {
@@ -159,3 +157,16 @@ return { -- these are meant to be shared between tex and md files
         {condition = is_in_math }
     ),
 }
+
+local number_sets = {
+  real = "R",
+  natural = "N",
+  complex = "C",
+  integer = "Z",
+  rational = "Q"
+}
+for key, symbol in pairs(number_sets) do
+  table.insert(snippets, s("is" .. key, t("\\in\\mathbb{" .. symbol .. "}")))
+end
+
+return snippets
