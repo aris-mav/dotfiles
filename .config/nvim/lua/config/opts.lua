@@ -5,8 +5,6 @@ vim.wo.number = true
 -- Set colors
 vim.o.background = "dark"
 vim.opt.termguicolors = true
-vim.cmd([[colorscheme gruvbox]])
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#3c3836" })
 
 -- Enable cursorline and highlight only the line number, not the entire line
 vim.opt.cursorline = true
