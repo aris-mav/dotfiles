@@ -6,8 +6,8 @@ if status is-interactive
 
             if not set -q TMUX
 
-                if tmux has-session -t main
-                    exec tmux attach-session -t main
+                if tmux has-session
+                    exec tmux attach-session
                 else
                     set -l term_width (tput cols)
                     if test $term_width -gt 150 # If screen is wide, split it
