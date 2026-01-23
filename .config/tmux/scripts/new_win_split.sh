@@ -1,8 +1,6 @@
 #!/bin/sh
 
-tmux new-window 
-
-width=$(tmux display -p "#{window_width}"); 
+width=$(tmux display -p "#{pane_width}"); 
 
 if [ "$width" -gt 150 ]; then 
     tmux split-window -h; 

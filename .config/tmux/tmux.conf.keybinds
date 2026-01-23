@@ -10,7 +10,11 @@ bind-key C-a send-prefix
 bind -n M-z resize-pane -Z ""
  
 # New window with two splits if screen is big enough
-bind n run-shell \
+bind c run-shell \
+         "tmux new-window && \
+         ~/.config/tmux/scripts/new_win_split.sh"
+
+bind e run-shell \
          "~/.config/tmux/scripts/new_win_split.sh"
 
 # External programs
@@ -19,9 +23,11 @@ bind -n M-m run-shell \
 bind -n M-b run-shell \
          "~/.config/tmux/scripts/open_window.sh bottom btm "
 bind -n M-= run-shell \
-         "~/.config/tmux/scripts/open_window.sh notes '~/.config/scripts/nt.sh -s'"
+         "~/.config/tmux/scripts/open_window.sh notes \
+         '~/.config/scripts/nt.sh -s'"
 bind -n M-t run-shell \
-         "~/.config/tmux/scripts/open_window.sh TODO '~/.config/scripts/nt.sh TODO.txt'"
+         "~/.config/tmux/scripts/open_window.sh TODO \
+         '~/.config/scripts/nt.sh TODO.txt'"
 
 # Popups
 bind C-f display-popup -d "#{pane_current_path}" -S fg=green -b rounded -E "fish"
