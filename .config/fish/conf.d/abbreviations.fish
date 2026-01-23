@@ -7,6 +7,7 @@
     abbr ga 'git add'
     abbr gd 'git diff'
     abbr gs 'git status'
+    abbr gS 'git stash'
     abbr gp 'git pull'
     abbr gP 'git push'
     abbr gb 'git branch'
@@ -25,6 +26,8 @@
     abbr y "$YANKTEXT"
     abbr xo 'xdg-open'
     abbr x 'xargs'
+
+    abbr tn 'tmux new-window'
 
 
     if type -q nix
