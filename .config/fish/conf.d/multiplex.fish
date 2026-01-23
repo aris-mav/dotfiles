@@ -9,15 +9,11 @@ if status is-interactive
                 if tmux has-session
                     exec tmux attach-session
                 else
-                    set -l term_width (tput cols)
-                    if test $term_width -gt 150 # If screen is wide, split it
-                        exec tmux new-session -s main -n home \; split-window -h \; resize-pane -x (math -s0 $term_width/2 + 25)
-                    else if test $term_width -gt 120 
-                        exec tmux new-session -s main -n home \; split-window -h \; resize-pane -x 66%
-                    else
-                        exec tmux new-session -s main -n home 
-                    end
+                    exec tmux new-session -s main -n home 
                 end
+            end
+            if test (tmux display-message -p '#{window_panes}') -eq 1
+                ~/.config/tmux/scripts/new_win_split.sh
             end
 
         else if type -q zellij

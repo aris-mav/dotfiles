@@ -9,15 +9,8 @@ bind-key C-a send-prefix
 # Fullscreen pane
 bind -n M-z resize-pane -Z ""
  
-# New window with two splits if screen is big enough
-bind c run-shell \
-         "tmux new-window && \
-         ~/.config/tmux/scripts/new_win_split.sh"
+bind e run-shell "~/.config/tmux/scripts/new_win_split.sh"
 
-bind e run-shell \
-         "~/.config/tmux/scripts/new_win_split.sh"
-
-# External programs
 bind -n M-m run-shell \
          "~/.config/tmux/scripts/open_window.sh music rmpc "
 bind -n M-b run-shell \
