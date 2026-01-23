@@ -48,9 +48,9 @@ function ToggleQuickfix()
         vim.cmd('copen')
     end
 end
-vim.keymap.set('n', "<A-c>", ':lua ToggleQuickfix()<CR>', { noremap = true, silent = true })
-vim.keymap.set("n", "<A-n>", ":cn <cr>", { remap = true, silent = false })
-vim.keymap.set("n", "<A-p>", ":cp <cr>", { remap = true, silent = false })
+vim.keymap.set('n', "<C-c>", ':lua ToggleQuickfix()<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<C-n>", ":cn <cr>", { remap = true, silent = false })
+vim.keymap.set("n", "<C-p>", ":cp <cr>", { remap = true, silent = false })
 
 -- Swap windows using alt+hjkl
 vim.keymap.set("n", "<A-h>", "<C-w>h", { noremap = true, silent = true })
