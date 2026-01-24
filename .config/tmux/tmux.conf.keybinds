@@ -15,7 +15,7 @@ bind -n M-m run-shell \
          "~/.config/tmux/scripts/open_window.sh music rmpc "
 bind -n M-b run-shell \
          "~/.config/tmux/scripts/open_window.sh bottom btm "
-bind -n M-= run-shell \
+bind -n M-n run-shell \
          "~/.config/tmux/scripts/open_window.sh notes \
          '~/.config/scripts/nt.sh -s'"
 bind -n M-t run-shell \
