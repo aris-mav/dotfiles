@@ -42,7 +42,7 @@
     if set -q FUZZYFIND
 
         abbr fp "$FUZZYFIND --preview='less {}'"
-        abbr gaf "git add (git diff --name-only | $FUZZYFIND --preview='less {}')"
+        abbr gaf "git add (git diff --name-only | $FUZZYFIND --preview 'git diff --color=always {}')"
 
         if test "$FUZZYFIND" = "sk"
             abbr -a skr 'echo (string split -m 1 : (sk --ansi -i -c \'rg -i --color=always --line-number "{}"\'))[1]'
