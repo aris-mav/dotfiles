@@ -79,21 +79,18 @@ local snippets = { -- these are meant to be shared between tex and md files
         {
             trig="upright",
             dscr="non-italic symbols in equations",
-            show_condition=is_in_math
         },
         {
             t("\\mathrm{"),
             i(1, "symbol"),
             t("}"),
-        },
-        {condition = is_in_math }
+        }
     ),
 
     s(
         {
             trig="frac",
             descr="Latex fraction",
-            show_condition=is_in_math
         },
         {
             t("\\frac{"),
@@ -101,15 +98,13 @@ local snippets = { -- these are meant to be shared between tex and md files
             t("}{"),
             i(2, "denominator"),
             t("}"),
-        },
-        {condition = is_in_math }
+        }
     ),
 
     s(
         {
             trig="derivative",
             descr="Leibnitz notation for 1st monovariate derivative",
-            show_condition=is_in_math
         },
         {
             t("\\frac{\\mathrm{d} "),
@@ -117,15 +112,13 @@ local snippets = { -- these are meant to be shared between tex and md files
             t(" }{\\mathrm{d} "),
             i(2, "x"),
             t(" }"),
-        },
-        {condition = is_in_math }
+        }
     ),
 
     s(
         {
             trig="integral",
             descr="Bounded integral",
-            show_condition=is_in_math
         },
         {
             t("\\int_{"),
@@ -137,15 +130,13 @@ local snippets = { -- these are meant to be shared between tex and md files
             t("}{\\mathrm{d}"),
             i(4, ""),
             t("}")
-        },
-        {condition = is_in_math }
+        }
     ),
 
     s(
         {
             trig="underset",
             descr="place text in first {} under text in second {}",
-            show_condition=is_in_math
         },
         {
             t("\\underset{"),
@@ -153,20 +144,37 @@ local snippets = { -- these are meant to be shared between tex and md files
             t("}{"),
             i(2, ""),
             t("}")
+        }
+    ),
+
+    s(
+        {
+            trig="log",
+            descr="logarithm of any base",
         },
-        {condition = is_in_math }
+        {
+            t("\\log_{"),
+            i(1, "base"),
+            t("}\\left({"),
+            i(2, "argument"),
+            t("}\\right)")
+        }
     ),
 }
 
-local number_sets = {
-  real = "R",
-  natural = "N",
-  complex = "C",
-  integer = "Z",
-  rational = "Q"
-}
-for key, symbol in pairs(number_sets) do
-  table.insert(snippets, s("is" .. key, t("\\in\\mathbb{" .. symbol .. "}")))
+for key, symbol in pairs({
+    real = "R",
+    natural = "N",
+    complex = "C",
+    integer = "Z",
+    rational = "Q"
+}) do
+    table.insert(snippets, s("is" .. key, t("\\in\\mathbb{" .. symbol .. "}")))
+end
+
+for _, snip in ipairs(snippets) do
+    snip.show_condition = is_in_math
+    snip.condition = is_in_math
 end
 
 return snippets
