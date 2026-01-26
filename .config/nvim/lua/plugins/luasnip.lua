@@ -15,13 +15,22 @@ return {
 
         require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/LuaSnip/"})
 
-        vim.cmd[[ 
-        " Use Tab to expand and jump through snippets
-        imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
-        smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>'
-        " Use Shift-Tab to jump backwards through snippets
-        imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
-        smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>' ]]
+
+        -- Tab to expand or jump
+        vim.keymap.set({"i", "s"}, "<Tab>", function()
+            if ls.expand_or_jumpable() then
+                ls.expand_or_jump()
+            else
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+            end
+        end, {silent = true})
+
+        -- Shift-Tab to jump backwards
+        vim.keymap.set({"i", "s"}, "<S-Tab>", function()
+            if ls.jumpable(-1) then
+                ls.jump(-1)
+            end
+        end, {silent = true})
 
         -- also define another expand keybind, in case cmp is triggered as well
         vim.keymap.set({"i"}, "<C-L>", function()
