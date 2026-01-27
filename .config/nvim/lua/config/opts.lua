@@ -15,6 +15,9 @@ vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "Orange" })
 -- vim.cmd[[:hi VertSplit ctermfg=bg ctermbg=bg guifg=bg guibg=bg]]
 vim.cmd[[set fillchars+=vert:\ ]]
 
+-- remove ~'s from the end of file
+vim.wo.fillchars='eob: '
+
 -- Indentations
 vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
 vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
@@ -51,7 +54,6 @@ vim.opt.sidescrolloff = 2 -- Number of columns to keep to the left and right of 
 
 vim.g.netrw_banner = 0
 
--- vim.opt.cursorline = true
 -- vim.opt.clipboard = "unnamedplus"
 
 vim.api.nvim_create_augroup("SpellCheckForSpecificFiletypes", { clear = true })
