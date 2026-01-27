@@ -16,7 +16,7 @@ vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "Orange" })
 vim.cmd[[set fillchars+=vert:\ ]]
 
 -- remove ~'s from the end of file
-vim.wo.fillchars='eob: '
+vim.opt.fillchars = { eob = ' ' }
 
 -- Indentations
 vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
