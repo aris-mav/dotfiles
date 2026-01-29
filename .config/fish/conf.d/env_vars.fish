@@ -27,14 +27,8 @@ else if type -q clip.exe
     set -gx YANKTEXT 'clip.exe'
 end
 
-if type -q bat
-    set -gx MANPAGER "bat -plman"
-else if type -q batcat
-    set -gx MANPAGER "batcat -plman"
-else if type -q nvim
+if type -q nvim
     set -gx MANPAGER "nvim +Man!"
-else
-    set -gx MANPAGER "less --use-color -Dd+r -Du+b"
 end
 
 if ! test "$fish_color_user" = "yellow"
