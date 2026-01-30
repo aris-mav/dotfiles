@@ -69,7 +69,6 @@ return {
                 keymaps = {
                     init_selection = "+",
                     node_incremental = "+",
-                    scope_incremental = "=",
                     node_decremental = "-",
                 },
             },
