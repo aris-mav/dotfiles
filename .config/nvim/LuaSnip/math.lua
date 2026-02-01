@@ -73,7 +73,51 @@ local function is_in_math()
   end
 end
 
+-- from https://evesdropper.dev/files/luasnip/choice-dynamic/
+local mat = function(args, snip)
+    local rows = tonumber(snip.captures[2])
+    local cols = tonumber(snip.captures[3])
+    local nodes = {}
+    local ins_indx = 1
+    for j = 1, rows do
+        table.insert(nodes, r(ins_indx, tostring(j) .. "x1", i(1)))
+        ins_indx = ins_indx + 1
+        for k = 2, cols do
+            table.insert(nodes, t(" & "))
+            table.insert(nodes, r(ins_indx, tostring(j) .. "x" .. tostring(k), i(1)))
+            ins_indx = ins_indx + 1
+        end
+        table.insert(nodes, t({ " \\\\", "" }))
+    end
+    -- fix last node.
+    nodes[#nodes] = t(" \\\\")
+    return sn(nil, nodes)
+end
+
 local snippets = { -- these are meant to be shared between tex and md files
+
+    -- from https://evesdropper.dev/files/luasnip/choice-dynamic/
+    s({ trig = "([bBpvV])mat(%d+)x(%d+)([ar])", regTrig = true, name = "matrix", dscr = "matrix trigger lets go", hidden = true },
+        fmt([[
+    \begin{<>}<>
+    <>
+    \end{<>}]],
+            {f(function(_, snip)
+                return snip.captures[1] .. "matrix" -- captures matrix type
+            end),
+                f(function(_, snip)
+                    if snip.captures[4] == "a" then
+                        out = string.rep("c", tonumber(snip.captures[3]) - 1) -- array for augment 
+                        return "[" .. out .. "|c]"
+                    end
+                    return "" -- otherwise return nothing
+                end),
+                d(1, mat),
+                f(function(_, snip)
+                    return snip.captures[1] .. "matrix" -- i think i could probably use a repeat node but whatever
+                end),},
+            { delimiters = "<>" })
+    ),
 
     s(
         {
