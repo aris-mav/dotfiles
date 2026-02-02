@@ -121,6 +121,17 @@ local snippets = { -- these are meant to be shared between tex and md files
 
     s(
         {
+            trig="vec",
+        },
+        {
+            t("\\vec{"),
+            i(1, "symbol"),
+            t("}"),
+        }
+    ),
+
+    s(
+        {
             trig="upright",
             dscr="non-italic symbols in equations",
         },
@@ -166,13 +177,28 @@ local snippets = { -- these are meant to be shared between tex and md files
         },
         {
             t("\\int_{"),
-            i(1, ""),
+            i(1, "lower"),
             t("}^{"),
-            i(2, ""),
+            i(2, "upper"),
             t("}{"),
-            i(3, ""),
+            i(3, "function"),
             t("}{\\mathrm{d}"),
-            i(4, ""),
+            i(4, "variable"),
+            t("}")
+        }
+    ),
+
+    s(
+        {
+            trig="sum",
+        },
+        {
+            t("\\sum_{"),
+            i(1, "lower"),
+            t("}^{"),
+            i(2, "upper"),
+            t("}{"),
+            i(3, "content"),
             t("}")
         }
     ),
