@@ -7,6 +7,7 @@ return {
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-cmdline',
         'saadparwaiz1/cmp_luasnip',
+        'f3fora/cmp-spell',
     },
     config = function()
         local cmp = require('cmp')
@@ -118,5 +119,26 @@ return {
                 { name = 'buffer' }
             }
         })
+
+        -- f3fora/cmp-spell' setup
+        cmp.setup.filetype(
+            { 'markdown', 'latex', 'gitcommit', 'text' },
+            { sources = cmp.config.sources({
+                { name = 'luasnip', priority = 1000 },
+                { name = 'nvim_lsp', priority = 750 },
+                { name = 'path', priority = 500 },
+            }, {
+                    { name = 'buffer', keyword_length = 3 },
+                    {
+                        name = 'spell', priority = 250,
+                        option = {
+                            keep_all_entries = false,
+                            enable_in_context = function()
+                                return require('cmp.config.context').in_treesitter_capture('spell')
+                            end,
+                        },
+                    },
+                })
+            })
     end
 }
