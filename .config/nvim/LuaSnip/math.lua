@@ -121,6 +121,32 @@ local snippets = { -- these are meant to be shared between tex and md files
 
     s(
         {
+            trig="norm",
+        },
+        {
+            t("\\lVert "),
+            i(1, "symbol"),
+            t(" \\rVert ")
+        }
+    ),
+
+    s(
+        {
+            trig="normm",
+        },
+        {
+            t("\\lVert "),
+            i(1, "symbol"),
+            t(" \\rVert_{"),
+            i(2, ""),
+            t("}^{"),
+            i(3, ""),
+            t("}")
+        }
+    ),
+
+    s(
+        {
             trig="vec",
         },
         {
