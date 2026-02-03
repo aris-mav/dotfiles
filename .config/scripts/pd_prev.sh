@@ -1,6 +1,5 @@
 #!/bin/sh
 
-rm /tmp/note*pdf
 input_markdown_file="$1"
 
 id=$(cksum "$input_markdown_file" | awk '{print $1}')
