@@ -1,5 +1,6 @@
 #!/bin/sh
 
+rm /tmp/note*pdf
 input_markdown_file="$1"
 
 id=$(cksum "$input_markdown_file" | awk '{print $1}')
@@ -27,11 +28,25 @@ if [ ! -f "$tmpfilename" ]; then
         set -- "--pdf-engine=$ENGINE" -V "mainfont=$SELECTED_FONT"
 
     else
-        set -- 
+        set -- "-V fontfamily=newpx"
     fi
 
-    pandoc "$input_markdown_file" -o "$tmpfilename" "$@"
+    pandoc "$input_markdown_file" -o "$tmpfilename" "$@" \
+        -V documentclass=extarticle \
+        -V fontsize=20pt \
+        -V geometry:margin=0.5in \
+        -V pagestyle=empty \
+        -V linestretch=1.3 \
+        -V colorlinks=true \
+        -V linkcolor=blue
 
 fi
 
-xdg-open "$tmpfilename" >/dev/null 2>&1 &
+if command -v zathura >/dev/null 2>&1; then
+    zathura \
+        --mode fullscreen \
+        -c $HOME/.config/zathura/dark \
+        "$tmpfilename" >/dev/null 2>&1 &
+else
+    xdg-open "$tmpfilename" >/dev/null 2>&1 &
+fi

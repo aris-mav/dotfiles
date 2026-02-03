@@ -1,0 +1,3 @@
+include ../zathurarc
+set recolor true
+set adjust-open height
