@@ -4,3 +4,7 @@ vim.keymap.set("n", "b", "<C-b>", { remap = true, silent = false })
 vim.keymap.set("n", "d", "<C-d>zzzv", { remap = true, silent = false })
 vim.keymap.set("n", "u", "<C-u>zzzv", { remap = true, silent = false })
 vim.keymap.set("n", "q", ":q<CR>", { buffer = true, silent = true })
+
+vim.keymap.set("n", "o", function()
+    require('man').show_toc()
+end, { buffer = true, silent = true })
