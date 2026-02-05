@@ -198,6 +198,20 @@ local snippets = { -- these are meant to be shared between tex and md files
 
     s(
         {
+            trig="partial_derivative",
+            descr="Leibnitz notation for partial derivative",
+        },
+        {
+            t("\\frac{\\partial "),
+            i(1, "f"),
+            t(" }{\\partial "),
+            i(2, "x"),
+            t(" }"),
+        }
+    ),
+
+    s(
+        {
             trig="integral",
             descr="Bounded integral",
         },
