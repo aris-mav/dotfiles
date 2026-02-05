@@ -124,7 +124,7 @@
 
                 (size: "25%", borders: "NONE", pane: Split(direction: Vertical, panes: [
 
-                            (size: "50%", borders: "NONE", pane: Pane(AlbumArt)),
+                            (size: "43%", borders: "NONE", pane: Pane(AlbumArt)),
 
                         ])
                 ),
