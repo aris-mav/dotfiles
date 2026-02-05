@@ -22,10 +22,11 @@ function sc
 
         if test -d $FLASH_DRIVE_DIR 
             if read_confirm "Sync with $FLASH_DRIVE_DIR ?"     
-                for folder in $syncfolders
-                    if type -q unison
-                        unison -auto -fat ~/$folder $FLASH_DRIVE_DIR/$folder
-                    else if read_confirm "Use rsync?"
+
+                if type -q unison
+                    unison usbsync ~ "$FLASH_DRIVE_DIR"
+                else if read_confirm "Use rsync?"
+                    for folder in $syncfolders
                         rsync -auv ~/$folder $FLASH_DRIVE_DIR/$folder
                     end
                 end
