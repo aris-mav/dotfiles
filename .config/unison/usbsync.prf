@@ -1,0 +1,15 @@
+# Folders to sync
+path = Documents
+path = Music
+path = Zotero
+
+# Logic & Automation
+auto = true
+fat = true
+
+# Unison preferences file
+ignore = Path Documents/notes
+ignore = Name .git
+ignore = Name zotero*
+ignore = Name .zotero*
+ignore = Name better-bibtex.*
