@@ -34,6 +34,7 @@ noto-fonts
 openssh
 otf-ipafont
 pass
+pavucontrol
 pipewire
 ripgrep
 ripgrep-all
