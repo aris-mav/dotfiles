@@ -2,6 +2,7 @@
 path = Documents
 path = Music
 path = Zotero
+path = Pictures
 
 # Logic & Automation
 auto = true
