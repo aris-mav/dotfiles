@@ -4,6 +4,7 @@ if status is-interactive
 
         if type -q tmux 
 
+            # if there's a session, connect
             if not set -q TMUX
 
                 if tmux has-session
@@ -12,6 +13,8 @@ if status is-interactive
                     exec tmux new-session -s main -n home 
                 end
             end
+
+            # if there's only one pane, split it if screen is big
             if test (tmux display-message -p '#{window_panes}') -eq 1
                 ~/.config/tmux/scripts/new_win_split.sh
             end
