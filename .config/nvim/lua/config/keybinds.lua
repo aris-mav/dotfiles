@@ -92,3 +92,8 @@ vim.api.nvim_create_autocmd("FileType", {
     end, { buffer = true, silent = true })
   end,
 })
+
+-- copy current filename
+vim.keymap.set("n", "cp", function()
+  vim.fn.setreg("+", vim.fn.expand("%"))
+end, { noremap = true, silent = true })
