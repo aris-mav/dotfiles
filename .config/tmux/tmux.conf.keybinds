@@ -29,6 +29,9 @@ bind C-f display-popup -d "#{pane_current_path}" \
 bind C-n display-popup -d "#{pane_current_path}" \
          -S fg=green -b rounded -h 90% -w 90% \
          -E "fish -c nmtui"
+bind C-b display-popup -d "#{pane_current_path}" \
+         -b none -h 80% -w 80% \
+         -E "fish -c bluetui"
 bind C-t display-popup -B -E "ttyper -w 35"
 
 # Kill pane without confirmation prompt
