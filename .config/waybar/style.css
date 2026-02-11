@@ -1,21 +1,18 @@
-* {
+o {
     border: none;
-    border-radius: 10;
+    border-radius: 0;
     min-height: 0;
     font-family: JetBrainsMono Nerd Font;
     font-weight: bold;
-    font-size: 23px;
+    font-size: 20;
 }
 
 window#waybar {
     background-color: #282828;
     transition-property: background-color;
     transition-duration: 0.5s;
-    border-radius: 10px;
+    border-radius: 0px;
 }
-
-/* window#waybar>box { */
-/* } */
 
 window#waybar.hidden {
     opacity: 0.5;
@@ -23,6 +20,7 @@ window#waybar.hidden {
 
 #workspaces {
     background-color: transparent;
+    padding-left: 5px;
 }
 
 #workspaces button {
@@ -32,7 +30,6 @@ window#waybar.hidden {
     padding: 4px 10px;
     margin: 4px 2px;
     border-radius: 7px;
-    /* background-color: #3c3836; */
     color: #ebdbb2;
 }
 
@@ -69,17 +66,7 @@ window#waybar.hidden {
     color: #ebdbb2;
 }
 
-#custom-logo {
-    padding-right: 7px;
-    padding-left: 2px;
-    margin-left: 2px;
-    font-size: 25px;
-    border-radius: 5px 0px 0px 5px;
-    color: #458588;
-}
-
-
-#battery { margin-right: 6px; 
+#battery { margin-right: 0px; 
     background-color: #282828;
     /* background-color: #3c3836; */
 }
@@ -123,11 +110,9 @@ tooltip {
     border-radius: 8px;
     padding: 15px;
     background-color: #282828;
-    /* background-color: #1d2021; */
 }
 
 tooltip label {
     padding: 5px;
     background-color: #282828;
-    /* background-color: #1d2021; */
 }
