@@ -23,8 +23,13 @@ bind -n M-t run-shell \
          '~/.config/scripts/nt.sh TODO.txt'"
 
 # Popups
-bind C-f display-popup -d "#{pane_current_path}" -S fg=green -b rounded -E "fish"
-bind C-t display-popup -B -E "ttyper -w 40"
+bind C-f display-popup -d "#{pane_current_path}" \
+         -S fg=green -b rounded -h 75% -w 75% \
+         -E "fish"
+bind C-n display-popup -d "#{pane_current_path}" \
+         -S fg=green -b rounded -h 90% -w 90% \
+         -E "fish -c nmtui"
+bind C-t display-popup -B -E "ttyper -w 35"
 
 # Kill pane without confirmation prompt
 bind-key X kill-pane
