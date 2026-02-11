@@ -4,19 +4,36 @@ set -gx FILE_BROWSER (choose_first_available br yazi ranger)
 set -gx FZF_DEFAULT_OPTS '--height 10% --layout reverse --border none --style minimal'
 
 set -gx NEWT_COLORS '
-root=,black
-window=white,black
-border=orange,black
-shadow=,black
-title=brightyellow,black
-textbox=white,black
-label=brightwhite,black
-listbox=white,black
-actlistbox=black,brightblack
-button=black,brightyellow
-actbutton=black,brightgreen
-entry=white,black
-disentry=brightblack,black
+root=green,black
+window=green,black
+border=green,black
+shadow=black,black
+title=green,black
+label=green,black
+
+textbox=green,black
+acttextbox=black,green
+
+entry=green,black
+actentry=black,green
+
+listbox=green,black
+actlistbox=black,green
+
+sellistbox=green,black
+actsellistbox=black,green
+
+checkbox=green,black
+actcheckbox=black,green
+
+helpline=green,black
+roottext=green,black
+
+button=black,green
+actbutton=green,black
+
+compactbutton=green,black
+actcompactbutton=green,black
 '
 
 if test "$XDG_SESSION_TYPE" = wayland
