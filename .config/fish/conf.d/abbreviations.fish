@@ -27,7 +27,9 @@
     abbr xo 'xdg-open'
     abbr x 'xargs'
 
-    abbr tn 'tmux new-window'
+    if type -q tmux
+        abbr cdtp 'cd (tmux list-panes -a -F "#{pane_current_path}" | fzf)'
+    end
 
 
     if type -q nix
