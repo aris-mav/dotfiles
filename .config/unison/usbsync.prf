@@ -10,6 +10,7 @@ fat = true
 
 # Unison preferences file
 ignore = Path Documents/notes
+ignore = Path Documents/NMRInversions.jl
 ignore = Name .git
 ignore = Name zotero*
 ignore = Name .zotero*
