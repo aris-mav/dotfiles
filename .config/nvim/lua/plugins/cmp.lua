@@ -11,6 +11,7 @@ return {
     },
     config = function()
         local cmp = require('cmp')
+        local luasnip = require('luasnip')
 
         cmp.setup({
 
@@ -74,12 +75,32 @@ return {
                 ['<C-d>'] = cmp.mapping.scroll_docs(4 ,{ 'i', 'c' }),
                 ['<CR>'] = cmp.mapping.confirm({ select = true } ,{ 'i', 'c' }),
                 ['<Space>'] = cmp.mapping.confirm({ select = false } ,{ 'i', 'c' }), -- select false is so that it does not auto select the 1st sugggestion
-                ['<Tab>'] = cmp.mapping.select_next_item( { 'i', 'c' }),
-                ['<S-Tab>'] = cmp.mapping.select_prev_item( { 'i', 'c' }),
+
+                ['<Tab>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    elseif luasnip.expand_or_jumpable() then
+                        luasnip.expand_or_jump()
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }), -- 's' (select mode) is critical for snippets!
+
+                ['<S-Tab>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_prev_item()
+                    elseif luasnip.jumpable(-1) then
+                        luasnip.jump(-1)
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }),
             }),
+
             snippet = {
                 expand = function(args)
-                    vim.snippet.expand(args.body)
+                    -- vim.snippet.expand(args.body) 
+                    luasnip.lsp_expand(args.body)
                 end,
             },
 
