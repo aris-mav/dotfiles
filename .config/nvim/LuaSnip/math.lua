@@ -119,16 +119,6 @@ local snippets = { -- these are meant to be shared between tex and md files
             { delimiters = "<>" })
     ),
 
-    s(
-        {
-            trig="norm",
-        },
-        {
-            t("\\lVert "),
-            i(1, "symbol"),
-            t(" \\rVert ")
-        }
-    ),
 
     s(
         {
@@ -284,6 +274,20 @@ for key, symbol in pairs({
     rational = "Q"
 }) do
     table.insert(snippets, s("is" .. key, t("\\in\\mathbb{" .. symbol .. "}")))
+end
+
+for key, symbols in pairs({
+    par = { "\\left( ", " \\right)" },
+    bra = { "\\left[ ", " \\right]" },
+    cur = { "\\left\\{ ", " \\right\\}" },
+    abs = { "\\left| ", " \\right|" },
+    ang = { "\\langle ", " \\rangle" },
+    flo = { "\\lfloor ", " \\rfloor" },
+    cei = { "\\lceil ", " \\rceil" },
+}) do
+    table.insert(snippets,
+        s({ trig = key }, { t(symbols[1]), i(1, "contents"), t(symbols[2]) })
+    )
 end
 
 for _, snip in ipairs(snippets) do
