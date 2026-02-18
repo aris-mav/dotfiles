@@ -270,6 +270,10 @@ local snippets = { -- these are meant to be shared between tex and md files
             t("}\\right)")
         }
     ),
+
+    s( { trig="thus" }, { t("\\Rightarrow ") }),
+    s( { trig="times" }, { t("\\times ") }),
+    s( { trig="cdot" }, { t("\\cdot ") }),
 }
 
 for key, symbol in pairs({
