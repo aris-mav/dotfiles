@@ -1,6 +1,7 @@
 if isinteractive()
     @eval using VimBindings
     @eval using Revise
+    @eval using Infiltrator
 end
 
 
