@@ -68,10 +68,10 @@ case "$input" in
         fi
 
         if command -v rg >/dev/null 2>&1; then
-            grepcmd="xargs rg --multiline --line-number --no-heading --color=always --smart-case -- < $validfiles"
+            grepcmd="rg --line-number --no-heading --color=always --smart-case"
         elif command -v grep >/dev/null 2>&1; then
             # grep fallback (keep filename:line:match format)
-            grepcmd="xargs grep -n -i --color=always -H -- < $validfiles"
+            grepcmd="grep -E -n -i --color=always -H"
         fi
 
         case "$EDITOR" in
@@ -97,31 +97,31 @@ case "$input" in
 
         if command -v fzf >/dev/null 2>&1; then
 
+            # {*} requires fzf > 0.63
             fzf --ansi \
+                --disabled \
                 --delimiter : \
                 --preview "$previewcmd" \
                 --preview-window="$prevwin" \
                 --reverse --height 100% \
+                --bind "start:reload(cat \"$validfiles\" | xargs -d '\n' $grepcmd '' || true)" \
+                --bind "change:reload:sleep 0.1;cat \"$validfiles\" | xargs -d '\n' $grepcmd -- {q} || true" \
                 --bind "enter:execute($editcommand)" \
                 --bind "ctrl-q:abort" \
-                --bind "ctrl-z:execute(~/.config/scripts/pd_prev.sh {1})" \
-                --bind "start:reload:$grepcmd "" || true" \
-                --bind "change:reload:sleep 0.2;$grepcmd {q} || true" \
-                --bind "ctrl-o:execute-silent(ls > $validfiles)+clear-query" \
-                --bind "ctrl-l:execute-silent(
-                    printf '%s\n' {*} | awk -F: '{print \$1}' | sort -u > $validfiles
-                    )+clear-query" 
+                --bind "ctrl-o:execute-silent(ls > \"$validfiles\")+clear-query" \
+                --bind "ctrl-l:execute-silent(echo {*} | tr ' ' '\n' | awk -F: '{print \$1}' | sort -u > \"$validfiles\")+clear-query"
 
         elif command -v sk >/dev/null 2>&1; then
 
             sk --ansi \
-                --cmd  "$grepcmd '{}'" \
                 --delimiter : \
                 --preview "$previewcmd" \
-                --preview-window="$prevwin" \
-                --bind "Enter:execute($editcommand)" \
+                --preview-window "$prevwin" \
+                --reverse --height 100% \
+                --cmd "cat \"$validfiles\" | xargs -d '\n' $grepcmd ''" \
+                --bind "change:reload(cat \"$validfiles\" | xargs -d '\n' $grepcmd -- {q} || true)" \
+                --bind "enter:execute($editcommand)" \
                 --bind "ctrl-q:abort" \
-                --reverse --height 100%
 
         elif command -v br >/dev/null 2>&1; then
             br -HI --cmd cr/ .
