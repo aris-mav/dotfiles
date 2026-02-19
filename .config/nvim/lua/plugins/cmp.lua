@@ -77,20 +77,20 @@ return {
                 ['<Space>'] = cmp.mapping.confirm({ select = false } ,{ 'i', 'c' }), -- select false is so that it does not auto select the 1st sugggestion
 
                 ['<Tab>'] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
+                    if luasnip.locally_jumpable(1) then
+                        luasnip.jump(1)
+                    elseif cmp.visible() then
                         cmp.select_next_item()
-                    elseif luasnip.expand_or_jumpable() then
-                        luasnip.expand_or_jump()
                     else
                         fallback()
                     end
-                end, { 'i', 's' }), -- 's' (select mode) is critical for snippets!
+                end, { 'i', 's' }),
 
                 ['<S-Tab>'] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_prev_item()
-                    elseif luasnip.jumpable(-1) then
+                    if luasnip.locally_jumpable(-1) then
                         luasnip.jump(-1)
+                    elseif cmp.visible() then
+                        cmp.select_prev_item()
                     else
                         fallback()
                     end
