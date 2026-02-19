@@ -103,7 +103,10 @@ local snippets = { -- these are meant to be shared between tex and md files
         regTrig = true,
         name = "matrix", dscr = "matrix trigger lets go",
         hidden = false },
-        fmt([[ \begin{<>} <> <> \end{<>}]],
+        fmt([[ 
+        \begin{<>}<> 
+        <>
+        \end{<>}]],
             {f(function(_, snip)
                 return snip.captures[1] .. "matrix" -- captures matrix type
             end),
@@ -133,19 +136,19 @@ local snippets = { -- these are meant to be shared between tex and md files
 
     s({ trig = "braket", dscr = "Bra-Ket (Inner Product)" }, {
         t("\\left\\langle "),
-        i(1, "phi"),
+        i(1, "left"),
         t(" \\middle| "),
-        i(2, "psi"),
+        i(2, "right"),
         t(" \\right\\rangle")
     }),
 
     s({ trig = "braaket", dscr = "Expectation Value" }, {
         t("\\left\\langle "),
-        i(1, "psi"),
+        i(1, "left"),
         t(" \\middle| "),
-        i(2, "A"),
+        i(2, "middle"),
         t(" \\middle| "),
-        i(3, "psi"),
+        i(3, "right"),
         t(" \\right\\rangle")
     }),
 
