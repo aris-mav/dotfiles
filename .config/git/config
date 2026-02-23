@@ -15,7 +15,14 @@
 
 [merge]
     conflictstyle = zdiff3
+	tool = nvimdiff
 [pull]
 	rebase = true
 [init]
 	defaultBranch = main
+[diff]
+	tool = nvimdiff
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
