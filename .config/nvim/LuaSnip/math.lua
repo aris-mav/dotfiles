@@ -125,9 +125,9 @@ local snippets = { -- these are meant to be shared between tex and md files
     ),
 
     s({trig="normm",}, {
-        t("\\lVert "),
+        t("\\left\\lVert "),
         i(1, "symbol"),
-        t(" \\rVert_{"),
+        t(" \\right\\rVert_{"),
         i(2, ""),
         t("}^{"),
         i(3, ""),
@@ -242,16 +242,16 @@ for key, symbol in pairs({
 end
 
 for key, symbols in pairs({
-    par  = { "\\left( ",         " \\right)",        "parentheses"     },
-    sbr  = { "\\left[ ",         " \\right]",        "square brackets" },
-    cbr  = { "\\left\\{ ",       " \\right\\}",      "curly braces"    },
-    abr  = { "\\langle ",        " \\rangle",        "angle brackets"  },
-    abs  = { "\\left| ",         " \\right|",        "absolute value"  },
-    flo  = { "\\lfloor ",        " \\rfloor",        "floor"           },
-    cei  = { "\\lceil ",         " \\rceil",         "ceiling"         },
-    norm = { "\\lVert ",         " \\rVert",         "norm"            },
-    bra  = { "\\left\\langle ",  " \\right|",        "bra"             },
-    ket  = { "\\left| ",         " \\right\\rangle", "ket"             },
+    par  = { "\\left( "       , " \\right)"         ,  "parentheses"     },
+    sbr  = { "\\left[ "       , " \\right]"         ,  "square brackets" },
+    cbr  = { "\\left\\{ "     , " \\right\\}"       ,  "curly braces"    },
+    abs  = { "\\left| "       , " \\right|"         ,  "absolute value"  },
+    abr  = { "\\left\\langle ", " \\right\\rangle"  ,  "angle brackets"  },
+    flo  = { "\\left\\lfloor ", " \\right\\rfloor"  ,  "floor"           },
+    cei  = { "\\left\\lceil " , " \\right\\rceil"   ,  "ceiling"         },
+    norm = { "\\left\\lVert " , " \\right\\rVert"   ,  "norm"            },
+    bra  = { "\\left\\langle ", " \\right|"         ,  "bra"             },
+    ket  = { "\\left| "       , " \\right\\rangle"  ,  "ket"             },
 }) do
     table.insert(snippets,
         s({ trig = key, dscr = symbols[3] }, {
