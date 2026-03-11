@@ -174,7 +174,7 @@ local snippets = { -- these are meant to be shared between tex and md files
 
     s( { trig="derivative", dscr="Leibnitz notation for 1st monovariate derivative", }, {
         t("\\frac{\\mathrm{d} "),
-        i(1, "f"),
+        i(1, ""),
         t(" }{\\mathrm{d} "),
         i(2, "x"),
         t(" }"),
@@ -182,7 +182,7 @@ local snippets = { -- these are meant to be shared between tex and md files
 
     s( { trig="partial_derivative", dscr="Leibnitz notation for partial derivative", }, {
         t("\\frac{\\partial "),
-        i(1, "f"),
+        i(1, ""),
         t(" }{\\partial "),
         i(2, "x"),
         t(" }"),
