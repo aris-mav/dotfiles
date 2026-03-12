@@ -230,14 +230,16 @@ for key, symbol in pairs({
 end
 
 for key, symbol in pairs({
-    bold    = "mathbf",
-    upright = "mathrm",
-    italic  = "mathit",
-    cal     = "mathcal",
-    bb      = "mathbb",
-    bar     = "overline",
-    hat     = "hat",
-    vec     = "vec",
+    bold       = "mathbf",
+    upright    = "mathrm",
+    italic     = "mathit",
+    typewriter = "mathtt",
+    sansserif  = "mathsf",
+    cal        = "mathcal",
+    bb         = "mathbb",
+    bar        = "overline",
+    hat        = "hat",
+    vec        = "vec",
 }) do
     table.insert(snippets,
         s({ trig=key}, {
