@@ -152,18 +152,6 @@ local snippets = { -- these are meant to be shared between tex and md files
         t(" \\right\\rangle")
     }),
 
-    s({ trig="vec", dscr = "Vector with arrow."}, {
-        t("\\vec{"),
-        i(1, "symbol"),
-        t("}"),
-    }),
-
-    s({ trig="upright", dscr="Non-italic symbols in equations", }, {
-        t("\\mathrm{"),
-        i(1, "symbol"),
-        t("}"),
-    }),
-
     s({ trig="frac", dscr="Latex fraction", }, {
         t("\\frac{"),
         i(1, "numerator"),
@@ -239,6 +227,25 @@ for key, symbol in pairs({
     rational = "Q"
 }) do
     table.insert(snippets, s("is" .. key, t("\\in\\mathbb{" .. symbol .. "}")))
+end
+
+for key, symbol in pairs({
+    bold    = "mathbf",
+    upright = "mathrm",
+    italic  = "mathit",
+    cal     = "mathcal",
+    bb      = "mathbb",
+    bar     = "overline",
+    hat     = "hat",
+    vec     = "vec",
+}) do
+    table.insert(snippets,
+        s({ trig=key}, {
+            t("\\".. symbol .."{"),
+            i(1, ""),
+            t("}")
+        })
+    )
 end
 
 for key, symbols in pairs({
