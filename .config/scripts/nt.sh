@@ -59,14 +59,6 @@ case "$input" in
         trap 'rm -f "$validfiles"' 0 INT TERM
         ls > $validfiles
 
-        if command -v bat >/dev/null 2>&1; then
-            previewcmd='bat --style=numbers --color=always --highlight-line {2} {1}'
-        elif command -v batcat >/dev/null 2>&1; then
-            previewcmd='batcat --style=numbers --color=always --highlight-line {2} {1}'
-        else
-            previewcmd='less {1}'
-        fi
-
         if command -v rg >/dev/null 2>&1; then
             grepcmd="rg --line-number --no-heading --color=always --smart-case"
         elif command -v grep >/dev/null 2>&1; then
@@ -101,28 +93,16 @@ case "$input" in
             fzf --ansi \
                 --disabled \
                 --delimiter : \
-                --preview "$previewcmd" \
+                --preview "~/.config/scripts/nt_preview.sh {1} {2}" \
                 --preview-window="$prevwin" \
                 --reverse --height 100% \
-                --bind "start:reload(cat \"$validfiles\" | xargs -d '\n' $grepcmd '' || true)" \
-                --bind "change:reload:sleep 0.1;cat \"$validfiles\" | xargs -d '\n' $grepcmd -- {q} || true" \
+                --bind "start:reload(cat \"$validfiles\" | sort -R || true)" \
+                --bind "change:reload:sleep 0.1; ~/.config/scripts/nt_filter.sh {q} \"$validfiles\" \"$grepcmd\"" \
                 --bind "enter:execute($editcommand)" \
                 --bind "ctrl-q:abort" \
                 --bind "ctrl-o:execute-silent(ls > \"$validfiles\")+clear-query" \
-                --bind "ctrl-l:execute-silent(echo {*} | tr ' ' '\n' | awk -F: '{print \$1}' | sort -u > \"$validfiles\")+clear-query" \
+                --bind "ctrl-l:execute-silent(echo {*} | grep -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)' | sort -u > $validfiles)+clear-query" \
                 --bind "ctrl-z:execute(~/.config/scripts/pd_prev.sh {1})" \
-
-        elif command -v sk >/dev/null 2>&1; then
-
-            sk --ansi \
-                --delimiter : \
-                --preview "$previewcmd" \
-                --preview-window "$prevwin" \
-                --reverse --height 100% \
-                --cmd "cat \"$validfiles\" | xargs -d '\n' $grepcmd ''" \
-                --bind "change:reload(cat \"$validfiles\" | xargs -d '\n' $grepcmd -- {q} || true)" \
-                --bind "enter:execute($editcommand)" \
-                --bind "ctrl-q:abort" \
 
         elif command -v br >/dev/null 2>&1; then
             br -HI --cmd cr/ .
