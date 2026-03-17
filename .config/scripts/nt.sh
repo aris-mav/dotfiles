@@ -109,7 +109,8 @@ case "$input" in
                 --bind "enter:execute($editcommand)" \
                 --bind "ctrl-q:abort" \
                 --bind "ctrl-o:execute-silent(ls > \"$validfiles\")+clear-query" \
-                --bind "ctrl-l:execute-silent(echo {*} | tr ' ' '\n' | awk -F: '{print \$1}' | sort -u > \"$validfiles\")+clear-query"
+                --bind "ctrl-l:execute-silent(echo {*} | tr ' ' '\n' | awk -F: '{print \$1}' | sort -u > \"$validfiles\")+clear-query" \
+                --bind "ctrl-z:execute(~/.config/scripts/pd_prev.sh {1})" \
 
         elif command -v sk >/dev/null 2>&1; then
 
