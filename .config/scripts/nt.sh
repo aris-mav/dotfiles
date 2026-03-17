@@ -99,10 +99,10 @@ case "$input" in
                 --bind "start:reload(cat \"$validfiles\" | sort -R || true)" \
                 --bind "change:reload:sleep 0.1; ~/.config/scripts/nt_filter.sh {q} \"$validfiles\" \"$grepcmd\"" \
                 --bind "enter:execute($editcommand)" \
-                --bind "ctrl-q:abort" \
-                --bind "ctrl-o:execute-silent(ls > \"$validfiles\")+clear-query" \
-                --bind "ctrl-l:execute-silent(echo {*} | grep -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)' | sort -u > $validfiles)+clear-query" \
+                --bind "ctrl-i:execute-silent(echo {*} | grep -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)' | sort -ur > $validfiles)+clear-query" \
+                --bind "ctrl-o:execute-silent(ls | sort -R > \"$validfiles\")+clear-query+reload(cat \"$validfiles\" | sort -R || true)" \
                 --bind "ctrl-z:execute(~/.config/scripts/pd_prev.sh {1})" \
+                --bind "ctrl-q:abort" \
 
         elif command -v br >/dev/null 2>&1; then
             br -HI --cmd cr/ .
