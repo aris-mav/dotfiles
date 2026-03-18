@@ -16,7 +16,7 @@ if status is-interactive
 
             # if there's only one pane, split it if screen is big
             if test (tmux display-message -p '#{window_panes}') -eq 1
-                ~/.config/tmux/scripts/new_win_split.sh
+                ~/.config/tmux/scripts/default_split.sh
             end
 
         else if type -q zellij
