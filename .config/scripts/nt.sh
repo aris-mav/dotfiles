@@ -5,6 +5,7 @@ help_msg() {
     echo "	some_text    - edit filename containing some_text"
     echo "	-n/--new     - new note"
     echo "	-r/--random  - view a random note"
+    echo "	-t/--tags    - print available tags"
     echo "	-s/--search  - search content in all notes"
     echo "	-h/--help    - print this message"
 }
@@ -120,6 +121,14 @@ case "$input" in
             batcat -p "$file"
         else
             cat "$file"
+        fi
+        ;;
+    -t )
+        # Print available tags
+        if command -v rg >/dev/null 2>&1; then
+            rg -PINo '(?<!\S)#[a-zA-Z]+' | sort -u
+        else
+            grep -ahPo '(?<!\S)#[a-zA-Z]+\b' * | sort -u
         fi
         ;;
     --help|-h )
