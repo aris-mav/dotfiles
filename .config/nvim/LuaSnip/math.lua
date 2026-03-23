@@ -101,7 +101,7 @@ local snippets = { -- these are meant to be shared between tex and md files
     -- from https://evesdropper.dev/files/luasnip/choice-dynamic/
     s({ trig = "([bBpvV])mat(%d+)x(%d+)([ar])",
         regTrig = true,
-        name = "matrix", dscr = "matrix trigger lets go",
+        name = "matrix",
         hidden = false },
         fmt([[ 
         \begin{<>}<> 
@@ -124,7 +124,7 @@ local snippets = { -- these are meant to be shared between tex and md files
             { delimiters = "<>" })
     ),
 
-    s({trig="normm",}, {
+    s({trig="normm", dscr = "Norm with _{}^{}"}, {
         t("\\left\\lVert "),
         i(1, "symbol"),
         t(" \\right\\rVert_{"),
@@ -230,6 +230,7 @@ for key, symbol in pairs({
 end
 
 for key, symbol in pairs({
+    normal     = "mathnormal",
     bold       = "mathbf",
     upright    = "mathrm",
     italic     = "mathit",
