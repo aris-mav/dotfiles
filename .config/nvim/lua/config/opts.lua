@@ -18,18 +18,38 @@ vim.cmd[[set fillchars+=vert:\ ]]
 -- remove ~'s from the end of file
 vim.opt.fillchars = { eob = ' ' }
 
--- Indentations
-vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
-vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
-vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
-vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 
+-- A TAB character looks like 4 spaces
+vim.o.tabstop = 4
+-- Pressing the TAB key will insert spaces instead of a TAB character
+vim.o.expandtab = true
+-- Number of spaces inserted instead of a TAB character
+vim.o.softtabstop = 4
+-- Number of spaces inserted when indenting
+vim.o.shiftwidth = 4
+-- Change the above for some cases
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "csv", "tsv", "txt" },
   callback = function()
     vim.opt_local.expandtab = false
     vim.opt_local.tabstop = 4
   end,
+})
+
+-- Readonly options for convenience
+vim.api.nvim_create_autocmd({"BufWinEnter", "FileType"}, {
+    callback = function()
+        -- Check if the buffer is read-only or not modifiable
+        if vim.bo.readonly or not vim.bo.modifiable then
+
+            local opts = { buffer = true, silent = true }
+
+            vim.keymap.set("n", "d", "<C-d>zz", opts)
+            vim.keymap.set("n", "u", "<C-u>zz", opts)
+            vim.keymap.set("n", "q", ":q<CR>", opts)
+
+        end
+    end,
 })
 
 -- set greek keymap and disable it 
@@ -64,7 +84,7 @@ vim.g.netrw_banner = 0
 
 -- vim.opt.clipboard = "unnamedplus"
 
-vim.api.nvim_create_augroup("SpellCheckForSpecificFiletypes", { clear = true })
+vim.api.nvim_create_augroup("SpellCheckForSpecificFiletypes", {clear = true})
 vim.api.nvim_create_autocmd("FileType", {
     group = "SpellCheckForSpecificFiletypes",
     pattern = {
