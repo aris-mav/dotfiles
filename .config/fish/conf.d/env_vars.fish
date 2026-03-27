@@ -36,6 +36,8 @@ compactbutton=green,black
 actcompactbutton=green,black
 '
 
+set -gx PYTHONSTARTUP "$HOME/.config/python/startup.py"
+
 if test "$XDG_SESSION_TYPE" = wayland
     set -gx YANKTEXT 'wl-copy -n'
 else if test "$XDG_SESSION_TYPE" = x11
