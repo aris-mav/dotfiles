@@ -8,28 +8,53 @@ return {
     config = function()
 
         local builtin = require('telescope.builtin')
+        local actions = require("telescope.actions")
+        local action_state = require("telescope.actions.state")
+
+        local copy_filename = function(register)
+            return function(prompt_bufnr)
+
+                local selection = action_state.get_selected_entry()
+                local path = selection.filename or selection.value
+
+                if path then
+                    vim.fn.setreg(register, path)
+                    print("Copied '" .. path .. "' into register " .. register .. ".")
+                end
+
+                actions.close(prompt_bufnr)
+            end
+        end
 
         require('telescope').setup {
             defaults = {
                 mappings = {
+
                     n = {
-                        ['dd'] = require('telescope.actions').delete_buffer,
-                        ['q'] = require('telescope.actions').close,
+                        ['dd'] = actions.delete_buffer,
+                        ['q'] = actions.close,
                         ["cd"] = function(prompt_bufnr)
-                            local selection = require("telescope.actions.state").get_selected_entry()
+                            local selection = action_state.get_selected_entry()
                             local dir = vim.fn.fnamemodify(selection.path, ":p:h")
-                            require("telescope.actions").close(prompt_bufnr)
+                            actions.close(prompt_bufnr)
                             -- Depending on what you want put `cd`, `lcd`, `tcd`
                             vim.cmd(string.format("silent lcd %s", dir))
                         end,
+                         
                         -- Swap <C-c> and <C-q>
-                        ["<C-c>"] = require('telescope.actions').send_to_qflist + require('telescope.actions').open_qflist,
-                        ["<C-q>"] = require('telescope.actions').close,
+                        ["<C-c>"] = actions.send_to_qflist + actions.open_qflist,
+                        ["<C-q>"] = actions.close,
+
+                        ['yy'] = copy_filename('"'),
+                        ['<leader>yy'] = copy_filename('+'),
                     },
+
                     i = {
-                        ["<C-c>"] = require('telescope.actions').send_to_qflist + require('telescope.actions').open_qflist,
-                        ["<C-q>"] = require('telescope.actions').close,
+                        ["<C-c>"] = actions.send_to_qflist + actions.open_qflist,
+                        ["<C-q>"] = actions.close,
+                        ["<C-y>"] = copy_filename('"'),
                     },
+
                 },
                 layout_strategy = "flex",
                 layout_config = {
