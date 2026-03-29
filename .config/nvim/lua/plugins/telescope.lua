@@ -40,7 +40,7 @@ return {
                             -- Depending on what you want put `cd`, `lcd`, `tcd`
                             vim.cmd(string.format("silent lcd %s", dir))
                         end,
-                         
+
                         -- Swap <C-c> and <C-q>
                         ["<C-c>"] = actions.send_to_qflist + actions.open_qflist,
                         ["<C-q>"] = actions.close,
