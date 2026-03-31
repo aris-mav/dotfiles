@@ -58,7 +58,7 @@ case "$input" in
         
         validfiles=$(mktemp)
         trap 'rm -f "$validfiles"' 0 INT TERM
-        ls | sort -R > $validfiles
+        ls *.md | sort -R > $validfiles
 
         if command -v rg >/dev/null 2>&1; then
             grepcmd="rg --line-number --no-heading --color=always --smart-case"
@@ -101,7 +101,8 @@ case "$input" in
                 --bind "change:reload:sleep 0.1; ~/.config/scripts/nt_filter.sh {q} \"$validfiles\" \"$grepcmd\"" \
                 --bind "enter:execute($editcommand)" \
                 --bind "ctrl-i:execute-silent(echo {*} | grep -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)' | sort -ur > $validfiles)+clear-query" \
-                --bind "ctrl-o:execute-silent(ls | sort -R > \"$validfiles\")+clear-query+reload(cat \"$validfiles\" | sort -R || true)" \
+                --bind "ctrl-o:execute-silent(ls *.md | sort -R > \"$validfiles\")+clear-query+reload(cat \"$validfiles\" | sort -R || true)" \
+                --bind "ctrl-s:reload(cat \"$validfiles\" | sort -r || true)" \
                 --bind "ctrl-z:execute(~/.config/scripts/pd_prev.sh {1})" \
                 --bind "ctrl-q:abort" \
 
