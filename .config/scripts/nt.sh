@@ -62,9 +62,11 @@ case "$input" in
 
         if command -v rg >/dev/null 2>&1; then
             grepcmd="rg -SHn --color=always"
+            get_filenames="rg -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
         elif command -v grep >/dev/null 2>&1; then
             # grep fallback (keep filename:line:match format)
-            grepcmd="grep -EH -n -i --color=always -H"
+            grepcmd="grep -E -n -i -H --color=always"
+            get_filenames="grep -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
         fi
 
         case "$EDITOR" in
@@ -99,7 +101,7 @@ case "$input" in
                 --reverse --height 100% \
                 --bind "start:reload(cat \"$validfiles\" || true)" \
                 --bind "change:reload:sleep 0.1; ~/.config/scripts/nt_filter.sh {q} \"$validfiles\" \"$grepcmd\"" \
-                --bind "enter:execute-silent(echo {*} | grep -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)' | sort -ur > $validfiles)+clear-query" \
+                --bind "enter:execute-silent(echo {*} | $get_filenames | sort -ur > $validfiles)+clear-query" \
                 --bind "ctrl-o:execute-silent(ls *.md | sort -R > \"$validfiles\")+clear-query+reload(cat \"$validfiles\" | sort -R || true)" \
                 --bind "ctrl-s:reload(cat \"$validfiles\" | sort -r || true)" \
                 --bind "ctrl-z:execute(~/.config/scripts/pd_prev.sh {1})" \
