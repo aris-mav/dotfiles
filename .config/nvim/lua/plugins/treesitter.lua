@@ -17,23 +17,43 @@ return {
     },
     config = function()
 
+        local install_language_list = {
+            "lua",
+            "python",
+            "markdown",
+            "markdown_inline",
+            "julia",
+            "rust",
+            "bash",
+            "fish",
+            "vim",
+            "tmux",
+            "toml",
+            "gitcommit",
+        }
+
+        local termux_prefix = os.getenv("PREFIX")
+        local is_termux = termux_prefix and termux_prefix:match("com.termux")
+
+        if is_termux then
+            local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+            -- Manually point the latex parser to the Termux system library
+            parser_config.latex = {
+                install_info = {
+                    url = termux_prefix .. "/lib/libtree-sitter-latex.so",
+                    files = { "src/parser.c" }, -- This is a dummy entry to satisfy the config
+                },
+                filetype = "tex",
+            }
+        else
+            -- On desktop, just let Treesitter handle it normally
+            table.insert(install_language_list, "latex")
+        end
+
         require'nvim-treesitter.configs'.setup {
             -- A list of parser names, or "all"
-            ensure_installed = {
-                "lua",
-                "python",
-                "markdown",
-                "markdown_inline",
-                "latex",
-                "julia",
-                "rust",
-                "bash",
-                "fish",
-                "vim",
-                "tmux",
-                "toml",
-                "gitcommit",
-            },
+            ensure_installed = install_language_list,
 
             -- Install parsers synchronously (only applied to `ensure_installed`)
             sync_install = false,
@@ -53,7 +73,7 @@ return {
                     "csv",
                     "tsv",
                     "tex",
-                    "latex"
+                    "latex",
                 },
 
                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
