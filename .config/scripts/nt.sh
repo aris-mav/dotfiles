@@ -15,8 +15,6 @@ if [ $# -gt 1 ]; then
     exit 1
 fi
 
-input=$1
-
 if [ -n "$NOTES_DIR" ]; then
     cd "$NOTES_DIR" || { echo "Failed to cd into $NOTES_DIR"; exit 1; }
 else
@@ -37,123 +35,140 @@ if [ $(( now - last_pull )) -gt 3600 ]; then
     echo "$now" > ".last_pull_time"
 fi
 
-case "$input" in
-    -n|--new )
-        # Make a new note
-        datetime=$(date +%Y%m%d%H%M%S)
-        newnote="$datetime.md"
-        $EDITOR "$newnote"
+if command -v rg >/dev/null 2>&1; then
+    grepcmd="rg -SHn --color=always"
+    get_filenames="rg -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
+elif command -v grep >/dev/null 2>&1; then
+    # grep fallback (keep filename:line:match format)
+    grepcmd="grep -E -n -i -H --color=always"
+    get_filenames="grep -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
+fi
 
-        if [ -f "$newnote" ] ; then
-            first_line=$(head -n 1 "$newnote")
+validfiles=$(mktemp)
+trap 'rm -f "$validfiles"' 0 INT TERM
+ls *.md | sort -R > $validfiles
 
-            git add "$newnote"
-            git commit -m "new note $first_line"
-
-            committed_anything=true
-        fi
+case "$EDITOR" in
+    nvim|vim|vi )
+        editcommand="$EDITOR +{2} {1}"
         ;;
-    -s|--search )
-        # Search in notes
-        
-        validfiles=$(mktemp)
-        trap 'rm -f "$validfiles"' 0 INT TERM
-        ls *.md | sort -R > $validfiles
+    helix|hx )
+        editcommand="$EDITOR {1}:{2}"
+        ;;
+    nano )
+        editcommand="$EDITOR +{2},1 {1}"
+        ;;
+    * )
+        editcommand="$EDITOR {1}"
+        ;;
+esac
 
-        if command -v rg >/dev/null 2>&1; then
-            grepcmd="rg -SHn --color=always"
-            get_filenames="rg -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
-        elif command -v grep >/dev/null 2>&1; then
-            # grep fallback (keep filename:line:match format)
-            grepcmd="grep -E -n -i -H --color=always"
-            get_filenames="grep -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
-        fi
+if [ $(tput cols) -gt 100 ]; then
+    prevwin='right:66%:wrap'
+else
+    prevwin='up:66%:wrap'
+fi
 
-        case "$EDITOR" in
-            nvim|vim|vi )
-                editcommand="$EDITOR +{2} {1}"
-                ;;
-            helix|hx )
-                editcommand="$EDITOR {1}:{2}"
-                ;;
-            nano )
-                editcommand="$EDITOR +{2},1 {1}"
-                ;;
-            * )
-                editcommand="$EDITOR {1}"
-                ;;
-        esac
+note_search() {
+    # {*} requires fzf > 0.63
+    if command -v fzf >/dev/null 2>&1; then
 
-        if [ $(tput cols) -gt 100 ]; then
-            prevwin='right:66%:wrap'
-        else
-            prevwin='up:66%:wrap'
-        fi
-
-        if command -v fzf >/dev/null 2>&1; then
-
-            # {*} requires fzf > 0.63
-            fzf --ansi \
-                --disabled \
-                --delimiter : \
-                --preview "~/.config/scripts/nt_preview.sh {1} {2}" \
-                --preview-window="$prevwin" \
-                --reverse --height 100% \
-                --bind "start:reload(cat \"$validfiles\" || true)" \
-                --bind "change:reload:sleep 0.1; ~/.config/scripts/nt_filter.sh {q} \"$validfiles\" \"$grepcmd\"" \
-                --bind "enter:execute-silent(echo {*} | $get_filenames | sort -ur > $validfiles)+clear-query" \
-                --bind "ctrl-o:execute-silent(ls *.md | sort -R > \"$validfiles\")+clear-query+reload(cat \"$validfiles\" | sort -R || true)" \
-                --bind "ctrl-s:reload(cat \"$validfiles\" | sort -r || true)" \
-                --bind "ctrl-z:execute(~/.config/scripts/pd_prev.sh {1})" \
-                --bind "ctrl-e:execute($editcommand)" \
-                --bind "ctrl-q:abort" \
+        fzf --ansi \
+            --disabled \
+            --delimiter : \
+            --preview "~/.config/scripts/nt_preview.sh {1} {2}" \
+            --preview-window="$prevwin" \
+            --reverse --height 100% \
+            --bind "start:reload(cat \"$validfiles\" || true)" \
+            --bind "change:reload:sleep 0.1; ~/.config/scripts/nt_filter.sh {q} \"$validfiles\" \"$grepcmd\"" \
+            --bind "enter:execute-silent(echo {*} | $get_filenames | sort -ur > $validfiles)+clear-query" \
+            --bind "ctrl-o:execute-silent(ls *.md | sort -R > \"$validfiles\")+clear-query+reload(cat \"$validfiles\" | sort -R || true)" \
+            --bind "ctrl-s:reload(cat \"$validfiles\" | sort -r || true)" \
+            --bind "ctrl-z:execute(~/.config/scripts/pd_prev.sh {1})" \
+            --bind "ctrl-e:execute($editcommand)" \
+            --bind "ctrl-q:abort" \
 
         elif command -v br >/dev/null 2>&1; then
             br -HI --cmd cr/ .
 
         elif [ "$EDITOR" = "nvim" ]; then
             nvim -c "Telescope live_grep"
-        fi
+    fi
+
+}
+
+new_note() {
+
+    datetime=$(date +%Y%m%d%H%M%S)
+    newnote="$datetime.md"
+    $EDITOR "$newnote"
+
+    if [ -f "$newnote" ] ; then
+        first_line=$(head -n 1 "$newnote")
+
+        git add "$newnote"
+        git commit -m "new note $first_line"
+
+        committed_anything=true
+    fi
+}
+
+random_note() {
+
+    file=$(ls -1 *.md | shuf -n 1)
+    if command -v bat >/dev/null 2>&1; then
+        bat -p "$file"
+    elif command -v batcat >/dev/null 2>&1; then
+        batcat -p "$file"
+    else
+        cat "$file"
+    fi
+
+}
+
+tags() {
+
+    if command -v rg >/dev/null 2>&1; then
+        rg -PINo '(?<!\S)#[a-zA-Z]+' | sort -u
+    else
+        grep -ahPo '(?<!\S)#[a-zA-Z]+\b' * | sort -u
+    fi
+
+}
+
+# switch for input flags
+case "$1" in
+    -n|--new )
+        new_note
+        ;;
+    -s|--search )
+        note_search
         ;;
     -r )
-        # Print a random note
-        file=$(ls -1 *.md | shuf -n 1)
-        if command -v bat >/dev/null 2>&1; then
-            bat -p "$file"
-        elif command -v batcat >/dev/null 2>&1; then
-            batcat -p "$file"
-        else
-            cat "$file"
-        fi
+        random_note
         ;;
     -t )
-        # Print available tags
-        if command -v rg >/dev/null 2>&1; then
-            rg -PINo '(?<!\S)#[a-zA-Z]+' | sort -u
-        else
-            grep -ahPo '(?<!\S)#[a-zA-Z]+\b' * | sort -u
-        fi
+        tags
         ;;
     --help|-h )
         help_msg
         ;;
     -* )
-        echo "$input flag not valid."
+        echo "$1 flag not valid."
         help_msg
         exit 1
         ;;
-    no_args )
-        # use this option if you just want to pull the remote
+    no_args ) # use this option if you just want to pull the remote
         ;;
-    * )
+    * ) # nt 'file' opens a filename containing 'file' in the name
 
         tmp=$(mktemp) || exit 1
         trap 'rm -f "$tmp"' 0 INT TERM
 
         if command -v rg >/dev/null 2>&1; then
-            ls | rg -S -- "$input" > "$tmp"
+            ls | rg -S -- "$1" > "$tmp"
         else
-            ls | grep -i -- "$input" > "$tmp"
+            ls | grep -i -- "$1" > "$tmp"
         fi
 
         count=$(wc -l < "$tmp")
@@ -169,7 +184,7 @@ case "$input" in
             echo "$file" > "$tmp"
 
         elif [ "$count" -eq 0 ]; then
-            echo "No file matches for '$input' in $NOTES_DIR."
+            echo "No file matches for '$1' in $NOTES_DIR."
             exit 1
         fi
 
@@ -194,6 +209,7 @@ case "$input" in
         ;;
 esac
 
+# git commits, if there are changes
 for file in $(git diff --name-only); do
     if [ ! -f "$file" ]; then
         continue
