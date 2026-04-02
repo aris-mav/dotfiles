@@ -36,11 +36,11 @@ if [ $(( now - last_pull )) -gt 3600 ]; then
 fi
 
 if command -v rg >/dev/null 2>&1; then
-    grepcmd="rg -SHn --color=always"
+    grepcmd="rg -SHn"
     get_filenames="rg -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
 elif command -v grep >/dev/null 2>&1; then
     # grep fallback (keep filename:line:match format)
-    grepcmd="grep -E -n -i -H --color=always"
+    grepcmd="grep -E -n -i -H"
     get_filenames="grep -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
 fi
 
@@ -79,11 +79,12 @@ note_search() {
             --preview "~/.config/scripts/nt_preview.sh {1} {2}" \
             --preview-window="$prevwin" \
             --reverse --height 100% \
-            --bind "start:reload(cat \"$validfiles\" || true)" \
-            --bind "change:reload:sleep 0.1; ~/.config/scripts/nt_filter.sh {q} \"$validfiles\" \"$grepcmd\"" \
+            --bind "start:reload(cat \"$validfiles\")" \
+            --bind "change:reload:sleep 0.1; [ -z {q} ] && cat \"$validfiles\" || cat \"$validfiles\" | xargs -d '\n' $grepcmd --color=always -- {q} || true" \
             --bind "enter:execute-silent(echo {*} | $get_filenames | sort -ur > $validfiles)+clear-query" \
-            --bind "ctrl-o:execute-silent(ls *.md | sort -R > \"$validfiles\")+clear-query+reload(cat \"$validfiles\" | sort -R || true)" \
-            --bind "ctrl-s:reload(cat \"$validfiles\" | sort -r || true)" \
+            --bind "ctrl-o:execute-silent(ls *.md | sort -R > \"$validfiles\")" \
+            --bind "ctrl-o:+clear-query+reload(cat \"$validfiles\")" \
+            --bind "ctrl-s:reload(cat \"$validfiles\" | sort -r)" \
             --bind "ctrl-z:execute(~/.config/scripts/pd_prev.sh {1})" \
             --bind "ctrl-e:execute($editcommand)" \
             --bind "ctrl-q:abort" \
