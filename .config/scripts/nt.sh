@@ -110,7 +110,7 @@ esac
 
 note_search() {
 
-    validfiles=$(mktemp)
+    validfiles=$(mktemp --tmpdir -u valid_files_XXXXX)
     trap 'rm -f "$validfiles"' 0 INT TERM
     find -- *.md -maxdepth 1 -type f | sort -R > "$validfiles"
 
@@ -148,9 +148,10 @@ note_search() {
             --reverse --height 100% \
             --bind "start:reload(cat \"$validfiles\")" \
             --bind "change:reload:sleep 0.1; [ -z {q} ] && cat $validfiles || cat $validfiles | xargs -d '\n' $grepcmd --color=always -- {q} || true" \
-            --bind "enter:execute-silent(echo {*} | $get_filenames | sort -ur > $validfiles)+clear-query" \
-            --bind "ctrl-o:execute-silent(ls *.md | sort -R > \"$validfiles\")" \
-            --bind "ctrl-o:+clear-query+reload(cat \"$validfiles\")" \
+            --bind "enter:execute-silent(echo {*} | $get_filenames | sort -ur > $validfiles)" \
+            --bind "enter:+clear-query" \
+            --bind "ctrl-o:execute-silent(find -- *.md -maxdepth 1 -type f | sort -R > $validfiles)" \
+            --bind "ctrl-o:+clear-query+reload(cat $validfiles)" \
             --bind "ctrl-s:reload(cat \"$validfiles\" | sort -r)" \
             --bind "ctrl-z:execute($0 -p {1})" \
             --bind "ctrl-e:execute($editcommand)" \
