@@ -46,7 +46,7 @@ fi
 
 validfiles=$(mktemp)
 trap 'rm -f "$validfiles"' 0 INT TERM
-ls *.md | sort -R > $validfiles
+find -- *.md | sort -R > "$validfiles"
 
 case "$EDITOR" in
     nvim|vim|vi )
@@ -63,7 +63,7 @@ case "$EDITOR" in
         ;;
 esac
 
-if [ $(tput cols) -gt 100 ]; then
+if [ "$(tput cols)" -gt 100 ]; then
     prevwin='right:66%:wrap'
 else
     prevwin='up:66%:wrap'
@@ -76,16 +76,16 @@ note_search() {
         fzf --ansi \
             --disabled \
             --delimiter : \
-            --preview "~/.config/scripts/nt_preview.sh {1} {2}" \
+            --preview "$HOME/.config/scripts/nt_preview.sh {1} {2}" \
             --preview-window="$prevwin" \
             --reverse --height 100% \
             --bind "start:reload(cat \"$validfiles\")" \
-            --bind "change:reload:sleep 0.1; [ -z {q} ] && cat \"$validfiles\" || cat \"$validfiles\" | xargs -d '\n' $grepcmd --color=always -- {q} || true" \
+            --bind "change:reload:sleep 0.1; [ -z {q} ] && cat $validfiles || cat $validfiles | xargs -d '\n' $grepcmd --color=always -- {q} || true" \
             --bind "enter:execute-silent(echo {*} | $get_filenames | sort -ur > $validfiles)+clear-query" \
             --bind "ctrl-o:execute-silent(ls *.md | sort -R > \"$validfiles\")" \
             --bind "ctrl-o:+clear-query+reload(cat \"$validfiles\")" \
             --bind "ctrl-s:reload(cat \"$validfiles\" | sort -r)" \
-            --bind "ctrl-z:execute(~/.config/scripts/pd_prev.sh {1})" \
+            --bind "ctrl-z:execute($HOME/.config/scripts/pd_prev.sh {1})" \
             --bind "ctrl-e:execute($editcommand)" \
             --bind "ctrl-q:abort" \
 
@@ -116,7 +116,7 @@ new_note() {
 
 random_note() {
 
-    file=$(ls -1 *.md | shuf -n 1)
+    file=$(find -- *.md | shuf -n 1)
     if command -v bat >/dev/null 2>&1; then
         bat -p "$file"
     elif command -v batcat >/dev/null 2>&1; then
@@ -132,7 +132,7 @@ tags() {
     if command -v rg >/dev/null 2>&1; then
         rg -PINo '(?<!\S)#[a-zA-Z]+' | sort -u
     else
-        grep -ahPo '(?<!\S)#[a-zA-Z]+\b' * | sort -u
+        grep -ahPo '(?<!\S)#[a-zA-Z]+\b' ./* | sort -u
     fi
 
 }
@@ -167,9 +167,9 @@ case "$1" in
         trap 'rm -f "$tmp"' 0 INT TERM
 
         if command -v rg >/dev/null 2>&1; then
-            ls | rg -S -- "$1" > "$tmp"
+            find . | rg -S -- "$1" > "$tmp"
         else
-            ls | grep -i -- "$1" > "$tmp"
+            find . | grep -i -- "$1" > "$tmp"
         fi
 
         count=$(wc -l < "$tmp")
