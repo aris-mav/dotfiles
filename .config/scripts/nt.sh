@@ -127,6 +127,15 @@ else
     prevwin='up:66%:wrap'
 fi
 
+bat=$(command -v bat || command -v batcat)
+
+if [ ! -z "$bat" ];then
+    bat="$bat --style=numbers --color=always"
+    prevcmd="[ -z {2} ] && $bat {1} || $bat --highlight-line {2} {1}"
+else
+    prevcmd="cat {1}"
+fi
+
 note_search() {
     # {*} requires fzf > 0.63
     if command -v fzf >/dev/null 2>&1; then
@@ -134,7 +143,7 @@ note_search() {
         fzf --ansi \
             --disabled \
             --delimiter : \
-            --preview "$HOME/.config/scripts/nt_preview.sh {1} {2}" \
+            --preview="$prevcmd" \
             --preview-window="$prevwin" \
             --reverse --height 100% \
             --bind "start:reload(cat \"$validfiles\")" \
