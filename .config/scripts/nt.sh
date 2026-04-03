@@ -112,7 +112,7 @@ note_search() {
 
     validfiles=$(mktemp)
     trap 'rm -f "$validfiles"' 0 INT TERM
-    find -- *.md | sort -R > "$validfiles"
+    find -- *.md -maxdepth 1 -type f | sort -R > "$validfiles"
 
     if command -v rg >/dev/null 2>&1; then
         grepcmd="rg -SHn"
@@ -183,7 +183,7 @@ new_note() {
 
 random_note() {
 
-    file=$(find -- *.md | shuf -n 1)
+    file=$(find -- *.md -maxdepth 1 -type f | shuf -n 1)
     if command -v bat >/dev/null 2>&1; then
         bat -p "$file"
     elif command -v batcat >/dev/null 2>&1; then
@@ -234,9 +234,9 @@ case "$1" in
         trap 'rm -f "$tmp"' 0 INT TERM
 
         if command -v rg >/dev/null 2>&1; then
-            find . | rg -S -- "$1" > "$tmp"
+            find . -maxdepth 1 -type f | rg -S -- "$1" > "$tmp"
         else
-            find . | grep -i -- "$1" > "$tmp"
+            find . -maxdepth 1 -type f | grep -i -- "$1" > "$tmp"
         fi
 
         count=$(wc -l < "$tmp")
