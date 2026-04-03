@@ -93,19 +93,6 @@ if [ $(( now - last_pull )) -gt 3600 ]; then
     echo "$now" > ".last_pull_time"
 fi
 
-if command -v rg >/dev/null 2>&1; then
-    grepcmd="rg -SHn"
-    get_filenames="rg -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
-elif command -v grep >/dev/null 2>&1; then
-    # grep fallback (keep filename:line:match format)
-    grepcmd="grep -E -n -i -H"
-    get_filenames="grep -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
-fi
-
-validfiles=$(mktemp)
-trap 'rm -f "$validfiles"' 0 INT TERM
-find -- *.md | sort -R > "$validfiles"
-
 case "$EDITOR" in
     nvim|vim|vi )
         editcommand="$EDITOR +{2} {1}"
@@ -121,22 +108,35 @@ case "$EDITOR" in
         ;;
 esac
 
-if [ "$(tput cols)" -gt 100 ]; then
-    prevwin='right:66%:wrap'
-else
-    prevwin='up:66%:wrap'
-fi
-
-bat=$(command -v bat || command -v batcat)
-
-if [ ! -z "$bat" ];then
-    bat="$bat --style=numbers --color=always"
-    prevcmd="[ -z {2} ] && $bat {1} || $bat --highlight-line {2} {1}"
-else
-    prevcmd="cat {1}"
-fi
-
 note_search() {
+
+    validfiles=$(mktemp)
+    trap 'rm -f "$validfiles"' 0 INT TERM
+    find -- *.md | sort -R > "$validfiles"
+
+    if command -v rg >/dev/null 2>&1; then
+        grepcmd="rg -SHn"
+        get_filenames="rg -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
+    elif command -v grep >/dev/null 2>&1; then
+        # grep fallback (keep filename:line:match format)
+        grepcmd="grep -E -n -i -H"
+        get_filenames="grep -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
+    fi
+
+    bat=$(command -v bat || command -v batcat)
+    if [ ! -z "$bat" ];then
+        bat="$bat --style=numbers --color=always"
+        prevcmd="[ -z {2} ] && $bat {1} || $bat --highlight-line {2} {1}"
+    else
+        prevcmd="cat {1}"
+    fi
+
+    if [ "$(tput cols)" -gt 100 ]; then
+        prevwin='right:66%:wrap'
+    else
+        prevwin='up:66%:wrap'
+    fi
+
     # {*} requires fzf > 0.63
     if command -v fzf >/dev/null 2>&1; then
 
