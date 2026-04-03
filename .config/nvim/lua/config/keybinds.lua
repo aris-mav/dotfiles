@@ -88,7 +88,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.keymap.set("n", "gp", function()
       vim.cmd("w")
-      vim.cmd("!~/.config/scripts/pd_prev.sh %:p")
+      vim.cmd("!~/.config/scripts/nt.sh -p %:p")
     end, { buffer = true, silent = true })
   end,
 })

@@ -7,10 +7,68 @@ help_msg() {
     echo "	-r/--random  - view a random note"
     echo "	-t/--tags    - print available tags"
     echo "	-s/--search  - search content in all notes"
+    echo "	-p/--preview - preview an .md file as .pdf"
     echo "	-h/--help    - print this message"
 }
 
-if [ $# -gt 1 ]; then
+md_preview() {
+
+    input_markdown_file="$1"
+    if [ -z "$input_markdown_file" ]; then
+        echo "Usage: nt -p <file.md>" >&2
+        return 1
+    fi
+
+    note_cache="$HOME/.cache/nt_notes"
+    mkdir -p "$note_cache"
+    pdf_filename="$note_cache/${input_markdown_file%.md}.pdf"
+
+    if [ ! -f "$pdf_filename" ] || [ "$input_markdown_file" -nt "$pdf_filename" ]; then
+
+        if LC_ALL=C grep '[^ -~]' "$input_markdown_file" >/dev/null 2>&1; then
+
+            if command -v xelatex >/dev/null 2>&1; then
+                ENGINE="xelatex"
+            elif command -v lualatex >/dev/null 2>&1; then
+                ENGINE="lualatex"
+            else
+                echo "Error: Non-ASCII characters detected, but neither xelatex nor lualatex was found." >&2
+                exit 1
+            fi
+
+            if fc-list -q "FreeSans"; then
+                SELECTED_FONT="FreeSans"
+            else
+                SELECTED_FONT=$(fc-list : family | head -n 1 | cut -d: -f2 | cut -d, -f1 | sed 's/^ //')
+            fi
+
+            set -- "--pdf-engine=$ENGINE" -V "mainfont=$SELECTED_FONT"
+
+        else
+            set -- "-V fontfamily=newpx"
+        fi
+
+        pandoc "$input_markdown_file" -o "$pdf_filename" "$@" \
+            -V documentclass=extarticle \
+            -V fontsize=20pt \
+            -V geometry:margin=0.5in \
+            -V pagestyle=empty \
+            -V linestretch=1.3 \
+            -V colorlinks=true \
+            -V linkcolor=blue
+    fi
+
+    if command -v zathura >/dev/null 2>&1; then
+        zathura --mode fullscreen -c "$HOME/.config/zathura/dark" "$pdf_filename" >/dev/null 2>&1 &
+    else
+        xdg-open "$pdf_filename" >/dev/null 2>&1 &
+    fi
+}
+
+if [ "$1" = "-p" ]; then
+    md_preview "$2"
+    exit 0
+elif [ $# -gt 1 ]; then
     help_msg
     exit 1
 fi
@@ -85,7 +143,7 @@ note_search() {
             --bind "ctrl-o:execute-silent(ls *.md | sort -R > \"$validfiles\")" \
             --bind "ctrl-o:+clear-query+reload(cat \"$validfiles\")" \
             --bind "ctrl-s:reload(cat \"$validfiles\" | sort -r)" \
-            --bind "ctrl-z:execute($HOME/.config/scripts/pd_prev.sh {1})" \
+            --bind "ctrl-z:execute($0 -p {1})" \
             --bind "ctrl-e:execute($editcommand)" \
             --bind "ctrl-q:abort" \
 
