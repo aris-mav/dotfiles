@@ -21,7 +21,9 @@ md_preview() {
 
     note_cache="$HOME/.cache/nt_notes"
     mkdir -p "$note_cache"
-    pdf_filename="$note_cache/${input_markdown_file%.md}.pdf"
+
+    mdname="$(basename "$input_markdown_file")"
+    pdf_filename="$note_cache/${mdname%.md}.pdf"
 
     if [ ! -f "$pdf_filename" ] || [ "$input_markdown_file" -nt "$pdf_filename" ]; then
 
