@@ -11,7 +11,7 @@ return {
     },
     config = function()
         local cmp = require('cmp')
-        local luasnip = require('luasnip')
+        local ls = require('luasnip')
 
         cmp.setup({
 
@@ -47,7 +47,6 @@ return {
                     local win_width = vim.api.nvim_win_get_width(0)
 
                     local max_content_width
-                    
                     if fixed_width then
                         max_content_width = fixed_width - 10
                     elseif win_width < 100  then
@@ -80,42 +79,48 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ['<C-u>'] = cmp.mapping.scroll_docs(-4 ,{ 'i', 'c' }),
                 ['<C-d>'] = cmp.mapping.scroll_docs(4 ,{ 'i', 'c' }),
-                ['<CR>'] = cmp.mapping.confirm({ select = true } ,{ 'i', 'c' }),
                 ['<Space>'] = cmp.mapping.confirm({ select = false } ,{ 'i', 'c' }), -- select false is so that it does not auto select the 1st sugggestion
 
-                ['<Tab>'] = cmp.mapping(function(fallback)
-                    if luasnip.locally_jumpable(1) then
-                        luasnip.jump(1)
+                ['<CR>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        if ls.expandable() then
+                            ls.expand()
+                        else
+                            cmp.confirm({
+                                select = true,
+                            })
+                        end
+                    else
+                        fallback()
+                    end
+                end),
+
+                ["<Tab>"] = cmp.mapping(function(fallback)
+                    if ls.locally_jumpable(1) then
+                        ls.jump(1)
                     elseif cmp.visible() then
                         cmp.select_next_item()
                     else
                         fallback()
                     end
-                end, { 'i', 's' }),
+                end, { "i", "s" }),
 
-                ['<S-Tab>'] = cmp.mapping(function(fallback)
-                    if luasnip.locally_jumpable(-1) then
-                        luasnip.jump(-1)
+                ["<S-Tab>"] = cmp.mapping(function(fallback)
+                    if ls.locally_jumpable(-1) then
+                        ls.jump(-1)
                     elseif cmp.visible() then
                         cmp.select_prev_item()
                     else
                         fallback()
                     end
-                end, { 'i', 's' }),
+                end, { "i", "s" }),
 
-                ["<Esc>"] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.abort()
-                    else
-                        fallback()
-                    end
-                end, { "i", "c" }),
             }),
 
             snippet = {
                 expand = function(args)
                     -- vim.snippet.expand(args.body) 
-                    luasnip.lsp_expand(args.body)
+                    ls.lsp_expand(args.body)
                 end,
             },
 
