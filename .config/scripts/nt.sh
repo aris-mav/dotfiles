@@ -139,7 +139,6 @@ note_search() {
         prevwin='up:66%:wrap'
     fi
 
-    # {*} requires fzf > 0.63
     if command -v fzf >/dev/null 2>&1; then
 
         fzf --ansi \
@@ -150,7 +149,7 @@ note_search() {
             --reverse --height 100% \
             --bind "start:reload(cat \"$validfiles\")" \
             --bind "change:reload:sleep 0.1; [ -z {q} ] && cat $validfiles || cat $validfiles | xargs -d '\n' $grepcmd --color=always -- {q} || true" \
-            --bind "enter:execute-silent(echo {*} | $get_filenames | sort -ur > $validfiles)" \
+            --bind "enter:execute-silent([ -z {q} ] || cat $validfiles | xargs -d '\n' $grepcmd -- {q} | $get_filenames | sort -ur > $validfiles.tmp && mv $validfiles.tmp $validfiles)" \
             --bind "enter:+clear-query" \
             --bind "ctrl-o:execute-silent(find -- *.md -maxdepth 1 -type f | sort -R > $validfiles)" \
             --bind "ctrl-o:+clear-query+reload(cat $validfiles)" \
