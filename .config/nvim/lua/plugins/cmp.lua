@@ -13,10 +13,11 @@ return {
         local cmp = require('cmp')
         local ls = require('luasnip')
         local menu_icon = {
-            nvim_lsp = " ",
-            luasnip  = "󰩫 ",
-            buffer   = "󰧮 ",
-            path     = " ",
+            nvim_lsp = "",
+            luasnip  = "󰩫",
+            buffer   = "󰧮",
+            path     = "",
+            spell    = "󰓆",
         }
 
         local symbol_map = {
