@@ -63,8 +63,6 @@ return {
                     item.menu = menu_icon[entry.source.name] or entry.source.name
                     item.kind = symbol_map[item.kind] or item.kind
 
-                    local content = item.abbr
-
                     local win_width = vim.api.nvim_win_get_width(0)
 
                     local max_content_width
@@ -74,17 +72,15 @@ return {
                         max_content_width = 50
                     end
 
-                    if #content > max_content_width then
+                    if #item.abbr > max_content_width then
                         -- cut the string short to prevent window from getting too long
-                        item.abbr = vim.fn.strcharpart(content, 0, max_content_width - 3) .. "..."
+                        item.abbr = vim.fn.strcharpart(item.abbr, 0, max_content_width - 3) .. "..."
                     else
-                        item.abbr = content
                         -- pad with spaces so that window is always the same size
                         -- item.abbr = content .. (" "):rep(max_content_width - #content)
                     end
 
                     return item
-                
                 end,
             },
 
