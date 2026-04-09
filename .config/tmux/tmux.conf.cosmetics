@@ -15,5 +15,3 @@ set -g window-status-format '#I-#W'
 set -g window-status-current-format '[#I-#W]'
 
 # set -g prompt-cursor-colour 'terminal'
-
-set-hook -g after-copy-mode 'set -p cursor-style underline'
