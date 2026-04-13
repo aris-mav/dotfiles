@@ -8,6 +8,7 @@ help_msg() {
     echo "	-t/--tags    - print available tags"
     echo "	-s/--search  - search content in all notes"
     echo "	-p/--preview - preview an .md file as .pdf"
+    echo "	-b/--book    - log a finished book"
     echo "	-h/--help    - print this message"
 }
 
@@ -220,6 +221,16 @@ case "$1" in
     -t )
         tags
         ;;
+    -b )
+        dt=$(date +%Y/%m/%d)
+        echo "$dt" >> "books_finished.tsv"
+
+        $EDITOR + "books_finished.tsv"
+
+        if [ "$(tail -n 1 "books_finished.tsv")" = "$dt" ]; then
+            git restore "books_finished.tsv"
+        fi
+        ;;
     --help|-h )
         help_msg
         ;;
@@ -261,20 +272,7 @@ case "$1" in
         IFS= read -r file < "$tmp"
 
         if [ -f "$file" ]; then 
-
-            if [ "$file" = "books_finished.tsv" ]; then 
-                # Log book you just finished
-                dt=$(date +%Y/%m/%d)
-                echo "$dt" >> "$file"
-
-                $EDITOR + "$file"
-
-                if [ "$(tail -n 1 "$file")" = "$dt" ]; then
-                    git restore "$file"
-                fi
-            else
-                "$EDITOR" "$file"
-            fi
+            "$EDITOR" "$file"
         fi
         ;;
 esac
