@@ -52,6 +52,26 @@ vim.api.nvim_create_autocmd({"BufWinEnter", "FileType"}, {
     end,
 })
 
+-- colorcolumn
+local column_group = vim.api.nvim_create_augroup("ColumnLine", { clear = true })
+vim.api.nvim_create_autocmd({ "FileType", "VimResized", "WinEnter" }, {
+    group = column_group,
+    pattern = "*",
+    callback = function()
+        local columns = vim.api.nvim_win_get_width(0)
+        
+        if columns > 100 then
+            if vim.bo.filetype == "markdown" then
+                vim.opt_local.colorcolumn = "50"
+            else
+                vim.opt_local.colorcolumn = "80"
+            end
+        else
+            vim.opt_local.colorcolumn = ""
+        end
+    end,
+})
+
 -- set greek keymap and disable it 
 -- (then toggle with C-6 on insert mode)
 vim.bo.keymap = 'greek'
