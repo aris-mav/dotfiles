@@ -7,6 +7,8 @@ set splitbelow         " Horizontal splits open below
 set splitright         " Vertical splits open to the right
 set confirm            " Ask to save instead of failing a :q command
 
+set autochdir
+
 " --- colour ---
 set background=dark
 colorscheme retrobox

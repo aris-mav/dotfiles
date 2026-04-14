@@ -8,6 +8,7 @@ nnoremap <leader>q :q<CR>
 nmap <leader>w :w <cr>
 nmap <leader>e :Ex<cr>
 nmap <leader>b :ls<cr>
+nmap <leader>m :marks<cr>
 
 " --- Keeping cursor centered ---
 nmap n nzzzv
