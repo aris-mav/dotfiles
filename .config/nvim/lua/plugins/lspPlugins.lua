@@ -61,7 +61,8 @@ return {
                         "lua_ls",
                         "texlab",
                         "rust_analyzer",
-                        "markdown_oxide"
+                        "markdown_oxide",
+                        "ruff", "ty",
                     },
                     handlers = {
                         function(server_name)
