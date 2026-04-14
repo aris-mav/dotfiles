@@ -43,15 +43,24 @@ if os.getenv("JULIALSP") == "jetls" then
 
 elseif os.getenv("JULIALSP") == "julials" then
 
-    if vim.fn.isdirectory(vim.fn.expand("~/.julia/environments/nvim-lspconfig")) ~= 1
+    if vim.fn.isdirectory(
+        vim.fn.expand("~/.julia/environments/nvim-lspconfig")
+    ) ~= 1
         and vim.fn.executable("julia") == 1 then
         print("Installing LanguageServer.jl")
-        vim.fn.system('julia --project=~/.julia/environments/nvim-lspconfig -e "using Pkg; Pkg.add(\\"LanguageServer\\"); Pkg.add(\\"SymbolServer\\"); Pkg.add(\\"StaticLint\\")"')
+        vim.fn.system(
+            'julia \
+            --project=~/.julia/environments/nvim-lspconfig \
+            -e "using Pkg; \
+            Pkg.add(\\"LanguageServer\\"); \
+            Pkg.add(\\"SymbolServer\\"); \
+            Pkg.add(\\"StaticLint\\")"'
+        )
     end
 
     local v = vim.version()
     if not ((v.major > 0) or (v.major == 0 and v.minor >= 11)) then
-        -- the config below should be unncessary in versions above 0.11, according to 
+        -- the config below should be unncessary in versions above 0.11
         -- https://github.com/julia-vscode/LanguageServer.jl/wiki/Vim-and-Neovim
         vim.lsp.config('julials', {
             cmd = {
