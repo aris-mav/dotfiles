@@ -19,9 +19,6 @@ vim.keymap.set('v', '|', ':!')
 -- Map leader-w to :w
 vim.keymap.set("n", "<leader>w", ":w <cr>", { remap = true, silent = false })
 
--- Greek keymap
-vim.keymap.set("n", "<leader>kg", ":set keymap=greek_utf-8  <cr>", { remap = true, silent = false })
-
 -- Map leader-e to netrw for the directory of curent file
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { remap = true, silent = false })
 
