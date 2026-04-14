@@ -251,6 +251,23 @@ for key, symbol in pairs({
     )
 end
 
+local greek_letters = {
+    "alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta",
+    "iota", "kappa", "lambda", "mu", "nu", "xi", "pi", "rho",
+    "sigma", "tau", "upsilon", "phi", "chi", "psi", "omega",
+    "varepsilon", "varrho", "vartheta", "varphi",
+    "Gamma", "Delta", "Theta", "Lambda",
+    "Xi", "Pi", "Sigma", "Upsilon",
+    "Phi", "Psi", "Omega",
+}
+for _, letter in ipairs(greek_letters) do
+    table.insert(snippets,
+        s({ trig=letter}, {
+            t("\\".. letter ),
+        })
+    )
+end
+
 for key, symbols in pairs({
     par  = { "\\left( "       , " \\right)"         ,  "parentheses"     },
     sbr  = { "\\left[ "       , " \\right]"         ,  "square brackets" },
