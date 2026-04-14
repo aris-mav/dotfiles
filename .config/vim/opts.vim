@@ -14,6 +14,10 @@ colorscheme retrobox
 " --- Line numbers ---
 set relativenumber
 set number
+augroup NetrwSettings
+    autocmd!
+    autocmd FileType netrw setlocal number relativenumber
+augroup END
 
 " Change cursor shape for different modes
 let &t_SI = "\e[6 q" " SI = Start Insert (Vertical bar)
