@@ -58,18 +58,17 @@ vim.api.nvim_create_autocmd({ "FileType", "VimResized", "WinEnter" }, {
     group = column_group,
     pattern = "*",
     callback = function()
+
         local columns = vim.api.nvim_win_get_width(0)
-        
-        if columns > 100 then
-            if vim.bo.filetype == "markdown" then
-                vim.opt_local.colorcolumn = "50"
-            else
-                vim.opt_local.colorcolumn = "80"
-            end
+
+        if vim.bo.filetype == "markdown" and columns > 70 then
+            vim.opt_local.colorcolumn = "50"
+        elseif columns > 100  then
+            vim.opt_local.colorcolumn = "80"
         else
             vim.opt_local.colorcolumn = ""
         end
-    end,
+    end
 })
 
 -- set greek keymap and disable it 
