@@ -12,6 +12,7 @@ set autochdir
 " --- colour ---
 set background=dark
 colorscheme retrobox
+highlight Normal ctermfg=white ctermbg=black
 
 " --- Line numbers ---
 set relativenumber
