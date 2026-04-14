@@ -8,6 +8,7 @@ return {
         'hrsh7th/cmp-cmdline',
         'saadparwaiz1/cmp_luasnip',
         'f3fora/cmp-spell',
+        'micangl/cmp-vimtex',
     },
     config = function()
         local cmp = require('cmp')
@@ -18,6 +19,7 @@ return {
             buffer   = "󰧮",
             path     = "",
             spell    = "󰓆",
+            vimtex   = "",
         }
 
         local symbol_map = {
@@ -87,6 +89,7 @@ return {
 
             sources = {
                 {name = 'nvim_lsp'},
+				{name = 'vimtex'},
                 {name = 'path' },
                 {name = 'luasnip' },
                 {name = 'buffer', keyword_length = 3 },

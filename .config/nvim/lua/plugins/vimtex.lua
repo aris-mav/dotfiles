@@ -6,5 +6,6 @@ return {
         vim.g.vimtex_view_method = "zathura"
         vim.g.vimtex_compiler_method = "latexmk"
         vim.g.vimtex_mappings_prefix = "<leader>l"
+        vim.g.vimtex_complete_enabled = 1
     end,
 }
