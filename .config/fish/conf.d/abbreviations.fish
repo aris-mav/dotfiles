@@ -27,6 +27,10 @@
     abbr xo 'xdg-open'
     abbr x 'xargs'
 
+    # nt 
+    abbr nn "nt -n"
+    abbr ns "nt -s"
+
     if type -q tmux
         abbr cdtp 'cd (tmux list-panes -a -F "#{pane_current_path}" | fzf)'
     end
