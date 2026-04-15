@@ -64,9 +64,9 @@ augroup END
 function! SetDynamicColumn()
     let l:cols = winwidth(0)
     if &filetype == 'markdown' && l:cols > 70
-        setlocal colorcolumn=50
+        setlocal colorcolumn=51
     elseif l:cols > 100
-        setlocal colorcolumn=80
+        setlocal colorcolumn=81
     else
         setlocal colorcolumn=
     endif
