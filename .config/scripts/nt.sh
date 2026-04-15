@@ -174,13 +174,13 @@ new_note() {
     newnote="$datetime.md"
     $EDITOR "$newnote"
 
-    if [ -f "$newnote" ] ; then
+    if [ -s "$newnote" ] ; then
         first_line=$(head -n 1 "$newnote")
-
         git add "$newnote"
         git commit -m "new note $first_line"
-
         committed_anything=true
+    else # The file is empty.
+        rm -f "$newnote"
     fi
 }
 
@@ -279,24 +279,28 @@ esac
 
 # git commits, if there are changes
 for file in $(git diff --name-only); do
-    if [ ! -f "$file" ]; then
-        continue
+
+    if [ -s "$file" ]; then
+        # The file is not-empty.
+        case "$file" in
+            [0-9]*.md)
+                first_line=$(head -n 1 "$file")
+                commit_msg="edits on $first_line"
+                ;;
+            *)
+                commit_msg=""
+                ;;
+        esac
+
+        git add "$file"
+        git commit --allow-empty-message -m "$commit_msg"
+        committed_anything=true
+    else
+        # The file is empty.
+        git rm "$file"
+        git commit -m "removed $file"
+        committed_anything=true
     fi
-
-    case "$file" in
-        [0-9]*.md)
-            first_line=$(head -n 1 "$file")
-            commit_msg="edits on $first_line"
-            ;;
-        *)
-            commit_msg=""
-            ;;
-    esac
-
-    git add "$file"
-    git commit --allow-empty-message -m "$commit_msg"
-
-    committed_anything=true
 done
 
 if [ "$committed_anything" = true ]; then
