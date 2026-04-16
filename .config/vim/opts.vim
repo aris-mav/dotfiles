@@ -78,7 +78,7 @@ set iminsert=0
 
 " --- Grep with Ripgrep ---
 if executable('rg')
-    set grepprg=rg\ --vimgrep
+    set grepprg=rg\ -S\ --vimgrep
     set grepformat=%f:%l:%c:%m
 else
     set grepprg=grep\ -nH\ $*
