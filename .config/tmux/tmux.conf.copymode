@@ -22,4 +22,4 @@ bind-key -T z-views b send-keys -X scroll-bottom
 
 # cursor options
 set-hook -g after-copy-mode 'set -p cursor-style block'
-set-hook -g after-copy-mode 'set -p cursor-color "#458588"'
+set-hook -g after-copy-mode 'set -p cursor-color "#ebdbb2"'
