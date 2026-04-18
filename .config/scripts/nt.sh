@@ -26,7 +26,7 @@ md_preview() {
     mdname="$(basename "$input_markdown_file")"
     pdf_filename="$note_cache/${mdname%.md}.pdf"
 
-    if [ ! -f "$pdf_filename" ] || [ "$input_markdown_file" -nt "$pdf_filename" ]; then
+    if [ ! "$input_markdown_file" -ot "$pdf_filename" ]; then
 
         if LC_ALL=C grep '[^ -~]' "$input_markdown_file" >/dev/null 2>&1; then
 
@@ -35,14 +35,21 @@ md_preview() {
             elif command -v lualatex >/dev/null 2>&1; then
                 ENGINE="lualatex"
             else
-                echo "Error: Non-ASCII characters detected, but neither xelatex nor lualatex was found." >&2
+                echo "Error: Non-ASCII characters detected, \
+                    but neither xelatex nor lualatex was found." >&2
                 exit 1
             fi
 
             if fc-list -q "FreeSans"; then
                 SELECTED_FONT="FreeSans"
             else
-                SELECTED_FONT=$(fc-list : family | head -n 1 | cut -d: -f2 | cut -d, -f1 | sed 's/^ //')
+                SELECTED_FONT=$(
+                    fc-list : family | \
+                        head -n 1 | \
+                        cut -d: -f2 | \
+                        cut -d, -f1 | \
+                        sed 's/^ //'
+                    )
             fi
 
             set -- "--pdf-engine=$ENGINE" -V "mainfont=$SELECTED_FONT"
@@ -62,7 +69,8 @@ md_preview() {
     fi
 
     if command -v zathura >/dev/null 2>&1; then
-        zathura --mode fullscreen -c "$HOME/.config/zathura/dark" "$pdf_filename" >/dev/null 2>&1 &
+        zathura --mode fullscreen \
+            -c "$HOME/.config/zathura/dark" "$pdf_filename" >/dev/null 2>&1 &
     else
         xdg-open "$pdf_filename" >/dev/null 2>&1 &
     fi
@@ -98,16 +106,16 @@ fi
 
 case "$EDITOR" in
     nvim|vim|vi )
-        editcommand="$EDITOR +{2} {1}"
+        edit_cmd="$EDITOR +{2} {1}"
         ;;
     helix|hx )
-        editcommand="$EDITOR {1}:{2}"
+        edit_cmd="$EDITOR {1}:{2}"
         ;;
     nano )
-        editcommand="$EDITOR +{2},1 {1}"
+        edit_cmd="$EDITOR +{2},1 {1}"
         ;;
     * )
-        editcommand="$EDITOR {1}"
+        edit_cmd="$EDITOR {1}"
         ;;
 esac
 
@@ -117,46 +125,62 @@ note_search() {
     trap 'rm -f "$validfiles"' 0 INT TERM
     find -- *.md -maxdepth 1 -type f | sort -R > "$validfiles"
 
-    if command -v rg >/dev/null 2>&1; then
-        grepcmd="rg -SHn"
-        get_filenames="rg -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
-    elif command -v grep >/dev/null 2>&1; then
-        # grep fallback (keep filename:line:match format)
-        grepcmd="grep -E -n -i -H"
-        get_filenames="grep -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
-    fi
-
-    bat=$(command -v bat || command -v batcat)
-    if [ ! -z "$bat" ];then
-        bat="$bat --style=numbers --color=always"
-        prevcmd="[ -z {2} ] && $bat {1} || $bat --highlight-line {2} {1}"
-    else
-        prevcmd="cat {1}"
-    fi
-
-    if [ "$(tput cols)" -gt 100 ]; then
-        prevwin='right:66%:wrap'
-    else
-        prevwin='up:66%:wrap'
-    fi
-
     if command -v fzf >/dev/null 2>&1; then
+
+        if command -v rg >/dev/null 2>&1; then
+            grep_cmd="rg -SHn"
+            get_filenames="rg -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
+        elif command -v grep >/dev/null 2>&1; then
+            # grep fallback (keep filename:line:match format)
+            grep_cmd="grep -E -n -i -H"
+            get_filenames="grep -oP '[a-zA-Z0-9_.-]+\.[a-z]+(?=:)'"
+        fi
+
+        bat=$(command -v bat || command -v batcat)
+        if [ ! -z "$bat" ];then
+            bat="$bat --style=numbers --color=always"
+            prev_cmd="[ -z {2} ] && $bat {1} || $bat --highlight-line {2} {1}"
+        else
+            prev_cmd="cat {1}"
+        fi
+
+        if [ "$(tput cols)" -gt 100 ]; then
+            prev_win='right:66%:wrap'
+        else
+            prev_win='up:66%:wrap'
+        fi
+
+        grep_filter=" 
+        [ -z {q} ] || \
+            cat $validfiles | \
+            xargs -d '\n' $grep_cmd -- {q} | \
+            $get_filenames | \
+            sort -ur > $validfiles.tmp \
+            &&  mv $validfiles.tmp $validfiles
+        "
+        change_cmd="
+        [ -z {q} ] && cat $validfiles || \
+            cat $validfiles | \
+            xargs -d '\n' $grep_cmd --color=always -- {q} \
+            || true
+        "
+        reset_cmd="find -- *.md -maxdepth 1 -type f | sort -R > $validfiles"
 
         fzf --ansi \
             --disabled \
             --delimiter : \
-            --preview="$prevcmd" \
-            --preview-window="$prevwin" \
+            --preview="$prev_cmd" \
+            --preview-window="$prev_win" \
             --reverse --height 100% \
             --bind "start:reload(cat \"$validfiles\")" \
-            --bind "change:reload:sleep 0.1; [ -z {q} ] && cat $validfiles || cat $validfiles | xargs -d '\n' $grepcmd --color=always -- {q} || true" \
-            --bind "enter:execute-silent([ -z {q} ] || cat $validfiles | xargs -d '\n' $grepcmd -- {q} | $get_filenames | sort -ur > $validfiles.tmp && mv $validfiles.tmp $validfiles)" \
+            --bind "change:reload:sleep 0.1; $change_cmd" \
+            --bind "enter:execute-silent($grep_filter)" \
             --bind "enter:+clear-query" \
-            --bind "ctrl-o:execute-silent(find -- *.md -maxdepth 1 -type f | sort -R > $validfiles)" \
+            --bind "ctrl-o:execute-silent($reset_cmd)" \
             --bind "ctrl-o:+clear-query+reload(cat $validfiles)" \
             --bind "ctrl-s:reload(cat \"$validfiles\" | sort -r)" \
             --bind "ctrl-z:execute($0 -p {1})" \
-            --bind "ctrl-e:execute($editcommand)" \
+            --bind "ctrl-e:execute($edit_cmd)" \
             --bind "ctrl-q:abort" \
 
         elif command -v br >/dev/null 2>&1; then
@@ -164,6 +188,9 @@ note_search() {
 
         elif [ "$EDITOR" = "nvim" ]; then
             nvim -c "Telescope live_grep"
+        else
+            echo "Install fzf, br or nvim (with telescope)."
+            exit 1
     fi
 
 }
