@@ -60,10 +60,16 @@ vim.api.nvim_create_autocmd({ "FileType", "VimResized", "WinEnter" }, {
     callback = function()
 
         local columns = vim.api.nvim_win_get_width(0)
+        local ftype = vim.bo.filetype
 
-        if vim.bo.filetype == "markdown" and columns > 70 then
+        if ftype == "markdown"
+            and columns > 70
+        then
             vim.opt_local.colorcolumn = "51"
-        elseif columns > 100  then
+        elseif
+            columns > 100
+            and not vim.tbl_contains({'csv','tsv'}, ftype)
+        then
             vim.opt_local.colorcolumn = "81"
         else
             vim.opt_local.colorcolumn = ""
