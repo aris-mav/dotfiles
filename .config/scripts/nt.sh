@@ -130,7 +130,9 @@ note_search() {
 
     validfiles=$(mktemp --tmpdir -u valid_files_XXXXX)
     trap 'rm -f "$validfiles"' 0 INT TERM
-    find -- *.md -maxdepth 1 -type f | sort -R > "$validfiles"
+
+    find . -maxdepth 1 -type f -name "[0-9]*.md" -printf "%f\n" | sort -R \
+        > "$validfiles"
 
     if command -v fzf >/dev/null 2>&1; then
 
