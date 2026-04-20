@@ -1,10 +1,10 @@
 function nt
 
     if test (count $argv) -eq 0
-        ~/.config/scripts/nt.sh no_args
+        $NOTES_DIR/nt.sh no_args
         cd $NOTES_DIR
     else 
-        ~/.config/scripts/nt.sh $argv
+        $NOTES_DIR/nt.sh $argv
     end    
 
 end
