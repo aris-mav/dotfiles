@@ -58,14 +58,21 @@ md_preview() {
             set -- "-V fontfamily=newpx"
         fi
 
-        pandoc "$input_markdown_file" -o "$pdf_filename" "$@" \
-            -V documentclass=extarticle \
-            -V fontsize=20pt \
-            -V geometry:margin=0.5in \
-            -V pagestyle=empty \
-            -V linestretch=1.3 \
-            -V colorlinks=true \
-            -V linkcolor=blue
+        case "$input_markdown_file" in
+            [0-9]*.md)
+                pandoc "$input_markdown_file" -o "$pdf_filename" "$@" \
+                    -V documentclass=extarticle \
+                    -V fontsize=20pt \
+                    -V geometry:margin=0.5in \
+                    -V pagestyle=empty \
+                    -V linestretch=1.3 \
+                    -V colorlinks=true \
+                    -V linkcolor=blue
+                ;;
+            *)
+                pandoc "$input_markdown_file" -o "$pdf_filename"
+                ;;
+        esac
     fi
 
     if command -v zathura >/dev/null 2>&1; then
