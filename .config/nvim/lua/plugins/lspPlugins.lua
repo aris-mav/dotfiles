@@ -61,7 +61,7 @@ return {
                         "lua_ls",
                         "texlab",
                         "rust_analyzer",
-                        "markdown_oxide",
+                        "marksman",
                         "ruff", "ty",
                     },
                     handlers = {
