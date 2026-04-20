@@ -24,7 +24,7 @@ bind -n M-n run-shell \
          '~/.config/scripts/nt.sh -s'"
 bind -n M-t run-shell \
          "~/.config/tmux/scripts/open_window.sh TODO \
-         '~/.config/scripts/nt.sh TODO.txt'"
+         '~/.config/scripts/nt.sh TODO'"
 
 # Popups
 bind C-f display-popup -d "#{pane_current_path}" \
