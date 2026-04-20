@@ -234,13 +234,46 @@ tags() {
 
 }
 
+commit_changes() { 
+    for file in $(git diff --name-only); do
+
+        if [ -s "$file" ]; then
+            # The file is not-empty.
+            case "$file" in
+                [0-9]*.md)
+                    first_line=$(head -n 1 "$file")
+                    commit_msg="edits on $first_line"
+                    ;;
+                *)
+                    commit_msg=""
+                    ;;
+            esac
+
+            git add "$file"
+            git commit --allow-empty-message -m "$commit_msg"
+            committed_anything=true
+        else
+            # The file is empty.
+            git rm "$file"
+            git commit -m "removed $file"
+            committed_anything=true
+        fi
+    done
+
+    if [ "$committed_anything" = true ]; then
+        git push
+    fi
+}
+
 # switch for input flags
 case "$1" in
     -n|--new )
         new_note
+        commit_changes
         ;;
     -s|--search )
         note_search
+        commit_changes
         ;;
     -r )
         random_note
@@ -257,6 +290,7 @@ case "$1" in
         if [ "$(tail -n 1 "books_finished.tsv")" = "$dt" ]; then
             git restore "books_finished.tsv"
         fi
+        commit_changes
         ;;
     --help|-h )
         help_msg
@@ -301,35 +335,6 @@ case "$1" in
         if [ -f "$file" ]; then 
             "$EDITOR" "$file"
         fi
+        commit_changes
         ;;
 esac
-
-# git commits, if there are changes
-for file in $(git diff --name-only); do
-
-    if [ -s "$file" ]; then
-        # The file is not-empty.
-        case "$file" in
-            [0-9]*.md)
-                first_line=$(head -n 1 "$file")
-                commit_msg="edits on $first_line"
-                ;;
-            *)
-                commit_msg=""
-                ;;
-        esac
-
-        git add "$file"
-        git commit --allow-empty-message -m "$commit_msg"
-        committed_anything=true
-    else
-        # The file is empty.
-        git rm "$file"
-        git commit -m "removed $file"
-        committed_anything=true
-    fi
-done
-
-if [ "$committed_anything" = true ]; then
-    git push
-fi
