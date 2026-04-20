@@ -153,7 +153,7 @@ note_search() {
             prev_cmd="cat {1}"
         fi
 
-        if [ "$(tput cols)" -gt 100 ]; then
+        if [ $(($(tput cols) / $(tput lines))) -ge 3 ]; then
             prev_win='right:66%:wrap'
         else
             prev_win='up:66%:wrap'
