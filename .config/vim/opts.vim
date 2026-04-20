@@ -65,7 +65,7 @@ function! SetDynamicColumn()
     let l:cols = winwidth(0)
     if &filetype == 'markdown' && l:cols > 70
         setlocal colorcolumn=51
-    elseif l:cols > 100
+    elseif l:cols > 100 && &filetype != 'csv' && &filetype != 'tsv'
         setlocal colorcolumn=81
     else
         setlocal colorcolumn=
