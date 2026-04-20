@@ -21,10 +21,10 @@ bind -n M-b run-shell \
          "~/.config/tmux/scripts/open_window.sh bottom btm "
 bind -n M-n run-shell \
          "~/.config/tmux/scripts/open_window.sh notes \
-         '~/.config/scripts/nt.sh -s'"
+         '$NOTES_DIR/nt.sh -s'"
 bind -n M-t run-shell \
          "~/.config/tmux/scripts/open_window.sh TODO \
-         '~/.config/scripts/nt.sh TODO'"
+         '$NOTES_DIR/nt.sh TODO'"
 
 # Popups
 bind C-f display-popup -d "#{pane_current_path}" \
