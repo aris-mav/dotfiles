@@ -19,12 +19,6 @@ bind -n M-m run-shell \
          "~/.config/tmux/scripts/open_window.sh music rmpc "
 bind -n M-b run-shell \
          "~/.config/tmux/scripts/open_window.sh bottom btm "
-bind -n M-n run-shell \
-         "~/.config/tmux/scripts/open_window.sh notes \
-         '$NOTES_DIR/nt.sh -s'"
-bind -n M-t run-shell \
-         "~/.config/tmux/scripts/open_window.sh TODO \
-         '$NOTES_DIR/nt.sh TODO'"
 
 # Popups
 bind C-f display-popup -d "#{pane_current_path}" \
