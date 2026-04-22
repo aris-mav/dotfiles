@@ -26,6 +26,7 @@ less
 lsd
 make
 man-db
+man-pages
 mpd
 mpv
 neovim
