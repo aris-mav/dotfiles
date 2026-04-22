@@ -54,28 +54,42 @@ vim.api.nvim_create_autocmd({"BufWinEnter", "FileType"}, {
 
 -- colorcolumn
 local column_group = vim.api.nvim_create_augroup("ColumnLine", { clear = true })
-vim.api.nvim_create_autocmd({ "FileType", "VimResized", "WinEnter" }, {
-    group = column_group,
-    pattern = "*",
-    callback = function()
+vim.api.nvim_create_autocmd({
+    "FileType", "VimResized", "WinEnter", "BufWinEnter" },
+    {
+        group = column_group,
+        pattern = "*",
+        callback = function()
+            local is_modifiable = vim.bo.modifiable
+            local is_readonly = vim.bo.readonly
+            local buftype = vim.bo.buftype
+            local columns = vim.api.nvim_win_get_width(0)
+            local ftype = vim.bo.filetype
 
-        local columns = vim.api.nvim_win_get_width(0)
-        local ftype = vim.bo.filetype
+            local code_width = 80
+            local md_width = 50
 
-        if ftype == "markdown"
-            and columns > 70
-        then
-            vim.opt_local.colorcolumn = "51"
-        elseif
-            columns > 100
-            and not vim.tbl_contains({'csv','tsv','man'}, ftype)
-        then
-            vim.opt_local.colorcolumn = "81"
-        else
-            vim.opt_local.colorcolumn = ""
+            if not is_modifiable or is_readonly or buftype ~= "" then
+                vim.opt_local.colorcolumn = ""
+                return
+            end
+
+            if ftype == "markdown" and columns > md_width then
+                vim.opt_local.colorcolumn = tostring(md_width+1)
+            elseif
+                columns > code_width
+                and not vim.tbl_contains({
+                    'csv',
+                    'tsv',
+                }, ftype)
+            then
+                vim.opt_local.colorcolumn = tostring(code_width + 1)
+            else
+                vim.opt_local.colorcolumn = ""
+            end
         end
-    end
-})
+    }
+)
 
 -- set greek keymap and disable it 
 -- (then toggle with C-6 on insert mode)

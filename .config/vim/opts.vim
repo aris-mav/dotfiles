@@ -58,15 +58,35 @@ augroup END
 " --- Dynamic colorcolumn ---
 augroup ColumnLine
     autocmd!
-    autocmd FileType,VimResized,WinEnter * call SetDynamicColumn()
+    autocmd FileType,VimResized,WinEnter,BufWinEnter * call s:UpdateColorColumn()
 augroup END
 
-function! SetDynamicColumn()
-    let l:cols = winwidth(0)
-    if &filetype == 'markdown' && l:cols > 70
-        setlocal colorcolumn=51
-    elseif l:cols > 100 && &filetype != 'csv' && &filetype != 'tsv'
-        setlocal colorcolumn=81
+function! s:UpdateColorColumn()
+    " Local variables for the logic
+    let l:is_modifiable = &modifiable
+    let l:is_readonly   = &readonly
+    let l:buftype       = &buftype
+    let l:columns       = winwidth(0)
+    let l:ftype         = &filetype
+
+    let l:code_width = 80
+    let l:md_width   = 50
+
+    " Check if the file is editable and is a normal file
+    if !l:is_modifiable || l:is_readonly || l:buftype != ""
+        setlocal colorcolumn=
+        return
+    endif
+
+    " Logic for Markdown
+    if l:ftype ==# "markdown" && l:columns > l:md_width
+        let &l:colorcolumn = string(l:md_width + 1)
+
+        " Logic for Code
+    elseif l:columns > l:code_width && index(['csv', 'tsv'], l:ftype) == -1
+        let &l:colorcolumn = string(l:code_width + 1)
+
+        " Clear if no conditions met
     else
         setlocal colorcolumn=
     endif
