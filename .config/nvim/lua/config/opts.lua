@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd({ "FileType", "VimResized", "WinEnter" }, {
             vim.opt_local.colorcolumn = "51"
         elseif
             columns > 100
-            and not vim.tbl_contains({'csv','tsv'}, ftype)
+            and not vim.tbl_contains({'csv','tsv','man'}, ftype)
         then
             vim.opt_local.colorcolumn = "81"
         else
