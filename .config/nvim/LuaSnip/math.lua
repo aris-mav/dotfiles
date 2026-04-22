@@ -251,6 +251,21 @@ for key, symbol in pairs({
     )
 end
 
+for _, symbol in pairs({
+    "exp", "ln", "log",
+    "sin", "cos", "tan",
+    "asin", "acos", "atan",
+    "sinh", "cosh", "tanh",
+}) do
+    table.insert(snippets,
+        s({ trig=symbol}, {
+            t("\\".. symbol .."{\\left( "),
+            i(1, ""),
+            t(" \\right)}"),
+        })
+    )
+end
+
 local greek_letters = {
     "alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta",
     "iota", "kappa", "lambda", "mu", "nu", "xi", "pi", "rho",
