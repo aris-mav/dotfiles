@@ -12,14 +12,14 @@ EOF
 if [ "$panes" -eq 1 ]; then
 
     if [ "$width" -gt 150 ]; then 
-        tmux split-window -b -d -h; 
-        tmux resize-pane -x $((width / 2 + 28)); 
+        tmux split-window -b -h; 
+        tmux resize-pane -x $((width / 2 - 28)); 
     elif [ "$width" -gt 120 ]; then 
-        tmux split-window -b -d -h; 
-        tmux resize-pane -x $((width * 66 / 100)); 
+        tmux split-window -b -h; 
+        tmux resize-pane -x $((width * 33 / 100)); 
     fi
 
-elif [ "$width" -gt "$((height * 2))" ]; then
+elif [ "$((width / height))" -gt 3 ]; then
     tmux split-window -h -c "$path"
 else
     tmux split-window -v -c "$path"
