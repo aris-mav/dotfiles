@@ -1,5 +1,4 @@
 # enter copy mode
-bind -n M-c copy-mode 
 bind -n M-\; copy-mode 
 
 # Exit copy mode with i

@@ -11,4 +11,8 @@ if status is-interactive
     # disables the greeting
     set fish_greeting 
 
+    if type -q fzf
+        fzf --fish | source
+    end
+
 end
