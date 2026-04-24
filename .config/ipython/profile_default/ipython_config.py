@@ -261,7 +261,7 @@ c = get_config()  #noqa
 
 ## Whether to display a banner upon starting IPython.
 #  Default: True
-# c.TerminalIPythonApp.display_banner = True
+c.TerminalIPythonApp.display_banner = False
 
 ## Run the file referenced by the PYTHONSTARTUP environment
 #  See also: InteractiveShellApp.exec_PYTHONSTARTUP
@@ -648,7 +648,6 @@ c.TerminalInteractiveShell.emacs_bindings_in_vi_insert_mode = True
 ## Enable vi (v) or Emacs (C-X C-E) shortcuts to open an external editor. This is
 #  in addition to the F2 binding, which is always enabled.
 #  Default: False
-# c.TerminalInteractiveShell.extra_open_editor_shortcuts = False
 
 ## Provide an alternative handler to be called when the user presses Return. This
 #  is an advanced option intended for debugging, which may be changed or removed
@@ -759,7 +758,7 @@ c.TerminalInteractiveShell.emacs_bindings_in_vi_insert_mode = True
 
 ## Display the current vi mode (when using vi editing mode).
 #  Default: True
-# c.TerminalInteractiveShell.prompt_includes_vi_mode = True
+c.TerminalInteractiveShell.prompt_includes_vi_mode = False
 
 ## The format for line numbering, will be passed `line` (int, 1 based) the
 #  current line number and `rel_line` the relative line number. for example to
