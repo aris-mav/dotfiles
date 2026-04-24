@@ -45,7 +45,7 @@ function ToggleQuickfix()
         vim.cmd('copen')
     end
 end
-vim.keymap.set('n', "<leader>c", ':lua ToggleQuickfix()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', "<A-c>", ':lua ToggleQuickfix()<CR>', { noremap = true, silent = true })
 vim.keymap.set("n", "<C-n>", ":cn <cr>zzzv", { remap = true, silent = false })
 vim.keymap.set("n", "<C-p>", ":cp <cr>zzzv", { remap = true, silent = false })
 

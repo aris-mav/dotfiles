@@ -37,7 +37,7 @@ function! ToggleQuickfix()
     endif
 endfunction
 
-nnoremap <silent> <leader>c :call ToggleQuickfix()<CR>
+nnoremap <silent> <A-c> :call ToggleQuickfix()<CR>
 nmap <C-n> :cn <cr>zzzv
 nmap <C-p> :cp <cr>zzzv
 
