@@ -437,7 +437,7 @@ c.TerminalIPythonApp.display_banner = False
 
 ## Set the color scheme (nocolor, neutral, linux, lightbg).
 #  Default: 'neutral'
-# c.InteractiveShell.colors = 'neutral'
+c.InteractiveShell.colors = 'linux'
 
 #  Default: False
 # c.InteractiveShell.debug = False
@@ -595,7 +595,7 @@ c.TerminalIPythonApp.display_banner = False
 
 ## Set the color scheme (nocolor, neutral, linux, lightbg).
 #  See also: InteractiveShell.colors
-# c.TerminalInteractiveShell.colors = 'neutral'
+c.TerminalInteractiveShell.colors = 'linux'
 
 ## Set to confirm when you try to exit IPython with an EOF (Control-D in Unix,
 #  Control-Z/Enter in Windows). By typing 'exit' or 'quit', you can force a
