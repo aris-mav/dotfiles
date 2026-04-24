@@ -31,13 +31,14 @@ vim.keymap.set('n', 'ZZ', function()
 end)
 -- choose lsp using the $JULIALSP environment variable
 if os.getenv("JULIALSP") == "jetls" then
+
     vim.lsp.config("jetls", {
         cmd = {
             "jetls",
-            "--threads=auto",
-            "--",
+            "serve",
         },
-        filetypes = {"julia"},
+        filetypes = { "julia" },
+        root_markers = { "Project.toml" }
     })
     vim.lsp.enable("jetls")
 
@@ -77,4 +78,6 @@ elseif os.getenv("JULIALSP") == "julials" then
     end
 
     vim.lsp.enable("julials")
+else
+    vim.notify("Use the $JULIALSP environment variable to choose lsp.")
 end
