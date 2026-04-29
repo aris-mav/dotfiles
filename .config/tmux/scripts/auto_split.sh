@@ -20,7 +20,7 @@ if [ "$panes" -eq 1 ] && [ "$width" -gt 120 ]; then
     else
         size="$((width * 33 / 100))"
     fi
-    tmux split-window -d -b -h -l $size
+    tmux split-window -d -b -h -l $size -c "$path"
 
 elif [ "$width" -gt 80 ] && [ "$height" -gt 30 ]; then
 
