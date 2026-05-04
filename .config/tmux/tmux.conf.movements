@@ -23,6 +23,11 @@ bind -n M-S-Right resize-pane -R
 bind -n M-S-Up    resize-pane -U
 bind -n M-S-Down  resize-pane -D
 
+bind-key -n M-H swap-pane -U
+bind-key -n M-J swap-pane -D
+bind-key -n M-K swap-pane -U
+bind-key -n M-L swap-pane -D
+
 # Alt+number to switch to corresponding window
 bind -n M-1 select-window -t :1
 bind -n M-2 select-window -t :2
