@@ -85,7 +85,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.keymap.set("n", "gb", function()
       vim.cmd("w")
-      vim.cmd("!$NOTES_DIR/nt.sh -p %:p")
+      vim.cmd("!FORCE_XO=true $NOTES_DIR/nt.sh -p %:p")
     end, { buffer = true, silent = true })
   end,
 })
