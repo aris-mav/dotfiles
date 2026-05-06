@@ -13,17 +13,17 @@
         "clock",
     ],
     "modules-right": [
-        "pulseaudio",
-        "network",
-        "power-profiles-daemon",
         "cpu",
         "memory",
         "backlight",
+        "pulseaudio",
+        "network",
         "battery",
         "battery#bat2",
+        "power-profiles-daemon",
         "niri/language",
-        "custom/power"
         // "idle_inhibitor",
+        "custom/power"
     ],
     "keyboard-state": {
         "capslock": true,
@@ -34,7 +34,6 @@
         }
     },
     "mpd": {
-        // "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
         "format": "{volume}% {stateIcon} {title}",
         "format-disconnected": "mpd not connected",
         "format-stopped": " 󰝛 ",
@@ -44,7 +43,6 @@
             "on": " "
         },
         "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
             "on": " "
         },
         "repeat-icons": {
@@ -57,8 +55,12 @@
             "paused": "",
             "playing": ""
         },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
+        "tooltip-format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "tooltip-format-disconnected": "MPD (disconnected)",
+        "on-click": "mpc toggle",
+        "on-scroll-up": "mpc next",
+        "on-scroll-down": "mpc prev",
+        "interval": 2,
     },
 
     "niri/language": {
@@ -79,7 +81,6 @@
         "spacing": 10,
         // "icons": {
         //   "blueman": "bluetooth",
-        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
         // }
     },
     "clock": {
@@ -139,12 +140,12 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{signalStrength}%  ",
-        "format-ethernet": "{ipaddr}/{cidr} 󰊗",
-        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "format-ethernet": "{ipaddr}/{cidr} 󰈁",
+        "tooltip-format": "{essid}, {ifname} via {gwaddr}",
         "format-linked": "{ifname} (No IP) 󰊗",
         "format-disconnected": "Disconnected ⚠",
         // "format-alt": "{ifname}: {ipaddr}/{cidr}"
-        "format-alt": "{essid} ({signalStrength}%) ",
+        "format-alt": "{essid}  ",
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -175,7 +176,7 @@
 			"shutdown": "shutdown",
 			"reboot": "reboot",
 			"suspend": "systemctl suspend",
-			"hibernate": "systemctl hibernate"
+			// "hibernate": "systemctl hibernate"
 		}
     }
 }
