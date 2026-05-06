@@ -21,21 +21,24 @@ window#waybar {
 
 #workspaces button {
     all: initial;
-    padding: 4px 10px;
-    margin: 4px 2px;
-    border-radius: 7px;
+    padding: 2px 7px;
+    margin: 2px 2px;
+    color: #928374; 
+    transition: all 0.2s ease;
+}
+
+#workspaces button.active {
+    color: #ebdbb2; 
+    font-weight: bold;
+    background-color: transparent;
+}
+
+#workspaces button:hover {
     color: #ebdbb2;
 }
 
-#workspaces button.active,
-#workspaces button:hover {
-    color: #282828;
-    background-color: #ebdbb2;
-}
-
 #workspaces button.urgent {
-    background-color: #cc241d;
-    color: #fbf1c7;
+    color: #fb4934;
 }
 
 tooltip {
