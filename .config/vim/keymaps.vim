@@ -7,7 +7,7 @@ nnoremap <C-q> :q<CR>
 nnoremap <leader>q :q<CR>
 nmap <leader>w :w <cr>
 nmap <leader>e :Ex<cr>
-nmap <leader>b :ls<cr>
+nmap <leader>b :buffers<cr>:b<space> 
 nmap <leader>m :marks<cr>
 
 " --- Keeping cursor centered ---
