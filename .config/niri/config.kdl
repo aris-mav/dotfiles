@@ -141,8 +141,8 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    // default-column-width { proportion 0.5; }
-    default-column-width { proportion 1.0; }
+    default-column-width { proportion 0.5; }
+    // default-column-width { proportion 1.0; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -321,6 +321,11 @@ window-rule {
     default-column-width {}
 }
 
+window-rule {
+    match app-id="alacritty"
+    default-column-width { proportion 0.4; }
+}
+
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
     // This app-id regular expression will work for both:
@@ -365,8 +370,8 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal" { spawn "alacritty"; }
-    Mod+B hotkey-overlay-title="Open a Browser" { spawn "firefox"; }
+    Mod+Return { spawn "~/.config/niri/toggle_app.sh" "alacritty"; }
+    Mod+B      { spawn "~/.config/niri/toggle_app.sh" "firefox"; }
 
     Mod+F hotkey-overlay-title="Run an Application" { 
         spawn "rofi" "-combi-modi" "window,drun" "-show" "combi" "-modes" "combi"; 
@@ -554,7 +559,7 @@ binds {
     // Mod+R { switch-preset-column-width-back; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
-    Mod+M { maximize-column; }
+    Mod+M { maximize-window-to-edges; }
     Mod+Shift+F { fullscreen-window; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
