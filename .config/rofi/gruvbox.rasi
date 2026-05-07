@@ -1,0 +1,51 @@
+/* Gruvbox Dark color palette for Rofi */
+* {
+    bg:      #282828;
+    bg-alt:  #3c3836;
+    fg:      #ebdbb2;
+    accent:  #fabd2f; /* Yellow */
+
+    background-color: @bg;
+    text-color:       @fg;
+}
+
+window {
+    border:           2px;
+    border-color:     @bg-alt;
+    padding:          5;
+}
+
+mainbox {
+    border:  0;
+    padding: 0;
+}
+
+element {
+    padding: 1px;
+    spacing: 5px;
+    border:  0;
+}
+
+element selected {
+    background-color: @bg-alt;
+    text-color:       @accent;
+}
+
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+inputbar {
+    spacing:    0;
+    text-color: @fg;
+    padding:    1px;
+    children:   [ prompt, textbox-prompt-colon, entry, case-indicator ];
+}
+
+textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em;
+    text-color: @fg;
+}
