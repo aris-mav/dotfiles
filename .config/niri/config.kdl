@@ -273,6 +273,14 @@ layout {
 // See the binds section below for more spawn examples.
 spawn-at-startup "waybar"
 
+spawn-at-startup "udiskie" "--smart-tray"
+
+spawn-at-startup "swayidle" "-w" \
+    "timeout" "300" "niri msg action power-off-monitors" \
+    "resume" "niri msg action power-on-monitors" \
+    "timeout" "600" "systemctl suspend" \
+    "before-sleep" "swaylock -f"
+
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -373,6 +381,8 @@ binds {
     Mod+Return { spawn "~/.config/niri/toggle_app.sh" "alacritty"; }
     Mod+T { spawn "~/.config/niri/toggle_app.sh" "alacritty"; }
     Mod+B { spawn "~/.config/niri/toggle_app.sh" "firefox"; }
+
+    Mod+D { spawn "makoctl" "dismiss"; }
 
     Mod+F hotkey-overlay-title="Run an Application" { 
         spawn "rofi" "-combi-modi" "window,drun" "-show" "combi" "-modes" "combi"; 
