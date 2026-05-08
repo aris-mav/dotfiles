@@ -24,6 +24,15 @@
         // "idle_inhibitor",
         "custom/power"
     ],
+
+    "niri/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            // Match by workspace name (defined in your Niri config)
+            "web": "󰈹",
+            "terminal": "",
+        }
+    },
     "keyboard-state": {
         "capslock": true,
         "format": "{name} {icon}",

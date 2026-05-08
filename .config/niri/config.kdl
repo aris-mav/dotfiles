@@ -319,6 +319,23 @@ animations {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
+workspace "terminal"
+workspace "web"
+
+// Browser Rule
+window-rule {
+    match app-id="firefox"
+    open-on-workspace "web"
+    default-column-width { proportion 1.0; }
+}
+
+// Terminal Rule
+window-rule {
+    match app-id="Alacritty"
+    open-on-workspace "terminal"
+    default-column-width { proportion 1.0; }
+}
+
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
 window-rule {
@@ -327,11 +344,6 @@ window-rule {
     // You can get away with just app-id="wezterm" if you want.
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
-}
-
-window-rule {
-    match app-id="alacritty"
-    default-column-width { proportion 0.4; }
 }
 
 // Open the Firefox picture-in-picture player as floating by default.
