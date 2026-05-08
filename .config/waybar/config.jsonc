@@ -30,7 +30,7 @@
         "format-icons": {
             // Match by workspace name (defined in your Niri config)
             "web": "󰈹",
-            "terminal": "",
+            "terminal": "",
         }
     },
     "keyboard-state": {
