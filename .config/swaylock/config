@@ -26,3 +26,6 @@ text-clear-color=282828
 layout-bg-color=282828
 layout-text-color=ebdbb2
 separator-color=00000000
+
+indicator-idle-visible
+font-size=35
