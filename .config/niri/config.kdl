@@ -398,6 +398,7 @@ binds {
     Mod+Return { spawn "~/.config/niri/toggle_app.sh" "alacritty"; }
     Mod+T { spawn "~/.config/niri/toggle_app.sh" "alacritty"; }
     Mod+B { spawn "~/.config/niri/toggle_app.sh" "firefox"; }
+    Mod+M { spawn "~/.config/niri/toggle_app.sh" "music"; }
 
     Mod+D { spawn "makoctl" "dismiss"; }
 

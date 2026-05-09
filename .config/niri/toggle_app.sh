@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# A simple "launch or focus" script for Niri
 APP_NAME=$1
 
 ID=$(
@@ -12,7 +11,18 @@ ID=$(
 
 if [ -z "$ID" ] || [ "$ID" = "null" ]; then
     # Not open? Launch it.
-    niri msg action spawn -- "$APP_NAME"
+
+    if [ "$APP_NAME" = "music" ]; then
+        niri msg action spawn -- alacritty \
+        --class music \
+        --title rmpc \
+        --config-file .config/alacritty/alacritty_minimal.toml \
+        -e rmpc
+
+    else
+        niri msg action spawn -- "$APP_NAME"
+    fi
+
 else
     # Open? Focus it.
     niri msg action focus-window --id "$ID"
