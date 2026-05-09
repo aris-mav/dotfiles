@@ -28,9 +28,9 @@
     "niri/workspaces": {
         "format": "{icon}",
         "format-icons": {
-            // Match by workspace name (defined in your Niri config)
             "web": "󰈹",
             "terminal": "",
+            "default": "", 
         }
     },
     "keyboard-state": {
