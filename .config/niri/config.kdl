@@ -281,6 +281,8 @@ spawn-at-startup "swayidle" "-w" \
     "timeout" "600" "systemctl suspend" \
     "before-sleep" "swaylock -f"
 
+spawn-sh-at-startup "swaybg -c \"#282828\""
+
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -319,20 +321,19 @@ animations {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
-workspace "terminal"
 workspace "web"
+workspace "terminal"
+
+window-rule {
+    match app-id="Alacritty"
+    open-on-workspace "terminal"
+    default-column-width { proportion 1.0; }
+}
 
 // Browser Rule
 window-rule {
     match app-id="firefox"
     open-on-workspace "web"
-    default-column-width { proportion 1.0; }
-}
-
-// Terminal Rule
-window-rule {
-    match app-id="Alacritty"
-    open-on-workspace "terminal"
     default-column-width { proportion 1.0; }
 }
 
@@ -353,6 +354,14 @@ window-rule {
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
+}
+
+cursor {
+    xcursor-theme "default"
+    xcursor-size 30
+
+    hide-when-typing
+    hide-after-inactive-ms 1000
 }
 
 // Example: block out two password managers from screen capture.
