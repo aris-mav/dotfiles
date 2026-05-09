@@ -7,6 +7,7 @@
     "modules-left": [
         "niri/workspaces",
         "mpd",
+        "pulseaudio",
     ],
     "modules-center": [
         "clock",
@@ -15,7 +16,6 @@
         "cpu",
         "memory",
         "backlight",
-        "pulseaudio",
         "network",
         "battery",
         "battery#bat2",
@@ -42,7 +42,7 @@
         }
     },
     "mpd": {
-        "format": "{stateIcon} {title}",
+        "format": "{title} {stateIcon}",
         "format-disconnected": "mpd not connected",
         "format-stopped": " 󰝛 ",
         "unknown-tag": "N/A",
