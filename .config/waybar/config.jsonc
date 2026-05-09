@@ -72,9 +72,9 @@
     },
 
     "niri/language": {
-        "format": "{short}", // Displays "en", "ru", "de", etc.
+        "format": "{shortDescription}",
         "tooltip": true,
-        // "on-click": "niri msg action switch-next-keyboard-layout",
+        "on-click": "niri msg action switch-layout next",
     },
 
     "idle_inhibitor": {
