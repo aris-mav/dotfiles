@@ -44,7 +44,7 @@
     "mpd": {
         "format": "{title} {stateIcon}",
         "format-disconnected": "mpd not connected",
-        "format-stopped": " 󰝛 ",
+        "format-stopped": "  ",
         "unknown-tag": "N/A",
         "interval": 5,
         "consume-icons": {
