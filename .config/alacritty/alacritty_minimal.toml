@@ -1,4 +1,4 @@
 general.import = [
     "font.toml", 
-    "gruvbox.toml",
+    "./themes/gruvbox/dark.toml",
 ]
