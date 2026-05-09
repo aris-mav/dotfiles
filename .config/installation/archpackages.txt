@@ -39,6 +39,8 @@ networkmanager
 niri
 nodejs
 noto-fonts
+noto-fonts-cjk 
+noto-fonts-emoji
 openssh
 otf-ipafont
 pass
