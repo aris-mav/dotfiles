@@ -28,7 +28,7 @@
     "niri/workspaces": {
         "format": "{icon}",
         "format-icons": {
-            "web": "󰈹",
+            "web": "󰖟",
             "terminal": "",
             "default": "", 
         }
@@ -67,6 +67,7 @@
         "tooltip-format": " Artist: {artist} \n Album: {album} \n Title: {title} \n Queue: {songPosition}/{queueLength} \n volume: {volume}% \n {elapsedTime:%M:%S}/{totalTime:%M:%S} \n {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}",
         "tooltip-format-disconnected": "MPD (disconnected)",
         "on-click": "mpc toggle",
+        "on-click-right": "~/.config/niri/toggle_app.sh music",
         "on-scroll-up": "mpc next",
         "on-scroll-down": "mpc prev",
         "interval": 2,
@@ -174,7 +175,8 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "on-click-right": "pavucontrol",
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     },
     "custom/power": {
         "format" : "⏻ ",
