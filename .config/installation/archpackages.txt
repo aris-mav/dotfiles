@@ -46,9 +46,11 @@ openssh
 otf-ipafont
 pass
 pavucontrol
+pcmanfm
 pipewire
 pipewire-alsa
 pipewire-pulse
+polkit-gnome
 ripgrep
 ripgrep-all
 rmpc
@@ -57,6 +59,7 @@ sd
 sed
 skim
 sudo
+swaybg
 swayidle
 swaylock
 syncthing
@@ -76,6 +79,7 @@ waybar
 wikiman
 wireplumber
 wl-clipboard
+xdg-desktop-portal-gnome
 xwayland-satellite
 yt-dlp
 zathura
