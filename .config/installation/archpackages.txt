@@ -1,5 +1,6 @@
 7zip
 alacritty
+alsa-utils
 arch-wiki-docs
 base-devel
 bat
@@ -46,6 +47,8 @@ otf-ipafont
 pass
 pavucontrol
 pipewire
+pipewire-alsa
+pipewire-pulse
 ripgrep
 ripgrep-all
 rmpc
@@ -71,6 +74,7 @@ vim
 watchexec
 waybar
 wikiman
+wireplumber
 wl-clipboard
 xwayland-satellite
 yt-dlp
