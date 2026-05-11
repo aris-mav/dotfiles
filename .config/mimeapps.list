@@ -121,6 +121,7 @@ image/gif=swayimg.desktop
 image/webp=swayimg.desktop
 image/bmp=swayimg.desktop
 image/tiff=swayimg.desktop
+text/plain=nvim.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;com.vivaldi.Vivaldi.desktop;
