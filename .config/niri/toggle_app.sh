@@ -16,7 +16,6 @@ if [ -z "$ID" ] || [ "$ID" = "null" ]; then
         niri msg action spawn -- alacritty \
         --class music \
         --title rmpc \
-        --config-file .config/alacritty/alacritty_minimal.toml \
         -e rmpc
 
     else
