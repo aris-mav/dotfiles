@@ -13,9 +13,6 @@ vim.g.maplocalleader = "\\"
 vim.keymap.set('n', '<C-q>', ":q<CR>")
 vim.keymap.set('n', '<leader>q', ":q<CR>")
 
--- pipe selection to command
-vim.keymap.set('v', '|', ':!')
-
 -- Map leader-w to :w
 vim.keymap.set("n", "<leader>w", ":w <cr>", { remap = true, silent = false })
 
