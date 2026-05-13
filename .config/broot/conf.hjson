@@ -53,8 +53,8 @@
 #
 # You may start either in 'command' mode, or in 'input' mode
 #
-modal: true
-initial_mode: input
+# modal: true
+# initial_mode: input
 
 ###############################################################
 # Whether to mark the selected line with a triangle
@@ -131,7 +131,7 @@ special_paths: {
 # to cancel (for example when you just opened broot), uncomment
 # this parameter
 # 
-# quit_on_last_cancel: true
+quit_on_last_cancel: true
 
 ###############################################################
 # Search modes
