@@ -7,7 +7,14 @@ set splitbelow         " Horizontal splits open below
 set splitright         " Vertical splits open to the right
 set confirm            " Ask to save instead of failing a :q command
 
-set autochdir
+" Search only starting from the directory of the current file and downward
+set path=.,**
+
+" Display all matching files when we tab complete
+set wildmenu
+
+" Ignore certain folders
+set wildignore+=**/.git/**,**/build/**
 
 " --- colour ---
 set background=dark
