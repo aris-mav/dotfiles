@@ -13,10 +13,9 @@ if [ -z "$ID" ] || [ "$ID" = "null" ]; then
     # Not open? Launch it.
 
     if [ "$APP_NAME" = "music" ]; then
-        niri msg action spawn -- alacritty \
-        --class music \
-        --title rmpc \
-        -e rmpc
+
+        $0 "alacritty"
+        ~/.config/tmux/scripts/open_window.sh music rmpc
 
     else
         niri msg action spawn -- "$APP_NAME"
