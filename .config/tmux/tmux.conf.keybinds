@@ -11,6 +11,7 @@ bind % split-window -h -c "#{pane_current_path}"
 bind \" split-window -v -c "#{pane_current_path}"
 
 bind -n M-n run-shell "~/.config/tmux/scripts/auto_split.sh"
+bind -n M-N neww
 
 # Fullscreen pane
 bind -n M-z resize-pane -Z ""
