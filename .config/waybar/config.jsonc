@@ -17,12 +17,10 @@
         "cpu",
         "memory",
         "backlight",
-        "network",
         "battery",
-        "battery#bat2",
+        "network",
         "power-profiles-daemon",
         "niri/language",
-        // "idle_inhibitor",
         "custom/power"
     ],
 
@@ -151,12 +149,11 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{signalStrength}% 󰖩",
-        "format-ethernet": "{ipaddr}/{cidr} 󰈁",
-        "tooltip-format": "{essid}, {ifname} via {gwaddr}",
+        "format-ethernet": "󰈁",
         "format-linked": "{ifname} (No IP) 󰊗",
-        "format-disconnected": "Disconnected ⚠",
+        "tooltip-format": "Network: {essid}\nInterface: {ifname}\nIP: {ipaddr}\nGateway: {gwaddr}\ncidr: {cidr}",
+        "format-disconnected": "⚠",
         // "format-alt": "{ifname}: {ipaddr}/{cidr}"
-        "format-alt": "{essid}  ",
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
