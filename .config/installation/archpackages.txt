@@ -51,6 +51,7 @@ pipewire
 pipewire-alsa
 pipewire-pulse
 polkit-gnome
+power-profiles-daemon
 ripgrep
 ripgrep-all
 rmpc
