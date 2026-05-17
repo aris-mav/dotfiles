@@ -18,9 +18,7 @@ bind -n M-z resize-pane -Z ""
 bind e run-shell "~/.config/tmux/scripts/new_win_split.sh"
 
 bind -n M-m run-shell \
-         "~/.config/tmux/scripts/open_window.sh music rmpc "
-bind -n M-b run-shell \
-         "~/.config/tmux/scripts/open_window.sh bottom btm "
+         "~/.config/tmux/scripts/open_window.sh -c music rmpc "
 
 # Popups
 bind C-f display-popup -d "#{pane_current_path}" \

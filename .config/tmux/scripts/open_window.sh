@@ -1,5 +1,16 @@
 #!/bin/sh
 
+# run "command" in "window_name"
+# if "window" exists, just go there
+# -c makes repeated calls cycle betwen target window and previous window
+# use as : #0 window command_name
+# or as  : #0 -c window command_name
+
+if [ "$1" = "-c" ]; then
+    mode="cycle"
+    shift
+fi
+
 WIN="$1"
 CMD="$2"
 
@@ -13,7 +24,7 @@ case "$WIN" in
         current_win=$(tmux display -p "#W")
         if [ "$current_win" = "$WIN" ]; then
             # go to previous window
-            tmux select-window -l 
+            [ "$mode" = "cycle" ] && tmux select-window -l 
         else
             # go to chosen window
             tmux select-window -t :"$WIN" || \
@@ -27,7 +38,7 @@ case "$WIN" in
         if tmux list-windows -F '#W' | grep -qx "$WIN"; then
             current_win=$(tmux display -p "#W")
             if [ "$current_win" = "$WIN" ]; then
-                tmux select-window -l 
+                [ "$mode" = "cycle" ] && tmux select-window -l 
             else
                 tmux select-window -t :"$WIN"
             fi
