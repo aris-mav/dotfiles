@@ -1,12 +1,17 @@
 return {
 
     "nvim-treesitter/nvim-treesitter",
+    branch = "master",
     build = function()
         require("nvim-treesitter.install").update({ with_sync = true })()
+    end,
+    cond = function()
+        return vim.version().minor < 12
     end,
     dependencies = {
         'HiPhish/rainbow-delimiters.nvim',
         'nvim-treesitter/nvim-treesitter-textobjects',
+        'mawkler/demicolon.nvim',
     },
     rainbow = {
         enable = true,
