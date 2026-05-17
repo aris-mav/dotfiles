@@ -13,6 +13,7 @@
         "clock",
     ],
     "modules-right": [
+        "keyboard-state",
         "cpu",
         "memory",
         "backlight",
@@ -35,10 +36,10 @@
     },
     "keyboard-state": {
         "capslock": true,
-        "format": "{name} {icon}",
+        "format": "{icon}",
         "format-icons": {
-            "locked": "",
-            "unlocked": ""
+            "locked": "CAPS ",
+            "unlocked": ""
         }
     },
     "mpd": {
