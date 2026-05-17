@@ -15,9 +15,9 @@
         "clock",
     ],
     "modules-right": [
+        "backlight",
         "cpu",
         "memory",
-        "backlight",
         "battery",
         "network",
         "power-profiles-daemon",
@@ -98,11 +98,11 @@
         "format-alt": "{:%d/%m/%Y}"
     },
     "cpu": {
-        "format": "{usage}%  ",
+        "format": "{usage}% ",
         "tooltip": false
     },
     "memory": {
-        "format": "{}%  "
+        "format": "{}% "
     },
     "temperature": {
         // "thermal-zone": 2,
