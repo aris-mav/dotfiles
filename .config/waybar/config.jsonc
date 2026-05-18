@@ -36,7 +36,7 @@
         "capslock": true,
         "format": "{icon}",
         "format-icons": {
-            "locked": "CAPS ",
+            "locked": " CAPS ",
             "unlocked": ""
         }
     },
