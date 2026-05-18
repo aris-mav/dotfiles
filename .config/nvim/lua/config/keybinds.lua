@@ -27,6 +27,10 @@ vim.keymap.set("n", "N", "Nzzzv", { remap = true, silent = false })
 vim.keymap.set("n", "<C-d>", "<C-d>zzzv", { remap = true, silent = false })
 vim.keymap.set("n", "<C-u>", "<C-u>zzzv", { remap = true, silent = false })
 
+-- Keep selection alive after indenting in Visual Mode
+vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
+vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
+
 -- U for redo
 vim.keymap.set("n", "U", "<C-r>", { remap = true, silent = false })
 

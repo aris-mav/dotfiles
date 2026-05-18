@@ -18,6 +18,10 @@ nmap N Nzzzv
 nmap <C-d> <C-d>zzzv
 nmap <C-u> <C-u>zzzv
 
+" Keep selection alive after indenting in Visual Mode
+vnoremap < <gv
+vnoremap > >gv
+
 " --- Redo ---
 nnoremap U <C-r>
 
