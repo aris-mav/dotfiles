@@ -20,6 +20,8 @@ bind e run-shell "~/.config/tmux/scripts/new_win_split.sh"
 
 bind -n M-m run-shell \
          "~/.config/tmux/scripts/open_window.sh -c music rmpc "
+bind -n M-M run-shell \
+         "~/.config/tmux/scripts/open_window.sh -c system_monitor btm "
 
 # Popups
 bind C-f display-popup -d "#{pane_current_path}" \

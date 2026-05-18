@@ -394,11 +394,12 @@ binds {
 
     Mod+Return { spawn "~/.config/niri/toggle_app.sh" "alacritty"; }
 
-    Mod+T { spawn "~/.config/niri/toggle_app.sh" "alacritty"; }
-    Mod+B { spawn "~/.config/niri/toggle_app.sh" "firefox"; }
-    Mod+M { spawn "~/.config/niri/toggle_app.sh" "music"; }
+    Mod+T       { spawn "~/.config/niri/toggle_app.sh" "alacritty"; }
+    Mod+B       { spawn "~/.config/niri/toggle_app.sh" "firefox"; }
+    Mod+M       { spawn "~/.config/niri/toggle_app.sh" "music"; }
+    Mod+Shift+M { spawn "~/.config/niri/toggle_app.sh" "system_monitor"; }
 
-    Mod+D { spawn "makoctl" "dismiss"; }
+    Mod+D       { spawn "makoctl" "dismiss"; }
     Mod+Shift+D { spawn "makoctl" "restore"; }
 
     Mod+F hotkey-overlay-title="Run an Application" { 

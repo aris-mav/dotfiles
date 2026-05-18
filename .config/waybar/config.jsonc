@@ -99,10 +99,12 @@
     },
     "cpu": {
         "format": "{usage}% ",
-        "tooltip": false
+        "tooltip": false,
+        "on-click-right": "~/.config/niri/toggle_app.sh system_monitor",
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}% ",
+        "on-click-right": "~/.config/niri/toggle_app.sh system_monitor",
     },
     "temperature": {
         // "thermal-zone": 2,

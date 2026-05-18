@@ -17,6 +17,10 @@ if [ -z "$ID" ] || [ "$ID" = "null" ]; then
         $0 "alacritty"
         ~/.config/tmux/scripts/open_window.sh music rmpc
 
+    elif [ "$APP_NAME" = "system_monitor" ]; then
+
+        $0 "alacritty"
+        ~/.config/tmux/scripts/open_window.sh system_monitor btm
     else
         niri msg action spawn -- "$APP_NAME"
     fi
