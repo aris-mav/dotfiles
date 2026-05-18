@@ -48,6 +48,7 @@ return {
                     vim.keymap.set("n", "<C-s>",      vim.lsp.buf.signature_help,  opts)
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename,          opts)
                     vim.keymap.set("n", "<leader>d",  vim.diagnostic.open_float,   opts)
+                    vim.keymap.set('n', '<leader>a',  vim.lsp.buf.code_action,     opts)
 
                 end,
             })
