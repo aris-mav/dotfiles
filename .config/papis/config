@@ -1,11 +1,12 @@
 [settings]
 default-library = library
+opentool = xdg-open
+editor = nvim
+add-edit = True
 picktool = fzf
 
 [library]
 dir = ~/library
-opentool = xdg-open
-editor = nvim
 use-git = True
 notes-name = notes.md
 database-backend = papis
@@ -15,4 +16,4 @@ citations-file-name = citations.yaml
 ref-format = {doc[author]:.6}_{doc[year]}_{doc[title]:.10}
 add-folder-name = {doc[year]}/{doc[author]:.15}
 add-file-name = {doc[title]:.30}
-
+doc-paths-word-separator = _
