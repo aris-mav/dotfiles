@@ -52,16 +52,6 @@ augroup TabSettings
     autocmd FileType csv,tsv,txt setlocal noexpandtab tabstop=4
 augroup END
 
-" --- Readonly convenience mappings ---
-augroup ReadOnlyMappings
-    autocmd!
-    autocmd BufWinEnter,FileType * if &readonly || !&modifiable |
-        \ nnoremap <buffer> <silent> d <C-d>zz |
-        \ nnoremap <buffer> <silent> u <C-u>zz |
-        \ nnoremap <buffer> <silent> q :q<CR> |
-        \ endif
-augroup END
-
 " --- Dynamic colorcolumn ---
 augroup ColumnLine
     autocmd!

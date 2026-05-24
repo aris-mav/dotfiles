@@ -36,21 +36,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Readonly options for convenience
-vim.api.nvim_create_autocmd({"BufWinEnter", "FileType"}, {
-    callback = function()
-        -- Check if the buffer is read-only or not modifiable
-        if vim.bo.readonly or not vim.bo.modifiable then
-
-            local opts = { buffer = true, silent = true }
-
-            vim.keymap.set("n", "d", "<C-d>zz", opts)
-            vim.keymap.set("n", "u", "<C-u>zz", opts)
-            vim.keymap.set("n", "q", ":q<CR>", opts)
-
-        end
-    end,
-})
 
 -- colorcolumn
 local column_group = vim.api.nvim_create_augroup("ColumnLine", { clear = true })

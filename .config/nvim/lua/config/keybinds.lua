@@ -62,6 +62,22 @@ vim.keymap.set("t", "<A-j>", "<C-\\><C-N><C-w>j", { noremap = true, silent = tru
 vim.keymap.set("t", "<A-k>", "<C-\\><C-N><C-w>k", { noremap = true, silent = true })
 vim.keymap.set("t", "<A-l>", "<C-\\><C-N><C-w>l", { noremap = true, silent = true })
 
+-- Readonly options for convenience
+vim.api.nvim_create_autocmd({"BufWinEnter", "FileType"}, {
+    callback = function()
+        -- Check if the buffer is read-only or not modifiable
+        if vim.bo.readonly or not vim.bo.modifiable then
+
+            local opts = { buffer = true, silent = true }
+
+            vim.keymap.set("n", "d", "<C-d>zz", opts)
+            vim.keymap.set("n", "u", "<C-u>zz", opts)
+            vim.keymap.set("n", "q", ":q<CR>", opts)
+
+        end
+    end,
+})
+
 vim.keymap.set("n", "gx", function()
     local word = vim.fn.expand("<cWORD>")
     -- Remove wrapping parentheses or brackets

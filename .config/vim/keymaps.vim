@@ -90,3 +90,13 @@ augroup END
 
 " --- Copy filename ---
 nnoremap <silent> cp :let @+ = expand("%")<CR> 
+
+" --- Readonly convenience mappings ---
+augroup ReadOnlyMappings
+    autocmd!
+    autocmd BufWinEnter,FileType * if &readonly || !&modifiable |
+        \ nnoremap <buffer> <silent> d <C-d>zz |
+        \ nnoremap <buffer> <silent> u <C-u>zz |
+        \ nnoremap <buffer> <silent> q :q<CR> |
+        \ endif
+augroup END
