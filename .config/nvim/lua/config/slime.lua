@@ -1,47 +1,63 @@
--- set target pane 
-vim.g.tpane = "!"
--- Options are: '.bottom-right' or 'window.pane' or '!' (last active pane)
--- change interactively using `:let g:target_pane = ":1.3"`
-
--- set buffer name
+-- declare buffer name for tmux
 vim.g.bname = "slime"
-
-local function grab_selection()
-
-    -- Exit visual mode cleanly to update the selection markers ('< and '>)
-    vim.api.nvim_feedkeys(
-        vim.api.nvim_replace_termcodes("<ESC>", true, false, true), "x", true
-    )
-
-    local lines = vim.fn.getregion(
-        vim.fn.getpos("'<"),
-        vim.fn.getpos("'>"),
-        { type = vim.fn.visualmode() }
-    )
-
-    local text = table.concat(lines, "\n")
-
-    return text
-
-end
 
 local function send_tmux(text)
 
-    vim.fn.system({"tmux", "set-buffer",
-        "-b", vim.g.bname, text,
-    })
-    vim.fn.system({"tmux", "paste-buffer", "-p",
-        "-b", vim.g.bname, "-t", vim.g.tpane,
-    })
-    vim.fn.system({"tmux", "send-keys",
-        "-t", vim.g.tpane, "\r",
-    })
+    -- set target pane (! is default, means "last active pane")
+    if not vim.g.tpane or vim.g.tpane == "" then
 
+        local input_pane = vim.fn.input("Target tmux pane: ", "!")
+
+        if input_pane == "" then
+            print("\nCancelled: No tmux pane specified.")
+            return
+        end
+        vim.g.tpane = input_pane
+    end
+
+    -- send text to target pane
+    vim.fn.system(
+        { "tmux", "set-buffer", "-b", vim.g.bname, text }
+    )
+    vim.fn.system(
+        { "tmux", "paste-buffer", "-p", "-b", vim.g.bname, "-t", vim.g.tpane }
+    )
+    vim.fn.system(
+        { "tmux", "send-keys", "-t", vim.g.tpane, "\r" }
+    )
 end
 
-vim.keymap.set( "v", "<cr>",
+_G.slime_operator = function(motion_type)
+    -- Determine the correct marks based on whether we came from Visual mode
+    -- Visual mode uses '< and '>, Normal mode motions use '[ and ']
+    local is_visual  = (motion_type == nil)
+    local start_mark = is_visual and "'<" or "'["
+    local end_mark   = is_visual and "'>" or "']"
+
+    -- Map the motion/visual type to what getregion expects
+    local reg_type = "v"
+
+    if is_visual then
+        reg_type = vim.fn.visualmode()
+    elseif motion_type == "line" then
+        reg_type = "V"
+    elseif motion_type == "block" then
+        reg_type = "\22"
+    end
+
+    local lines = vim.fn.getregion(
+        vim.fn.getpos(start_mark),
+        vim.fn.getpos(end_mark),
+        { type = reg_type }
+    )
+    send_tmux(table.concat(lines, "\n"))
+end
+
+-- We map both 'n' and 'x' (Visual mode, excluding Select mode)
+vim.keymap.set({ "n", "x" }, "<CR>",
     function()
-        send_tmux(grab_selection())
+        vim.o.operatorfunc = "v:lua.slime_operator"
+        return "g@"
     end,
-    { desc = "Send selection to tmux" }
+    { expr = true, desc = "Send to tmux (motion or visual)" }
 )
