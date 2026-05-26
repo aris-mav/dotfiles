@@ -1,6 +1,7 @@
 -- Direct tmux command targeting the right pane ('.bottom-right', '.1', ...)
 -- "!" means last active pane
 local target_pane = "!"
+local buffer_name = "slime"
 
 local function send_selection_to_tmux()
 
@@ -10,15 +11,23 @@ local function send_selection_to_tmux()
     )
 
     -- Extract the visually selected text range
-    local start_pos = vim.fn.getpos("'<")
-    local end_pos = vim.fn.getpos("'>")
+    local lines = vim.fn.getregion(
+        vim.fn.getpos("'<"),
+        vim.fn.getpos("'>"),
+        { type = vim.fn.visualmode() }
+    )
 
-    -- Get the exact text region between the visual marks
-    local lines = vim.fn.getregion(start_pos, end_pos, { type = vim.fn.visualmode() })
-    local text = table.concat(lines, "\n")  .. "\n\r"
+    local text = table.concat(lines, "\n")
 
-    vim.fn.system({ "tmux", "set-buffer", text })
-    vim.fn.system({ "tmux", "paste-buffer", "-dp", "-t", target_pane })
+    vim.fn.system({"tmux", "set-buffer",
+        "-b", buffer_name, text,
+    })
+    vim.fn.system({"tmux", "paste-buffer", "-p",
+        "-b", buffer_name, "-t", target_pane,
+    })
+    vim.fn.system({"tmux", "send-keys",
+        "-t", target_pane, "\r",
+    })
 end
 
 vim.keymap.set( "v", "<cr>", send_selection_to_tmux,
