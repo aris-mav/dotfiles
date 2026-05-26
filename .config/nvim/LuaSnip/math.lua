@@ -259,9 +259,9 @@ for _, symbol in pairs({
 }) do
     table.insert(snippets,
         s({ trig=symbol}, {
-            t("\\".. symbol .."{\\left( "),
+            t("\\".. symbol .."{ "),
             i(1, ""),
-            t(" \\right)}"),
+            t(" }"),
         })
     )
 end
