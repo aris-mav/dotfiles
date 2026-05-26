@@ -1,16 +1,18 @@
--- Direct tmux command targeting the right pane ('.bottom-right', '.1', ...)
--- "!" means last active pane
-local target_pane = "!"
-local buffer_name = "slime"
+-- set target pane 
+vim.g.tpane = "!"
+-- Options are: '.bottom-right' or 'window.pane' or '!' (last active pane)
+-- change interactively using `:let g:target_pane = ":1.3"`
 
-local function send_selection_to_tmux()
+-- set buffer name
+vim.g.bname = "slime"
+
+local function grab_selection()
 
     -- Exit visual mode cleanly to update the selection markers ('< and '>)
     vim.api.nvim_feedkeys(
         vim.api.nvim_replace_termcodes("<ESC>", true, false, true), "x", true
     )
 
-    -- Extract the visually selected text range
     local lines = vim.fn.getregion(
         vim.fn.getpos("'<"),
         vim.fn.getpos("'>"),
@@ -19,17 +21,27 @@ local function send_selection_to_tmux()
 
     local text = table.concat(lines, "\n")
 
-    vim.fn.system({"tmux", "set-buffer",
-        "-b", buffer_name, text,
-    })
-    vim.fn.system({"tmux", "paste-buffer", "-p",
-        "-b", buffer_name, "-t", target_pane,
-    })
-    vim.fn.system({"tmux", "send-keys",
-        "-t", target_pane, "\r",
-    })
+    return text
+
 end
 
-vim.keymap.set( "v", "<cr>", send_selection_to_tmux,
+local function send_tmux(text)
+
+    vim.fn.system({"tmux", "set-buffer",
+        "-b", vim.g.bname, text,
+    })
+    vim.fn.system({"tmux", "paste-buffer", "-p",
+        "-b", vim.g.bname, "-t", vim.g.tpane,
+    })
+    vim.fn.system({"tmux", "send-keys",
+        "-t", vim.g.tpane, "\r",
+    })
+
+end
+
+vim.keymap.set( "v", "<cr>",
+    function()
+        send_tmux(grab_selection())
+    end,
     { desc = "Send selection to tmux" }
 )
