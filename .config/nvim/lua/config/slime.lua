@@ -17,7 +17,7 @@ local function send_tmux(text)
 
     -- send text to target pane
     vim.fn.system(
-        { "tmux", "set-buffer", "-b", vim.g.bname, text }
+        { "tmux", "set-buffer", "-b", vim.g.bname, "--", text }
     )
     vim.fn.system(
         { "tmux", "paste-buffer", "-p", "-b", vim.g.bname, "-t", vim.g.tpane }
