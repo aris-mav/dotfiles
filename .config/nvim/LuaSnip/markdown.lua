@@ -19,7 +19,7 @@ return {
     s("mathinline", {
         t({"$"}),
         i(1, "maths"),
-        t({"$"}),
+        t({"$ "}),
     }),
 
 }
