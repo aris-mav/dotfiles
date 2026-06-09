@@ -36,6 +36,16 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- match statusline and colorcolumn colours
+vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
+    callback = function()
+        local colorcolumn_hl = vim.api.nvim_get_hl(0,
+            { name = "ColorColumn", link = false })
+        local cc_bg = colorcolumn_hl.bg or colorcolumn_hl.ctermbg
+        vim.api.nvim_set_hl(0, "StatusLine", { bg = cc_bg })
+        vim.api.nvim_set_hl(0, "StatusLineNC", { bg = cc_bg })
+    end,
+})
 
 -- colorcolumn
 local column_group = vim.api.nvim_create_augroup("ColumnLine", { clear = true })
