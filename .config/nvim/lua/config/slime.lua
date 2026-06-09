@@ -1,22 +1,8 @@
 -- declare buffer name for tmux
 vim.g.bname = "slime"
 
-local function send_tmux(text)
+local function send_to_tpane(text)
 
-    if not vim.g.tpane or vim.g.tpane == "" then
-
-        -- "!" is default, and means "last active pane"
-        -- otherwise, the syntax is "window_number.pane_number"
-        local input_pane = vim.fn.input("Target tmux pane: ", "!")
-
-        if input_pane == "" then
-            print("\nCancelled: No tmux pane specified.")
-            return
-        end
-        vim.g.tpane = input_pane
-    end
-
-    -- send text to target pane
     vim.fn.system(
         { "tmux", "set-buffer", "-b", vim.g.bname, "--", text }
     )
@@ -26,6 +12,21 @@ local function send_tmux(text)
     vim.fn.system(
         { "tmux", "send-keys", "-t", vim.g.tpane, "\r" }
     )
+
+end
+
+local function check_tpane()
+    if not vim.g.tpane or vim.g.tpane == "" then
+        -- tmux syntax is "window.pane" (e.g. 1.3)
+        -- the default option below is "!", and it means "last active pane"
+        local input_pane = vim.fn.input("Target tmux pane: ", "!")
+
+        if input_pane == "" then
+            print("\nCancelled: No tmux pane specified.")
+            return
+        end
+        vim.g.tpane = input_pane
+    end
 end
 
 _G.slime_operator = function(motion_type)
@@ -51,11 +52,12 @@ _G.slime_operator = function(motion_type)
         vim.fn.getpos(end_mark),
         { type = reg_type }
     )
-    send_tmux(table.concat(lines, "\n"))
+    send_to_tpane(table.concat(lines, "\n"))
 end
 
 vim.keymap.set({ "n", "x" }, "<CR>",
     function()
+        check_tpane()
         vim.o.operatorfunc = "v:lua.slime_operator"
         return "g@"
     end,
@@ -64,20 +66,30 @@ vim.keymap.set({ "n", "x" }, "<CR>",
 
 vim.keymap.set("n", "<leader><CR>",
     function()
+        check_tpane()
         if not vim.g.slimestring or vim.g.slimestring == "" then
-            vim.g.slimestring = vim.fn.input("Set slimestring to : ")
+            vim.g.slimestring = vim.fn.input("Set slimestring : ")
         end
         if vim.g.slimestring ~= "" then
-            send_tmux(vim.g.slimestring)
+            send_to_tpane(vim.g.slimestring)
         end
     end,
     { desc = "Send a string to tmux pane." }
 )
 
--- vim.keymap.set("n", "<CR><CR>",
---     function()
---         vim.o.operatorfunc = "v:lua.slime_operator"
---         vim.cmd("normal! g@_")
---     end,
---     { desc = "Send current line to tmux pane." }
--- )
+vim.keymap.set("n", "<CR>c",
+    function()
+        check_tpane()
+        vim.fn.system({ "tmux", "send-keys", "-t", vim.g.tpane, 'C-c' })
+    end,
+    { desc = "Send interrupt singal to pane" }
+)
+
+vim.keymap.set("n", "<CR><CR>",
+    function()
+        check_tpane()
+        vim.o.operatorfunc = "v:lua.slime_operator"
+        vim.cmd("normal! g@_")
+    end,
+    { desc = "Send current line to tmux pane." }
+)
