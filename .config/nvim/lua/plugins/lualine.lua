@@ -33,8 +33,8 @@ return {
             },
             sections = {
 
-                lualine_a = {'branch'},
-                lualine_b = {'diff', 'diagnostics'},
+                lualine_a = {'diff', 'branch'},
+                lualine_b = {'diagnostics'},
                 lualine_c = {
                     {
                         'filename',
