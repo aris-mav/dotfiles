@@ -198,5 +198,42 @@ return {
         vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
         vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
         vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
+        vim.keymap.set("n", "<CR><CR>",
+            function()
+                local node = vim.treesitter.get_node()
+                if not node then return end
+
+                -- Define the structural blocks you want to capture entirely
+                local target_types = {
+                    function_definition = true,
+                    method_definition = true,
+                    for_statement = true,
+                    while_statement = true,
+                    if_statement = true,
+                    conditional_expression = true,
+                }
+
+                -- Climb up the syntax tree until we find one of our target blocks
+                while node and not target_types[node:type()] do
+                    node = node:parent()
+                end
+
+                if not node then
+                    print("No surrounding loop or function found!")
+                    return
+                end
+
+                -- Get the starting and ending lines of the entire block
+                local start_row, _, end_row, _ = node:range()
+
+                -- Move cursor to the very first line of the block
+                vim.api.nvim_win_set_cursor(0, { start_row + 1, 0 })
+                -- Enter Visual LINE mode (uppercase V) to select whole lines
+                vim.cmd("normal! V")
+                -- Move cursor to the last line of the block to finish the selection
+                vim.api.nvim_win_set_cursor(0, { end_row + 1, 0 })
+            end,
+            { desc = "Select current treesitter block." }
+        )
     end
 }

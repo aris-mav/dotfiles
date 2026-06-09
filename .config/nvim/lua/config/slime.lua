@@ -52,12 +52,12 @@ _G.slime_operator = function(motion_type)
         vim.fn.getpos(end_mark),
         { type = reg_type }
     )
+    check_tpane()
     send_to_tpane(table.concat(lines, "\n"))
 end
 
 vim.keymap.set({ "n", "x" }, "<CR>",
     function()
-        check_tpane()
         vim.o.operatorfunc = "v:lua.slime_operator"
         return "g@"
     end,
@@ -83,13 +83,4 @@ vim.keymap.set("n", "<CR>c",
         vim.fn.system({ "tmux", "send-keys", "-t", vim.g.tpane, 'C-c' })
     end,
     { desc = "Send interrupt singal to pane" }
-)
-
-vim.keymap.set("n", "<CR><CR>",
-    function()
-        check_tpane()
-        vim.o.operatorfunc = "v:lua.slime_operator"
-        vim.cmd("normal! g@_")
-    end,
-    { desc = "Send current line to tmux pane." }
 )
