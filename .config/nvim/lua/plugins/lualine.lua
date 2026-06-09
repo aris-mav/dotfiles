@@ -7,9 +7,15 @@ return {
         require('lualine').setup {
             options = {
                 -- theme = 'gruvbox',
+                theme = {
+                    normal = {
+                        a = { fg = nil, bg = nil },
+                        b = { fg = nil, bg = nil },
+                        c = { fg = nil, bg = nil },
+                    },
+                },
                 icons_enabled = true,
-                -- component_separators = { left = '', right = ''},
-                section_separators = { left = '', right = ''},
+                section_separators = { left = '', right = ''},
                 component_separators = { left = '', right = ''},
                 disabled_filetypes = {
                     statusline = {},
@@ -95,5 +101,13 @@ return {
             inactive_winbar = {},
             extensions = {}
         }
+
+        vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
+            callback = function()
+                vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+                vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE" })
+            end,
+        })
+
     end
 }
