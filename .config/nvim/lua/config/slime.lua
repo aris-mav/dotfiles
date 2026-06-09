@@ -3,9 +3,10 @@ vim.g.bname = "slime"
 
 local function send_tmux(text)
 
-    -- set target pane (! is default, means "last active pane")
     if not vim.g.tpane or vim.g.tpane == "" then
 
+        -- "!" is default, and means "last active pane"
+        -- otherwise, the syntax is "window_number.pane_number"
         local input_pane = vim.fn.input("Target tmux pane: ", "!")
 
         if input_pane == "" then
@@ -58,17 +59,25 @@ vim.keymap.set({ "n", "x" }, "<CR>",
         vim.o.operatorfunc = "v:lua.slime_operator"
         return "g@"
     end,
-    { expr = true, desc = "Send motion or visual selection to target pane." }
+    { expr = true, desc = "Send motion or visual selection to tmux pane." }
 )
 
-vim.keymap.set("n", "<CR><CR>",
+vim.keymap.set("n", "<leader><CR>",
     function()
-        if not vim.g.slimestring then
-            vim.g.slimestring = vim.fn.input("Send to tmux: ")
+        if not vim.g.slimestring or vim.g.slimestring == "" then
+            vim.g.slimestring = vim.fn.input("Set slimestring to : ")
         end
         if vim.g.slimestring ~= "" then
             send_tmux(vim.g.slimestring)
         end
     end,
-    { desc = "Send a specific string to target pane." }
+    { desc = "Send a string to tmux pane." }
 )
+
+-- vim.keymap.set("n", "<CR><CR>",
+--     function()
+--         vim.o.operatorfunc = "v:lua.slime_operator"
+--         vim.cmd("normal! g@_")
+--     end,
+--     { desc = "Send current line to tmux pane." }
+-- )
