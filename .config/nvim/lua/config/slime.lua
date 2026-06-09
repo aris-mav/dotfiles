@@ -53,11 +53,22 @@ _G.slime_operator = function(motion_type)
     send_tmux(table.concat(lines, "\n"))
 end
 
--- We map both 'n' and 'x' (Visual mode, excluding Select mode)
 vim.keymap.set({ "n", "x" }, "<CR>",
     function()
         vim.o.operatorfunc = "v:lua.slime_operator"
         return "g@"
     end,
-    { expr = true, desc = "Send to tmux (motion or visual)" }
+    { expr = true, desc = "Send motion or visual selection to target pane." }
+)
+
+vim.keymap.set("n", "<CR><CR>",
+    function()
+        if not vim.g.slimestring then
+            vim.g.slimestring = vim.fn.input("Send to tmux: ")
+        end
+        if vim.g.slimestring ~= "" then
+            send_tmux(vim.g.slimestring)
+        end
+    end,
+    { desc = "Send a specific string to target pane." }
 )
