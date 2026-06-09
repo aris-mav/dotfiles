@@ -1,5 +1,5 @@
-    abbr gC 'git commit'
-    abbr gc 'git checkout'
+    abbr gc 'git commit'
+    abbr gC 'git checkout'
     abbr gr 'git restore'
     abbr gR 'git reset'
     abbr gf 'git fetch'
@@ -15,7 +15,8 @@
     abbr grb 'git rebase'
     abbr gcp 'git cherry-pick'
     abbr gau 'git add -u'
-    abbr gacp 'git add -u ; git commit ; git push '
+    abbr gac 'git commit -a'
+    abbr gacp 'git commit -a ; git push'
 
     if set -q FUZZYFIND
 
