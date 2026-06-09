@@ -1,3 +1,7 @@
+if vim.fn.has('nvim-0.12') == 1 then
+    require('vim._core.ui2').enable()
+end
+
 -- linenumbers
 vim.wo.relativenumber = true
 vim.wo.number = true
@@ -17,7 +21,6 @@ vim.cmd[[set fillchars+=vert:\ ]]
 
 -- remove ~'s from the end of file
 vim.opt.fillchars = { eob = ' ' }
-
 
 -- A TAB character looks like 4 spaces
 vim.o.tabstop = 4
