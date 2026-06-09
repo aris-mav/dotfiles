@@ -4,3 +4,4 @@ include ./themes/gruvbox/dark
 
 set selection-clipboard clipboard
 set font "JetBrainsMono 10"
+set database "sqlite"
