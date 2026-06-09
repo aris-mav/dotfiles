@@ -33,8 +33,8 @@ return {
             },
             sections = {
 
-                lualine_a = {'diff', 'branch'},
-                lualine_b = {'diagnostics'},
+                lualine_a = {'diff'},
+                lualine_b = {'branch'},
                 lualine_c = {
                     {
                         'filename',
@@ -60,7 +60,10 @@ return {
                     }
                 },
 
-                lualine_x = {'encoding'},
+                lualine_x = {
+                    'encoding',
+                    { 'filetype', colored = true, icon_only = true },
+                },
                 lualine_y = {
                     {
                         'lsp_status',
@@ -70,7 +73,7 @@ return {
                             -- Standard unicode symbols to cycle through for LSP progress:
                             spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
                             -- Standard unicode symbol for when LSP is done:
-                            done =  '',
+                            done =  ' ',
                             -- Delimiter inserted between LSP names:
                             separator = ',',
                         },
@@ -79,14 +82,11 @@ return {
                         -- Display the LSP name
                         show_name = true,
                     },
-                    {
-                        'filetype',
-                        colored = true,   -- Displays filetype icon in color if set to true
-                        icon_only = true, -- Display only an icon for filetype
-                        icon = { align = 'left' }, -- Display filetype icon on the right hand side
-                    },
+                    'diagnostics',
                 },
-                lualine_z = {'location'}
+                lualine_z = {
+                    'location',
+                }
             },
             inactive_sections = {
                 lualine_a = {},
@@ -101,7 +101,5 @@ return {
             inactive_winbar = {},
             extensions = {}
         }
-
-
     end
 }
