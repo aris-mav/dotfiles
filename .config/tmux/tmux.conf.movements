@@ -19,11 +19,11 @@ bind -n M-j     if-shell '[ "$(tmux display -p "#{pane_at_bottom}")" = "0" ]' {s
 bind Down       if-shell '[ "$(tmux display -p "#{pane_at_bottom}")" = "0" ]' {select-pane -D} {next-window}
 bind j          if-shell '[ "$(tmux display -p "#{pane_at_bottom}")" = "0" ]' {select-pane -D} {next-window}
 
-# Resize pane using Alt + Shift + Arrow Keys
-bind -n M-S-Left  resize-pane -L 
-bind -n M-S-Right resize-pane -R
-bind -n M-S-Up    resize-pane -U
-bind -n M-S-Down  resize-pane -D
+# Resize pane
+bind -n M--  resize-pane -L 
+bind -n M-= resize-pane -R
+bind -n M-_   resize-pane -D
+bind -n M-+  resize-pane -U
 
 bind-key -n M-H swap-pane -U
 bind-key -n M-J swap-pane -D
