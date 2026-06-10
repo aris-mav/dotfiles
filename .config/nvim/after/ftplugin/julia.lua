@@ -1,16 +1,16 @@
 if vim.g.did_after_julia then
-  return
+    return
 end
 vim.g.did_after_julia = true
 
 -- modify quit, so that you don't quit easily when LSP is running
 local function julia_ls_running()
-  for _, client in ipairs(vim.lsp.get_clients()) do
-    if client.name == "julials" then
-      return true
+    for _, client in ipairs(vim.lsp.get_clients()) do
+        if client.name == "julials" then
+            return true
+        end
     end
-  end
-  return false
+    return false
 end
 local function quitvim()
     if vim.fn.winnr('$') > 1 or not julia_ls_running() then

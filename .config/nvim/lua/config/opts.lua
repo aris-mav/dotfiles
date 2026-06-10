@@ -32,11 +32,11 @@ vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 -- Change the above for some cases
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "csv", "tsv", "txt" },
-  callback = function()
-    vim.opt_local.expandtab = false
-    vim.opt_local.tabstop = 4
-  end,
+    pattern = { "csv", "tsv", "txt" },
+    callback = function()
+        vim.opt_local.expandtab = false
+        vim.opt_local.tabstop = 4
+    end,
 })
 
 -- match statusline and colorcolumn colours
@@ -96,11 +96,11 @@ vim.bo.iminsert = 0
 
 -- Use ripgrep if available
 if vim.fn.executable("rg") == 1 then
-  vim.opt.grepprg = "rg --vimgrep"
-  vim.opt.grepformat = "%f:%l:%c:%m"
+    vim.opt.grepprg = "rg --vimgrep"
+    vim.opt.grepformat = "%f:%l:%c:%m"
 else
-  vim.opt.grepprg = "grep -nH $*"
-  vim.opt.grepformat = "%f:%l:%m"
+    vim.opt.grepprg = "grep -nH $*"
+    vim.opt.grepformat = "%f:%l:%m"
 end
 
 vim.keymap.set('ca', 'g', function()
