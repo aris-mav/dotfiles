@@ -1,4 +1,3 @@
-# Pane navigation
 bind -n M-Left  if-shell '[ "$(tmux display -p "#{pane_at_left}")"   = "0" ]' {select-pane -L} {}
 bind -n M-h     if-shell '[ "$(tmux display -p "#{pane_at_left}")"   = "0" ]' {select-pane -L} {}
 bind Left       if-shell '[ "$(tmux display -p "#{pane_at_left}")"   = "0" ]' {select-pane -L} {}
@@ -19,11 +18,10 @@ bind -n M-j     if-shell '[ "$(tmux display -p "#{pane_at_bottom}")" = "0" ]' {s
 bind Down       if-shell '[ "$(tmux display -p "#{pane_at_bottom}")" = "0" ]' {select-pane -D} {next-window}
 bind j          if-shell '[ "$(tmux display -p "#{pane_at_bottom}")" = "0" ]' {select-pane -D} {next-window}
 
-# Resize pane
-bind -n M--  resize-pane -L 
-bind -n M-= resize-pane -R
-bind -n M-_   resize-pane -D
-bind -n M-+  resize-pane -U
+bind -n M-- run-shell "tmux resize-pane -x $((#{pane_width}-1))"
+bind -n M-= run-shell "tmux resize-pane -x $((#{pane_width}+1))"
+bind -n M-_ run-shell "tmux resize-pane -y $((#{pane_height}-1))"
+bind -n M-+ run-shell "tmux resize-pane -y $((#{pane_height}+1))"
 
 bind-key -n M-H swap-pane -U
 bind-key -n M-J swap-pane -D
