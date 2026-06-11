@@ -32,7 +32,7 @@ return {
                 DiagnosticSignHint  = { fg = "#8ec07c", bg = "none" },
                 NormalFloat = { bg = "#3c3836" },
                 FloatBorder = { fg = "#3c3836", bg = "#3c3836" },
-                ColorColumn = { bg = "#3c3836" },
+                -- ColorColumn = { bg = "#3c3836" },
             }
         })
         vim.cmd.colorscheme("gruvbox")
