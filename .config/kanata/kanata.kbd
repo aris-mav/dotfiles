@@ -9,7 +9,7 @@
 (deflayer base
  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
  tab  @q   @w   @e   @r   t    y    @u   @i   @o   @p   [    ]    \
- @es  @a   @s   @d   @f   g    h    @j   @k   @l   @;   @ap  ret
+ esc  @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    ret
  lsft z    x    c    v    b    n    m    ,    .    /    rsft
  lctl      lmet lalt      @sp            ralt rctl 
  )
@@ -24,19 +24,12 @@
 
 (deflayer spc_layer
  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11 f12   _
- _    _    mmid @mau mrgt @mwu  _    _    _    _    _    _    _   _
- _    mlft @mal @mad @mar @mwd  left down up   rght -    =    _
+ _    _    mmid @mau mrgt @mwu  home pgdn pgup end  _    _    _   _
+ _    mlft @mal @mad @mar @mwd  left down up   rght _    _    _
  _    caps del  @cw  S-tab bspc tab  ret  [    ]    \    _
  _         _    _         XX             _    _ 
  )
 
-(deflayer esc_layer
- _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11 f12   _
- _    _    mmid @mau mrgt @mwu  _    _    _    _    _    _    _   _
- _    mlft @mal @mad @mar @mwd  home pgdn pgup end  S--  S-=  _
- _    caps del  @cw  S-tab bspc tab  ret  S-[  S-]  S-\  _
- _         _    _         XX             _    _ 
- )
 
 (defvar
  tap-time 200
@@ -71,11 +64,7 @@
 
 (defalias
 
-
  sp (tap-hold-press $tap-time $hold-time-long spc (layer-while-held spc_layer))
-
- es (tap-hold-release-keys $tap-time $hold-time-mid  (multi esc @tap) (layer-while-held esc_layer) $left-hand-keys)
- ap (tap-hold-release-keys $tap-time $hold-time-mid  (multi '   @tap) (layer-while-held esc_layer) $right-hand-keys)
 
  ;; Home row mods
  a (tap-hold-release-keys $tap-time $hold-time-long  (multi a @tap) rmet $left-hand-keys)
