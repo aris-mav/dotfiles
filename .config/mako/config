@@ -26,3 +26,6 @@ border-color=#d65d0e
 border-color=#fb4934
 text-color=#fb4934
 default-timeout=0
+
+[category=osd]
+default-timeout=500
