@@ -435,7 +435,7 @@ binds {
     XF86AudioMute allow-when-locked=true { 
         spawn-sh r"wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle \
         && notify-send -e -c osd \
-        -h string:x-canonical-private-synchronous:volume 'Volume' \
+        -h string:x-canonical-private-synchronous:volume \
         $(wpctl get-volume @DEFAULT_AUDIO_SINK@ \
         | grep -q '[MUTED]' && echo 'Muted' || echo 'Unmuted')" 
     }

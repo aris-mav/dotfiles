@@ -30,3 +30,7 @@ default-timeout=0
 [category=osd]
 default-timeout=500
 history=0
+anchor=top-center
+text-alignment=center
+width=200
+height=50
