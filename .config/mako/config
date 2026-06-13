@@ -34,3 +34,4 @@ anchor=top-center
 text-alignment=center
 width=200
 height=50
+layer=overlay
