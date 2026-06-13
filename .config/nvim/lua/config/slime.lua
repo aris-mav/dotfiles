@@ -66,10 +66,10 @@ vim.keymap.set({ "n", "x" }, "<CR>",
 
 vim.keymap.set("n", "<leader><CR>",
     function()
-        check_tpane()
         if not vim.g.slimestring or vim.g.slimestring == "" then
             vim.g.slimestring = vim.fn.input("Set slimestring : ")
         end
+        check_tpane()
         if vim.g.slimestring ~= "" then
             send_to_tpane(vim.g.slimestring)
         end
