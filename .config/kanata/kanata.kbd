@@ -23,13 +23,12 @@
  )
 
 (deflayer spc_layer
- _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11 f12   _
- _    _    mmid @mau mrgt @mwu  home pgdn pgup end  _    _    _   _
- _    mlft @mal @mad @mar @mwd  left down up   rght _    _    _
- _    caps del  @cw  S-tab bspc tab  ret  [    ]    \    _
- _         _    _         XX             _    _ 
+ _    f1   f2   f3   f4    f5    f6   f7   f8   f9   f10  f11  f12  del
+ _    _    mmid @mau mrgt  @mwu  home pgdn pgup end  _    vold volu mute
+ _    mlft @mal @mad @mar  @mwd  left down up   rght brdn brup _
+ _    caps del  @cw  S-tab bspc  tab  ret  [    ]    \    _
+ _         _    _          XX              _    _ 
  )
-
 
 (defvar
  tap-time 200
