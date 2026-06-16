@@ -50,7 +50,7 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
     end,
 })
 
--- colorcolumn
+-- colorcolumn, only for suitable files
 local column_group = vim.api.nvim_create_augroup("ColumnLine", { clear = true })
 vim.api.nvim_create_autocmd({
     "FileType", "VimResized", "WinEnter", "BufWinEnter" },
@@ -58,32 +58,30 @@ vim.api.nvim_create_autocmd({
         group = column_group,
         pattern = "*",
         callback = function()
-            local is_modifiable = vim.bo.modifiable
-            local is_readonly = vim.bo.readonly
-            local buftype = vim.bo.buftype
-            local columns = vim.api.nvim_win_get_width(0)
-            local ftype = vim.bo.filetype
 
-            local code_width = 80
-            local md_width = 50
-
-            if not is_modifiable or is_readonly or buftype ~= "" then
+            if not vim.bo.modifiable
+                or vim.bo.readonly
+                or vim.bo.buftype ~= ""
+            then
                 vim.opt_local.colorcolumn = ""
                 return
             end
 
-            if ftype == "markdown" and columns > md_width then
-                vim.opt_local.colorcolumn = tostring(md_width+1)
-            elseif
-                columns > code_width
-                and not vim.tbl_contains({
-                    'csv',
-                    'tsv',
-                }, ftype)
-            then
-                vim.opt_local.colorcolumn = tostring(code_width + 1)
-            else
-                vim.opt_local.colorcolumn = ""
+            local ftype = vim.bo.filetype
+            if not vim.tbl_contains({
+                'csv',
+                'tsv',
+            }, ftype) then
+
+                if vim.tbl_contains({
+                    'markdown',
+                }, ftype) then
+                    vim.opt_local.colorcolumn = "51"
+                    vim.opt_local.textwidth = 50
+                else
+                    vim.opt_local.colorcolumn = "81"
+                    vim.opt_local.textwidth = 80
+                end
             end
         end
     }
@@ -121,6 +119,7 @@ vim.g.netrw_banner = 0
 
 -- vim.opt.clipboard = "unnamedplus"
 
+-- spellcheck
 vim.api.nvim_create_augroup("SpellCheckForSpecificFiletypes", {clear = true})
 vim.api.nvim_create_autocmd("FileType", {
     group = "SpellCheckForSpecificFiletypes",
@@ -133,7 +132,6 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.opt_local.spelllang = { "en_gb", "el" }
         vim.opt_local.spell = true
-        vim.opt_local.textwidth = 50
     end,
 })
 
