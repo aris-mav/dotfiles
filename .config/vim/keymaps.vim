@@ -43,9 +43,9 @@ function! ToggleQuickfix()
     endif
 endfunction
 
-nnoremap <silent> <leader>c :call ToggleQuickfix()<CR>
-nmap <C-n> :cn <cr>zzzv
-nmap <C-p> :cp <cr>zzzv
+nnoremap <silent> <A-c> :call ToggleQuickfix()<CR>
+nmap <A-d> :cn <cr>zzzv
+nmap <A-u> :cp <cr>zzzv
 
 " --- Window Navigation (Alt + hjkl) ---
 nnoremap <silent> <A-h> <C-w>h
