@@ -197,38 +197,38 @@ return {
         vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
         vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 
-        vim.keymap.set("n", "<CR><CR>", function()
-
-            local node = vim.treesitter.get_node()
-            if not node then return end
-
-            -- Define the structural blocks you want to capture entirely
-            local target_types = {
-                function_definition = true,
-                for_statement = true,
-                while_statement = true,
-                if_statement = true,
-                conditional_expression = true,
-            }
-
-            -- Climb up the syntax tree until we find one of our target blocks
-            while node and not target_types[node:type()] do
-                node = node:parent()
-            end
-
-            if not node then
-                vim.cmd("normal +")
-                return
-            end
-
-            local start_row, start_col, end_row, end_col = node:range()
-
-            vim.fn.setpos('.', {0, start_row + 1, start_col + 1, 0})
-            vim.cmd('normal! v')
-            vim.fn.setpos('.', {0, end_row + 1, end_col, 0})
-
-        end,
-            { desc = "Select current treesitter block." }
-        )
+        -- vim.keymap.set("n", "<CR><CR>", function()
+        --
+        --     local node = vim.treesitter.get_node()
+        --     if not node then return end
+        --
+        --     -- Define the structural blocks you want to capture entirely
+        --     local target_types = {
+        --         function_definition = true,
+        --         for_statement = true,
+        --         while_statement = true,
+        --         if_statement = true,
+        --         conditional_expression = true,
+        --     }
+        --
+        --     -- Climb up the syntax tree until we find one of our target blocks
+        --     while node and not target_types[node:type()] do
+        --         node = node:parent()
+        --     end
+        --
+        --     if not node then
+        --         vim.cmd("normal +")
+        --         return
+        --     end
+        --
+        --     local start_row, start_col, end_row, end_col = node:range()
+        --
+        --     vim.fn.setpos('.', {0, start_row + 1, start_col + 1, 0})
+        --     vim.cmd('normal! v')
+        --     vim.fn.setpos('.', {0, end_row + 1, end_col, 0})
+        --
+        -- end,
+        --     { desc = "Select current treesitter block." }
+        -- )
     end
 }
