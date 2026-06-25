@@ -334,6 +334,10 @@ window-rule {
     default-column-width { proportion 1.0; }
 }
 
+window-rule {
+    match app-id="yad"
+    open-floating true
+}
 
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
