@@ -6,6 +6,7 @@ mouse = false
 true-color = true
 scrolloff = 1
 shell = ["/usr/bin/fish" , "-c"]
+rulers = [80]
 
 [editor.cursor-shape]
 insert = "bar"
