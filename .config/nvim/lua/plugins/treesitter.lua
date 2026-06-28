@@ -1,4 +1,4 @@
-local install_language_list = {
+local install_languages = {
     "lua",
     "python",
     "markdown",
@@ -27,6 +27,7 @@ return {
     {
         "romus204/tree-sitter-manager.nvim",
         dependencies = {}, -- tree-sitter CLI must be installed system-wide
+        branch = "develop",
         cond = function()
             return vim.version().minor > 11
         end,
@@ -36,10 +37,12 @@ return {
                 parser_dir = vim.fn.stdpath("data") .. "/site/parser",
                 query_dir = vim.fn.stdpath("data") .. "/site/queries",
                 assume_installed = {}, -- blacklist languages
-                ensure_installed = install_language_list, -- parsers to install at startup
+                ensure_installed = install_languages, -- parsers to install at startup
                 border = "rounded", -- border style for the TUI window
                 auto_install = true, -- auto-install when a new filetype is encountered
-                noauto_install = {}, -- blacklist from auto_install
+                noauto_install = {
+                    "latex",
+                }, -- blacklist from auto_install
                 highlight = true, -- enable treesitter highlighting (use list to whitelist)
                 nohighlight = disabled_languages, -- blacklist from highlight
                 languages = {}, -- override or add new parser sources
@@ -88,12 +91,12 @@ return {
                 }
             else
                 -- On desktop, just let Treesitter handle it normally
-                table.insert(install_language_list, "latex")
+                table.insert(install_languages, "latex")
             end
 
             require'nvim-treesitter.configs'.setup {
                 -- A list of parser names, or "all"
-                ensure_installed = install_language_list,
+                ensure_installed = install_languages,
 
                 -- Install parsers synchronously (only applied to `ensure_installed`)
                 sync_install = false,
