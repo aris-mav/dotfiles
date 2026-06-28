@@ -14,6 +14,14 @@ local install_language_list = {
     "latex",
 }
 
+local disabled_languages = {
+    "csv",
+    "tsv",
+    "tex",
+    "latex",
+}
+
+
 return {
 
     {
@@ -33,7 +41,7 @@ return {
                 auto_install = true, -- auto-install when a new filetype is encountered
                 noauto_install = {}, -- blacklist from auto_install
                 highlight = true, -- enable treesitter highlighting (use list to whitelist)
-                nohighlight = {}, -- blacklist from highlight
+                nohighlight = disabled_languages, -- blacklist from highlight
                 languages = {}, -- override or add new parser sources
                 nerdfont = true, -- use Nerd Font icons in the manager UI
             })
@@ -101,13 +109,7 @@ return {
                     enable = true,
 
                     -- list of language that will be disabled
-                    disable = {
-                        "csv",
-                        "tsv",
-                        "tex",
-                        "latex",
-                    },
-
+                    disable = disabled_languages,
                     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
                     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
                     -- Using this option may slow down your editor, and you may see some duplicate highlights.
