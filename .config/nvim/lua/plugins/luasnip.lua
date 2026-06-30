@@ -6,25 +6,24 @@ return {
     build = "make install_jsregexp",
 
     config = function()
-
         local ls = require("luasnip")
 
         ls.filetype_extend("tex", { "math" })
         ls.filetype_extend("markdown", { "math" })
 
         require("luasnip.loaders.from_lua").lazy_load(
-            {paths = "~/.config/nvim/LuaSnip/"}
+            { paths = "~/.config/nvim/LuaSnip/" }
         )
 
-        vim.keymap.set({"i"}, "<C-L>", function()
+        vim.keymap.set({ "i" }, "<C-L>", function()
             ls.expand()
-        end, {silent = true})
+        end, { silent = true })
 
-        vim.keymap.set({"i", "s"}, "<C-E>", function()
+        vim.keymap.set({ "i", "s" }, "<C-E>", function()
             if ls.choice_active() then
                 ls.change_choice(1)
             end
-        end, {silent = true})
+        end, { silent = true })
 
         ls.config.set_config({ -- Setting LuaSnip config
             -- Enable autotriggered snippets
@@ -58,6 +57,5 @@ return {
                 ls.unlink_current()
             end
         end, { desc = "Undo a snippet", })
-
     end,
 }

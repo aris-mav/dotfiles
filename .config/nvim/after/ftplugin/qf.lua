@@ -20,7 +20,7 @@ vim.keymap.set('n', 'dd', function()
         end
     end
 end, {
-    buffer = true,     -- Crucial: only maps 'dd' in the quickfix window
+    buffer = true, -- Crucial: only maps 'dd' in the quickfix window
     noremap = true,
     silent = true,
     desc = 'Remove quickfix item under cursor',
