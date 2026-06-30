@@ -3,17 +3,17 @@ return {
         -- Automatically install LSP servers with mason
         'williamboman/mason.nvim',
         lazy = false,
-        opts = { },
+        opts = {},
     },
 
     {
         'neovim/nvim-lspconfig',
-        cmd = {'LspInfo', 'LspInstall', 'LspStart'},
-        event = {'BufReadPre', 'BufNewFile'},
+        cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
+        event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'williamboman/mason.nvim'},
-            {'williamboman/mason-lspconfig.nvim'},
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'williamboman/mason.nvim' },
+            { 'williamboman/mason-lspconfig.nvim' },
         },
         init = function()
             -- Reserve a space in the gutter
@@ -38,18 +38,20 @@ return {
                 callback = function(event)
                     local opts = { buffer = event.buf }
 
-                    vim.keymap.set("n", "K",          vim.lsp.buf.hover,           opts)
-                    vim.keymap.set("n", "gd",         vim.lsp.buf.definition,      opts)
-                    vim.keymap.set("n", "gD",         vim.lsp.buf.declaration,     opts)
-                    vim.keymap.set("n", "gi",         vim.lsp.buf.implementation,  opts)
-                    vim.keymap.set("n", "go",         vim.lsp.buf.type_definition, opts)
-                    vim.keymap.set("n", "gr",         vim.lsp.buf.references,      opts)
-                    vim.keymap.set("n", "gs",         vim.lsp.buf.signature_help,  opts)
-                    vim.keymap.set("n", "<C-s>",      vim.lsp.buf.signature_help,  opts)
-                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename,          opts)
-                    vim.keymap.set("n", "<leader>d",  vim.diagnostic.open_float,   opts)
-                    vim.keymap.set('n', '<leader>a',  vim.lsp.buf.code_action,     opts)
-
+                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+                    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+                    vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
+                    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+                    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
+                    vim.keymap.set("n", "<C-s>", vim.lsp.buf.signature_help, opts)
+                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+                    vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+                    vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, opts)
+                    vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
+                        vim.lsp.buf.format({ async = true })
+                    end, opts)
                 end,
             })
 
@@ -75,7 +77,6 @@ return {
 
             -- enable fish lsp
             vim.lsp.enable('fish_lsp')
-
         end
     }
 }
