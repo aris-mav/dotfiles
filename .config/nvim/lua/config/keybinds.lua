@@ -40,8 +40,8 @@ function ToggleQuickfix()
     end
 end
 vim.keymap.set('n', "<A-c>", ':lua ToggleQuickfix()<CR>', { noremap = true, silent = true })
-vim.keymap.set("n", "<A-d>", ":cn <cr>zzzv", { remap = true, silent = false })
-vim.keymap.set("n", "<A-u>", ":cp <cr>zzzv", { remap = true, silent = false })
+vim.keymap.set("n", "<A-.>", ":cn <cr>zzzv", { remap = true, silent = false })
+vim.keymap.set("n", "<A-,>", ":cp <cr>zzzv", { remap = true, silent = false })
 
 -- Swap windows using alt+hjkl
 vim.keymap.set("n", "<A-h>", "<C-w>h", { noremap = true, silent = true })
