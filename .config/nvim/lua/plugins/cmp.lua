@@ -62,14 +62,13 @@ return {
                     "menu",
                 },
                 format = function(entry, item)
-
                     item.menu = menu_icon[entry.source.name] or entry.source.name
                     item.kind = symbol_map[item.kind] or item.kind
 
                     local win_width = vim.api.nvim_win_get_width(0)
 
                     local max_content_width
-                    if win_width < 100  then
+                    if win_width < 100 then
                         max_content_width = math.floor(win_width * 0.5)
                     else
                         max_content_width = 50
@@ -88,16 +87,16 @@ return {
             },
 
             sources = {
-                {name = 'nvim_lsp'},
-                {name = 'vimtex'},
-                {name = 'path' },
-                {name = 'luasnip' },
-                {name = 'buffer', keyword_length = 3 },
+                { name = 'nvim_lsp' },
+                { name = 'vimtex' },
+                { name = 'path' },
+                { name = 'luasnip' },
+                { name = 'buffer',  keyword_length = 3 },
             },
             mapping = cmp.mapping.preset.insert({
-                ['<C-u>'] = cmp.mapping.scroll_docs(-4 ,{ 'i', 'c' }),
-                ['<C-d>'] = cmp.mapping.scroll_docs(4 ,{ 'i', 'c' }),
-                ['<Space>'] = cmp.mapping.confirm({ select = false } ,{ 'i', 'c' }), -- select false is so that it does not auto select the 1st sugggestion
+                ['<C-u>'] = cmp.mapping.scroll_docs(-4, { 'i', 'c' }),
+                ['<C-d>'] = cmp.mapping.scroll_docs(4, { 'i', 'c' }),
+                ['<Space>'] = cmp.mapping.confirm({ select = false }, { 'i', 'c' }), -- select false is so that it does not auto select the 1st sugggestion
 
                 ['<CR>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
@@ -137,7 +136,7 @@ return {
 
             snippet = {
                 expand = function(args)
-                    -- vim.snippet.expand(args.body) 
+                    -- vim.snippet.expand(args.body)
                     ls.lsp_expand(args.body)
                 end,
             },
@@ -149,13 +148,13 @@ return {
             sources = cmp.config.sources({
                 { name = 'path' }
             }, {
-                    {
-                        name = 'cmdline',
-                        option = {
-                            ignore_cmds = { 'Man', '!' }
-                        }
+                {
+                    name = 'cmdline',
+                    option = {
+                        ignore_cmds = { 'Man', '!' }
                     }
-                }),
+                }
+            }),
             formatting = {
                 format = function(entry, vim_item)
                     -- Add menu info to show source
@@ -182,14 +181,16 @@ return {
         -- f3fora/cmp-spell' setup
         cmp.setup.filetype(
             { 'markdown', 'latex', 'gitcommit', 'text' },
-            { sources = cmp.config.sources({
-                { name = 'luasnip', priority = 1000 },
-                { name = 'nvim_lsp', priority = 750 },
-                { name = 'path', priority = 500 },
-            }, {
+            {
+                sources = cmp.config.sources({
+                    { name = 'luasnip',  priority = 1000 },
+                    { name = 'nvim_lsp', priority = 750 },
+                    { name = 'path',     priority = 500 },
+                }, {
                     { name = 'buffer', keyword_length = 3 },
                     {
-                        name = 'spell', priority = 250,
+                        name = 'spell',
+                        priority = 250,
                         option = {
                             keep_all_entries = false,
                             enable_in_context = function()

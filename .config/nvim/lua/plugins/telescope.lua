@@ -6,14 +6,12 @@ return {
     },
 
     config = function()
-
         local builtin = require('telescope.builtin')
         local actions = require("telescope.actions")
         local action_state = require("telescope.actions.state")
 
         local copy_filename = function(register)
             return function(prompt_bufnr)
-
                 local selection = action_state.get_selected_entry()
                 local path = selection.filename or selection.value
 
@@ -92,7 +90,6 @@ return {
                 '',
             }
         ) do
-
             vim.keymap.set('n',
                 "<leader>s" .. string.sub(sym, 1, 1),
                 function()
@@ -101,6 +98,5 @@ return {
                 { desc = "Symbols: " .. sym }
             )
         end
-
     end,
 }

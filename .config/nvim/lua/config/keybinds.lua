@@ -28,8 +28,8 @@ vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 vim.keymap.set("n", "U", "<C-r>", { remap = true, silent = false })
 
 -- Map leader-y to yank in plus register in normal and visual mode and leader-p to paste from plus register in normal and visual mode
-vim.keymap.set({ "n", "v" } , "<leader>y", '\"+y', { remap = true, silent = false })
-vim.keymap.set({ "n", "v" } , "<leader>p", '\"+p', { remap = true, silent = false })
+vim.keymap.set({ "n", "v" }, "<leader>y", '\"+y', { remap = true, silent = false })
+vim.keymap.set({ "n", "v" }, "<leader>p", '\"+p', { remap = true, silent = false })
 
 -- Quickfix keymaps
 function ToggleQuickfix()
@@ -39,6 +39,7 @@ function ToggleQuickfix()
         vim.cmd('copen')
     end
 end
+
 vim.keymap.set('n', "<A-c>", ':lua ToggleQuickfix()<CR>', { noremap = true, silent = true })
 vim.keymap.set("n", "<A-.>", ":cn <cr>zzzv", { remap = true, silent = false })
 vim.keymap.set("n", "<A-,>", ":cp <cr>zzzv", { remap = true, silent = false })
@@ -56,17 +57,15 @@ vim.keymap.set("t", "<A-k>", "<C-\\><C-N><C-w>k", { noremap = true, silent = tru
 vim.keymap.set("t", "<A-l>", "<C-\\><C-N><C-w>l", { noremap = true, silent = true })
 
 -- Readonly options for convenience
-vim.api.nvim_create_autocmd({"BufWinEnter", "FileType"}, {
+vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
     callback = function()
         -- Check if the buffer is read-only or not modifiable
         if vim.bo.readonly or not vim.bo.modifiable then
-
             local opts = { buffer = true, silent = true }
 
             vim.keymap.set("n", "d", "<C-d>zz", opts)
             vim.keymap.set("n", "u", "<C-u>zz", opts)
             vim.keymap.set("n", "q", ":q<CR>", opts)
-
         end
     end,
 })

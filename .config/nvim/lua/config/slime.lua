@@ -2,7 +2,6 @@
 vim.g.bname = "slime"
 
 local function send_to_tpane(text)
-
     vim.fn.system(
         { "tmux", "set-buffer", "-b", vim.g.bname, "--", text }
     )
@@ -12,7 +11,6 @@ local function send_to_tpane(text)
     vim.fn.system(
         { "tmux", "send-keys", "-t", vim.g.tpane, "\r" }
     )
-
 end
 
 local function check_tpane()
@@ -37,7 +35,7 @@ _G.slime_operator = function(motion_type)
     local end_mark   = is_visual and "'>" or "']"
 
     -- Map the motion/visual type to what getregion expects
-    local reg_type = "v"
+    local reg_type   = "v"
 
     if is_visual then
         reg_type = vim.fn.visualmode()

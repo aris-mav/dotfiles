@@ -25,13 +25,13 @@ return {
             palette_overrides = {},
             dim_inactive = false,
             overrides = {
-                SignColumn = { bg = "none" },
+                SignColumn          = { bg = "none" },
                 DiagnosticSignError = { fg = "#fb4934", bg = "none" },
                 DiagnosticSignWarn  = { fg = "#fabd2f", bg = "none" },
                 DiagnosticSignInfo  = { fg = "#83a598", bg = "none" },
                 DiagnosticSignHint  = { fg = "#8ec07c", bg = "none" },
-                NormalFloat = { bg = "#3c3836" },
-                FloatBorder = { fg = "#3c3836", bg = "#3c3836" },
+                NormalFloat         = { bg = "#3c3836" },
+                FloatBorder         = { fg = "#3c3836", bg = "#3c3836" },
                 -- ColorColumn = { bg = "#3c3836" },
             }
         })

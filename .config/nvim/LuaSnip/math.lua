@@ -99,20 +99,22 @@ local snippets = { -- these are meant to be shared between tex and md files
 
     -- Dynamic matrices
     -- from https://evesdropper.dev/files/luasnip/choice-dynamic/
-    s({ trig = "([bBpvV])mat(%d+)x(%d+)([ar])",
-        regTrig = true,
-        name = "matrix",
-        hidden = false },
-        fmt([[ 
-        \begin{<>}<> 
+    s({
+            trig = "([bBpvV])mat(%d+)x(%d+)([ar])",
+            regTrig = true,
+            name = "matrix",
+            hidden = false
+        },
+        fmt([[
+        \begin{<>}<>
         <>
         \end{<>}]],
-            {f(function(_, snip)
+            { f(function(_, snip)
                 return snip.captures[1] .. "matrix" -- captures matrix type
             end),
                 f(function(_, snip)
                     if snip.captures[4] == "a" then
-                        local out = string.rep("c", tonumber(snip.captures[3]) - 1) -- array for augment 
+                        local out = string.rep("c", tonumber(snip.captures[3]) - 1) -- array for augment
                         return "[" .. out .. "|c]"
                     end
                     return "" -- otherwise return nothing
@@ -120,11 +122,11 @@ local snippets = { -- these are meant to be shared between tex and md files
                 d(1, mat),
                 f(function(_, snip)
                     return snip.captures[1] .. "matrix" -- i think i could probably use a repeat node but whatever
-                end),},
+                end), },
             { delimiters = "<>" })
     ),
 
-    s({trig="normm", dscr = "Norm with _{}^{}"}, {
+    s({ trig = "normm", dscr = "Norm with _{}^{}" }, {
         t("\\left\\lVert "),
         i(1, "symbol"),
         t(" \\right\\rVert_{"),
@@ -152,7 +154,7 @@ local snippets = { -- these are meant to be shared between tex and md files
         t(" \\right\\rangle")
     }),
 
-    s({ trig="frac", dscr="Latex fraction", }, {
+    s({ trig = "frac", dscr = "Latex fraction", }, {
         t("\\frac{"),
         i(1, "numerator"),
         t("}{"),
@@ -160,7 +162,7 @@ local snippets = { -- these are meant to be shared between tex and md files
         t("}"),
     }),
 
-    s( { trig="derivative", dscr="Leibnitz notation for 1st monovariate derivative", }, {
+    s({ trig = "derivative", dscr = "Leibnitz notation for 1st monovariate derivative", }, {
         t("\\frac{\\mathrm{d} "),
         i(1, ""),
         t(" }{\\mathrm{d} "),
@@ -168,7 +170,7 @@ local snippets = { -- these are meant to be shared between tex and md files
         t(" }"),
     }),
 
-    s( { trig="partial_derivative", dscr="Leibnitz notation for partial derivative", }, {
+    s({ trig = "partial_derivative", dscr = "Leibnitz notation for partial derivative", }, {
         t("\\frac{\\partial "),
         i(1, ""),
         t(" }{\\partial "),
@@ -176,7 +178,7 @@ local snippets = { -- these are meant to be shared between tex and md files
         t(" }"),
     }),
 
-    s( { trig="integral", dscr="Bounded integral", }, {
+    s({ trig = "integral", dscr = "Bounded integral", }, {
         t("\\int_{"),
         i(1, "lower"),
         t("}^{"),
@@ -188,7 +190,7 @@ local snippets = { -- these are meant to be shared between tex and md files
         t("}")
     }),
 
-    s( { trig="sum", }, {
+    s({ trig = "sum", }, {
         t("\\sum_{"),
         i(1, "lower"),
         t("}^{"),
@@ -198,7 +200,7 @@ local snippets = { -- these are meant to be shared between tex and md files
         t("}")
     }),
 
-    s( { trig="underset", dscr="place text in first {} under text in second {}", }, {
+    s({ trig = "underset", dscr = "place text in first {} under text in second {}", }, {
         t("\\underset{"),
         i(1, ""),
         t("}{"),
@@ -206,7 +208,7 @@ local snippets = { -- these are meant to be shared between tex and md files
         t("}")
     }),
 
-    s( { trig="log", dscr="logarithm of any base", }, {
+    s({ trig = "log", dscr = "logarithm of any base", }, {
         t("\\log_{"),
         i(1, "base"),
         t("}\\left({"),
@@ -214,9 +216,9 @@ local snippets = { -- these are meant to be shared between tex and md files
         t("}\\right)")
     }),
 
-    s( { trig="thus" }, { t("\\Rightarrow ") }),
-    s( { trig="times" }, { t("\\times ") }),
-    s( { trig="cdot" }, { t("\\cdot ") }),
+    s({ trig = "thus" }, { t("\\Rightarrow ") }),
+    s({ trig = "times" }, { t("\\times ") }),
+    s({ trig = "cdot" }, { t("\\cdot ") }),
 }
 
 for key, symbol in pairs({
@@ -243,8 +245,8 @@ for key, symbol in pairs({
     vec        = "vec",
 }) do
     table.insert(snippets,
-        s({ trig=key}, {
-            t("\\".. symbol .."{"),
+        s({ trig = key }, {
+            t("\\" .. symbol .. "{"),
             i(1, ""),
             t("}")
         })
@@ -258,8 +260,8 @@ for _, symbol in pairs({
     "sinh", "cosh", "tanh",
 }) do
     table.insert(snippets,
-        s({ trig=symbol}, {
-            t("\\".. symbol .."{ "),
+        s({ trig = symbol }, {
+            t("\\" .. symbol .. "{ "),
             i(1, ""),
             t(" }"),
         })
@@ -277,23 +279,23 @@ local greek_letters = {
 }
 for _, letter in ipairs(greek_letters) do
     table.insert(snippets,
-        s({ trig=letter}, {
-            t("\\".. letter ),
+        s({ trig = letter }, {
+            t("\\" .. letter),
         })
     )
 end
 
 for key, symbols in pairs({
-    par  = { "\\left( "       , " \\right)"         ,  "parentheses"     },
-    sbr  = { "\\left[ "       , " \\right]"         ,  "square brackets" },
-    cbr  = { "\\left\\{ "     , " \\right\\}"       ,  "curly braces"    },
-    abs  = { "\\left| "       , " \\right|"         ,  "absolute value"  },
-    abr  = { "\\left\\langle ", " \\right\\rangle"  ,  "angle brackets"  },
-    flo  = { "\\left\\lfloor ", " \\right\\rfloor"  ,  "floor"           },
-    cei  = { "\\left\\lceil " , " \\right\\rceil"   ,  "ceiling"         },
-    norm = { "\\left\\lVert " , " \\right\\rVert"   ,  "norm"            },
-    bra  = { "\\left\\langle ", " \\right|"         ,  "bra"             },
-    ket  = { "\\left| "       , " \\right\\rangle"  ,  "ket"             },
+    par  = { "\\left( ", " \\right)", "parentheses" },
+    sbr  = { "\\left[ ", " \\right]", "square brackets" },
+    cbr  = { "\\left\\{ ", " \\right\\}", "curly braces" },
+    abs  = { "\\left| ", " \\right|", "absolute value" },
+    abr  = { "\\left\\langle ", " \\right\\rangle", "angle brackets" },
+    flo  = { "\\left\\lfloor ", " \\right\\rfloor", "floor" },
+    cei  = { "\\left\\lceil ", " \\right\\rceil", "ceiling" },
+    norm = { "\\left\\lVert ", " \\right\\rVert", "norm" },
+    bra  = { "\\left\\langle ", " \\right|", "bra" },
+    ket  = { "\\left| ", " \\right\\rangle", "ket" },
 }) do
     table.insert(snippets,
         s({ trig = key, dscr = symbols[3] }, {

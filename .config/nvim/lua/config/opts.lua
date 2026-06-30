@@ -17,7 +17,7 @@ vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "Orange" })
 
 -- Remove border between vertical windows
 -- vim.cmd[[:hi VertSplit ctermfg=bg ctermbg=bg guifg=bg guibg=bg]]
-vim.cmd[[set fillchars+=vert:\ ]]
+vim.cmd [[set fillchars+=vert:\ ]]
 
 -- remove ~'s from the end of file
 vim.opt.fillchars = { eob = ' ' }
@@ -53,12 +53,11 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 -- colorcolumn, only for suitable files
 local column_group = vim.api.nvim_create_augroup("ColumnLine", { clear = true })
 vim.api.nvim_create_autocmd({
-    "FileType", "VimResized", "WinEnter", "BufWinEnter" },
+        "FileType", "VimResized", "WinEnter", "BufWinEnter" },
     {
         group = column_group,
         pattern = "*",
         callback = function()
-
             if not vim.bo.modifiable
                 or vim.bo.readonly
                 or vim.bo.buftype ~= ""
@@ -69,13 +68,12 @@ vim.api.nvim_create_autocmd({
 
             local ftype = vim.bo.filetype
             if not vim.tbl_contains({
-                'csv',
-                'tsv',
-            }, ftype) then
-
-                if vim.tbl_contains({
-                    'markdown',
+                    'csv',
+                    'tsv',
                 }, ftype) then
+                if vim.tbl_contains({
+                        'markdown',
+                    }, ftype) then
                     vim.opt_local.colorcolumn = "51"
                     vim.opt_local.textwidth = 50
                 else
@@ -87,7 +85,7 @@ vim.api.nvim_create_autocmd({
     }
 )
 
--- set greek keymap and disable it 
+-- set greek keymap and disable it
 -- (then toggle with C-6 on insert mode)
 vim.bo.keymap = 'greek'
 vim.bo.iminsert = 0
@@ -109,10 +107,10 @@ vim.keymap.set('ca', 'g', function()
     return 'g'
 end, { expr = true })
 
-vim.opt.hlsearch = false -- Do not highlight search results
-vim.opt.incsearch = true -- Highlight search results only as you type
+vim.opt.hlsearch = false  -- Do not highlight search results
+vim.opt.incsearch = true  -- Highlight search results only as you type
 
-vim.opt.scrolloff = 1 -- Number of lines to keep above and below the cursor
+vim.opt.scrolloff = 1     -- Number of lines to keep above and below the cursor
 vim.opt.sidescrolloff = 2 -- Number of columns to keep to the left and right of the cursor
 
 vim.g.netrw_banner = 0
@@ -120,7 +118,7 @@ vim.g.netrw_banner = 0
 -- vim.opt.clipboard = "unnamedplus"
 
 -- spellcheck
-vim.api.nvim_create_augroup("SpellCheckForSpecificFiletypes", {clear = true})
+vim.api.nvim_create_augroup("SpellCheckForSpecificFiletypes", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     group = "SpellCheckForSpecificFiletypes",
     pattern = {
@@ -144,8 +142,8 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- No line numbers for terminal windows
-vim.api.nvim_create_autocmd('TermOpen',{
-    group = vim.api.nvim_create_augroup('custom-term-open', {clear = true }),
+vim.api.nvim_create_autocmd('TermOpen', {
+    group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
     callback = function()
         vim.opt.signcolumn = "no"
         vim.opt.number = false

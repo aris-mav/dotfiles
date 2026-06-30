@@ -1,7 +1,7 @@
 return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    enabled = true ,
+    enabled = true,
 
     config = function()
         require('lualine').setup {
@@ -15,8 +15,8 @@ return {
                     },
                 },
                 icons_enabled = true,
-                section_separators = { left = '', right = ''},
-                component_separators = { left = '', right = ''},
+                section_separators = { left = '', right = '' },
+                component_separators = { left = '', right = '' },
                 disabled_filetypes = {
                     statusline = {},
                     winbar = {},
@@ -33,13 +33,13 @@ return {
             },
             sections = {
 
-                lualine_a = {'diff'},
-                lualine_b = {'branch'},
+                lualine_a = { 'diff' },
+                lualine_b = { 'branch' },
                 lualine_c = {
                     {
                         'filename',
-                        file_status = true,      -- Displays file status (readonly status, modified status)
-                        newfile_status = false,  -- Display new file status (new file means no write after created)
+                        file_status = true,     -- Displays file status (readonly status, modified status)
+                        newfile_status = false, -- Display new file status (new file means no write after created)
                         path = 1,
                         -- 0: Just the filename
                         -- 1: Relative path
@@ -47,7 +47,7 @@ return {
                         -- 3: Absolute path, with tilde as the home directory
                         -- 4: Filename and parent dir, with tilde as the home directory
 
-                        shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
+                        shorting_target = 40, -- Shortens path to leave 40 spaces in the window
                         -- for other components. (terrible name, any suggestions?)
                         -- It can also be a function that returns
                         -- the value of `shorting_target` dynamically.
@@ -73,7 +73,7 @@ return {
                             -- Standard unicode symbols to cycle through for LSP progress:
                             spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
                             -- Standard unicode symbol for when LSP is done:
-                            done =  ' ',
+                            done = ' ',
                             -- Delimiter inserted between LSP names:
                             separator = ',',
                         },
@@ -91,8 +91,8 @@ return {
             inactive_sections = {
                 lualine_a = {},
                 lualine_b = {},
-                lualine_c = {'filename'},
-                lualine_x = {'location'},
+                lualine_c = { 'filename' },
+                lualine_x = { 'location' },
                 lualine_y = {},
                 lualine_z = {}
             },

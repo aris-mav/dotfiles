@@ -35,17 +35,17 @@ return {
                 -- Default Options
                 parser_dir = vim.fn.stdpath("data") .. "/site/parser",
                 query_dir = vim.fn.stdpath("data") .. "/site/queries",
-                assume_installed = {}, -- blacklist languages
+                assume_installed = {},                -- blacklist languages
                 ensure_installed = install_languages, -- parsers to install at startup
-                border = "rounded", -- border style for the TUI window
-                auto_install = true, -- auto-install when a new filetype is encountered
+                border = "rounded",                   -- border style for the TUI window
+                auto_install = true,                  -- auto-install when a new filetype is encountered
                 noauto_install = {
                     "latex",
-                }, -- blacklist from auto_install
-                highlight = true, -- enable treesitter highlighting (use list to whitelist)
+                },                                -- blacklist from auto_install
+                highlight = true,                 -- enable treesitter highlighting (use list to whitelist)
                 nohighlight = disabled_languages, -- blacklist from highlight
-                languages = {}, -- override or add new parser sources
-                nerdfont = true, -- use Nerd Font icons in the manager UI
+                languages = {},                   -- override or add new parser sources
+                nerdfont = true,                  -- use Nerd Font icons in the manager UI
             })
         end,
     },
@@ -72,8 +72,6 @@ return {
             -- termcolors = {} -- table of colour name strings
         },
         config = function()
-
-
             local termux_prefix = os.getenv("PREFIX")
             local is_termux = termux_prefix and termux_prefix:match("com.termux")
 
@@ -93,7 +91,7 @@ return {
                 table.insert(install_languages, "latex")
             end
 
-            require'nvim-treesitter.configs'.setup {
+            require 'nvim-treesitter.configs'.setup {
                 -- A list of parser names, or "all"
                 ensure_installed = install_languages,
 
@@ -118,7 +116,7 @@ return {
                     -- Instead of true it can also be a list of languages
                     additional_vim_regex_highlighting = false,
                 },
-                indent = {enable = true},
+                indent = { enable = true },
 
                 incremental_selection = {
                     enable = true,
@@ -160,7 +158,7 @@ return {
 
                             ["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
                             ["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
-                        },                    -- You can choose the select mode (default is charwise 'v')
+                        }, -- You can choose the select mode (default is charwise 'v')
                         --
                         -- Can also be a function which gets passed a table with the keys
                         -- * query_string: eg '@function.inner'
@@ -169,7 +167,7 @@ return {
                         -- mapping query_strings to modes.
                         selection_modes = {
                             ['@parameter.outer'] = 'v', -- charwise
-                            ['@function.outer'] = 'V', --linewise
+                            ['@function.outer'] = 'V',  --linewise
                             ['@class.outer'] = '<c-v>', -- blockwise
                         },
                         -- If you set this to `true` (default is `false`) then any textobject is
@@ -227,7 +225,6 @@ return {
             vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
             vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
             vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
-
         end
     },
 

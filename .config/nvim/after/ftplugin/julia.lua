@@ -31,7 +31,6 @@ vim.keymap.set('n', 'ZZ', function()
 end)
 -- choose lsp using the $JULIALSP environment variable
 if os.getenv("JULIALSP") == "jetls" then
-
     vim.lsp.config("jetls", {
         cmd = {
             "jetls",
@@ -41,12 +40,10 @@ if os.getenv("JULIALSP") == "jetls" then
         root_markers = { "Project.toml" }
     })
     vim.lsp.enable("jetls")
-
 elseif os.getenv("JULIALSP") == "julials" then
-
     if vim.fn.isdirectory(
-        vim.fn.expand("~/.julia/environments/nvim-lspconfig")
-    ) ~= 1
+            vim.fn.expand("~/.julia/environments/nvim-lspconfig")
+        ) ~= 1
         and vim.fn.executable("julia") == 1 then
         print("Installing LanguageServer.jl")
         vim.fn.system(
@@ -66,7 +63,7 @@ elseif os.getenv("JULIALSP") == "julials" then
         vim.lsp.config('julials', {
             cmd = {
                 "julia",
-                "--project=".."~/.julia/environments/nvim-lspconfig/",
+                "--project=" .. "~/.julia/environments/nvim-lspconfig/",
                 "--startup-file=no",
                 "--history-file=no",
                 vim.fn.expand("~/.config/nvim/lua/lsp/") .. "julials_start.jl"
