@@ -49,7 +49,7 @@ return {
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
                     vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
                     vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, opts)
-                    vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
+                    vim.keymap.set({ 'n', 'v' }, '<leader>=', function()
                         vim.lsp.buf.format({ async = true })
                     end, opts)
                 end,
