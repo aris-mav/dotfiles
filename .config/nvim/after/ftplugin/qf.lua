@@ -1,7 +1,13 @@
 -- Quickfix bindings
 vim.keymap.set("n", "q", ":lclose | cclose<CR>", { buffer = true, silent = true })
 vim.keymap.set("n", "o", ":lclose | cclose<CR>", { buffer = true, silent = true })
-vim.keymap.set("n", "<CR>", "<CR>:lclose | cclose<CR>", { buffer = true, silent = true })
+
+-- remove unnecessary slime binding (prevents lag)
+pcall(vim.keymap.del, "n", "<CR>c", { buffer = true })
+-- rebind CR
+vim.keymap.set("n", "<CR>", "<CR>:lclose | cclose<CR>",
+    { buffer = true, silent = true, nowait = true }
+)
 
 vim.keymap.set('n', 'dd', function()
     local qf_list = vim.fn.getqflist()

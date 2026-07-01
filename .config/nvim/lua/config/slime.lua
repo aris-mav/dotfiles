@@ -54,6 +54,8 @@ _G.slime_operator = function(motion_type)
     send_to_tpane(table.concat(lines, "\n"))
 end
 
+vim.keymap.set("n", "<CR><CR>", '<cmd>echo ""<cr>')
+
 vim.keymap.set({ "n", "x" }, "<CR>",
     function()
         vim.o.operatorfunc = "v:lua.slime_operator"
