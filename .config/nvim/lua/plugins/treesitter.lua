@@ -3,6 +3,7 @@ local install_languages = {
     "python",
     "markdown",
     "markdown_inline",
+    "yaml",
     "julia",
     "rust",
     "bash",
