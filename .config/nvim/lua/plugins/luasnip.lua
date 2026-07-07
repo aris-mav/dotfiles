@@ -1,6 +1,8 @@
 return {
     "L3MON4D3/LuaSnip",
     event = "InsertEnter",
+    -- loads immediately when a markdown buffer's filetype is set
+    ft = "markdown",
     version = "v2.*",
     -- install jsregexp (optional!).
     build = "make install_jsregexp",
