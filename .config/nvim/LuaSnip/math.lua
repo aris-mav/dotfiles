@@ -243,6 +243,7 @@ for key, symbol in pairs({
     ol         = "overline",
     ul         = "underline",
     hat        = "hat",
+    dot        = "dot",
     vec        = "vec",
     nabla      = "nabla",
 }) do
