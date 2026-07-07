@@ -4,29 +4,39 @@ local t = ls.text_node
 local f = ls.function_node
 local i = ls.insert_node
 
-local yaml_header = s({ trig = "frontmatter" }, {
-    t({ "---", "date: " }),
-    f(function() return os.date("%Y-%m-%d") end, {}),
-    t({ "", 'title: "' }), i(1),
-    t({ '"', 'source: "' }), i(2),
-    t({ '"', "tags:", "  - " }), i(3),
-    t({ "", "---", "", "" }),
-    i(0)
-})
+local yaml_header = s({},
+    {
+        t({ "---", "date: " }),
+        f(function() return os.date("%Y-%m-%d") end, {}),
+        t({ "", 'title: "' }), i(1),
+        t({ '"', 'source: "' }), i(2),
+        t({ '"', "tags:", "  - " }), i(3),
+        t({ "", "---", "", "" }),
+        i(0)
+    }
+)
 
-local function expand_auto_header()
-    local basename = vim.fn.expand("%:r")
-    if #basename == 14 and not string.match(basename, "%D") then
-        ls.add_snippets("markdown", { yaml_header })
-        vim.schedule(function()
-            ls.snip_expand(yaml_header)
-            vim.cmd("startinsert!")
-        end)
-    end
+local function is_nt()
+    local basename = vim.fn.expand("%:t:r")
+    return #basename == 14 and basename:match("^%d+$") ~= nil
 end
 
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "*.md",
+local function is_new_file()
+    return vim.fn.filereadable(vim.fn.expand("%:p")) == 0
+end
+
+local function expand_auto_header()
+    if not is_nt() or not is_new_file() then
+        return
+    end
+    vim.schedule(function()
+        ls.snip_expand(yaml_header)
+        vim.cmd("startinsert!")
+    end)
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
     callback = expand_auto_header,
 })
 
