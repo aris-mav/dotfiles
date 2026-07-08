@@ -190,6 +190,16 @@ local snippets = { -- these are meant to be shared between tex and md files
         t("}")
     }),
 
+    s({ trig = "evaluated_integral", dscr = "Evaluated bounded integral", }, {
+        t("\\left.{"),
+        i(1, "function"),
+        t("} \\right|_{"),
+        i(2, "lower"),
+        t("}^{"),
+        i(3, "upper"),
+        t("}"),
+    }),
+
     s({ trig = "sum", }, {
         t("\\sum_{"),
         i(1, "lower"),
@@ -200,11 +210,13 @@ local snippets = { -- these are meant to be shared between tex and md files
         t("}")
     }),
 
-    s({ trig = "underset", dscr = "place text in first {} under text in second {}", }, {
+    s({
+        trig = "underset", dscr = "place text under some other text",
+    }, {
         t("\\underset{"),
-        i(1, ""),
+        i(1, "under"),
         t("}{"),
-        i(2, ""),
+        i(2, "over"),
         t("}")
     }),
 
