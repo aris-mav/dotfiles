@@ -70,10 +70,13 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
     end,
 })
 
--- treesitter incremental selection
 if vim.fn.has('nvim-0.12') == 1 then
-    vim.keymap.set("v", ".", "an", { remap = true }) -- expand to parent node
-    vim.keymap.set("v", ",", "in", { remap = true }) -- shrink to child node
+    -- expand to parent TS node
+    vim.keymap.set("v", ".", "an", { remap = true })
+    -- shrink to child TS node
+    vim.keymap.set("v", ",", "in", { remap = true })
+    -- gq the current node
+    vim.keymap.set("n", "g=", "gqin", { remap = true })
 end
 
 vim.keymap.set("n", "gx", function()
