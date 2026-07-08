@@ -28,6 +28,7 @@ return {
     {
         "romus204/tree-sitter-manager.nvim",
         dependencies = {}, -- tree-sitter CLI must be installed system-wide
+        event = "BufReadPost",
         cond = function()
             return vim.version().minor > 11
         end,
