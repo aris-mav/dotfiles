@@ -2,7 +2,7 @@ return {
     {
         -- Automatically install LSP servers with mason
         'williamboman/mason.nvim',
-        lazy = false,
+        event = "VeryLazy",
         opts = {},
     },
 

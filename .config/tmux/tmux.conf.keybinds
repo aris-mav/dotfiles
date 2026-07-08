@@ -24,6 +24,10 @@ bind -n M-M run-shell \
          "~/.config/tmux/scripts/open_window.sh -c system_monitor btm "
 
 # Popups
+bind -n M-t display-popup \
+         -S fg=green -b rounded -h 75% -w 75% \
+         -E "nt -T"
+
 bind C-f display-popup -d "#{pane_current_path}" \
          -S fg=green -b rounded -h 75% -w 75% \
          -E "fish"
