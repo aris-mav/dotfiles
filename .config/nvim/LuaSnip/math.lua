@@ -126,6 +126,12 @@ local snippets = { -- these are meant to be shared between tex and md files
             { delimiters = "<>" })
     ),
 
+    s({ trig = "^", dscr = "exponent", snippetType="autosnippet" }, {
+        t("^{"),
+        i(1, "exponent"),
+        t("}")
+    }),
+
     s({ trig = "normm", dscr = "Norm with _{}^{}" }, {
         t("\\left\\lVert "),
         i(1, "symbol"),
