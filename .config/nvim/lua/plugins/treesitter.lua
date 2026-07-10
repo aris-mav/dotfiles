@@ -12,8 +12,13 @@ local install_languages = {
     "tmux",
     "toml",
     "gitcommit",
-    "latex",
 }
+
+local termux_prefix = os.getenv("PREFIX")
+local is_termux = termux_prefix and termux_prefix:match("com.termux")
+if not is_termux then
+    table.insert(install_languages, "latex")
+end
 
 local disabled_languages = {
     "csv",
@@ -21,7 +26,6 @@ local disabled_languages = {
     "tex",
     "latex",
 }
-
 
 return {
 
@@ -41,13 +45,11 @@ return {
                 ensure_installed = install_languages, -- parsers to install at startup
                 border = "rounded",                   -- border style for the TUI window
                 auto_install = true,                  -- auto-install when a new filetype is encountered
-                noauto_install = {
-                    "latex",
-                },                                -- blacklist from auto_install
-                highlight = true,                 -- enable treesitter highlighting (use list to whitelist)
-                nohighlight = disabled_languages, -- blacklist from highlight
-                languages = {},                   -- override or add new parser sources
-                nerdfont = true,                  -- use Nerd Font icons in the manager UI
+                noauto_install = {},                  -- blacklist from auto_install
+                highlight = true,                     -- enable treesitter highlighting (use list to whitelist)
+                nohighlight = disabled_languages,     -- blacklist from highlight
+                languages = {},                       -- override or add new parser sources
+                nerdfont = true,                      -- use Nerd Font icons in the manager UI
             })
         end,
     },
@@ -74,25 +76,6 @@ return {
             -- termcolors = {} -- table of colour name strings
         },
         config = function()
-            local termux_prefix = os.getenv("PREFIX")
-            local is_termux = termux_prefix and termux_prefix:match("com.termux")
-
-            if is_termux then
-                local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-
-                -- Manually point the latex parser to the Termux system library
-                parser_config.latex = {
-                    install_info = {
-                        url = termux_prefix .. "/lib/libtree-sitter-latex.so",
-                        files = { "src/parser.c" }, -- This is a dummy entry to satisfy the config
-                    },
-                    filetype = "tex",
-                }
-            else
-                -- On desktop, just let Treesitter handle it normally
-                table.insert(install_languages, "latex")
-            end
-
             require 'nvim-treesitter.configs'.setup {
                 -- A list of parser names, or "all"
                 ensure_installed = install_languages,
