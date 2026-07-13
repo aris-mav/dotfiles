@@ -126,7 +126,7 @@ local snippets = { -- these are meant to be shared between tex and md files
             { delimiters = "<>" })
     ),
 
-    s({ trig = "^", dscr = "exponent", snippetType="autosnippet" }, {
+    s({ trig = "^", dscr = "exponent", snippetType = "autosnippet" }, {
         t("^{"),
         i(1, "exponent"),
         t("}")
@@ -162,9 +162,9 @@ local snippets = { -- these are meant to be shared between tex and md files
 
     s({ trig = "frac", dscr = "Latex fraction", }, {
         t("\\frac{"),
-        i(1, "numerator"),
+        i(1, "num"),
         t("}{"),
-        i(2, "denominator"),
+        i(2, "den"),
         t("}"),
     }),
 
@@ -184,33 +184,21 @@ local snippets = { -- these are meant to be shared between tex and md files
         t(" }"),
     }),
 
-    s({ trig = "integral", dscr = "Bounded integral", }, {
-        t("\\int_{"),
-        i(1, "lower"),
-        t("}^{"),
-        i(2, "upper"),
-        t("}{"),
-        i(3, "function"),
-        t("}{\\mathrm{d}"),
-        i(4, "variable"),
-        t("}")
-    }),
-
     s({ trig = "evaluated_integral", dscr = "Evaluated bounded integral", }, {
         t("\\left.{"),
         i(1, "function"),
         t("} \\right|_{"),
-        i(2, "lower"),
+        i(2, "lo"),
         t("}^{"),
-        i(3, "upper"),
+        i(3, "up"),
         t("}"),
     }),
 
     s({ trig = "sum", }, {
         t("\\sum_{"),
-        i(1, "lower"),
+        i(1, "lo"),
         t("}^{"),
-        i(2, "upper"),
+        i(2, "up"),
         t("}{"),
         i(3, "content"),
         t("}")
@@ -242,13 +230,30 @@ local snippets = { -- these are meant to be shared between tex and md files
 }
 
 for key, symbol in pairs({
-    real = "R",
-    natural = "N",
-    complex = "C",
-    integer = "Z",
+    real     = "R",
+    natural  = "N",
+    complex  = "C",
+    integer  = "Z",
     rational = "Q"
 }) do
     table.insert(snippets, s("is" .. key, t("\\in\\mathbb{" .. symbol .. "}")))
+end
+
+for key, symbol in pairs({
+    integral               = "int",
+    integral_closed        = "oint",
+    integral_double        = "iint",
+    integral_double_closed = "oiint",
+    integral_triple        = "iiint",
+    integral_triple_closed = "oiiint",
+}) do
+    table.insert(snippets, s({ trig = key, dscr = "Bounded integral", }, {
+        t("\\" .. symbol .. "_{"),
+        i(1, "lo"), t("}^{"),
+        i(2, "up"), t("}{"),
+        i(3, "func"), t("}{\\mathrm{d}"),
+        i(4, "var"), t("}")
+    }))
 end
 
 for key, symbol in pairs({
@@ -267,13 +272,11 @@ for key, symbol in pairs({
     vec        = "vec",
     nabla      = "nabla",
 }) do
-    table.insert(snippets,
-        s({ trig = key }, {
-            t("\\" .. symbol .. "{"),
-            i(1, ""),
-            t("}")
-        })
-    )
+    table.insert(snippets, s({ trig = key }, {
+        t("\\" .. symbol .. "{"),
+        i(1, ""),
+        t("}")
+    }))
 end
 
 for _, symbol in pairs({
@@ -282,13 +285,9 @@ for _, symbol in pairs({
     "asin", "acos", "atan",
     "sinh", "cosh", "tanh",
 }) do
-    table.insert(snippets,
-        s({ trig = symbol }, {
-            t("\\" .. symbol .. "{ "),
-            i(1, ""),
-            t(" }"),
-        })
-    )
+    table.insert(snippets, s({ trig = symbol }, {
+        t("\\" .. symbol .. "{ "), i(1, ""), t(" }"),
+    }))
 end
 
 local greek_letters = {
@@ -301,10 +300,7 @@ local greek_letters = {
     "Phi", "Psi", "Omega",
 }
 for _, letter in ipairs(greek_letters) do
-    table.insert(snippets,
-        s({ trig = letter }, {
-            t("\\" .. letter),
-        })
+    table.insert(snippets, s({ trig = letter }, { t("\\" .. letter), })
     )
 end
 
@@ -320,13 +316,11 @@ for key, symbols in pairs({
     bra  = { "\\left\\langle ", " \\right|", "bra" },
     ket  = { "\\left| ", " \\right\\rangle", "ket" },
 }) do
-    table.insert(snippets,
-        s({ trig = key, dscr = symbols[3] }, {
-            t(symbols[1]),
-            i(1, "contents"),
-            t(symbols[2])
-        })
-    )
+    table.insert(snippets, s({ trig = key, dscr = symbols[3] }, {
+        t(symbols[1]),
+        i(1, "contents"),
+        t(symbols[2])
+    }))
 end
 
 for _, snip in ipairs(snippets) do
