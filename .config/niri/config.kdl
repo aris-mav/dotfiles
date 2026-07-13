@@ -323,15 +323,12 @@ workspace "web"
 workspace "terminal"
 
 window-rule {
-    match app-id="Alacritty"
-    open-on-workspace "terminal"
-    default-column-width { proportion 1.0; }
-}
-
-window-rule {
     match app-id="firefox"
-    open-on-workspace "web"
-    default-column-width { proportion 1.0; }
+    default-column-width { proportion 0.5; }
+    open-on-output "focused" 
+    open-maximized false
+    open-maximized-to-edges false
+    open-focused false
 }
 
 window-rule {
