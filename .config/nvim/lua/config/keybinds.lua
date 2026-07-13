@@ -97,17 +97,6 @@ vim.keymap.set("n", "gx", function()
     end
 end, { noremap = true, silent = true })
 
--- preview markdown
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "markdown",
-    callback = function()
-        vim.keymap.set("n", "gb", function()
-            vim.cmd("w")
-            vim.cmd("!FORCE_XO=true $NOTES_DIR/nt.sh -p %:p")
-        end, { buffer = true, silent = true })
-    end,
-})
-
 -- copy current filename
 vim.keymap.set("n", "cp", function()
     vim.fn.setreg("+", vim.fn.expand("%"))
