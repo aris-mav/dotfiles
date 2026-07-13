@@ -138,8 +138,15 @@ vim.diagnostic.config({
     underline = true,
     virtual_text = {
         current_line = true,
-        source = "if_many",
-        prefix = "●",
+        prefix = function(diagnostic)
+            local icons = {
+                [vim.diagnostic.severity.ERROR] = " ",
+                [vim.diagnostic.severity.WARN]  = " ",
+                [vim.diagnostic.severity.INFO]  = " ",
+                [vim.diagnostic.severity.HINT]  = " ",
+            }
+            return icons[diagnostic.severity] or "●"
+        end,
     },
     severity_sort = true,
     update_in_insert = false,
