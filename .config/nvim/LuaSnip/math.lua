@@ -56,13 +56,15 @@ local function is_in_math()
         while node do
             if MATH_NODES[node:type()] then
                 return true
-            elseif node:type() == "math_environment" or node:type() == "generic_environment" then
+            elseif node:type() == "math_environment"
+                or node:type() == "generic_environment" then
                 local begin = node:child(0)
                 local names = begin and begin:field "name"
-                if
-                    names
+                if names
                     and names[1]
-                    and MATH_ENVIRONMENTS[vim.treesitter.get_node_text(names[1], buf):match "[A-Za-z]+"]
+                    and MATH_ENVIRONMENTS[
+                    vim.treesitter.get_node_text(names[1], buf):match "[A-Za-z]+"
+                    ]
                 then
                     return true
                 end
@@ -85,7 +87,9 @@ local mat = function(args, snip)
         ins_indx = ins_indx + 1
         for k = 2, cols do
             table.insert(nodes, t(" & "))
-            table.insert(nodes, r(ins_indx, tostring(j) .. "x" .. tostring(k), i(1)))
+            table.insert(
+                nodes, r(ins_indx, tostring(j) .. "x" .. tostring(k), i(1))
+            )
             ins_indx = ins_indx + 1
         end
         table.insert(nodes, t({ " \\\\", "" }))
@@ -114,7 +118,9 @@ local snippets = { -- these are meant to be shared between tex and md files
             end),
                 f(function(_, snip)
                     if snip.captures[4] == "a" then
-                        local out = string.rep("c", tonumber(snip.captures[3]) - 1) -- array for augment
+                        local out = string.rep(
+                            "c", tonumber(snip.captures[3]) - 1
+                        ) -- array for augment
                         return "[" .. out .. "|c]"
                     end
                     return "" -- otherwise return nothing
@@ -168,26 +174,40 @@ local snippets = { -- these are meant to be shared between tex and md files
         t("}"),
     }),
 
-    s({ trig = "derivative", dscr = "Leibnitz notation for 1st monovariate derivative", }, {
-        t("\\frac{\\mathrm{d} "),
+    s({
+        trig = "derivative",
+        dscr = "Leibnitz notation for 1st monovariate derivative",
+    }, {
+        t("\\frac{\\mathrm{d}{"),
         i(1, ""),
-        t(" }{\\mathrm{d} "),
+        t("}}{\\mathrm{d}{"),
         i(2, "x"),
-        t(" }"),
+        t("}}"),
     }),
 
-    s({ trig = "partial_derivative", dscr = "Leibnitz notation for partial derivative", }, {
-        t("\\frac{\\partial "),
+    s({
+        trig = "derivative_partial",
+        dscr = "Leibnitz notation for partial derivative",
+    }, {
+        t("\\frac{\\partial{"),
         i(1, ""),
-        t(" }{\\partial "),
+        t("}}{\\partial{"),
         i(2, "x"),
-        t(" }"),
+        t("}}"),
     }),
 
-    s({ trig = "evaluated_integral", dscr = "Evaluated bounded integral", }, {
-        t("\\left.{"),
+    s({ trig = "differential", dscr = "Differential of a variable", }, {
+        t("\\frac{\\mathrm{d}{"), i(1, ""), t("}"),
+    }),
+
+    s({ trig = "differential_partial", dscr = "Partial differential of a variable", }, {
+        t("\\frac{\\partial{"), i(1, ""), t("}"),
+    }),
+
+    s({ trig = "integral_evaluated", dscr = "Evaluated bounded integral", }, {
+        t("\\left["),
         i(1, "function"),
-        t("} \\right|_{"),
+        t(" \\right]_{"),
         i(2, "lo"),
         t("}^{"),
         i(3, "up"),
@@ -280,13 +300,13 @@ for key, symbol in pairs({
 end
 
 for _, symbol in pairs({
-    "exp", "ln", "log",
+    "exp", "ln", "log", "sqrt",
     "sin", "cos", "tan",
     "asin", "acos", "atan",
     "sinh", "cosh", "tanh",
 }) do
     table.insert(snippets, s({ trig = symbol }, {
-        t("\\" .. symbol .. "{ "), i(1, ""), t(" }"),
+        t("\\" .. symbol .. "{"), i(1, ""), t("}"),
     }))
 end
 
