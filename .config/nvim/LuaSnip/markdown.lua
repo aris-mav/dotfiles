@@ -54,7 +54,7 @@ return {
     s("mathblock", {
         t({ "$$", "" }),
         i(1, "maths"),
-        t({ "", "$$" }),
+        t({ "", "$$","" }),
     }),
 
     s("mathinline", {
