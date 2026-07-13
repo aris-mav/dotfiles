@@ -85,11 +85,6 @@ vim.api.nvim_create_autocmd({
     }
 )
 
--- set greek keymap and disable it
--- (then toggle with C-6 on insert mode)
-vim.bo.keymap = 'greek'
-vim.bo.iminsert = 0
-
 -- Use ripgrep if available
 if vim.fn.executable("rg") == 1 then
     vim.opt.grepprg = "rg --vimgrep"
@@ -115,23 +110,82 @@ vim.opt.sidescrolloff = 2 -- Number of columns to keep to the left and right of 
 
 vim.g.netrw_banner = 0
 
--- vim.opt.clipboard = "unnamedplus"
+-- set greek keymap and disable it
+-- (then toggle with C-6 on insert mode)
+vim.bo.keymap = 'greek'
+vim.bo.iminsert = 0
 
--- spellcheck
+local spellcheck_ft = {
+    "markdown",
+    "tex",
+    "txt",
+    "typst",
+}
+
+vim.opt.spellfile = vim.fn.stdpath("data") .. "/site/spell/en.utf-8.add"
+
 vim.api.nvim_create_augroup("SpellCheckForSpecificFiletypes", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     group = "SpellCheckForSpecificFiletypes",
-    pattern = {
-        "markdown",
-        "tex",
-        "txt",
-        "typst",
-    },
+    pattern = spellcheck_ft,
     callback = function()
         vim.opt_local.spelllang = { "en_gb", "el" }
         vim.opt_local.spell = true
     end,
 })
+
+vim.lsp.config("harper_ls", {
+    filetypes = spellcheck_ft,
+    settings = {
+        ["harper-ls"] = {
+            userDictPath = vim.fn.stdpath("data") .. "/site/spell/en.utf-8.add",
+            linters = {
+                SpellCheck = true,
+                SpelledNumbers = false,
+                AnA = true,
+                SentenceCapitalization = true,
+                UnclosedQuotes = true,
+                WrongApostrophe = false,
+                LongSentences = true,
+                RepeatedWords = true,
+                Spaces = true,
+                CorrectNumberSuffix = true,
+                AvoidBannedWords = false,
+            },
+            codeActions = {
+                ForceStable = false
+            },
+            markdown = {
+                IgnoreLinkTitle = false
+            },
+            diagnosticSeverity = "hint",
+            isolateEnglish = false,
+            dialect = "British",
+            maxFileLength = 10000,
+            excludePatterns = {}
+        }
+    }
+})
+
+vim.keymap.set("n", "zg", function()
+    local harper_clients = vim.lsp.get_clients({ bufnr = 0, name = "harper_ls" })
+    local found_action = false
+    if #harper_clients > 0 then
+        vim.lsp.buf.code_action({
+            apply = true,
+            filter = function(action)
+                if action.title:match("[Uu]ser dictionary") ~= nil then
+                    found_action = true
+                    return true
+                end
+                return false
+            end,
+        })
+    end
+    if not found_action then
+        vim.cmd("normal! zg")
+    end
+end, { desc = "Add word to dictionary" })
 
 vim.diagnostic.config({
     signs = false,
