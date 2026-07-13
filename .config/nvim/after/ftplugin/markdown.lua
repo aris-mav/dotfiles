@@ -62,3 +62,11 @@ vim.keymap.set('n', 'gb', function()
         vim.cmd("!FORCE_XO=true $NOTES_DIR/nt.sh -p %:p")
     end
 end, { desc = 'Preview markdown file', silent = true })
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+    callback = function()
+       if previewing then
+           stop_preview()
+       end
+    end
+})
