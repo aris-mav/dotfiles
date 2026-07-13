@@ -178,7 +178,6 @@ return {
                 { name = 'buffer' }
             }
         })
-
         -- f3fora/cmp-spell' setup
         cmp.setup.filetype(
             { 'markdown', 'latex', 'gitcommit', 'text' },

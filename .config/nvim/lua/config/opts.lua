@@ -133,6 +133,21 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.diagnostic.config({
+    signs = false,
+    underline = true,
+    virtual_text = {
+        current_line = true,
+        source = "if_many",
+        prefix = "●",
+    },
+    severity_sort = true,
+    update_in_insert = false,
+    float = {
+        border = "rounded",
+        focusable = false,
+    },
+})
 
 vim.opt.wrap = false
 vim.opt.undofile = true
