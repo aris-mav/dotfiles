@@ -4,21 +4,15 @@ return {
         'williamboman/mason.nvim',
         event = "VeryLazy",
         opts = {},
+        dependencies = {
+            { 'williamboman/mason-lspconfig.nvim' },
+        },
     },
 
     {
         'neovim/nvim-lspconfig',
         cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
         event = { 'BufReadPre', 'BufNewFile' },
-        dependencies = {
-            { 'williamboman/mason.nvim' },
-            { 'williamboman/mason-lspconfig.nvim' },
-        },
-        init = function()
-            -- Reserve a space in the gutter
-            -- This will avoid an annoying layout shift in the screen
-            vim.opt.signcolumn = 'no'
-        end,
         config = function()
             local lsp_defaults = require('lspconfig').util.default_config
 
@@ -30,25 +24,14 @@ return {
                 require('cmp_nvim_lsp').default_capabilities()
             )
 
-            -- Detect Termux
-            local is_termux = os.getenv("PREFIX") and os.getenv("PREFIX"):match("com.termux")
-
-            if not is_termux then
-                require('mason-lspconfig').setup({
-                    ensure_installed = {
-                        "lua_ls",
-                        "texlab",
-                        "rust_analyzer",
-                        "marksman",
-                        "ruff", "ty",
-                    },
-                    handlers = {
-                        function(server_name)
-                            vim.lsp.enable(server_name)
-                        end,
-                    }
-                })
-            end
+            require('mason-lspconfig').setup({
+                ensure_installed = {},
+                handlers = {
+                    function(server_name)
+                        vim.lsp.enable(server_name)
+                    end,
+                }
+            })
 
             -- enable fish lsp
             vim.lsp.enable('fish_lsp')
