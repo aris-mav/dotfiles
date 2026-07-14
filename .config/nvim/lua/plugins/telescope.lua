@@ -46,13 +46,13 @@ return {
                             actions.close(prompt_bufnr)
                             vim.cmd(string.format("silent lcd %s", dir))
                         end,
-                        ["<C-c>"] = actions.send_to_qflist + actions.open_qflist,
+                        ["<A-q>"] = actions.send_to_qflist,
                         ["<C-q>"] = actions.close,
                         ['yy'] = copy_filename('"'),
                         ['<leader>yy'] = copy_filename('+'),
                     },
                     i = {
-                        ["<C-c>"] = actions.send_to_qflist + actions.open_qflist,
+                        ["<A-q>"] = actions.send_to_qflist,
                         ["<C-q>"] = actions.close,
                         ["<C-y>"] = copy_filename('"'),
                     },
