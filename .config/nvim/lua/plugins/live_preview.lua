@@ -5,12 +5,10 @@ return {
     },
     config = function()
         -- Pass it as a single string instead of a table
-        require('livepreview.config').set({
-            browser = "firefox --new-window"
-        })
-
-        vim.keymap.set('n', '<leader>l', '<cmd>LivePreview start<CR>', {
-            desc = 'Start Live Preview in new Firefox window'
-        })
+        if vim.env.NIRI_SOCKET then
+            require('livepreview.config').set({
+                browser = "firefox --new-window"
+            })
+        end
     end,
 }

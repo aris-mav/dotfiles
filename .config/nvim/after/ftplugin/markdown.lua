@@ -2,16 +2,17 @@ local livepreview_available, _ = pcall(require, "livepreview.config")
 local previewing = false
 
 local function start_preview()
-    if vim.env.TMUX then
-        vim.fn.jobstart(
-            { "tmux",
-                "if-shell", "-F", "#{window_zoomed_flag}", "", "resize-pane -Z"
-            },
-            { detach = true, }
-        )
-    end
     vim.cmd("LivePreview start")
+
     if vim.env.NIRI_SOCKET then
+        if vim.env.TMUX then
+            vim.fn.jobstart(
+                { "tmux",
+                    "if-shell", "-F", "#{window_zoomed_flag}", "", "resize-pane -Z"
+                },
+                { detach = true, }
+            )
+        end
         vim.fn.jobstart({ "sh", "-c",
             "niri msg action set-column-width 50%; \
             sleep 0.5; \
@@ -35,13 +36,13 @@ local function close_preview_window()
 end
 
 local function stop_preview()
-    if vim.env.TMUX then
-        vim.fn.jobstart(
-            { "tmux", "resize-pane", "-Z" },
-            { detach = true, }
-        )
-    end
     if vim.env.NIRI_SOCKET then
+        if vim.env.TMUX then
+            vim.fn.jobstart(
+                { "tmux", "resize-pane", "-Z" },
+                { detach = true, }
+            )
+        end
         vim.fn.jobstart({ "niri", "msg", "action", "maximize-window-to-edges" },
             { detach = true, })
         close_preview_window()
@@ -65,8 +66,8 @@ end, { desc = 'Preview markdown file', silent = true })
 
 vim.api.nvim_create_autocmd("VimLeavePre", {
     callback = function()
-       if previewing then
-           stop_preview()
-       end
+        if previewing then
+            stop_preview()
+        end
     end
 })
