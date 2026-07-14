@@ -40,17 +40,13 @@ function ToggleQuickfix()
     end
 end
 
-vim.keymap.set('n', "<A-c>", ':lua ToggleQuickfix()<CR>', { noremap = true, silent = true })
-vim.keymap.set("n", "<A-.>", ":cn <cr>zzzv", { remap = true, silent = false })
-vim.keymap.set("n", "<A-,>", ":cp <cr>zzzv", { remap = true, silent = false })
+vim.keymap.set('n', "<A-q>", ':lua ToggleQuickfix()<CR>', { noremap = true, silent = true })
 
 -- Swap windows using alt+hjkl
 vim.keymap.set("n", "<A-h>", "<C-w>h", { noremap = true, silent = true })
 vim.keymap.set("n", "<A-j>", "<C-w>j", { noremap = true, silent = true })
 vim.keymap.set("n", "<A-k>", "<C-w>k", { noremap = true, silent = true })
 vim.keymap.set("n", "<A-l>", "<C-w>l", { noremap = true, silent = true })
-
--- Same as above, but for terminal mode
 vim.keymap.set("t", "<A-h>", "<C-\\><C-N><C-w>h", { noremap = true, silent = true })
 vim.keymap.set("t", "<A-j>", "<C-\\><C-N><C-w>j", { noremap = true, silent = true })
 vim.keymap.set("t", "<A-k>", "<C-\\><C-N><C-w>k", { noremap = true, silent = true })
