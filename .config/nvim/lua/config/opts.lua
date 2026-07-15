@@ -139,6 +139,7 @@ vim.lsp.config("harper_ls", {
     settings = {
         ["harper-ls"] = {
             userDictPath = vim.fn.stdpath("data") .. "/site/spell/en.utf-8.add",
+            -- more options here : https://writewithharper.com/docs/rules?utm_source
             linters = {
                 SpellCheck = true,
                 SpelledNumbers = false,
@@ -150,7 +151,8 @@ vim.lsp.config("harper_ls", {
                 RepeatedWords = true,
                 Spaces = true,
                 CorrectNumberSuffix = true,
-                AvoidBannedWords = false,
+                AvoidCurses = false,
+                UseTitleCase = false,
             },
             codeActions = {
                 ForceStable = false
