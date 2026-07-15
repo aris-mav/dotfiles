@@ -191,11 +191,11 @@ local snippets = { -- these are meant to be shared between tex and md files
     }),
 
     s({ trig = "differential", dscr = "Differential of a variable", }, {
-        t("\\frac{\\mathrm{d}{"), i(1, ""), t("}"),
+        t("\\mathrm{d}{"), i(1, ""), t("}"),
     }),
 
     s({ trig = "differential_partial", dscr = "Partial differential of a variable", }, {
-        t("\\frac{\\partial{"), i(1, ""), t("}"),
+        t("\\partial{"), i(1, ""), t("}"),
     }),
 
     s({ trig = "integral_evaluated", dscr = "Evaluated bounded integral", }, {
