@@ -45,7 +45,7 @@ return {
                 path = { score_offset = 3 },
                 lsp = { score_offset = 2 },
                 snippets = { score_offset = 1 },
-                buffer = { score_offset = -10 },
+                buffer = { score_offset = -100 },
             },
         },
         cmdline = {
