@@ -16,14 +16,6 @@ return {
         config = function()
             local lsp_defaults = require('lspconfig').util.default_config
 
-            -- Add cmp_nvim_lsp capabilities settings to lspconfig
-            -- This should be executed before you configure any language server
-            lsp_defaults.capabilities = vim.tbl_deep_extend(
-                'force',
-                lsp_defaults.capabilities,
-                require('cmp_nvim_lsp').default_capabilities()
-            )
-
             require('mason-lspconfig').setup({
                 ensure_installed = {},
                 handlers = {
