@@ -1,6 +1,10 @@
 local livepreview_available, _ = pcall(require, "livepreview.config")
 local previewing = false
 
+vim.keymap.set('n', '<leader>j', 'gqip',
+    { desc = 'Format paragraph' }
+)
+
 local function start_preview()
     vim.cmd("LivePreview start")
 

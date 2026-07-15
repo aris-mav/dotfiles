@@ -236,6 +236,28 @@ local snippets = { -- these are meant to be shared between tex and md files
         t("}\\right)")
     }),
 
+    s({
+        trig = "aligned",
+        dscr = "aligned block",
+    }, {
+        t({ "\\begin{aligned}",""}),
+        i(1, "& \\\\"),
+        t({"", "\\end{aligned}"}),
+    }),
+
+    s({
+        trig = "optimisation",
+        dscr = "Optimisation problem with constraints",
+    }, {
+        t({ "\\begin{aligned}", "\\min_{" }),
+        i(1, "var"),
+        t({ "}\\quad", "& " }),
+        i(2, "function"),
+        t({ " \\\\", "\\text{s.t.} \\quad", "& " }),
+        i(3, "constraint"),
+        t({ " \\\\", "\\end{aligned}" }),
+    }),
+
     s({ trig = "Rightarrow" }, { t("\\Rightarrow ") }),
     s({ trig = "rightarrow" }, { t("\\rightarrow ") }),
     s({ trig = "times" }, { t("\\times ") }),
