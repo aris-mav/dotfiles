@@ -40,12 +40,16 @@ return {
         -- elsewhere in your config, without redefining it, due to `opts_extend`
         sources = {
             -- Keep your default sources enabled
-            default = { "lsp", "path", "snippets", "buffer" },
+            default = { "lsp", "path", "snippets", "buffer", "sources" },
             providers = {
                 path = { score_offset = 3 },
                 lsp = { score_offset = 2 },
                 snippets = { score_offset = 1 },
                 buffer = { score_offset = -100 },
+                sources = {
+                    name = 'Sources',
+                    module = 'blink.nt_sources',
+                },
             },
         },
         cmdline = {
