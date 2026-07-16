@@ -27,12 +27,15 @@ return {
         appearance = {
             -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
             -- Adjusts spacing to ensure icons are aligned
-            nerd_font_variant = 'mono'
+            nerd_font_variant = 'mono',
+            kind_icons = {
+                nt_source = '󱉟',
+            },
         },
 
         completion = {
             documentation = { auto_show = true },
-            ghost_text = { enabled = true },
+            ghost_text = { enabled = false },
         },
 
         snippets = { preset = 'luasnip' },
