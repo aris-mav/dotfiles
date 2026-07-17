@@ -47,6 +47,18 @@ return {
                 lsp = { score_offset = 2 },
                 snippets = { score_offset = 1 },
                 buffer = { score_offset = -100 },
+                cmdline = {
+                    min_keyword_length = function(ctx)
+                        -- when typing a command, only show
+                        -- when the keyword is 3 characters or longer
+                        if ctx.mode == 'cmdline'
+                            and string.find(ctx.line, ' ') == nil
+                        then
+                            return 3
+                        end
+                        return 0
+                    end
+                },
                 sources = {
                     name = 'Sources',
                     module = 'blink.nt_sources',
@@ -58,7 +70,9 @@ return {
                 preset = 'inherit',
                 ['<CR>'] = { 'accept_and_enter', 'fallback' },
             },
-            completion = { menu = { auto_show = true } },
+            completion = {
+                menu = { auto_show = true },
+            },
         },
 
         -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
