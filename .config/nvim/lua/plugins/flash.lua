@@ -9,8 +9,15 @@ return {
         search = {
             mode = "fuzzy",
             multi_window = false, -- prevents messing up autocomplete windows
-        }
+        },
+        label = {
+            rainbow = {
+                enabled = true,
+                shade = 5,
+            },
+        },
     },
+
     keys = {
         {
             "s",
