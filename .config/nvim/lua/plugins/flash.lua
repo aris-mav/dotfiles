@@ -7,7 +7,8 @@ return {
             search = { enabled = true },
         },
         search = {
-            mode = "fuzzy"
+            mode = "fuzzy",
+            multi_window = false, -- prevents messing up autocomplete windows
         }
     },
     keys = {
