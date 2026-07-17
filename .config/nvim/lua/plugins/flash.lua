@@ -13,7 +13,6 @@ return {
         label = {
             rainbow = {
                 enabled = true,
-                shade = 5,
             },
         },
     },
