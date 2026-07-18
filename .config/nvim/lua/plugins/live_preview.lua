@@ -1,8 +1,6 @@
 return {
     'brianhuster/live-preview.nvim',
-    dependencies = {
-        'nvim-telescope/telescope.nvim',
-    },
+    ft = "markdown",
     config = function()
         -- Pass it as a single string instead of a table
         if vim.env.NIRI_SOCKET then
