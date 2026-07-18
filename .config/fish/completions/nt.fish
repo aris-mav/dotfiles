@@ -9,7 +9,7 @@ complete -c nt -n __nt_using_s -fra '(nt -t)' -d 'tag'
 complete -c nt -d 'edit file' -fra '(ls $NOTES_DIR)'
 
 complete -c nt -s s -d 'content search' -fr
-complete -c nt -s n -d 'creante new note' -f
+complete -c nt -s n -d 'create new note' -f
 complete -c nt -s S -d 'list all sources' -f
 complete -c nt -s H -d 'list all headers' -f
 complete -c nt -s t -d 'list all tags' -f
