@@ -61,7 +61,7 @@ return {
                 },
                 sources = {
                     name = 'Sources',
-                    module = 'blink.nt_sources',
+                    module = 'misc.nt_sources',
                 },
             },
         },

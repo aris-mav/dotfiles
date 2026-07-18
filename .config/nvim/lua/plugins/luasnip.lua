@@ -14,7 +14,7 @@ return {
         ls.filetype_extend("markdown", { "math" })
 
         require("luasnip.loaders.from_lua").lazy_load(
-            { paths = "~/.config/nvim/LuaSnip/" }
+            { paths = "~/.config/nvim/lua/luasnips/" }
         )
 
         vim.keymap.set({ "i" }, "<C-L>", function()

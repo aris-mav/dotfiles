@@ -66,7 +66,7 @@ elseif os.getenv("JULIALSP") == "julials" then
                 "--project=" .. "~/.julia/environments/nvim-lspconfig/",
                 "--startup-file=no",
                 "--history-file=no",
-                vim.fn.expand("~/.config/nvim/lua/lsp/") .. "julials_start.jl"
+                vim.fn.expand("~/.config/nvim/lua/misc/") .. "julials_start.jl"
             },
             filetypes = { 'julia' },
             root_markers = { "Project.toml", "JuliaProject.toml" },

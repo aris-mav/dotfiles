@@ -1,5 +1,5 @@
 vim.loader.enable()
-require("config.keybinds") -- Load file with keybinds
-require("config.lazy") -- Load lazy.nvim
-require("config.opts") -- Load general options
-require("config.slime")
+require("config.keybinds")
+require("config.lazy")
+require("config.opts")
+require("misc.slime")
