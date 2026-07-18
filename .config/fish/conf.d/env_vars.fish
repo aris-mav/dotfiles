@@ -38,14 +38,6 @@ actcompactbutton=green,black
 
 set -gx PYTHONSTARTUP "$HOME/.config/python/startup.py"
 
-if test "$XDG_SESSION_TYPE" = wayland
-    set -gx YANKTEXT 'wl-copy -n'
-else if test "$XDG_SESSION_TYPE" = x11
-    set -gx YANKTEXT 'xclip'
-else if type -q clip.exe
-    set -gx YANKTEXT 'clip.exe'
-end
-
 if type -q nvim
     set -gx MANPAGER "nvim +Man!"
 end

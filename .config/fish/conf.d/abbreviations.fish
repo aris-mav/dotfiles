@@ -35,7 +35,7 @@
 
     abbr e "$EDITOR"
     abbr f "$FILE_BROWSER"
-    abbr y "$YANKTEXT"
+    abbr y fish_clipboard_copy
     abbr xo 'xdg-open'
     abbr x 'xargs'
 
