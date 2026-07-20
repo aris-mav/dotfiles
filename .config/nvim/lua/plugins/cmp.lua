@@ -46,7 +46,10 @@ return {
                 path = { score_offset = 3 },
                 lsp = { score_offset = 2 },
                 snippets = { score_offset = 1 },
-                buffer = { score_offset = -100 },
+                buffer = {
+                    score_offset = -100,
+                    min_keyword_length = 3,
+                },
                 cmdline = {
                     min_keyword_length = function(ctx)
                         -- when typing a command, only show
