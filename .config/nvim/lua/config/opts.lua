@@ -219,12 +219,30 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- No line numbers for terminal windows
+
 vim.api.nvim_create_autocmd('TermOpen', {
+    desc = "Format buffer with LSP on save, if supported",
     group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
     callback = function()
         vim.opt.signcolumn = "no"
         vim.opt.number = false
         vim.opt.relativenumber = false
+    end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    desc = "Format buffer with LSP on save, if supported",
+    callback = function(event)
+        local clients = vim.lsp.get_clients({
+            bufnr = event.buf,
+            method = "textDocument/formatting",
+        })
+        if #clients == 0 then
+            return
+        end
+        vim.lsp.buf.format({
+            bufnr = event.buf,
+            timeout_ms = 1000,
+        })
     end,
 })
