@@ -22,7 +22,34 @@ return {
         -- C-k: Toggle signature help (if signature.enabled = true)
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        keymap = { preset = 'enter' },
+        keymap = {
+            preset = 'enter',
+            ['<Tab>'] = {
+                function(cmp)
+                    -- If there's a bracket in front of cursor, skip past it
+                    local col = vim.fn.col(".")
+                    local line = vim.fn.getline(".")
+                    local rest = line:sub(col)
+                    local spaces, closer = rest:match("^(%s*)([%]%}\"'`)])")
+
+                    if closer then
+                        vim.api.nvim_feedkeys(
+                            vim.api.nvim_replace_termcodes(
+                                string.rep("<Right>", #spaces + 1),
+                                true, true, true
+                            ),
+                            "n",
+                            true
+                        )
+                        return true
+                    end
+                    -- no bracket to skip: fall through to the rest of the chain
+                end,
+                'snippet_forward',
+                'select_next',
+                'fallback',
+            },
+        },
 
         appearance = {
             -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
