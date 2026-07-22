@@ -54,7 +54,7 @@ return {
                     i = {
                         ["<A-q>"] = actions.send_to_qflist,
                         ["<C-q>"] = actions.close,
-                        ["<C-y>"] = copy_filename('"'),
+                        ["<C-y>"] = copy_filename('+'),
                     },
                 },
                 layout_strategy = "flex",
