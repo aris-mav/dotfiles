@@ -20,7 +20,9 @@ local function start_preview()
         vim.fn.jobstart({ "sh", "-c",
             "niri msg action set-column-width 50%; \
             sleep 0.5; \
-            niri msg action swap-window-right"
+            niri msg action swap-window-right \
+            niri msg action focus-column-left \
+            niri msg action focus-column-right"
         }, { detach = true })
     end
 end
