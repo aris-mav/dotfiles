@@ -108,7 +108,7 @@ return {
                     map('n', '<leader>hp', gitsigns.preview_hunk)
                     map('n', '<leader>hi', gitsigns.preview_hunk_inline)
 
-                    map('n', '<leader>hb', function()
+                    map('n', '<leader>hB', function()
                         gitsigns.blame_line({ full = true })
                     end)
 
@@ -122,9 +122,9 @@ return {
                     map('n', '<leader>hq', gitsigns.setqflist)
 
                     -- Toggles
-                    map('n', '<leader>gb', gitsigns.toggle_current_line_blame)
-                    map('n', '<leader>gd', gitsigns.toggle_deleted)
-                    map('n', '<leader>gw', gitsigns.toggle_word_diff)
+                    map('n', '<leader>hb', gitsigns.toggle_current_line_blame)
+                    map('n', '<leader>hx', gitsigns.toggle_deleted)
+                    map('n', '<leader>hw', gitsigns.toggle_word_diff)
 
                     -- Text object
                     map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
