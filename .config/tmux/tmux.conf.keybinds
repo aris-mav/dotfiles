@@ -26,7 +26,7 @@ bind -n M-M run-shell \
 # Popups
 bind -n M-t display-popup \
          -S fg=green -b rounded -h 80% -w 90 \
-         -E "nt -T"
+         -E "nt $EDITOR TODO.txt"
 
 bind C-f display-popup -d "#{pane_current_path}" \
          -S fg=green -b rounded -h 75% -w 75% \
