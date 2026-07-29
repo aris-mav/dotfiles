@@ -32,7 +32,7 @@ function source:get_trigger_characters()
 end
 
 function source:refresh(callback)
-    local cmd = { vim.env.NOTES_DIR .. '/nt.sh', '-S' }
+    local cmd = { vim.env.NOTES_DIR .. '/.scripts/nt.sh', '-S' }
 
     self.job = vim.system(cmd, { text = true }, function(result)
         self.job = nil

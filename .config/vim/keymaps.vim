@@ -85,7 +85,7 @@ nnoremap <silent> gx :call OpenDOI()<CR>
 " --- Markdown Preview ---
 augroup MarkdownMaps
     autocmd!
-    autocmd FileType markdown nnoremap <buffer> <silent> gp :w<CR>:!~/.config/scripts/nt.sh -p %:p<CR>
+    autocmd FileType markdown nnoremap <buffer> <silent> gp :w<CR>:!$NOTES_DIR/.scripts/nt.sh -p %:p<CR>
 augroup END
 
 " --- Copy filename ---
