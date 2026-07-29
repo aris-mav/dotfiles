@@ -39,8 +39,7 @@
     abbr xo 'xdg-open'
     abbr x 'xargs'
 
-    abbr nn "nt -n"
-    abbr ns "nt -s"
+    abbr --set-cursor=% n "nt -%" 
 
     if type -q pacman
         abbr pa 'sudo pacman'
