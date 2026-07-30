@@ -240,9 +240,9 @@ local snippets = { -- these are meant to be shared between tex and md files
         trig = "aligned",
         dscr = "aligned block",
     }, {
-        t({ "\\begin{aligned}",""}),
+        t({ "\\begin{aligned}", "" }),
         i(1, "& \\\\"),
-        t({"", "\\end{aligned}"}),
+        t({ "", "\\end{aligned}" }),
     }),
 
     s({
@@ -263,6 +263,9 @@ local snippets = { -- these are meant to be shared between tex and md files
     s({ trig = "times" }, { t("\\times ") }),
     s({ trig = "cdot" }, { t("\\cdot ") }),
     s({ trig = "infty" }, { t("\\infty ") }),
+
+    s({ trig = "tag", dscr = "Label equation with a tag", },
+        { t("\\tag{"), i(1, ""), t("}") }),
 }
 
 for key, symbol in pairs({
