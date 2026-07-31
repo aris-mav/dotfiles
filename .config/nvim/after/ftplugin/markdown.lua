@@ -1,6 +1,12 @@
 local livepreview_available, _ = pcall(require, "livepreview.config")
 local previewing = false
 
+-- look for backlinks to current file
+vim.keymap.set("n", "gl", function()
+    vim.cmd("silent grep! " .. vim.fn.shellescape(vim.fn.expand("%:t")))
+    vim.cmd("copen")
+end, { buffer = true })
+
 local function start_preview()
     vim.cmd("LivePreview start")
 
@@ -75,11 +81,8 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 })
 
 
--- Buffer-local augroup so re-sourcing this ftplugin (e.g. on `:e` or a
--- filetype re-detect) replaces the autocmd instead of stacking a
--- duplicate copy of it.
 local group = vim.api.nvim_create_augroup(
-    "MarkdownGqFormat_" .. vim.api.nvim_get_current_buf(),
+    "gq_format" .. vim.api.nvim_get_current_buf(),
     { clear = true }
 )
 
