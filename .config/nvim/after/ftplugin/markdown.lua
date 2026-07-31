@@ -81,51 +81,96 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 })
 
 
+-- Each "skippable" block type is described by:
+--   starts(line)         -> true if this line opens the block
+--   is_delimited         -> true: skip forward to a matching closer line
+--                           false: skip forward while `starts` keeps matching
+--                           (i.e. a "run" of similar lines, like a table)
+--   ends(line)            -> only used when is_delimited; matches the closer
+local block_types = {
+    { -- $$ ... $$ math block
+        starts = function(l) return l:match("^%$%$%s*$") ~= nil end,
+        ends = function(l) return l:match("^%$%$%s*$") ~= nil end,
+        is_delimited = true,
+    },
+    { -- ``` ... ``` fenced code block
+        starts = function(l) return l:match("^%s*```") ~= nil end,
+        ends = function(l) return l:match("^%s*```") ~= nil end,
+        is_delimited = true,
+    },
+    { -- table: a run of contiguous table-like lines, no distinct closer
+        starts = function(line)
+            return line:match("^%s*|") ~= nil
+                or (line:match("^%s*[-:| ]+$") ~= nil
+                    and line:match("[-|]") ~= nil)
+        end,
+        is_delimited = false,
+    },
+}
+
+-- Given lines and a starting index i (where some block_type.starts matched),
+-- return the index just past the end of that block.
+local function skip_block(lines, n, i, block)
+    if block.is_delimited then
+        i = i + 1 -- past the opening delimiter
+        while i <= n and not block.ends(lines[i]) do
+            i = i + 1
+        end
+        return i + 1 -- past the closing delimiter
+    else
+        while i <= n and block.starts(lines[i]) do
+            i = i + 1
+        end
+        return i
+    end
+end
+
 local group = vim.api.nvim_create_augroup(
-    "gq_format" .. vim.api.nvim_get_current_buf(),
+    "gq_autoformat" .. vim.api.nvim_get_current_buf(),
     { clear = true }
 )
-
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = group,
     buffer = 0,
-    desc = "gq-format markdown paragraphs, skipping $$ math blocks",
+    desc = "gq-format markdown paragraphs, skipping math, code, and tables.",
     callback = function(event)
         local view = vim.fn.winsaveview()
         local lines = vim.api.nvim_buf_get_lines(event.buf, 0, -1, false)
 
         local i, n = 1, #lines
-
         while i <= n do
             if lines[i] == "" then
-                -- blank line, nothing to do
                 i = i + 1
-            elseif lines[i]:match("^%$%$%s*$") then
-                -- opening $$ of a math block: skip forward past its
-                -- closing $$ without touching anything in between
-                i = i + 1
-                while i <= n and not lines[i]:match("^%$%$%s*$") do
-                    i = i + 1
-                end
-                i = i + 1 -- past the closing $$
-            else
-                -- start of a regular paragraph: format it with gq,
-                -- relying on gqip to stop at the surrounding blank lines
-                vim.api.nvim_win_set_cursor(0, { i, 0 })
-                vim.cmd("normal! gqip")
+                goto continue
+            end
 
-                -- gq can change the line count, so refresh our view of
-                -- the buffer before continuing the scan
-                lines = vim.api.nvim_buf_get_lines(event.buf, 0, -1, false)
-                n = #lines
-
-                -- advance past the (possibly reflowed) paragraph to its
-                -- trailing blank line
-                while i <= n and lines[i] ~= "" do
-                    i = i + 1
+            -- try each skippable block type in turn
+            for _, block in ipairs(block_types) do
+                if block.starts(lines[i]) then
+                    i = skip_block(lines, n, i, block)
+                    goto continue
                 end
             end
+
+            -- none matched: this is a regular paragraph, gq-format it,
+            -- relying on gqip to stop at the surrounding blank lines
+            vim.api.nvim_win_set_cursor(0, { i, 0 })
+            vim.cmd("normal! gqip")
+
+            -- gq can change the line count, so refresh our view of the
+            -- buffer before continuing the scan
+            lines = vim.api.nvim_buf_get_lines(event.buf, 0, -1, false)
+            n = #lines
+
+            -- advance past the (possibly reflowed) paragraph to its
+            -- trailing blank line
+            while i <= n and lines[i] ~= "" do
+                i = i + 1
+            end
+
+            ::continue::
         end
+
         vim.fn.winrestview(view)
     end,
 })
