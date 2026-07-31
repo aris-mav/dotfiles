@@ -88,9 +88,9 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 --                           (i.e. a "run" of similar lines, like a table)
 --   ends(line)            -> only used when is_delimited; matches the closer
 local block_types = {
-    { -- $$ ... $$ math block
-        starts = function(l) return l:match("^%$%$%s*$") ~= nil end,
-        ends = function(l) return l:match("^%$%$%s*$") ~= nil end,
+    { -- $$ ... $$ math block (allow indentation, e.g. inside a list item)
+        starts = function(l) return l:match("^%s*%$%$%s*$") ~= nil end,
+        ends = function(l) return l:match("^%s*%$%$%s*$") ~= nil end,
         is_delimited = true,
     },
     { -- ``` ... ``` fenced code block
