@@ -51,13 +51,16 @@ return {
         t({ "$$", "" }), i(1, "maths"), t({ "", "$$", "", "" }),
     }),
 
-    s("link", {
+    s({
+        trig = "ll",
+        snippetType = "autosnippet",
+    }, {
         t("["),
         i(1, "text"),
         t("]("),
         d(2, function()
             local clipboard = vim.fn.getreg('+'):gsub("%s+", "")
-            if clipboard == "" then
+            if clipboard == "" or string.len(clipboard) > 100 then
                 clipboard = "url"
             end
             return sn(nil, {
