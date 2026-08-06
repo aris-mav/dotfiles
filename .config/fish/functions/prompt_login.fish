@@ -24,9 +24,6 @@ function prompt_login --description "display user name for the prompt"
         set color_host $fish_color_host_remote
     end
 
-    if set -q TMUX_PANE 
-    else
-        echo -n -s (set_color $fish_color_user) "$USER" (set_color green) @ (set_color $color_host) (prompt_hostname) (set_color normal)
-    end
+    # echo -n -s (set_color $fish_color_user) "$USER" (set_color green) @ (set_color $color_host) (prompt_hostname) (set_color normal)
 
 end

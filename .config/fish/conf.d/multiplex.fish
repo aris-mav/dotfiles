@@ -1,8 +1,8 @@
 if status is-interactive
 
-    if not test "$TERM_PROGRAM" = "WezTerm"
+    if not set -q KITTY_WINDOW_ID
 
-        if type -q tmux 
+        if type -q tmux
 
             # if there's a session, connect
             if not set -q TMUX
@@ -10,7 +10,7 @@ if status is-interactive
                 if tmux has-session
                     exec tmux attach-session
                 else
-                    exec tmux new-session -s main -n home 
+                    exec tmux new-session -s main -n home
                 end
             end
 
