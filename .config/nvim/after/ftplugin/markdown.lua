@@ -51,8 +51,6 @@ local function stop_preview()
                 { detach = true, }
             )
         end
-        vim.fn.jobstart({ "niri", "msg", "action", "maximize-window-to-edges" },
-            { detach = true, })
         close_preview_window()
     end
 end

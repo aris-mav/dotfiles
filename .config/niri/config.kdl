@@ -124,13 +124,12 @@ layout {
 
     gaps 5
 
-    center-focused-column "always"
+    center-focused-column "on-overflow"
     always-center-single-column
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     preset-column-widths {
         // Proportion sets the width as a fraction of the output width, taking gaps into account.
-        proportion 1.0
         proportion 0.5
         // Fixed sets the width in logical pixels exactly.
         // fixed 1920
@@ -355,16 +354,6 @@ window-rule {
     open-floating true
 }
 
-// Work around WezTerm's initial configure bug
-// by setting an empty default-column-width.
-window-rule {
-    // This regular expression is intentionally made as specific as possible,
-    // since this is the default config, and we want no false positives.
-    // You can get away with just app-id="wezterm" if you want.
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
-}
-
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
     // This app-id regular expression will work for both:
@@ -414,7 +403,9 @@ binds {
 
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+Return  { spawn "kitty" "--single-instance"; }
+    Mod+Return  hotkey-overlay-title="terminal" {
+        spawn "kitty" "--single-instance";
+    }
     Mod+M       hotkey-overlay-title="music player" { 
         spawn "kitty" "--single-instance" "rmpc"; 
     }
@@ -427,13 +418,13 @@ binds {
     Mod+Shift+N hotkey-overlay-title="restore notification" {
         spawn "makoctl" "restore";
     }
-    Mod+D hotkey-overlay-title="Run an Application" { 
+    Mod+D hotkey-overlay-title="drun" { 
         spawn "rofi" "-show" "drun"; 
     }
-    Mod+Slash hotkey-overlay-title="Switch Window" { 
+    Mod+W hotkey-overlay-title="window switch" { 
         spawn "rofi" "-show" "window"; 
     }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" {
+    Super+Alt+L hotkey-overlay-title="swaylock" {
         spawn "swaylock";
     }
 
