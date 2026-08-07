@@ -31,7 +31,9 @@ elseif vim.env.KITTY_WINDOW_ID or (vim.env.TERM and vim.env.TERM:match("kitty"))
     check_target = function()
         if not vim.g.slime_target or vim.g.slime_target == "" then
             -- Kitty window ID or @target syntax
-            local input_target = vim.fn.input("Kitty target: --match ", "id:2")
+            local input_target = vim.fn.input(
+                "Kitty target: --match ", "title:repl"
+            )
 
             if input_target == "" then
                 print("\nCancelled: No Kitty target specified.")
