@@ -296,6 +296,7 @@ for key, symbol in pairs({
 end
 
 for key, symbol in pairs({
+    text       = "text",
     normal     = "mathnormal",
     bold       = "mathbf",
     upright    = "mathrm",
