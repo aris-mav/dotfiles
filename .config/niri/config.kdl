@@ -117,32 +117,22 @@ output "DP-4" {
 }
 
 // Settings that influence how windows are positioned and sized.
-// Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-    // Set gaps around windows in logical pixels.
+
     gaps 5
 
-    // When to center a column when changing focus, options are:
-    // - "never", default behavior, focusing an off-screen column will keep at the left
-    //   or right edge of the screen.
-    // - "always", the focused column will always be centered.
-    // - "on-overflow", focusing a column will center it if it doesn't fit
-    //   together with the previously focused column.
     center-focused-column "never"
+    always-center-single-column
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     preset-column-widths {
         // Proportion sets the width as a fraction of the output width, taking gaps into account.
-        // For example, you can perfectly fit four windows sized "proportion 0.25" on an output.
-        // The default preset widths are 1/3, 1/2 and 2/3 of the output.
         proportion 1.0
         proportion 0.5
-
         // Fixed sets the width in logical pixels exactly.
         // fixed 1920
     }
-
     // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
     preset-window-heights { 
         proportion 1.0
@@ -271,6 +261,22 @@ layout {
         // right 64
         // top 64
         // bottom 64
+    }
+
+    tab-indicator {
+        // off
+        on
+        hide-when-single-tab
+        place-within-column
+        gap 6
+        width 4
+        length total-proportion=0.66
+        position "left"
+        gaps-between-tabs 20
+        corner-radius 8
+        active-gradient from="#d79921" to="#458588" angle=0
+        inactive-gradient from="#928374" to="#a89984" angle=0
+        urgent-gradient from="#cc241d" to="#d79921" angle=0
     }
 }
 
@@ -408,12 +414,9 @@ binds {
 
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+Return { spawn "~/.config/niri/toggle_app.sh" "alacritty"; }
-
-    Mod+T       { spawn "~/.config/niri/toggle_app.sh" "alacritty"; }
-    Mod+B       { spawn "~/.config/niri/toggle_app.sh" "firefox"; }
-    Mod+M       { spawn "~/.config/niri/toggle_app.sh" "music"; }
-    Mod+Shift+M { spawn "~/.config/niri/toggle_app.sh" "system_monitor"; }
+    Mod+Return  { spawn "kitty" "--single-instance"; }
+    Mod+M       { spawn "kitty" "--single-instance" "rmpc"; }
+    Mod+Shift+M { spawn "kitty" "--single-instance" "btm"; }
 
     Mod+D       { spawn "makoctl" "dismiss"; }
     Mod+Shift+D { spawn "makoctl" "restore"; }
@@ -616,7 +619,6 @@ binds {
     // Mod+TouchpadScrollDown { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+"; }
     // Mod+TouchpadScrollUp   { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"; }
 
-
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
@@ -638,12 +640,12 @@ binds {
     // * adjust width as a percentage of screen width: "-10%" or "+10%"
     // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
     // set-column-width "100" will make the column occupy 200 physical screen pixels.
-    Mod+Minus { set-column-width "-10%"; }
-    Mod+Equal { set-column-width "+10%"; }
+    Mod+Minus { set-column-width "-5%"; }
+    Mod+Equal { set-column-width "+5%"; }
 
     // Finer height adjustments when in column with other windows.
-    Mod+Shift+Minus { set-window-height "-10%"; }
-    Mod+Shift+Equal { set-window-height "+10%"; }
+    Mod+Shift+Minus { set-window-height "-5%"; }
+    Mod+Shift+Equal { set-window-height "+5%"; }
 
     // Move the focused window between the floating and the tiling layout.
     Mod+V       { toggle-window-floating; }
@@ -676,10 +678,6 @@ binds {
     // which ensures niri always processes them, even when an inhibitor is active.
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-    // The quit action will show a confirmation dialog to avoid accidental exits.
-    Mod+Shift+E { quit; }
-    Ctrl+Alt+Delete { quit; }
-
     // MPD binds
     Mod+P { spawn "mpc" "toggle"; }
     XF86AudioPlay { spawn "mpc" "toggle"; }
@@ -689,5 +687,9 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    // Mod+Shift+P { power-off-monitors; }
+    Mod+Shift+P { power-off-monitors; }
+
+    // The quit action will show a confirmation dialog to avoid accidental exits.
+    Mod+Shift+E { quit; }
+    Ctrl+Alt+Delete { quit; }
 }
