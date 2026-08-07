@@ -120,9 +120,11 @@ output "DP-4" {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
 
+    background-color "#282828"
+
     gaps 5
 
-    center-focused-column "never"
+    center-focused-column "always"
     always-center-single-column
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
@@ -294,8 +296,6 @@ spawn-at-startup "swayidle" "-w" \
     "timeout" "600" "systemctl suspend" \
     "before-sleep" "swaylock -f"
 
-spawn-sh-at-startup "swaybg -c \"#282828\""
-
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -415,16 +415,27 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+Return  { spawn "kitty" "--single-instance"; }
-    Mod+M       { spawn "kitty" "--single-instance" "rmpc"; }
-    Mod+Shift+M { spawn "kitty" "--single-instance" "btm"; }
-
-    Mod+D       { spawn "makoctl" "dismiss"; }
-    Mod+Shift+D { spawn "makoctl" "restore"; }
-
-    Mod+F hotkey-overlay-title="Run an Application" { 
-        spawn "rofi" "-combi-modi" "window,drun" "-show" "combi" "-modes" "combi"; 
-    }   
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+M       hotkey-overlay-title="music player" { 
+        spawn "kitty" "--single-instance" "rmpc"; 
+    }
+    Mod+Shift+M hotkey-overlay-title="resource manager" { 
+        spawn "kitty" "--single-instance" "btm"; 
+    }
+    Mod+N       hotkey-overlay-title="dismiss notification" { 
+        spawn "makoctl" "dismiss";
+    }
+    Mod+Shift+N hotkey-overlay-title="restore notification" {
+        spawn "makoctl" "restore";
+    }
+    Mod+D hotkey-overlay-title="Run an Application" { 
+        spawn "rofi" "-show" "drun"; 
+    }
+    Mod+Slash hotkey-overlay-title="Switch Window" { 
+        spawn "rofi" "-show" "window"; 
+    }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" {
+        spawn "swaylock";
+    }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -622,7 +633,7 @@ binds {
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
-    Mod+Shift+F { fullscreen-window; }
+    Mod+F { fullscreen-window; }
 
     Mod+Z { maximize-window-to-edges; }
     Mod+Shift+Z { expand-column-to-available-width; }
@@ -654,7 +665,7 @@ binds {
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
     // rather than stacked on top of each other.
-    Mod+W { toggle-column-tabbed-display; }
+    Mod+S { toggle-column-tabbed-display; }
 
     // Actions to switch layouts.
     // Note: if you uncomment these, make sure you do NOT have
@@ -679,7 +690,7 @@ binds {
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     // MPD binds
-    Mod+P { spawn "mpc" "toggle"; }
+    Mod+P hotkey-overlay-title="toggle music" { spawn "mpc" "toggle"; }
     XF86AudioPlay { spawn "mpc" "toggle"; }
     XF86AudioNext { spawn "mpc" "next"; }
     XF86AudioPrev { spawn "mpc" "prev"; }
