@@ -1,29 +1,61 @@
--- declare buffer name for tmux
-vim.g.bname = "slime"
+-- Pre-declare local function references so LSP doesn't complain about globals
+local send_to_target
+local check_target
 
-local function send_to_tpane(text)
-    vim.fn.system(
-        { "tmux", "set-buffer", "-b", vim.g.bname, "--", text }
-    )
-    vim.fn.system(
-        { "tmux", "paste-buffer", "-p", "-b", vim.g.bname, "-t", vim.g.tpane }
-    )
-    vim.fn.system(
-        { "tmux", "send-keys", "-t", vim.g.tpane, "\r" }
-    )
-end
+if vim.env.TMUX then
+    -- declare buffer name for tmux
+    vim.g.bname = "slime"
 
-local function check_tpane()
-    if not vim.g.tpane or vim.g.tpane == "" then
-        -- tmux syntax is "window.pane" (e.g. 1.3)
-        -- the default option below is "!", and it means "last active pane"
-        local input_pane = vim.fn.input("Target tmux pane: ", "!")
+    check_target = function()
+        if not vim.g.slime_target or vim.g.slime_target == "" then
+            -- tmux syntax is "window.pane" (e.g. 1.3)
+            -- the default option below is "!", and it means "last active pane"
+            local input_pane = vim.fn.input("Target tmux pane: ", "!")
 
-        if input_pane == "" then
-            print("\nCancelled: No tmux pane specified.")
-            return
+            if input_pane == "" then
+                print("\nCancelled: No tmux pane specified.")
+                return false
+            end
+            vim.g.slime_target = input_pane
         end
-        vim.g.tpane = input_pane
+        return true
+    end
+
+    send_to_target = function(text)
+        vim.fn.system({ "tmux", "set-buffer", "-b", vim.g.bname, "--", text })
+        vim.fn.system({ "tmux", "paste-buffer", "-p",
+            "-b", vim.g.bname, "-t", vim.g.slime_target })
+        vim.fn.system({ "tmux", "send-keys", "-t", vim.g.slime_target, "\r" })
+    end
+elseif vim.env.KITTY_WINDOW_ID or (vim.env.TERM and vim.env.TERM:match("kitty")) then
+    check_target = function()
+        if not vim.g.slime_target or vim.g.slime_target == "" then
+            -- Kitty window ID or @target syntax
+            local input_target = vim.fn.input("Kitty target: --match ", "id:2")
+
+            if input_target == "" then
+                print("\nCancelled: No Kitty target specified.")
+                return false
+            end
+            vim.g.slime_target = input_target
+        end
+        return true
+    end
+
+    send_to_target = function(text)
+        print("sending to " .. vim.g.slime_target)
+        vim.fn.system({ "kitten", "@", "send-text", "--bracketed-paste=enable",
+            "--match", vim.g.slime_target, text })
+        vim.fn.system({
+            "kitten", "@", "send-key", "--match", vim.g.slime_target, "\r" })
+    end
+else
+    check_target = function()
+        print("Unsupported terminal environment.")
+        return false
+    end
+    send_to_target = function(_)
+        print("Cannot send text: terminal not supported.")
     end
 end
 
@@ -50,8 +82,8 @@ _G.slime_operator = function(motion_type)
         vim.fn.getpos(end_mark),
         { type = reg_type }
     )
-    check_tpane()
-    send_to_tpane(table.concat(lines, "\n"))
+    check_target()
+    send_to_target(table.concat(lines, "\n"))
 end
 
 vim.keymap.set("n", "<CR><CR>", '<cmd>echo ""<cr>')
@@ -69,9 +101,9 @@ vim.keymap.set("n", "<leader><CR>",
         if not vim.g.slimestring or vim.g.slimestring == "" then
             vim.g.slimestring = vim.fn.input("Set slimestring : ")
         end
-        check_tpane()
+        check_target()
         if vim.g.slimestring ~= "" then
-            send_to_tpane(vim.g.slimestring)
+            send_to_target(vim.g.slimestring)
         end
     end,
     { desc = "Send a string to tmux pane." }
@@ -79,8 +111,8 @@ vim.keymap.set("n", "<leader><CR>",
 
 vim.keymap.set("n", "<CR>c",
     function()
-        check_tpane()
-        vim.fn.system({ "tmux", "send-keys", "-t", vim.g.tpane, 'C-c' })
+        check_target()
+        vim.fn.system({ "tmux", "send-keys", "-t", vim.g.slime_target, 'C-c' })
     end,
     { desc = "Send interrupt singal to pane" }
 )
