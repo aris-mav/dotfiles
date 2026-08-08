@@ -66,7 +66,7 @@
         "tooltip-format": " Artist: {artist} \n Album: {album} \n Title: {title} \n Queue: {songPosition}/{queueLength} \n volume: {volume}% \n {elapsedTime:%M:%S}/{totalTime:%M:%S} \n {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}",
         "tooltip-format-disconnected": "MPD (disconnected)",
         "on-click": "mpc toggle",
-        "on-click-right": "~/.config/niri/toggle_app.sh music",
+        "on-click-right": "kitty rmpc",
         "on-scroll-up": "mpc next",
         "on-scroll-down": "mpc prev",
         "interval": 2,
@@ -100,11 +100,11 @@
     "cpu": {
         "format": "{usage}% ",
         "tooltip": false,
-        "on-click-right": "~/.config/niri/toggle_app.sh system_monitor",
+        "on-click-right": "kitty btm",
     },
     "memory": {
         "format": "{}% ",
-        "on-click-right": "~/.config/niri/toggle_app.sh system_monitor",
+        "on-click-right": "kitty btm",
     },
     "temperature": {
         // "thermal-zone": 2,
