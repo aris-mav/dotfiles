@@ -121,12 +121,12 @@
     ),
     tabs: [
         (name: "Queue", pane: Split(direction: Vertical, panes: [
-            (size: "40%", borders: "NONE", pane: Split(direction: Vertical, 
+            (size: "45%", borders: "NONE", pane: Split(direction: Vertical, 
                 panes: [
                     (size: "95%", borders: "NONE", pane: Pane(AlbumArt)),
                 ])
             ),
-            (size: "60%", borders: "NONE", pane: Split(direction: Vertical, 
+            (size: "55%", borders: "NONE", pane: Split(direction: Vertical, 
                 panes: [
                     (size: "100%", borders: "NONE", pane: Pane(Queue)),
 
