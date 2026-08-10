@@ -1,6 +1,3 @@
-set -gx EDITOR (choose_first_available nvim vim vi hx)
-set -gx FUZZYFIND (choose_first_available fzf sk)
-set -gx FILE_BROWSER (choose_first_available br yazi ranger)
 set -gx FZF_DEFAULT_OPTS '--height 10% --layout reverse --border none --style minimal'
 
 set -gx NEWT_COLORS '
