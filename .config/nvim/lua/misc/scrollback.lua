@@ -1,4 +1,4 @@
-if vim.env.KITTY_SCROLLBACK_PAGER then
+if vim.env.KITTYSCROLL then
     vim.opt.eventignore = 'FileType'
     vim.opt.clipboard = 'unnamedplus'
     vim.keymap.set({ 'n', 'v' }, 'q', 'ZQ')
@@ -11,4 +11,7 @@ if vim.env.KITTY_SCROLLBACK_PAGER then
     for _, key in ipairs({ 'A', 'I', 'R', 'cc', 'C', 's', 'S' }) do
         vim.keymap.set({ 'n', 'x' }, key, '<Nop>')
     end
+
+    vim.opt.number = true
+    vim.opt.relativenumber = true
 end
