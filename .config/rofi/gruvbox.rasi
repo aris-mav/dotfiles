@@ -10,14 +10,15 @@
 }
 
 window {
-    border:           2px;
+    border:           3px;
     border-color:     @bg-alt;
+    border-radius:    px;
     padding:          5;
 }
 
 mainbox {
     border:  0;
-    padding: 0;
+    padding: 10;
 }
 
 element {
@@ -27,7 +28,7 @@ element {
 }
 
 element selected {
-    background-color: @bg-alt;
+    background-color: @bg;
     text-color:       @accent;
 }
 

@@ -11,7 +11,7 @@ configuration {
     eh: 1;
     m: "-5";
     dpi: -1;
-    auto-select: true;
+    auto-select: false;
     terminal: "rofi-sensible-terminal";
     // 	preview-cmd: ;
     // 	on-selection-changed: ;

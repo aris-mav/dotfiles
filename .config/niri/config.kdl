@@ -429,7 +429,7 @@ binds {
         spawn "rofi" "-show" "drun"; 
     }
     Mod+W hotkey-overlay-title="window switch" { 
-        spawn "rofi" "-show" "window"; 
+        spawn "rofi" "-auto-select" "-show" "window"; 
     }
     Super+Alt+L hotkey-overlay-title="swaylock" {
         spawn "swaylock";
