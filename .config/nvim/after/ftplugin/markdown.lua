@@ -123,6 +123,20 @@ local function skip_block(lines, n, i, block)
     end
 end
 
+-- YAML frontmatter is only valid as the very first thing in the file, so it
+-- can't be expressed as a generic block_type (those only look at the line
+-- itself, not its position). Handle it as a one-off before the main scan.
+local function skip_frontmatter(lines, n)
+    if n >= 1 and lines[1]:match("^%-%-%-%s*$") then
+        local i = 2
+        while i <= n and not lines[i]:match("^%-%-%-%s*$") do
+            i = i + 1
+        end
+        return i + 1 -- past the closing "---"
+    end
+    return 1
+end
+
 local group = vim.api.nvim_create_augroup(
     "gq_autoformat" .. vim.api.nvim_get_current_buf(),
     { clear = true }
@@ -130,12 +144,13 @@ local group = vim.api.nvim_create_augroup(
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = group,
     buffer = 0,
-    desc = "gq-format markdown paragraphs, skipping math, code, and tables.",
+    desc = "gq-format markdown paragraphs, skipping math, code, tables, and YAML frontmatter.",
     callback = function(event)
         local view = vim.fn.winsaveview()
         local lines = vim.api.nvim_buf_get_lines(event.buf, 0, -1, false)
 
-        local i, n = 1, #lines
+        local n = #lines
+        local i = skip_frontmatter(lines, n)
         while i <= n do
             if lines[i] == "" then
                 i = i + 1
