@@ -14,7 +14,7 @@ anchor=top-right
 background-color=#282828
 text-color=#ebdbb2
 border-color=#d65d0e
-progress-color=#458588 #689d6a
+progress-color=#fe8019
 
 [urgency=low]
 border-color=#3c3836
