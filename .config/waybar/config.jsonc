@@ -20,8 +20,9 @@
         "memory",
         "battery",
         "network",
+        "idle_inhibitor",
         "power-profiles-daemon",
-        "custom/power"
+        "custom/power",
     ],
 
     "niri/workspaces": {
@@ -80,11 +81,13 @@
 
     "idle_inhibitor": {
         "format": "{icon}",
+        "timeout": 60,
         "format-icons": {
-            "activated": " ",
-            "deactivated": " "
+            "activated": "",
+            "deactivated": ""
         }
     },
+
     "tray": {
         // "icon-size": 21,
         "spacing": 10,
@@ -92,10 +95,32 @@
         //   "blueman": "bluetooth",
         // }
     },
+
     "clock": {
-        // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%d/%m/%Y}"
+        "interval": 60,
+        "format": "{:%H:%M}",
+        "format-alt": "{:%A, %B %d %Y}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode"          : "month",
+            "mode-mon-col"  : 3,
+            "on-scroll"     : 1,
+            "on-click-right": "mode",
+            "iso8601"       : true,
+        "format": {
+            "months":     "<span color='#458588'><b>{}</b></span>",
+            "weekdays":   "<span color='#689d6a'><b>{}</b></span>",
+            "days":       "<span color='#ebdbb2'><b>{}</b></span>",
+            "today":      "<span color='#d79921'><b><u>{}</u></b></span>"
+        }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
     },
     "cpu": {
         "format": "{usage}% ",
