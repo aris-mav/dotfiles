@@ -42,28 +42,15 @@
         }
     },
     "mpd": {
-        "format": "{title} {stateIcon}",
+        "format": "{title} {stateIcon}{repeatIcon}{randomIcon}{consumeIcon}{singleIcon}",
         "format-disconnected": "mpd not connected",
         "format-stopped": "  ",
         "unknown-tag": "N/A",
-        "interval": 5,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-
+        "repeat-icons":  { "on": "  " },
+        "random-icons":  { "on": "  " },
+        "consume-icons": { "on": " 󰩫 " },
+        "single-icons":  { "on": " 󰑘 " },
+        "state-icons":   { "paused": "", "playing": "" },
         "tooltip-format": " Artist: {artist} \n Album: {album} \n Title: {title} \n Queue: {songPosition}/{queueLength} \n volume: {volume}% \n {elapsedTime:%M:%S}/{totalTime:%M:%S} \n {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}",
         "tooltip-format-disconnected": "MPD (disconnected)",
         "on-click": "mpc toggle",

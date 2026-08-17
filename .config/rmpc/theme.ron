@@ -139,13 +139,42 @@
                 ],
                 right: [
                     (
-                        kind: Property(Widget(States(
-                            active_style: (fg: "white", modifiers: "Bold"),
-                            separator_style: (fg: "white")))
-                        ),
-                        style: (fg: "dark_gray")
+                        kind: Group([
+                            (kind: Property(Status(RepeatV2(
+                                on_label: " ",
+                                off_label: " ",
+                                on_style: (fg: "white", modifiers: "Bold"),
+                                off_style: (fg: "dark_gray"),
+                            )))),
+                            (kind: Text(" ")),
+                            (kind: Property(Status(RandomV2(
+                                on_label: " ",
+                                off_label: " ",
+                                on_style: (fg: "white", modifiers: "Bold"),
+                                off_style: (fg: "dark_gray"),
+                            )))),
+                            (kind: Text(" ")),
+                            (kind: Property(Status(ConsumeV2(
+                                on_label: "󰩫 ",
+                                off_label: "󰩫 ",
+                                oneshot_label: "󰩫 ₁",
+                                on_style: (fg: "white", modifiers: "Bold"),
+                                off_style: (fg: "dark_gray"),
+                                oneshot_style: (fg: "white"),
+                            )))),
+                            (kind: Text(" ")),
+                            (kind: Property(Status(SingleV2(
+                                on_label: "󰑘 ",
+                                off_label: "󰑗 ",
+                                oneshot_label: "󰑘 ₁",
+                                on_style: (fg: "white", modifiers: "Bold"),
+                                off_style: (fg: "dark_gray"),
+                                oneshot_style: (fg: "white"),
+                            )))),
+                        ]),
+                        style: (fg: "dark_gray"),
                     ),
-                ]
+                ],
             ),
         ],
     ),
