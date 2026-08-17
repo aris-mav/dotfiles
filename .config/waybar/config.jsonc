@@ -57,6 +57,7 @@
         "on-click-right": "kitty rmpc",
         "on-scroll-up": "mpc next",
         "on-scroll-down": "mpc prev",
+        "smooth-scrolling-threshold": 3.0,
         "interval": 2,
     },
 
@@ -107,7 +108,8 @@
             "on-click-backward": "tz_down",
             "on-scroll-up": "shift_up",
             "on-scroll-down": "shift_down"
-        }
+        },
+        "smooth-scrolling-threshold": 3.0,
     },
     "cpu": {
         "format": "{usage}% ",
@@ -129,7 +131,9 @@
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "smooth-scrolling-threshold": 1.0,
+        "reverse-scrolling": true,
     },
     "battery": {
         "states": {
@@ -189,6 +193,8 @@
         },
         "on-click-right": "pavucontrol",
         "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "smooth-scrolling-threshold": 1.0,
+        "reverse-scrolling": true,
     },
     "custom/power": {
         "format" : "⏻ ",
