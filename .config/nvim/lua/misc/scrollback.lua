@@ -11,14 +11,14 @@ if vim.env.KITTYSCROLL then
     for _, key in ipairs({ 'A', 'I', 'R', 'cc', 'C', 's', 'S' }) do
         vim.keymap.set({ 'n', 'x' }, key, '<Nop>')
     end
-end
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function()
-        if vim.v.event.operator == "y" then
-            vim.schedule(function()
-                vim.cmd("quit")
-            end)
-        end
-    end,
-})
+    vim.api.nvim_create_autocmd("TextYankPost", {
+        callback = function()
+            if vim.v.event.operator == "y" then
+                vim.schedule(function()
+                    vim.cmd("quit")
+                end)
+            end
+        end,
+    })
+end
