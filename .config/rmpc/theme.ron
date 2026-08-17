@@ -18,8 +18,8 @@
         active_style: (fg: "blue", bg: "black", modifiers: "Bold"),
         inactive_style: (),
     ),
-    highlighted_item_style: (fg: "yellow", modifiers: ""),
-    current_item_style: (fg: "blue", bg: "black", modifiers: "Bold"),
+    highlighted_item_style: (fg: "blue", modifiers: ""),
+    current_item_style: (bg: "#3c3836", modifiers: ""),
     borders_style: (fg: "green"),
     highlight_border_style: (fg: "green"),
     symbols: (
@@ -106,7 +106,11 @@
             (
                 left: [
                     // (kind: Text("["), style: (fg: "yellow", modifiers: "Bold")),
-                    (kind: Property(Status(StateV2(playing_label: "Playing ", paused_label: "Paused ", stopped_label: "Stopped "))), style: (fg: "yellow", modifiers: "")),
+                    (kind: Property(Status(StateV2(
+                        playing_label: "Playing ", 
+                        paused_label: "Paused ", 
+                        stopped_label: "Stopped "
+                    ))), style: (fg: "yellow", modifiers: "")),
                     // (kind: Text("]"), style: (fg: "yellow", modifiers: "Bold"))
                 ],
                 center: [
