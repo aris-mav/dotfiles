@@ -108,8 +108,8 @@
                     // (kind: Text("["), style: (fg: "yellow", modifiers: "Bold")),
                     (kind: Property(Status(StateV2(
                         playing_label: "Playing ", 
-                        paused_label: "Paused ", 
-                        stopped_label: "Stopped "
+                        paused_label: "Paused  ", 
+                        stopped_label: "Stopped  "
                     ))), style: (fg: "yellow", modifiers: "")),
                     // (kind: Text("]"), style: (fg: "yellow", modifiers: "Bold"))
                 ],
