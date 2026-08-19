@@ -262,7 +262,7 @@ local snippets = { -- these are meant to be shared between tex and md files
     s({ trig = "rightarrow" }, { t("\\rightarrow ") }),
     s({ trig = "times" }, { t("\\times ") }),
     s({ trig = "cdot" }, { t("\\cdot ") }),
-    s({ trig = "infty" }, { t("\\infty ") }),
+    s({ trig = "infty" }, { t("\\infty") }),
 
     s({ trig = "tag", dscr = "Label equation with a tag", },
         { t("\\tag{"), i(1, ""), t("}") }),
@@ -308,9 +308,12 @@ for key, symbol in pairs({
     ol         = "overline",
     ul         = "underline",
     hat        = "hat",
-    dot        = "dot",
     vec        = "vec",
     nabla      = "nabla",
+    dot        = "dot",
+    ddot       = "ddot",
+    dddot      = "dddot",
+    ddddot     = "ddddot",
 }) do
     table.insert(snippets, s({ trig = key }, {
         t("\\" .. symbol .. "{"),
