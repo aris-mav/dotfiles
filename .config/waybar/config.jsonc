@@ -15,6 +15,7 @@
         "clock",
     ],
     "modules-right": [
+        "temperature",
         "backlight",
         "cpu",
         "memory",
@@ -121,12 +122,12 @@
         "on-click-right": "kitty btm",
     },
     "temperature": {
-        // "thermal-zone": 2,
+        "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["󰉬", "", "󰉪"]
+        "format-critical": "{temperatureC}°C !{icon}",
+        "critical-threshold": 80,
+        "format-icons": ["", "", "", ""]
     },
     "backlight": {
         // "device": "acpi_video1",
