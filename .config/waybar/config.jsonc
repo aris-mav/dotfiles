@@ -15,7 +15,6 @@
         "clock",
     ],
     "modules-right": [
-        "temperature",
         "backlight",
         "cpu",
         "memory",
@@ -43,6 +42,8 @@
         }
     },
     "mpd": {
+        "min-length": 18,
+        "title-len": 20,
         "format": "{title} {stateIcon}{repeatIcon}{randomIcon}{consumeIcon}{singleIcon}",
         "format-disconnected": "mpd not connected",
         "format-stopped": "  ",
@@ -88,7 +89,7 @@
     "clock": {
         "interval": 60,
         "format": "{:%H:%M}",
-        "format-alt": "{:%A, %B %d %Y}",
+        "format-alt": "{:%d/%m - %H:%M}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
             "mode"          : "month",
