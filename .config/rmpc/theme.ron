@@ -105,22 +105,25 @@
         rows: [
             (
                 left: [
-                    // (kind: Text("["), style: (fg: "yellow", modifiers: "Bold")),
-                    (kind: Property(Status(StateV2(
-                        playing_label: "Playing ", 
-                        paused_label: "Paused  ", 
-                        stopped_label: "Stopped  "
-                    ))), style: (fg: "yellow", modifiers: "")),
-                    // (kind: Text("]"), style: (fg: "yellow", modifiers: "Bold"))
+                    (kind: Property(Status(Bitrate)), style: (fg: "yellow"),
+                        default: (kind: Text("0"), style: (fg: "yellow")), 
+                    ),
+                    (kind: Text(" kbps"), style: (fg: "yellow")),
                 ],
                 center: [
                     (kind: Property(Song(Title)), style: (fg: "yellow", modifiers: ""),
-                        default: (kind: Text("No Song"), style: (modifiers: "Bold"))
-                    )
+                        default: (kind: Text(""))
+                    ),
+                    (kind: Property(Status(StateV2(
+                        playing_label: "  ", 
+                        paused_label: "  ", 
+                        stopped_label: "  ",
+                    ))), style: (fg: "yellow", modifiers: "")),
                 ],
                 right: [
                     (kind: Property(Widget(ScanStatus)), style: (fg: "yellow")),
-                    (kind: Property(Widget(Volume)), style: (fg: "yellow"))
+                    (kind: Property(Status(Volume)), style: (fg: "yellow")),
+                    (kind: Text("% 󰕾 "), style: (fg: "yellow")),
                 ]
             ),
             (
@@ -128,13 +131,10 @@
                     (kind: Property(Status(Elapsed))),
                     (kind: Text(" / ")),
                     (kind: Property(Status(Duration))),
-                    (kind: Text(" (")),
-                    (kind: Property(Status(Bitrate))),
-                    (kind: Text(" kbps)"))
                 ],
                 center: [
                     (kind: Property(Song(Artist)), style: (fg: "white", modifiers: ""),
-                        default: (kind: Text("Unknown"), style: (fg: "yellow", modifiers: ""))
+                        default: (kind: Text("Unknown"), style: ( modifiers: ""))
                     ),
                     (kind: Text(" - ")),
                     (kind: Property(Song(Album)),
