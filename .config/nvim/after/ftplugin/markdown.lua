@@ -123,6 +123,23 @@ local function skip_block(lines, n, i, block)
     end
 end
 
+-- A paragraph followed by \n\n won't be formatted
+-- Returns the index to jump to if protected, or nil if not.
+local function protected_paragraph_end(lines, n, i)
+    local para_end = i
+    while para_end <= n and lines[para_end] ~= "" do
+        para_end = para_end + 1
+    end
+
+    if para_end + 1 <= n
+        and lines[para_end] == ""
+        and lines[para_end + 1] == "" then
+        return para_end
+    end
+
+    return nil
+end
+
 -- YAML frontmatter is only valid as the very first thing in the file, so it
 -- can't be expressed as a generic block_type (those only look at the line
 -- itself, not its position). Handle it as a one-off before the main scan.
@@ -151,6 +168,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
         local n = #lines
         local i = skip_frontmatter(lines, n)
+
         while i <= n do
             if lines[i] == "" then
                 i = i + 1
@@ -163,6 +181,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
                     i = skip_block(lines, n, i, block)
                     goto continue
                 end
+            end
+
+            -- check if paragraph is followed by \n\n
+            local protected_skip = protected_paragraph_end(lines, n, i)
+            if protected_skip then
+                i = protected_skip
+                goto continue
             end
 
             -- none matched: this is a regular paragraph, gq-format it,
