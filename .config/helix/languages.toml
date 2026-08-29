@@ -43,3 +43,8 @@ args = [
     run(server)
     """
 ]
+
+[[language]]
+name = "markdown"
+text-width = 50
+rulers = [51]
