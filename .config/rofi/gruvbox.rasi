@@ -10,8 +10,8 @@
 }
 
 window {
-    border:           3px;
-    border-color:     @bg-alt;
+    border:           1px;
+    border-color:     @accent;
     border-radius:    5px;
     padding:          5;
 }
