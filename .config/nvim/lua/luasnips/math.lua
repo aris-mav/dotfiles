@@ -107,7 +107,7 @@ local snippets = { -- these are meant to be shared between tex and md files
             trig = "([bBpvV])mat(%d+)x(%d+)([ar])",
             regTrig = true,
             name = "matrix",
-            hidden = false
+            hidden = true
         },
         fmt([[
         \begin{<>}<>
