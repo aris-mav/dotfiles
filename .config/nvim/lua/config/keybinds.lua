@@ -27,9 +27,10 @@ vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 -- U for redo
 vim.keymap.set("n", "U", "<C-r>", { remap = true, silent = false })
 
--- Map leader-y to yank in plus register in normal and visual mode and leader-p to paste from plus register in normal and visual mode
-vim.keymap.set({ "n", "v" }, "<leader>y", '\"+y', { remap = true, silent = false })
-vim.keymap.set({ "n", "v" }, "<leader>p", '\"+p', { remap = true, silent = false })
+-- yank and put in plus register
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { remap = true, silent = false })
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { remap = true, silent = false })
+vim.keymap.set({ "v" }, "<leader>d", '"+d', { remap = true, silent = false })
 
 -- Quickfix keymaps
 function ToggleQuickfix()
