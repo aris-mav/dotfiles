@@ -118,7 +118,7 @@ panel-id='world'
 size=(870, 690)
 
 [org/gnome/control-center]
-last-panel='background'
+last-panel='keyboard'
 window-state=(952, 1039, true)
 
 [org/gnome/deja-dup]
@@ -456,6 +456,7 @@ move-to-workspace-down=@as []
 move-to-workspace-left=@as []
 move-to-workspace-right=@as []
 move-to-workspace-up=@as []
+show-desktop=@as []
 switch-applications=@as []
 switch-applications-backward=@as []
 switch-group=@as []
@@ -918,7 +919,7 @@ animation-time=0.25
 cycle-height-steps=[0.5, 1.0]
 cycle-width-steps=[0.38195000000000001, 0.5, 0.61804000000000003]
 default-focus-mode=0
-disable-scratch-in-overview=true
+disable-scratch-in-overview=false
 disable-topbar-styling=false
 edge-preview-enable=true
 edge-preview-scale=0.14999999999999999
@@ -967,6 +968,7 @@ move-monitor-right=['<Shift><Control><Super>l']
 move-right=['<Shift><Super>l']
 move-up=['']
 new-window=['']
+paper-toggle-fullscreen=['<Super>f']
 slurp-in=['<Super>comma']
 switch-down=['']
 switch-down-or-else-workspace=['<Super>j', '<Super>Down']
@@ -982,6 +984,7 @@ switch-previous=['']
 switch-right=['<Super>l', '<Super>Right']
 switch-up=['']
 switch-up-or-else-workspace=['<Super>k', '<Super>Up']
+toggle-maximize-width=['<Super>z']
 
 [org/gnome/shell/extensions/paperwm/workspaces]
 list=['1af64198-e500-4740-baee-070ee6d17ab4', '0db0bed2-2835-4da5-8ee1-25bab1feb16b', '7c2a5361-3c51-44c2-b62b-31d6e3d12441', 'f9603529-1acf-4fe5-ba2a-20efe08359a6', '80014679-bfed-4a49-b9e2-c57094be48d6', '2a78f731-b19a-40d4-a1cc-2028fa422e90', 'd7fc911b-d683-46f3-b970-e06bc3607db5', 'b130fbe3-0c8d-4bdd-abc9-31ad90928233', '090f113e-464a-43c6-bc1a-d6ab567d749a', 'd4fb0b73-b1ad-4462-a620-62427597b994', 'f58227b0-0be7-4060-88a6-934b058104a4']
@@ -1077,6 +1080,7 @@ switch-to-application-1=@as []
 switch-to-application-2=@as []
 switch-to-application-3=@as []
 switch-to-application-4=@as []
+toggle-application-view=['<Super>d']
 toggle-message-tray=@as []
 toggle-overview=['<Super>o']
 
