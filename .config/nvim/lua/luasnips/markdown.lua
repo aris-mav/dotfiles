@@ -48,7 +48,7 @@ return {
             return is_blank(before) and is_isolated_line()
         end,
     }, {
-        t({ "$$", "" }), i(1, "maths"), t({ "", "$$", "", "" }),
+        t({ "$$", "" }), i(1, "maths"), t({ "", "$$" }),
     }),
 
     s({
