@@ -339,6 +339,9 @@ workspace "web" {
 workspace "terminal" {
     open-on-output "DP-4"
 }
+workspace "reads" {
+    open-on-output "DP-4"
+}
 
 window-rule {
     match app-id="firefox"

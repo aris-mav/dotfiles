@@ -30,6 +30,7 @@
         "format-icons": {
             "web": "󰖟",
             "terminal": "",
+            "reads": "󱉟",
             "default": "", 
         }
     },
