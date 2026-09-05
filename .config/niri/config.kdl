@@ -333,13 +333,13 @@ animations {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
-workspace "web" {
+workspace "one" {
     open-on-output "DP-4"
 }
-workspace "terminal" {
+workspace "two" {
     open-on-output "DP-4"
 }
-workspace "reads" {
+workspace "three" {
     open-on-output "DP-4"
 }
 

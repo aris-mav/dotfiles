@@ -43,7 +43,7 @@
         }
     },
     "mpd": {
-        "min-length": 18,
+        "min-length": 15,
         "title-len": 20,
         "format": "{title} {stateIcon}{repeatIcon}{randomIcon}{consumeIcon}{singleIcon}",
         "format-disconnected": "mpd not connected",
