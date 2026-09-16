@@ -1,65 +1,41 @@
 #info
-g       first-node
-G       last-node
-\mb     beginning-of-node
-\me     end-of-node
+:h      get-help-window
 
-j       next-line
-k       prev-line
 h       prev-node
+j       down-line
+k       up-line
 l       next-node
 
-^O      history-node
+H       first-node
+L       last-node
 
+g       beginning-of-node
+G       end-of-node
+
+\kd     next-line
+\ku     prev-line
+
+^e      down-line
+^y      up-line
 f       scroll-forward-page-only
 ^f      scroll-forward-page-only
-\m\     scroll-forward-page-only
-z       scroll-forward-page-only-set-window
-
 b       scroll-backward-page-only
 ^b      scroll-backward-page-only
-w       scroll-backward-page-only-set-window
-
-\kd     down-line
-^e      down-line
-\ku     up-line
-^y      up-line
-
 d       scroll-half-screen-down
 ^d      scroll-half-screen-down
 u       scroll-half-screen-up
 ^u      scroll-half-screen-up
 
-^xu     up-node
-\mt     top-node
-\md     dir-node
-
-^xg     goto-node
+^O      history-node
 I       goto-invocation-node
 
 n       search-next
 N       search-previous
 
-\mf     xref-item
-
-^]      select-reference-this-line
 ^j      select-reference-this-line
 ^m      select-reference-this-line
+^]      select-reference-this-line
 
 ^c      abort-key
-
-\mh     get-info-help-node
-
 q       quit
 ZZ      quit
-
-#echo-area
-\mh     echo-area-backward
-\ml     echo-area-forward
-\m0     echo-area-beg-of-line
-\m$     echo-area-end-of-line
-\mw     echo-area-forward-word
-\mx     echo-area-delete
-\mu     echo-area-abort
-^v      echo-area-quoted-insert
-\mX     echo-area-kill-word
