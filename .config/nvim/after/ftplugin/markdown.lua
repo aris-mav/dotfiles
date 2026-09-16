@@ -1,5 +1,5 @@
-vim.o.softtabstop = 2
-vim.o.shiftwidth = 2
+vim.bo.softtabstop = 2
+vim.bo.shiftwidth = 2
 
 local livepreview_available, _ = pcall(require, "livepreview.config")
 local previewing = false
