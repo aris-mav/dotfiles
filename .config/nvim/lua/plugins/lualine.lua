@@ -102,5 +102,6 @@ return {
             inactive_winbar = {},
             extensions = {}
         }
+        vim.o.laststatus = 3
     end
 }

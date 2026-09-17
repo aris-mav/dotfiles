@@ -215,6 +215,8 @@ vim.diagnostic.config({
 vim.opt.wrap = false
 vim.opt.undofile = true
 
+vim.o.laststatus = 3
+
 -- Ignore case in search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
