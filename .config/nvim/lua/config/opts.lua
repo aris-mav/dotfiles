@@ -215,7 +215,9 @@ vim.diagnostic.config({
 vim.opt.wrap = false
 vim.opt.undofile = true
 
+-- statusline options
 vim.o.laststatus = 3
+vim.o.cmdheight = 0
 
 -- Ignore case in search
 vim.opt.ignorecase = true
