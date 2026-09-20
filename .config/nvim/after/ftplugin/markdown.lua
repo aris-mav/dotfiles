@@ -1,6 +1,11 @@
 vim.bo.softtabstop = 2
 vim.bo.shiftwidth = 2
 
+vim.keymap.set('n', 'gb',
+    '<cmd>!FORCE_XO=true $NOTES_DIR/.scripts/nt.sh -p %:p<CR>',
+    { desc = 'Markdown HTML preview', silent = true }
+)
+
 local livepreview_available, _ = pcall(require, "livepreview.config")
 local previewing = false
 
@@ -58,7 +63,7 @@ local function stop_preview()
     end
 end
 
-vim.keymap.set('n', 'gb', function()
+vim.keymap.set('n', '<leader>l', function()
     if livepreview_available then
         if not previewing then
             vim.cmd("w")
@@ -68,10 +73,8 @@ vim.keymap.set('n', 'gb', function()
             stop_preview()
             previewing = false
         end
-    else
-        vim.cmd("!FORCE_XO=true $NOTES_DIR/.scripts/nt.sh -p %:p")
     end
-end, { desc = 'Preview markdown file', silent = true })
+end, { desc = 'Toggle live preview', silent = true })
 
 vim.api.nvim_create_autocmd("VimLeavePre", {
     callback = function()
@@ -80,7 +83,6 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
         end
     end
 })
-
 
 -- Each "skippable" block type is described by:
 --   starts(line)         -> true if this line opens the block
