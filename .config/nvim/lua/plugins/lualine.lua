@@ -3,6 +3,7 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     enabled = true,
     event = "VeryLazy",
+    cond = vim.env.KITTYSCROLL == nil,
 
     config = function()
         require('lualine').setup {
