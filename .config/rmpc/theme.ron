@@ -109,16 +109,16 @@
                         default: (kind: Text("0"), style: (fg: "yellow")), 
                     ),
                     (kind: Text(" kbps"), style: (fg: "yellow")),
+                    (kind: Property(Status(StateV2(
+                        playing_label: " (playing) ", 
+                        paused_label: " (paused) ", 
+                        stopped_label: " (stopped) ",
+                    ))), style: (fg: "yellow", modifiers: "")),
                 ],
                 center: [
                     (kind: Property(Song(Title)), style: (fg: "yellow", modifiers: ""),
                         default: (kind: Text(""))
                     ),
-                    (kind: Property(Status(StateV2(
-                        playing_label: "  ", 
-                        paused_label: "  ", 
-                        stopped_label: "  ",
-                    ))), style: (fg: "yellow", modifiers: "")),
                 ],
                 right: [
                     (kind: Property(Widget(ScanStatus)), style: (fg: "yellow")),
