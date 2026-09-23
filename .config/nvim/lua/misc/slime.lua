@@ -84,8 +84,9 @@ _G.slime_operator = function(motion_type)
         vim.fn.getpos(end_mark),
         { type = reg_type }
     )
-    check_target()
-    send_to_target(table.concat(lines, "\n"))
+    if check_target() then
+        send_to_target(table.concat(lines, "\n"))
+    end
 end
 
 vim.keymap.set("n", "<CR><CR>", '<cmd>echo ""<cr>')
