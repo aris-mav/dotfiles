@@ -21,7 +21,11 @@ return {
         {
             "s",
             mode = { "n", "x", "o" },
-            function() require("flash").treesitter() end,
+            function()
+                require("flash").treesitter(
+                    { jump = { pos = "range", autojump = false }, }
+                )
+            end,
             desc = "Flash Treesitter"
         },
         {
