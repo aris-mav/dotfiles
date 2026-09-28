@@ -12,14 +12,6 @@ vim.keymap.set("n", "<leader>w", ":w <cr>", { remap = true, silent = false })
 -- Map leader-e to netrw for the directory of curent file
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { remap = true, silent = false })
 
--- Keep cursor centered after some big movements
-vim.keymap.set("n", "n", "nzzzv", { remap = true, silent = false })
-vim.keymap.set("n", "N", "Nzzzv", { remap = true, silent = false })
--- vim.keymap.set("n", "<C-f>", "<C-f>zzzv", { remap = true, silent = false })
--- vim.keymap.set("n", "<C-b>", "<C-b>zzzv", { remap = true, silent = false })
-vim.keymap.set("n", "<C-d>", "<C-d>zzzv", { remap = true, silent = false })
-vim.keymap.set("n", "<C-u>", "<C-u>zzzv", { remap = true, silent = false })
-
 -- Keep selection alive after indenting in Visual Mode
 vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
@@ -60,8 +52,8 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
         if vim.bo.readonly or not vim.bo.modifiable then
             local opts = { buffer = true, silent = true }
 
-            vim.keymap.set("n", "d", "<C-d>zz", opts)
-            vim.keymap.set("n", "u", "<C-u>zz", opts)
+            vim.keymap.set("n", "d", "<C-d>", opts)
+            vim.keymap.set("n", "u", "<C-u>", opts)
             vim.keymap.set("n", "q", ":q<CR>", opts)
         end
     end,

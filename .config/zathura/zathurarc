@@ -1,10 +1,6 @@
-# open in fullscreen
-include ./windowsize
 include ./themes/gruvbox/dark
-
 set selection-clipboard clipboard
 set font "JetBrainsMono 10"
 set database "sqlite"
-set scroll-full-overlap 0.04
 set show-recent 30
 # set recolor true
