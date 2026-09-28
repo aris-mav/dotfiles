@@ -48,8 +48,15 @@ elseif vim.env.KITTY_WINDOW_ID or (vim.env.TERM and vim.env.TERM:match("kitty"))
         print("sending to " .. vim.g.slime_target)
         vim.fn.system({ "kitten", "@", "send-text", "--bracketed-paste=enable",
             "--match", vim.g.slime_target, text })
-        vim.fn.system({
-            "kitten", "@", "send-key", "--match", vim.g.slime_target, "\r" })
+
+        local cmd = {
+            "kitten", "@", "send-key", "--match", vim.g.slime_target, "enter"
+        }
+        -- Python needs a blank line to close an indented block
+        if vim.bo.filetype == "python" and text:match("\n[ \t]+%S") then
+            table.insert(cmd, "enter")
+        end
+        vim.fn.system(cmd)
     end
 else
     check_target = function()
