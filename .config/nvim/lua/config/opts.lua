@@ -51,39 +51,25 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 })
 
 -- colorcolumn, only for suitable files
-local column_group = vim.api.nvim_create_augroup("ColumnLine", { clear = true })
-vim.api.nvim_create_autocmd({
-        "FileType", "VimResized", "WinEnter", "BufWinEnter" },
-    {
-        group = column_group,
-        pattern = "*",
-        callback = function()
-            if not vim.bo.modifiable
-                or vim.bo.readonly
-                or vim.bo.buftype ~= ""
-            then
-                vim.opt_local.colorcolumn = ""
-                return
-            end
-
-            local ftype = vim.bo.filetype
-            if not vim.tbl_contains({
-                    'csv',
-                    'tsv',
-                }, ftype) then
-                if vim.tbl_contains({
-                        'markdown',
-                    }, ftype) then
-                    vim.opt_local.colorcolumn = "51"
-                    vim.opt_local.textwidth = 50
-                else
-                    vim.opt_local.colorcolumn = "81"
-                    vim.opt_local.textwidth = 80
-                end
-            end
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("ColumnLine", { clear = true }),
+    callback = function(args)
+        local widths = {
+            markdown = 50,
+            python = 88,
+            csv = 0,
+            tsv = 0,
+        }
+        local bo = vim.bo[args.buf]
+        local width = widths[bo.filetype] or 80
+        if width == 0 or bo.buftype ~= "" then
+            vim.opt_local.colorcolumn = ""
+            return
         end
-    }
-)
+        vim.opt_local.colorcolumn = tostring(width + 1)
+        vim.opt_local.textwidth = width
+    end,
+})
 
 -- Use ripgrep if available
 if vim.fn.executable("rg") == 1 then
