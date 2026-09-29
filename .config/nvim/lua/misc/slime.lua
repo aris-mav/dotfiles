@@ -45,18 +45,15 @@ elseif vim.env.KITTY_WINDOW_ID or (vim.env.TERM and vim.env.TERM:match("kitty"))
     end
 
     send_to_target = function(text)
-        print("sending to " .. vim.g.slime_target)
-        vim.fn.system({ "kitten", "@", "send-text", "--bracketed-paste=enable",
-            "--match", vim.g.slime_target, text })
-
-        local cmd = {
-            "kitten", "@", "send-key", "--match", vim.g.slime_target, "enter"
-        }
-        -- Python needs a blank line to close an indented block
-        if vim.bo.filetype == "python" and text:match("\n[ \t]+%S") then
-            table.insert(cmd, "enter")
-        end
-        vim.fn.system(cmd)
+        print("Sent to kitty with --match " .. vim.g.slime_target)
+        vim.fn.system({
+            "kitten", "@", "send-text", "--bracketed-paste=enable",
+            "--match", vim.g.slime_target, text
+        })
+        vim.fn.system({
+            "kitten", "@", "send-key",
+            "--match", vim.g.slime_target, "enter"
+        })
     end
 else
     check_target = function()
@@ -91,8 +88,14 @@ _G.slime_operator = function(motion_type)
         vim.fn.getpos(end_mark),
         { type = reg_type }
     )
+    local text = table.concat(lines, "\n")
+
+    if vim.bo.filetype == "python" then
+        text = text .. "\n"
+    end
+
     if check_target() then
-        send_to_target(table.concat(lines, "\n"))
+        send_to_target(text)
     end
 end
 
