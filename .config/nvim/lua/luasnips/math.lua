@@ -263,6 +263,7 @@ local snippets = { -- these are meant to be shared between tex and md files
     s({ trig = "times" }, { t("\\times ") }),
     s({ trig = "cdot" }, { t("\\cdot ") }),
     s({ trig = "infty" }, { t("\\infty") }),
+    s({ trig = "kronecker" }, { t("\\otimes") }),
 
     s({ trig = "tag", dscr = "Label equation with a tag", },
         { t("\\tag{"), i(1, ""), t("}") }),
