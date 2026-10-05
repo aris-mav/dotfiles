@@ -19,6 +19,7 @@ set wildignore+=**/.git/**,**/build/**
 " --- colour ---
 set termguicolors
 set background=dark
+let g:gruvbox_invert_selection = 0
 colorscheme gruvbox
 
 " --- Line numbers ---
