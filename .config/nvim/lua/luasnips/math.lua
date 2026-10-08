@@ -315,6 +315,7 @@ for key, symbol in pairs({
     ddot       = "ddot",
     dddot      = "dddot",
     ddddot     = "ddddot",
+    operator   = "operatorname",
 }) do
     table.insert(snippets, s({ trig = key }, {
         t("\\" .. symbol .. "{"),
