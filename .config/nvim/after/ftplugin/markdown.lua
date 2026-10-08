@@ -96,6 +96,11 @@ local block_types = {
         ends = function(l) return l:match("^%s*%$%$%s*$") ~= nil end,
         is_delimited = true,
     },
+    { -- ::: ... ::: pandoc fenced div (allow indentation)
+        starts       = function(l) return l:match("^%s*:::+") ~= nil end,
+        ends         = function(l) return l:match("^%s*:::+%s*$") ~= nil end,
+        is_delimited = true,
+    },
     { -- ``` ... ``` fenced code block
         starts = function(l) return l:match("^%s*```") ~= nil end,
         ends = function(l) return l:match("^%s*```") ~= nil end,
