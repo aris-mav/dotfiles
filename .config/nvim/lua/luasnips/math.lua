@@ -348,16 +348,35 @@ for _, letter in ipairs(greek_letters) do
 end
 
 for key, symbols in pairs({
-    par  = { "\\left( ", " \\right)", "parentheses" },
-    sbr  = { "\\left[ ", " \\right]", "square brackets" },
-    cbr  = { "\\left\\{ ", " \\right\\}", "curly braces" },
-    abs  = { "\\left| ", " \\right|", "absolute value" },
-    abr  = { "\\left\\langle ", " \\right\\rangle", "angle brackets" },
-    flo  = { "\\left\\lfloor ", " \\right\\rfloor", "floor" },
-    cei  = { "\\left\\lceil ", " \\right\\rceil", "ceiling" },
-    norm = { "\\left\\lVert ", " \\right\\rVert", "norm" },
-    bra  = { "\\left\\langle ", " \\right|", "bra" },
-    ket  = { "\\left| ", " \\right\\rangle", "ket" },
+    Par  = { "\\left( ", " \\right)", "parentheses" },
+    Sbr  = { "\\left[ ", " \\right]", "square brackets" },
+    Cbr  = { "\\left\\{ ", " \\right\\}", "curly braces" },
+    Abs  = { "\\left| ", " \\right|", "absolute value" },
+    Abr  = { "\\left\\langle ", " \\right\\rangle", "angle brackets" },
+    Flo  = { "\\left\\lfloor ", " \\right\\rfloor", "floor" },
+    Cei  = { "\\left\\lceil ", " \\right\\rceil", "ceiling" },
+    Norm = { "\\left\\lVert ", " \\right\\rVert", "norm" },
+    Bra  = { "\\left\\langle ", " \\right|", "bra" },
+    Ket  = { "\\left| ", " \\right\\rangle", "ket" },
+}) do
+    table.insert(snippets, s({ trig = key, dscr = symbols[3] }, {
+        t(symbols[1]),
+        i(1, "contents"),
+        t(symbols[2])
+    }))
+end
+
+for key, symbols in pairs({
+    par  = { "( ", " )", "parentheses" },
+    sbr  = { "[ ", " ]", "square brackets" },
+    cbr  = { "\\{ ", " \\}", "curly braces" },
+    abs  = { "| ", " |", "absolute value" },
+    abr  = { "\\langle ", " \\rangle", "angle brackets" },
+    flo  = { "\\lfloor ", " \\rfloor", "floor" },
+    cei  = { "\\lceil ", " \\rceil", "ceiling" },
+    norm = { "\\lVert ", " \\rVert", "norm" },
+    bra  = { "\\langle ", " |", "bra" },
+    ket  = { "| ", " \\rangle", "ket" },
 }) do
     table.insert(snippets, s({ trig = key, dscr = symbols[3] }, {
         t(symbols[1]),
