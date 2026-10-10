@@ -1,2 +1,5 @@
 source ~/.config/vim/opts.vim
 source ~/.config/vim/keymaps.vim
+
+let g:gruvbox_invert_selection = 0
+colorscheme gruvbox

@@ -1,43 +1,15 @@
+vim.cmd('source ~/.config/vim/opts.vim')
+
+vim.o.laststatus = 3
+
 if vim.fn.has('nvim-0.12') == 1 then
     require('vim._core.ui2').enable()
 end
-
--- linenumbers
-vim.wo.relativenumber = true
-vim.wo.number = true
-
--- Set colors
-vim.o.background = "dark"
-vim.opt.termguicolors = true
 
 -- Enable cursorline and highlight only the line number, not the entire line
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "Orange" })
-
--- Remove border between vertical windows
--- vim.cmd[[:hi VertSplit ctermfg=bg ctermbg=bg guifg=bg guibg=bg]]
-vim.cmd [[set fillchars+=vert:\ ]]
-
--- remove ~'s from the end of file
-vim.opt.fillchars = { eob = ' ' }
-
--- A TAB character looks like 4 spaces
-vim.o.tabstop = 4
--- Pressing the TAB key will insert spaces instead of a TAB character
-vim.o.expandtab = true
--- Number of spaces inserted instead of a TAB character
-vim.o.softtabstop = 4
--- Number of spaces inserted when indenting
-vim.o.shiftwidth = 4
--- Change the above for some cases
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "csv", "tsv", "txt" },
-    callback = function()
-        vim.opt_local.expandtab = false
-        vim.opt_local.tabstop = 4
-    end,
-})
 
 -- match statusline and colorcolumn colours
 vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
@@ -107,18 +79,6 @@ local spellcheck_ft = {
     "txt",
     "typst",
 }
-
-vim.opt.spellfile = vim.fn.stdpath("data") .. "/site/spell/en.utf-8.add"
-
-vim.api.nvim_create_augroup("SpellCheckForSpecificFiletypes", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-    group = "SpellCheckForSpecificFiletypes",
-    pattern = spellcheck_ft,
-    callback = function()
-        vim.opt_local.spelllang = { "en_gb", "el" }
-        vim.opt_local.spell = true
-    end,
-})
 
 vim.lsp.config("harper_ls", {
     filetypes = spellcheck_ft,
@@ -197,15 +157,6 @@ vim.diagnostic.config({
         focusable = false,
     },
 })
-
-vim.opt.wrap = false
-vim.opt.undofile = true
-
-vim.o.laststatus = 3
-
--- Ignore case in search
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Format buffer with LSP on save, if supported",
