@@ -6,7 +6,7 @@ set undofile        " Keep undo history across sessions
 set ignorecase      " Case-insensitive search...
 set smartcase       " ...unless the pattern has capitals
 set hidden          " Allow switching buffers without saving
-set mouse=a         " Enable mouse support (useful for resizing splits)
+set mouse=a         " Enable mouse support
 set splitbelow      " Horizontal splits open below
 set splitright      " Vertical splits open to the right
 set confirm         " Ask to save instead of failing a :q command
