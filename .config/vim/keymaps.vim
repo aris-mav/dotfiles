@@ -9,7 +9,7 @@ nmap <leader>e :Ex<cr>
 nmap <leader>b :buffers<cr>:b<space> 
 nmap <leader>m :marks<cr>:mark<space>
 nmap <leader>f :find *
-nmap <leader>/ :grep<space>
+nmap <leader>/ :silent grep<space>
 
 " Keep selection alive after indenting in Visual Mode
 vnoremap < <gv
@@ -37,8 +37,8 @@ function! ToggleQuickfix()
 endfunction
 
 nnoremap <silent> <A-c> :call ToggleQuickfix()<CR>
-nmap <A-d> :cn <cr>zzzv
-nmap <A-u> :cp <cr>zzzv
+nmap <A-n> :cn <cr>zzzv
+nmap <A-p> :cp <cr>zzzv
 
 " Window Navigation (Alt + hjkl) 
 nnoremap <silent> <A-h> <C-w>h

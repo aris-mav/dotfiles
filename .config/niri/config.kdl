@@ -404,12 +404,8 @@ binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
     // like wev.
-    //
     // "Mod" is a special modifier equal to Super when running on a TTY, and to Alt
     // when running as a winit window.
-    //
-    // Most actions that you can bind here can also be invoked programmatically with
-    // `niri msg action do-something`.
 
     Mod+Shift+Slash { show-hotkey-overlay; }
 
@@ -422,20 +418,23 @@ binds {
     Mod+Shift+M hotkey-overlay-title="resource manager" { 
         spawn "kitty" "--single-instance" "btm"; 
     }
+
     Mod+N       hotkey-overlay-title="dismiss notification" { 
         spawn "makoctl" "dismiss";
     }
     Mod+Shift+N hotkey-overlay-title="restore notification" {
         spawn "makoctl" "restore";
     }
+
+    Super+Alt+L hotkey-overlay-title="swaylock" {
+        spawn "swaylock";
+    }
+
     Mod+D hotkey-overlay-title="drun" { 
         spawn "rofi" "-show" "drun"; 
     }
-    Mod+W hotkey-overlay-title="window switch" { 
+    Mod+F hotkey-overlay-title="window switch" { 
         spawn "rofi" "-auto-select" "-show" "window"; 
-    }
-    Super+Alt+L hotkey-overlay-title="swaylock" {
-        spawn "swaylock";
     }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -634,15 +633,12 @@ binds {
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
-    Mod+F { fullscreen-window; }
 
     Mod+Z { maximize-window-to-edges; }
-    Mod+Shift+Z { expand-column-to-available-width; }
+    Mod+Shift+Z { fullscreen-window; }
 
     Mod+C { center-column; }
-
-    // Center all fully visible columns on screen.
-    Mod+Ctrl+C { center-visible-columns; }
+    Mod+Shift+C { center-visible-columns; }
 
     // Finer width adjustments.
     // This command can also:
