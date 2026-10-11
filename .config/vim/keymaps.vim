@@ -1,32 +1,25 @@
-" Map leader to space 
 let mapleader = " "
 let maplocalleader = "\\"
 
-" General Keymaps 
-nnoremap <leader>q :q<CR>
+nmap <leader>q :q<CR>
 nmap <leader>w :w <cr>
+
 nmap <leader>e :Ex<cr>
 nmap <leader>b :buffers<cr>:b<space> 
 nmap <leader>m :marks<cr>:mark<space>
 nmap <leader>f :find *
 nmap <leader>/ :silent grep<space>
 
-" Keep selection alive after indenting in Visual Mode
-vnoremap < <gv
-vnoremap > >gv
+xnoremap < <gv
+xnoremap > >gv
 
-" Redo 
 nnoremap U <C-r>
 
-" Clipboard Copy/Paste 
-" Yank to + register
 nnoremap <leader>y "+y
-vnoremap <leader>y "+y
-" Paste from + register
 nnoremap <leader>p "+p
-vnoremap <leader>p "+p
+xnoremap <leader>y "+y
+xnoremap <leader>p "+p
 
-" Quickfix Logic 
 function! ToggleQuickfix()
     let qf_winid = getqflist({'winid' : 0}).winid
     if qf_winid != 0
@@ -35,12 +28,10 @@ function! ToggleQuickfix()
         copen
     endif
 endfunction
-
 nnoremap <silent> <A-c> :call ToggleQuickfix()<CR>
-nmap <A-n> :cn <cr>zzzv
-nmap <A-p> :cp <cr>zzzv
+nmap ]q :cn <cr>zzzv
+nmap [q :cp <cr>zzzv
 
-" Window Navigation (Alt + hjkl) 
 nnoremap <silent> <A-h> <C-w>h
 nnoremap <silent> <A-j> <C-w>j
 nnoremap <silent> <A-k> <C-w>k
@@ -50,10 +41,6 @@ tnoremap <silent> <A-j> <C-\><C-N><C-w>j
 tnoremap <silent> <A-k> <C-\><C-N><C-w>k
 tnoremap <silent> <A-l> <C-\><C-N><C-w>l
 
-" Copy current filename 
-nnoremap <silent> cp :let @+ = expand("%")<CR>
-
-" Readonly convenience mappings 
 augroup ReadOnlyMappings
     autocmd!
     autocmd BufWinEnter,FileType * if &readonly || !&modifiable |
@@ -62,3 +49,6 @@ augroup ReadOnlyMappings
         \ nnoremap <buffer> <silent> q :q<CR> |
         \ endif
 augroup END
+
+" Copy current filename 
+nnoremap <silent> cp :let @+ = expand("%")<CR>
