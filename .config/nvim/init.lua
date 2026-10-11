@@ -1,6 +1,6 @@
 vim.loader.enable()
-require("misc.scrollback")
+require("config.scrollback")
 require("config.keybinds")
 require("config.lazy")
 require("config.opts")
-require("misc.slime")
+require("config.slime")

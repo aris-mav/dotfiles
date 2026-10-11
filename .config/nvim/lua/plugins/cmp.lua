@@ -83,7 +83,7 @@ return {
                 },
                 sources = {
                     name = 'nt',
-                    module = 'misc.nt_cmp',
+                    module = 'config.nt_cmp',
                 },
             },
         },
