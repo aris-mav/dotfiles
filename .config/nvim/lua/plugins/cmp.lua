@@ -89,11 +89,10 @@ return {
         },
         cmdline = {
             keymap = {
-                preset = 'inherit',
                 ['<CR>'] = { 'accept_and_enter', 'fallback' },
             },
             completion = {
-                menu = { auto_show = true },
+                menu = { auto_show = false },
                 list = {
                     selection = {
                         preselect = false,
