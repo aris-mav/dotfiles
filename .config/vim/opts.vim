@@ -32,6 +32,8 @@ augroup NetrwSettings
     autocmd FileType netrw setlocal number relativenumber
 augroup END
 let g:netrw_banner = 0
+let g:netrw_preview = 1
+let g:netrw_winsize = 30
 
 " Cursor shape
 let &t_SI = "\e[6 q" " SI = Start Insert (Vertical bar)

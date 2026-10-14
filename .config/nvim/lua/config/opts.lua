@@ -43,35 +43,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- Use ripgrep if available
-if vim.fn.executable("rg") == 1 then
-    vim.opt.grepprg = "rg --vimgrep"
-    vim.opt.grepformat = "%f:%l:%c:%m"
-else
-    vim.opt.grepprg = "grep -nH $*"
-    vim.opt.grepformat = "%f:%l:%m"
-end
-
-vim.keymap.set('ca', 'g', function()
-    -- Check if 'g' is the very first thing typed in the command line
-    if vim.fn.getcmdtype() == ':' and vim.fn.getcmdline() == 'g' then
-        return 'silent grep'
-    end
-    return 'g'
-end, { expr = true })
-
-vim.opt.hlsearch = false  -- Do not highlight search results
-vim.opt.incsearch = true  -- Highlight search results only as you type
-
-vim.opt.scrolloff = 0     -- Number of lines to keep above and below the cursor
-vim.opt.sidescrolloff = 2 -- Number of columns to keep to the left and right of the cursor
-
-vim.g.netrw_banner = 0
-
--- set greek keymap and disable it
--- (then toggle with C-6 on insert mode)
-vim.bo.keymap = 'greek'
-vim.bo.iminsert = 0
 
 local spellcheck_ft = {
     "markdown",
