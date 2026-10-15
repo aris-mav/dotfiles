@@ -1,4 +1,5 @@
 vim.cmd('source ~/.config/vim/keymaps.vim')
+vim.cmd('source ~/.config/vim/slime.vim')
 
 vim.api.nvim_create_autocmd('LspAttach', {
     desc = 'LSP actions',
