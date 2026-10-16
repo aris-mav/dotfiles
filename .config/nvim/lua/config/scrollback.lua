@@ -5,6 +5,7 @@ if vim.env.KITTYSCROLL then
     vim.api.nvim_create_autocmd('StdinReadPost', {
         once = true,
         callback = function()
+            vim.api.nvim_buf_set_lines(0, -2, -1, false, {})
             local chan = vim.api.nvim_open_term(0, {})
             vim.api.nvim_chan_send(
                 chan, '\27[1;93m-- SCROLLBACK --\27[0m'
