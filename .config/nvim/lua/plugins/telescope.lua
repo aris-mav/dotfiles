@@ -2,22 +2,14 @@ return {
     'nvim-telescope/telescope.nvim',
     cmd = "Telescope",
     keys = {
-        { "<leader>t",  desc = "Telescope Builtins" },
-        { "<leader>b",  desc = "Buffers" },
-        { "<leader>f",  desc = "Find Files" },
-        { "<leader>/",  desc = "Live Grep" },
-        { "<leader>m",  desc = "Marks" },
-        { "<leader>sl", desc = "Symbols: latex" },
-        { "<leader>sj", desc = "Symbols: julia" },
-        { "<leader>sk", desc = "Symbols: kaomoji" },
-        { "<leader>se", desc = "Symbols: emoji" },
-        { "<leader>sg", desc = "Symbols: gitmoji" },
-        { "<leader>sm", desc = "Symbols: math" },
-        { "<leader>sn", desc = "Symbols: nerd" },
+        { "<leader>t", desc = "Telescope Builtins" },
+        { "<leader>b", desc = "Buffers" },
+        { "<leader>f", desc = "Find Files" },
+        { "<leader>/", desc = "Live Grep" },
+        { "<leader>m", desc = "Marks" },
     },
     dependencies = {
         'nvim-lua/plenary.nvim',
-        'nvim-telescope/telescope-symbols.nvim',
     },
     config = function()
         local builtin = require('telescope.builtin')
@@ -79,14 +71,5 @@ return {
         vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Find Files' })
         vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = 'Live Grep' })
         vim.keymap.set('n', '<leader>m', builtin.marks, { desc = 'Marks' })
-        for _, sym in ipairs(
-            { 'latex', 'julia', 'kaomoji', 'emoji', 'gitmoji', 'math', 'nerd', '' }
-        ) do
-            vim.keymap.set('n',
-                "<leader>s" .. string.sub(sym, 1, 1),
-                function() builtin.symbols({ sources = { sym } }) end,
-                { desc = "Symbols: " .. sym }
-            )
-        end
     end,
 }
