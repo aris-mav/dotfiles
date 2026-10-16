@@ -4,29 +4,31 @@ elseif $KITTY_WINDOW_ID !=# '' || $TERM =~# 'kitty'
     let s:term = 'kitty'
 endif
 
-" returns 1 if valid target exists
-function! s:Target() abort
+function! s:TargetSelect() abort
     if s:term ==# ''
         echo 'can only send text to kitty or tmux'
         return 0
     endif
 
-    if get(g:, 'slime_target', '') ==# ''
+    if get(b:, 'slime_target', '') ==# ''
         if s:term ==# 'tmux'
             " tmux syntax is "window.pane" (e.g. 1.3); "!" means last active pane
-            let g:slime_target = input('Target tmux pane: ', '!')
+            let b:slime_target = input('Target tmux pane: ', '!')
         elseif s:term ==# 'kitty'
             " any kitty --match expression, e.g. title:repl or id:3
-            let g:slime_target = input('Kitty target: --match ', 'title:repl')
+            let b:slime_target = input('Kitty target: --match ', 'title:repl')
         endif
     endif
 
-    return g:slime_target !=# ''
+    return b:slime_target !=# '' " returns 1 only if valid target exists
 endfunction
 
-function! s:Send(text) abort
-    " Quote the target so characters like "!" are safe in the shell.
-    let l:target = shellescape(g:slime_target)
+function! Slime(text) abort
+    if !s:TargetSelect()
+        return
+    endif
+
+    let l:target = shellescape(b:slime_target)
 
     if s:term ==# 'tmux'
         call system('tmux set-buffer -b slime -- ' . shellescape(a:text))
@@ -40,8 +42,6 @@ function! s:Send(text) abort
 endfunction
 
 function! SlimeOperator(type) abort
-    " use register `"s` to save the selected text
-    let l:previous_s_content = @s
 
     " Map the region type to its Visual-mode key (v, V or Ctrl-V).
     let l:v = {'char': 'v', 'line': 'V', 'block': "\<C-v>"}[a:type]
@@ -53,12 +53,7 @@ function! SlimeOperator(type) abort
     " python REPLs need a trailing newline to close indented blocks.
     let l:text = @s . (&filetype ==# 'python' ? "\n" : '')
 
-    " restore s register
-    let @s = l:previous_s_content
-
-    if s:Target()
-        call s:Send(l:text)
-    endif
+    call Slime(l:text)
 endfunction
 
 function! s:SetOpFunc() abort
