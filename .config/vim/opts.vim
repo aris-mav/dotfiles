@@ -40,7 +40,7 @@ let &t_SI = "\e[6 q" " SI = Start Insert (Vertical bar)
 let &t_SR = "\e[4 q" " SR = Start Replace (Underline)
 let &t_EI = "\e[2 q" " EI = End Insert/Replace (Block)
 
-set timeoutlen=500    " Timeout for mapping sequences
+set timeoutlen=750    " Timeout for mapping sequences
 set ttimeoutlen=10    " Fixes Esc delay
 
 " Remove border and end-of-file tildes 

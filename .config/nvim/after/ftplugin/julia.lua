@@ -20,8 +20,6 @@ local function quitvim()
     end
 end
 
--- Quit with ctrl-q or <leader>q
-vim.keymap.set('n', '<C-q>', quitvim)
 vim.keymap.set('n', '<leader>q', quitvim)
 vim.keymap.set('n', 'ZZ', function()
     if vim.fn.expand('%') ~= '' then
@@ -29,6 +27,7 @@ vim.keymap.set('n', 'ZZ', function()
     end
     quitvim()
 end)
+
 -- choose lsp using the $JULIALSP environment variable
 if os.getenv("JULIALSP") == "jetls" then
     vim.lsp.config("jetls", {
