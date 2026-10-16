@@ -50,5 +50,11 @@ augroup ReadOnlyMappings
         \ endif
 augroup END
 
+augroup netrw_maps
+  autocmd!
+  autocmd FileType netrw nmap <buffer> l <CR>
+  autocmd FileType netrw nmap <buffer> h -
+augroup END
+
 " Copy current filename 
 nnoremap <silent> cp :let @+ = expand("%")<CR>
