@@ -5,11 +5,11 @@ if vim.env.KITTYSCROLL then
     vim.api.nvim_create_autocmd('StdinReadPost', {
         once = true,
         callback = function()
-            vim.api.nvim_buf_set_lines(0, -2, -1, false, {})
+            local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
             local chan = vim.api.nvim_open_term(0, {})
-            vim.api.nvim_chan_send(
-                chan, '\27[1;93m-- SCROLLBACK --\27[0m'
-            )
+            vim.api.nvim_buf_set_lines(0, 0, -1, false, {})
+            vim.api.nvim_chan_send(chan, table.concat(lines, '\r\n'))
+
             vim.bo.modifiable = false
             vim.bo.readonly = true
             vim.bo.list = false
@@ -25,9 +25,10 @@ if vim.env.KITTYSCROLL then
             vim.o.number = false
             vim.o.relativenumber = false
 
-            vim.keymap.set({ 'n', 'v' }, 'q', 'ZQ')
-
-            for _, key in ipairs({ 'i', 'a', 'o', 'O', 'gI' }) do
+            for _, key in ipairs({ 'i', 'q' }) do
+                vim.keymap.set('n', key, 'ZQ')
+            end
+            for _, key in ipairs({ 'a', 'o', 'O', 'gI' }) do
                 vim.keymap.set('n', key, '<Nop>')
             end
             for _, key in ipairs({ 'A', 'I', 'R', 'cc', 'C', 's', 'S' }) do
