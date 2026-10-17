@@ -29,31 +29,27 @@ function! Slime(text) abort
     endif
 
     let l:target = shellescape(b:slime_target)
+    let l:text = shellescape(a:text)
 
     if s:term ==# 'tmux'
-        call system('tmux set-buffer -b slime -- ' . shellescape(a:text))
+        call system('tmux set-buffer -b slime -- ' . l:text)
         call system('tmux paste-buffer -p -b slime -t ' . l:target)
         call system('tmux send-keys -t ' . l:target . ' Enter')
     elseif s:term ==# 'kitty'
         call system('kitten @ send-text --bracketed-paste=enable --match '
-                    \ . l:target . ' ' . shellescape(a:text))
+                    \ . l:target . ' ' . l:text)
         call system('kitten @ send-key --match ' . l:target . ' enter')
     endif
 endfunction
 
 function! SlimeOperator(type) abort
-
-    " Map the region type to its Visual-mode key (v, V or Ctrl-V).
+    " a:type can be 'char', 'line' or 'block'
     let l:v = {'char': 'v', 'line': 'V', 'block': "\<C-v>"}[a:type]
-    " a:type is 'char', 'line' or 'block'.
 
-    " Re-select the operated-on region using the '[ and '] marks, yank to `"s`.
+    " select the operated-on region using the '[ and '] marks, yank to `"s`
     execute 'silent normal! `[' . l:v . '`]"sy'
 
-    " python REPLs need a trailing newline to close indented blocks.
-    let l:text = @s . (&filetype ==# 'python' ? "\n" : '')
-
-    call Slime(l:text)
+    call Slime(@s . '')
 endfunction
 
 function! s:SetOpFunc() abort
