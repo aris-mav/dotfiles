@@ -62,6 +62,6 @@ function! s:SetOpFunc() abort
 endfunction
 
 " <SID> allows local (s:) function to be mapped
-nnoremap <expr> S <SID>SetOpFunc()
-xnoremap <expr> S <SID>SetOpFunc()
-nmap SS S_
+nnoremap <expr> s <SID>SetOpFunc()
+xnoremap <expr> s <SID>SetOpFunc()
+nmap ss s_
