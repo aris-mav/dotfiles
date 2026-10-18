@@ -12,7 +12,6 @@ if vim.env.KITTYSCROLL then
 
             vim.bo.modifiable = false
             vim.bo.readonly = true
-            vim.bo.list = false
         end,
     })
 
