@@ -6,6 +6,7 @@ return {
     -- build = 'cargo build --release',
     -- If you use nix, you can build from source with:
     -- build = 'nix run .#build-plugin',
+    event = { "InsertEnter", "CmdlineEnter" },
 
     ---@module 'blink.cmp'
     dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },

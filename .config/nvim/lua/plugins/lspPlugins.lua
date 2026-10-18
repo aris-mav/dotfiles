@@ -1,7 +1,7 @@
 return {
     {
-        'williamboman/mason.nvim',
-        event = 'VeryLazy',
+        'mason-org/mason.nvim',
+        cmd = 'Mason',
         opts = {},
     },
     {
@@ -20,9 +20,10 @@ return {
         end
     },
     {
-        'williamboman/mason-lspconfig.nvim',
+        'mason-org/mason-lspconfig.nvim',
+        event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
-            'williamboman/mason.nvim',
+            'mason-org/mason.nvim',
             'neovim/nvim-lspconfig',
         },
         opts = {},
