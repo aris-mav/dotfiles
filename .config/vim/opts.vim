@@ -16,7 +16,6 @@ set wildmenu
 set wildignore+=**/.git/**,**/build/**
 set shell=fish
 set mouse=a
-set scrolloff=1
 set sidescrolloff=2
 set relativenumber
 set number
