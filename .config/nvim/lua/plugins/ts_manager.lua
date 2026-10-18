@@ -11,13 +11,8 @@ local install_languages = {
     "vim",
     "toml",
     "gitcommit",
+    "latex",
 }
-
-local termux_prefix = os.getenv("PREFIX")
-local is_termux = termux_prefix and termux_prefix:match("com.termux")
-if not is_termux then
-    table.insert(install_languages, "latex")
-end
 
 return {
     "nvim-treesitter/nvim-treesitter",
