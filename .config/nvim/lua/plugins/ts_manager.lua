@@ -9,7 +9,6 @@ local install_languages = {
     "bash",
     "fish",
     "vim",
-    "tmux",
     "toml",
     "gitcommit",
 }
@@ -20,31 +19,14 @@ if not is_termux then
     table.insert(install_languages, "latex")
 end
 
-local disabled_languages = {
-    "csv",
-    "tsv",
-    "tex",
-    "latex",
-}
-
 return {
     "nvim-treesitter/nvim-treesitter",
-    branch = "master",
-    build = function()
-        require("nvim-treesitter.install").update({ with_sync = true })()
-    end,
+    branch = "main",
+    lazy = false,
+    build = ":TSUpdate",
     config = function()
-        require 'nvim-treesitter.configs'.setup {
-            ensure_installed = install_languages,
-            sync_install = false,
-            auto_install = true,
-            ignore_install = {},
-            highlight = {
-                enable = true,
-                disable = disabled_languages,
-                additional_vim_regex_highlighting = false,
-            },
-            indent = { enable = true },
-        }
-    end
+        local ts = require("nvim-treesitter")
+
+        ts.install(install_languages)
+    end,
 }
