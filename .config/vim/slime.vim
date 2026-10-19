@@ -37,7 +37,7 @@ function! Slime(text) abort
         call system('tmux send-keys -t ' . l:target . ' Enter')
     elseif s:term ==# 'kitty'
         call system('kitten @ send-text --bracketed-paste=enable --match '
-                    \ . l:target . ' ' . l:text)
+                    \ . l:target . ' -- ' . l:text)
         call system('kitten @ send-key --match ' . l:target . ' enter')
     endif
 endfunction
