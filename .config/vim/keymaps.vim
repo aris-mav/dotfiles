@@ -29,8 +29,15 @@ function! ToggleQuickfix()
     endif
 endfunction
 nnoremap <silent> <A-c> :call ToggleQuickfix()<CR>
-nmap ]q :cn <cr>zzzv
-nmap [q :cp <cr>zzzv
+
+nnoremap <silent> ]q :<C-u>execute v:count1 . 'cnext'<cr>
+nnoremap <silent> [q :<C-u>execute v:count1 . 'cprevious'<cr>
+nnoremap <silent> ]l :<C-u>execute v:count1 . 'lnext'<cr>
+nnoremap <silent> [l :<C-u>execute v:count1 . 'lprevious'<cr>
+nnoremap <silent> ]a :<C-u>execute v:count1 . 'next'<cr>
+nnoremap <silent> [a :<C-u>execute v:count1 . 'previous'<cr>
+nnoremap <silent> ]b :<C-u>execute v:count1 . 'bnext'<cr>
+nnoremap <silent> [b :<C-u>execute v:count1 . 'bprevious'<cr>
 
 nnoremap <silent> <A-h> <C-w>h
 nnoremap <silent> <A-j> <C-w>j
