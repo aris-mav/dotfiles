@@ -17,14 +17,20 @@ set wildignore+=**/.git/**,**/build/**
 set shell=fish
 set mouse=a
 set sidescrolloff=2
-set relativenumber
-set number
 set tabstop=4
 set expandtab
 set softtabstop=4
 set shiftwidth=4
 set termguicolors
 set background=dark
+
+set number
+set relativenumber
+augroup cmdline_numbers
+    autocmd!
+    autocmd CmdlineEnter : set norelativenumber | redraw
+    autocmd CmdlineLeave : set relativenumber
+augroup END
 
 augroup NetrwSettings
     autocmd!
