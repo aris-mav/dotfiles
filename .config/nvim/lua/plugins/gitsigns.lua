@@ -88,26 +88,38 @@ return {
                     -- Actions
                     map('n', '<leader>hs', gitsigns.stage_hunk)
                     map('v', '<leader>hs', function()
-                        gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+                        gitsigns.stage_hunk(
+                            { vim.fn.line('.'), vim.fn.line('v') })
                     end)
+                    map('n', '<leader>hS', gitsigns.stage_buffer)
 
                     map('n', '<leader>hr', gitsigns.reset_hunk)
                     map('v', '<leader>hr', function()
-                        gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+                        gitsigns.reset_hunk(
+                            { vim.fn.line('.'), vim.fn.line('v') })
                     end)
-
-                    map('n', '<leader>hS', gitsigns.stage_buffer)
                     map('n', '<leader>hR', gitsigns.reset_buffer)
 
                     map('n', '<leader>hp', gitsigns.preview_hunk)
                     map('n', '<leader>hi', gitsigns.preview_hunk_inline)
 
-                    map('n', '<leader>hB', function()
-                        gitsigns.blame_line({ full = true })
+                    -- toggle diff mode
+                    map('n', '<leader>hd', function()
+                        if vim.wo.diff then
+                            vim.cmd('diffoff!')
+                            for _, win in ipairs(
+                                vim.api.nvim_tabpage_list_wins(0)
+                            ) do
+                                local buf = vim.api.nvim_win_get_buf(win)
+                                if vim.api.nvim_buf_get_name(buf):
+                                    match('^gitsigns://') then
+                                    vim.api.nvim_win_close(win, true)
+                                end
+                            end
+                        else
+                            gitsigns.diffthis()
+                        end
                     end)
-
-                    map('n', '<leader>hd', gitsigns.diffthis)
-
                     map('n', '<leader>hD', function()
                         gitsigns.diffthis('~')
                     end)
@@ -117,6 +129,10 @@ return {
 
                     -- Toggles
                     map('n', '<leader>hb', gitsigns.toggle_current_line_blame)
+                    map('n', '<leader>hB', function()
+                        gitsigns.blame_line({ full = true })
+                    end)
+
                     map('n', '<leader>hx', gitsigns.toggle_deleted)
                     map('n', '<leader>hw', gitsigns.toggle_word_diff)
 
