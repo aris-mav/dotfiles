@@ -14,24 +14,18 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         config = function()
+            local s = {
+                add          = { text = '┃' },
+                change       = { text = '┃' },
+                delete       = { text = '_' },
+                topdelete    = { text = '‾' },
+                changedelete = { text = '~' },
+                untracked    = { text = '┆' },
+            }
             vim.opt.signcolumn = "yes"
             require('gitsigns').setup {
-                signs                        = {
-                    add          = { text = '┃' },
-                    change       = { text = '┃' },
-                    delete       = { text = '_' },
-                    topdelete    = { text = '‾' },
-                    changedelete = { text = '~' },
-                    untracked    = { text = '┆' },
-                },
-                signs_staged                 = {
-                    add          = { text = '┃' },
-                    change       = { text = '┃' },
-                    delete       = { text = '_' },
-                    topdelete    = { text = '‾' },
-                    changedelete = { text = '~' },
-                    untracked    = { text = '┆' },
-                },
+                signs                        = s,
+                signs_staged                 = s,
                 signs_staged_enable          = true,
                 signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
                 numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
