@@ -14,7 +14,6 @@ set incsearch
 set path=.,**
 set wildmenu
 set wildignore+=**/.git/**,**/build/**
-set shell=fish
 set mouse=a
 set sidescrolloff=2
 set tabstop=4
@@ -23,39 +22,13 @@ set softtabstop=4
 set shiftwidth=4
 set termguicolors
 set background=dark
-
+set timeoutlen=750
+set ttimeoutlen=10
 set number
 set relativenumber
-augroup cmdline_numbers
-    autocmd!
-    autocmd CmdlineEnter : set norelativenumber | redraw
-    autocmd CmdlineLeave : set relativenumber
-augroup END
-
-augroup NetrwSettings
-    autocmd!
-    autocmd FileType netrw setlocal number relativenumber
-augroup END
-let g:netrw_banner = 0
-let g:netrw_preview = 1
-let g:netrw_winsize = 30
-
-" Cursor shape
-let &t_SI = "\e[6 q" " SI = Start Insert (Vertical bar)
-let &t_SR = "\e[4 q" " SR = Start Replace (Underline)
-let &t_EI = "\e[2 q" " EI = End Insert/Replace (Block)
-
-set timeoutlen=750    " Timeout for mapping sequences
-set ttimeoutlen=10    " Fixes Esc delay
-
-" Remove border and end-of-file tildes 
 set fillchars+=vert:\ 
 set fillchars+=eob:\ 
-
-augroup TabSettings
-    autocmd!
-    autocmd FileType csv,tsv,txt setlocal noexpandtab tabstop=4
-augroup END
+set shell=fish
 
 if executable('rg')
     set grepprg=rg\ -S\ --vimgrep
@@ -65,7 +38,31 @@ else
     set grepformat=%f:%l:%m
 endif
 
-augroup SpellCheckForSpecificFiletypes
+let &t_SI = "\e[6 q" " SI = Start Insert (Vertical bar)
+let &t_SR = "\e[4 q" " SR = Start Replace (Underline)
+let &t_EI = "\e[2 q" " EI = End Insert/Replace (Block)
+
+let g:netrw_banner = 0
+let g:netrw_preview = 1
+let g:netrw_winsize = 30
+
+augroup CmdModeNumbers
+    autocmd!
+    autocmd CmdlineEnter : set norelativenumber | redraw
+    autocmd CmdlineLeave : set relativenumber
+augroup END
+
+augroup NetrwSettings
+    autocmd!
+    autocmd FileType netrw setlocal number relativenumber
+augroup END
+
+augroup TabSettings
+    autocmd!
+    autocmd FileType csv,tsv,txt setlocal noexpandtab tabstop=4
+augroup END
+
+augroup SpellCheckTextFiles
   autocmd!
   autocmd FileType markdown,tex,text,typst
         \ setlocal spell spelllang=en_gb,el textwidth=50 colorcolumn=+1

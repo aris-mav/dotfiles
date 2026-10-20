@@ -1,14 +1,12 @@
 let mapleader = " "
 let maplocalleader = "\\"
 
-nmap <leader>q :q<CR>
-nmap <leader>w :w <cr>
-
-nmap <leader>e :Ex<cr>
-nmap <leader>b :buffers<cr>:b<space> 
-nmap <leader>m :marks<cr>:mark<space>
+nmap <leader>w :write<cr>
+nmap <leader>e :Explore<cr>
+nmap <leader>b :buffers<cr>
+nmap <leader>m :marks<cr>
 nmap <leader>f :find *
-nmap <leader>/ :silent grep<space>
+nmap <leader>/ :grep<space>
 
 xnoremap < <gv
 xnoremap > >gv
@@ -21,14 +19,13 @@ xnoremap <leader>y "+y
 xnoremap <leader>p "+p
 
 function! ToggleQuickfix()
-    let qf_winid = getqflist({'winid' : 0}).winid
-    if qf_winid != 0
+    if getqflist({'winid' : 0}).winid
         cclose
     else
         copen
     endif
 endfunction
-nnoremap <silent> <A-c> :call ToggleQuickfix()<CR>
+nnoremap <silent> <leader>q :call ToggleQuickfix()<CR>
 
 nnoremap <silent> ]q :<C-u>execute v:count1 . 'cnext'<cr>
 nnoremap <silent> [q :<C-u>execute v:count1 . 'cprevious'<cr>
@@ -48,6 +45,9 @@ tnoremap <silent> <A-j> <C-\><C-N><C-w>j
 tnoremap <silent> <A-k> <C-\><C-N><C-w>k
 tnoremap <silent> <A-l> <C-\><C-N><C-w>l
 
+" Copy current filename 
+nnoremap <silent> cp :let @+ = expand("%")<CR>
+
 augroup ReadOnlyMappings
     autocmd!
     autocmd BufWinEnter,FileType * if &readonly || !&modifiable |
@@ -57,11 +57,8 @@ augroup ReadOnlyMappings
         \ endif
 augroup END
 
-augroup netrw_maps
-  autocmd!
-  autocmd FileType netrw nmap <buffer> l <CR>
-  autocmd FileType netrw nmap <buffer> h -
+augroup NetrwMappings
+    autocmd!
+    autocmd FileType netrw nmap <buffer> l <CR>
+    autocmd FileType netrw nmap <buffer> h -
 augroup END
-
-" Copy current filename 
-nnoremap <silent> cp :let @+ = expand("%")<CR>
