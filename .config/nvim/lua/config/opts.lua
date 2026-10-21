@@ -43,6 +43,21 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("TermOpen", {
+    group = vim.api.nvim_create_augroup("TermStartInsert", { clear = true }),
+    callback = function()
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
+        vim.cmd("startinsert")
+    end,
+})
+vim.api.nvim_create_autocmd("TermClose", {
+    callback = function(args)
+        if vim.v.event.status == 0 then
+            vim.api.nvim_buf_delete(args.buf, { force = true })
+        end
+    end,
+})
 
 local spellcheck_ft = {
     "markdown",
