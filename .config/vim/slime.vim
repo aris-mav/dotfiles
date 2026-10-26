@@ -50,9 +50,11 @@ function! SlimeOperator(type) abort
     execute 'silent normal! `[' . l:v . '`]"sy'
 
     call Slime(@s . '')
+    call setpos('.', s:pos)
 endfunction
 
 function! s:SetOpFunc() abort
+    let s:pos = getcurpos()
     set operatorfunc=SlimeOperator
     return 'g@'
 endfunction
