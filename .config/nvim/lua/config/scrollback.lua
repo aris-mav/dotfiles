@@ -11,6 +11,7 @@ if vim.env.KITTYSCROLL then
             vim.o.foldcolumn = '0'
             vim.o.laststatus = 0
             vim.o.cmdheight = 0
+            vim.opt.shortmess:append('I')
 
             local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
             local chan = vim.api.nvim_open_term(0, {})
