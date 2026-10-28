@@ -3,6 +3,8 @@ source ~/.config/vim/keymaps.vim
 source ~/.config/vim/slime.vim
 
 if !has('nvim')
+    syntax on          
+    filetype plugin indent on
     let g:gruvbox_invert_selection = 0
     colorscheme gruvbox
 endif

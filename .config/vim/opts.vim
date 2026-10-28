@@ -1,6 +1,3 @@
-syntax on          
-filetype plugin indent on
-
 set nowrap
 set undofile
 set ignorecase
@@ -67,4 +64,3 @@ augroup SpellCheckTextFiles
   autocmd FileType markdown,tex,text,typst
         \ setlocal spell spelllang=en_gb,el textwidth=50 colorcolumn=+1
 augroup END
-doautocmd SpellCheckTextFiles FileType
