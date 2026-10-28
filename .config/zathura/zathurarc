@@ -3,4 +3,4 @@ set selection-clipboard clipboard
 set font "JetBrainsMono 10"
 set database "sqlite"
 set show-recent 30
-# set recolor true
+map <C-N> exec "zathura"
