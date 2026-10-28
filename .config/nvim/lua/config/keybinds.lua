@@ -1,6 +1,3 @@
-vim.cmd('source ~/.config/vim/keymaps.vim')
-vim.cmd('source ~/.config/vim/slime.vim')
-
 if vim.fn.has('nvim-0.12') == 1 then
     vim.keymap.set("n", "<leader>u", function()
         vim.cmd.packadd("nvim.undotree")

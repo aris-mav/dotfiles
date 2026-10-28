@@ -1,5 +1,6 @@
 vim.loader.enable()
+vim.cmd('source ~/.config/vim/vimrc')
 require("config.scrollback")
-require("config.keybinds")
 require("config.lazy")
+require("config.keybinds")
 require("config.opts")

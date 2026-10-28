@@ -1,5 +1,3 @@
-vim.cmd('source ~/.config/vim/opts.vim')
-
 vim.o.laststatus = 3
 
 if vim.fn.has('nvim-0.12') == 1 then
