@@ -9,6 +9,9 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "Orange" })
 
+-- Cursor shapes
+vim.opt.guicursor = "n-v:block,i-ci-ve:ver25,r-cr-o:hor20,c:ver25"
+
 -- match statusline and colorcolumn colours
 vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
     callback = function()
