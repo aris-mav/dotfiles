@@ -36,7 +36,20 @@ return {
             sections = {
 
                 lualine_a = {
-                    { 'diff', padding = { left = 0, right = 1 }, },
+                    {
+                        'diff',
+                        padding = { left = 0, right = 1 },
+                        source = function()
+                            local gs = vim.b.gitsigns_status_dict
+                            if gs then
+                                return {
+                                    added = gs.added,
+                                    modified = gs.changed,
+                                    removed = gs.removed,
+                                }
+                            end
+                        end,
+                    },
                 },
                 lualine_b = {
                     {
