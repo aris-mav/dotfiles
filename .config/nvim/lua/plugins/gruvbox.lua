@@ -26,6 +26,8 @@ return {
             dim_inactive = false,
             overrides = {
                 SignColumn          = { bg = "none" },
+                StatusLine          = { bg = "none" },
+                StatusLineNC        = { bg = "none" },
                 DiagnosticSignError = { fg = "#fb4934", bg = "none" },
                 DiagnosticSignWarn  = { fg = "#fabd2f", bg = "none" },
                 DiagnosticSignInfo  = { fg = "#83a598", bg = "none" },
