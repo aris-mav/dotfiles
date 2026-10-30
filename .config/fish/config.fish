@@ -9,10 +9,6 @@ if status is-interactive
 
     set fish_greeting
 
-    if type -q zoxide
-        zoxide init fish | source
-    end
-    if type -q fzf
-        fzf --fish | source
-    end
+    type -q zoxide && zoxide init fish | source
+    type -q fzf && fzf --fish | source
 end
