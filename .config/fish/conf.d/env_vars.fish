@@ -1,4 +1,11 @@
-set -gx FZF_DEFAULT_OPTS '--height 10% --layout reverse --border none --style minimal'
+set -gx FZF_DEFAULT_OPTS '
+--height 10%
+--layout reverse
+--style minimal
+--border none
+--gutter=" "
+--pointer=""
+'
 
 set -gx LESS '-Ri'
 
