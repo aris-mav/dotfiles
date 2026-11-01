@@ -124,7 +124,7 @@
                     (kind: Property(Widget(ScanStatus)), style: (fg: "yellow")),
                     (kind: Text("volume: "), style: (fg: "yellow")),
                     (kind: Property(Status(Volume)), style: (fg: "yellow")),
-                    (kind: Text("% "), style: (fg: "yellow")),
+                    (kind: Text("%"), style: (fg: "yellow")),
                 ]
             ),
             (
