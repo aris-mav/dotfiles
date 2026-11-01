@@ -12,7 +12,7 @@ bind 'set keyseq-timeout 10'
 
 export EDITOR="nvim"
 
-PS1='\w\n '
+PS1='\w\n'
 
 alias e='$EDITOR'
 
