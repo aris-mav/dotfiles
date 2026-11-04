@@ -3,6 +3,9 @@
 ---@diagnostic disable: unused-local
 require('vis')
 
+local n = vis.modes.VISUAL
+local v = vis.modes.NORMAL
+
 vis.events.subscribe(vis.events.INIT, function()
     vis:command('set theme gruvbox')
     vis:command('map normal ! :!')
