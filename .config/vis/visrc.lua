@@ -1,15 +1,18 @@
 -- load standard vis module, providing parts of the Lua API
 ---@diagnostic disable: undefined-global
+---@diagnostic disable: unused-local
 require('vis')
 
 vis.events.subscribe(vis.events.INIT, function()
-    -- Your global configuration options
     vis:command('set theme gruvbox')
     vis:command('map normal ! :!')
+    vis:map(n, " y", '"+y')
+    vis:map(v, " y", '"+y')
+    vis:map(n, " p", '"+p')
+    vis:map(v, " p", '"+p')
 end)
 
-vis.events.subscribe(vis.events.WIN_OPEN, function(win) -- luacheck: no unused args
-    -- Your per window configuration options e.g.
+vis.events.subscribe(vis.events.WIN_OPEN, function(win)
     vis:command('set tabwidth 4')
     vis:command('set expandtab')
     vis:command('set showeof off')
