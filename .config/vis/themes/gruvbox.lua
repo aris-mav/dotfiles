@@ -46,10 +46,9 @@ local colors                = {
 lex.STYLE_NOTHING           = ''
 lex.STYLE_WHITESPACE        = ''
 
-lex.STYLE_LINENUMBER        = 'fore:' .. colors.gray
-lex.STYLE_LINENUMBER_CURSOR = 'fore:' .. colors.yellow
 lex.STYLE_CURSOR            = 'reverse'
-lex.STYLE_CURSOR_PRIMARY    = vis.lexers.STYLE_CURSOR .. ',fore:' .. colors.yellow
+lex.STYLE_CURSOR_PRIMARY    = 'reverse'
+
 lex.STYLE_CURSOR_LINE       = 'back:' .. colors.bg_line
 lex.STYLE_COLOR_COLUMN      = 'back:' .. colors.bg_line
 lex.STYLE_SELECTION         = 'back:' .. colors.bg_sel
@@ -57,6 +56,9 @@ lex.STYLE_STATUS            = 'fore:' .. colors.gray .. ',back:' .. colors.bg
 lex.STYLE_STATUS_FOCUSED    = 'fore:' .. colors.fg .. ',back:' .. colors.bg_bar
 lex.STYLE_SEPARATOR         = 'fore:' .. colors.bg_sep
 lex.STYLE_INFO              = 'fore:' .. colors.yellow .. ',bold'
+lex.STYLE_LINENUMBER        = 'fore:' .. colors.gray
+lex.STYLE_LINENUMBER_CURSOR = 'fore:' .. colors.yellow
+
 lex.STYLE_OPERATOR          = vis.lexers.STYLE_DEFAULT
 lex.STYLE_EOF               = vis.lexers.STYLE_LINENUMBER
 
