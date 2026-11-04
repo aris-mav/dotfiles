@@ -6,13 +6,21 @@ require('vis')
 local n = vis.modes.VISUAL
 local v = vis.modes.NORMAL
 
+
 vis.events.subscribe(vis.events.INIT, function()
     vis:command('set theme gruvbox')
+
+    vis:map(n, ' y', '"+y')
+    vis:map(v, ' y', '"+y')
+    vis:map(n, ' p', '"+p')
+    vis:map(v, ' p', '"+p')
+
     vis:command('map normal ! :!')
-    vis:map(n, " y", '"+y')
-    vis:map(v, " y", '"+y')
-    vis:map(n, " p", '"+p')
-    vis:map(v, " p", '"+p')
+
+    vis:command('map normal <M-h> <C-w>h')
+    vis:command('map normal <M-j> <C-w>j')
+    vis:command('map normal <M-k> <C-w>k')
+    vis:command('map normal <M-l> <C-w>l')
 end)
 
 vis.events.subscribe(vis.events.WIN_OPEN, function(win)
