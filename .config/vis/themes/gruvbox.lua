@@ -25,36 +25,35 @@
 
 local lex                   = vis.lexers
 local colors                = {
-    bg      = '0',
-    fg      = 'default',
-    gray    = '8',
-    red     = '9',
-    green   = '10',
-    yellow  = '11',
-    blue    = '12',
-    purple  = '13',
-    aqua    = '14',
-    orange  = '11',
+    bg           = '0',
+    fg           = 'default',
+    gray         = '8',
+    red          = '9',
+    green        = '10',
+    yellow       = '11',
+    blue         = '12',
+    purple       = '13',
+    aqua         = '14',
+    orange       = '11',
 
-    -- backgrounds from the 256-colour grey ramp
-    bg_line = '236', -- cursor line
-    bg_bar  = '237', -- status bar
-    bg_sel  = '239', -- selection (dark grey)
-    bg_sep  = '239',
+    bg_selection = '239',
+    bg_line      = '236',
+    bg_bar       = '237',
+    bg_dark      = '235'
 }
 
 lex.STYLE_NOTHING           = ''
 lex.STYLE_WHITESPACE        = ''
 
-lex.STYLE_CURSOR            = 'reverse'
-lex.STYLE_CURSOR_PRIMARY    = 'reverse'
+lex.STYLE_CURSOR            = 'back:' .. colors.bg_dark .. ',reverse'
+lex.STYLE_CURSOR_PRIMARY    = 'back:' .. colors.bg_dark .. ',reverse'
 
 lex.STYLE_CURSOR_LINE       = 'back:' .. colors.bg_line
 lex.STYLE_COLOR_COLUMN      = 'back:' .. colors.bg_line
-lex.STYLE_SELECTION         = 'back:' .. colors.bg_sel
+lex.STYLE_SELECTION         = 'back:' .. colors.bg_selection
 lex.STYLE_STATUS            = 'fore:' .. colors.gray .. ',back:' .. colors.bg
 lex.STYLE_STATUS_FOCUSED    = 'fore:' .. colors.fg .. ',back:' .. colors.bg_bar
-lex.STYLE_SEPARATOR         = 'fore:' .. colors.bg_sep
+lex.STYLE_SEPARATOR         = 'fore:' .. colors.bg_selection
 lex.STYLE_INFO              = 'fore:' .. colors.yellow .. ',bold'
 lex.STYLE_LINENUMBER        = 'fore:' .. colors.gray
 lex.STYLE_LINENUMBER_CURSOR = 'fore:' .. colors.yellow
