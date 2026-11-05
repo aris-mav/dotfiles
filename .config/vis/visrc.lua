@@ -15,6 +15,10 @@ vis.events.subscribe(vis.events.INIT, function()
     vis:map(n, ' p', '"+p')
     vis:map(v, ' p', '"+p')
 
+    vis:map(vis.modes.NORMAL, '<F5>', function()
+        vis:command('e!')
+    end, 'Reload file from disk')
+
     vis:command('map normal ! :!')
 
     vis:command('map normal <M-h> <C-w>h')
