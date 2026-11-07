@@ -27,15 +27,12 @@ vis.events.subscribe(vis.events.INIT, function()
 end)
 
 vis.events.subscribe(vis.events.WIN_OPEN, function(win)
-
     vis:command('set showeof off')
     vis:command('set autoindent on')
     vis:command('set relativenumbers')
     vis:command('set ignorecase')
     vis:command('set tabwidth 4')
     vis:command('set expandtab')
-    vis:command('set shownewlines')
-
 end)
 
 require('ftopts')
