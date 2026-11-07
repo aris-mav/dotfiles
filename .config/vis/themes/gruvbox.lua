@@ -4,6 +4,7 @@
 local lex                   = vis.lexers
 local col                   = {
     black      = '0',
+    orange     = '3',
     gray       = '8',
     white      = '15',
 
@@ -11,7 +12,6 @@ local col                   = {
     red        = '9',
     green      = '10',
     yellow     = '11',
-    orange     = '11',
     blue       = '12',
     purple     = '13',
     aqua       = '14',
@@ -36,7 +36,7 @@ lex.STYLE_SEPARATOR         = 'fore:' .. col.selection
 lex.STYLE_INFO              = 'fore:' .. col.yellow .. ',bold'
 lex.STYLE_LINENUMBER        = 'fore:' .. col.gray
 lex.STYLE_LINENUMBER_CURSOR = 'fore:' .. col.yellow
-lex.STYLE_EOF               = lex.STYLE_LINENUMBER
+lex.STYLE_EOF               = 'fore:' .. col.gray
 
 lex.STYLE_DEFAULT           = 'back:' .. col.black .. ',fore:' .. col.white
 lex.STYLE_CLASS             = 'fore:' .. col.yellow
@@ -56,4 +56,5 @@ lex.STYLE_TYPE              = 'fore:' .. col.yellow
 lex.STYLE_VARIABLE          = 'fore:' .. col.blue
 lex.STYLE_EMBEDDED          = 'fore:' .. col.orange
 lex.STYLE_IDENTIFIER        = 'fore:' .. col.blue
-lex.STYLE_OPERATOR          = lex.STYLE_DEFAULT
+lex.STYLE_OPERATOR          = 'fore:' .. col.white
+lex.STYLE_CODE              = 'fore:' .. col.yellow
