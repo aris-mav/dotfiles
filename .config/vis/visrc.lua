@@ -34,6 +34,7 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
     vis:command('set ignorecase')
     vis:command('set tabwidth 4')
     vis:command('set expandtab')
+    vis:command('set shownewlines')
 
 end)
 

@@ -23,11 +23,12 @@ local col                   = {
 }
 
 lex.STYLE_NOTHING           = ''
-lex.STYLE_WHITESPACE        = ''
 
 lex.STYLE_CURSOR            = 'back:' .. col.cursors .. ',fore:' .. col.white
 lex.STYLE_CURSOR_PRIMARY    = 'back:' .. col.black .. ',reverse'
-lex.STYLE_CURSOR_LINE       = 'back:' .. col.cursorline
+lex.STYLE_CURSOR_LINE       = 'back:' .. col.bottombar
+
+lex.STYLE_WHITESPACE        = 'fore:' .. col.bottombar
 lex.STYLE_COLOR_COLUMN      = 'back:' .. col.cursorline
 lex.STYLE_SELECTION         = 'back:' .. col.selection
 lex.STYLE_STATUS            = 'fore:' .. col.gray .. ',back:' .. col.black
