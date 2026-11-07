@@ -7,7 +7,7 @@ local n = vis.modes.VISUAL
 local v = vis.modes.NORMAL
 
 vis.events.subscribe(vis.events.INIT, function()
-    vis:command('set theme gruvbox')
+    vis:command('set theme minimal')
 
     vis:map(n, ' y', '"+y')
     vis:map(v, ' y', '"+y')
