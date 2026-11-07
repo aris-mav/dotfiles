@@ -64,3 +64,21 @@ augroup SpellCheckTextFiles
   autocmd FileType markdown,tex,text,typst
         \ setlocal spell spelllang=en_gb,el textwidth=50 colorcolumn=+1
 augroup END
+
+function! s:PandocFormat()
+    if !executable('pandoc')
+        return
+    endif
+    let l:view = winsaveview()
+        execute '%!pandoc -f markdown -t markdown --columns=50 --tab-stop=2'
+    if v:shell_error
+        silent undo
+        echohl ErrorMsg | echom 'pandoc failed, file not formatted' | echohl None
+    endif
+    call winrestview(l:view)
+endfunction
+
+augroup PandocFormat
+  autocmd!
+  autocmd BufWritePre *.md call s:PandocFormat()
+augroup END
