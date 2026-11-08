@@ -395,8 +395,6 @@ window-rule {
 
 environment {
     TERMINAL "kitty"
-    EDITOR "nvim"
-    VISUAL "nvim"
     BROWSER "firefox"
 }
 

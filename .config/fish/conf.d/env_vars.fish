@@ -7,7 +7,7 @@ set -gx FZF_DEFAULT_OPTS '
 --pointer=""
 '
 
-set -gx LESS '-Ri'
+set -gx LESS -Ri
 
 set -gx NEWT_COLORS '
 root=green,black
@@ -44,12 +44,8 @@ actcompactbutton=green,black
 
 set -gx PYTHONSTARTUP "$HOME/.config/python/startup.py"
 
-if type -q nvim
-    set -gx MANPAGER "nvim +Man!"
-end
-
-if ! test "$fish_color_user" = "yellow"
+if ! test "$fish_color_user" = yellow
     set fish_color_user yellow
     set fish_color_host cyan
-    set fish_color_cwd  blue
+    set fish_color_cwd blue
 end
