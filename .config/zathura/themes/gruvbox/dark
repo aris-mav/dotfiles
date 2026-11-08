@@ -1,4 +1,4 @@
-set recolor                     "false"                # switch to dark immediately
+set recolor                     "false"                # full dark
 set recolor-keephue             "true"                 # keep original color
 
 set recolor-lightcolor          "rgba(40,40,40,1)"     # bg
