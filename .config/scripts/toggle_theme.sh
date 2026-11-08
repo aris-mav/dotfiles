@@ -1,19 +1,23 @@
-#! /bin/sh
+#!/bin/sh
 
 current=$(gsettings get org.gnome.desktop.interface color-scheme)
 
-if echo "$current" | grep -q dark; then
-    scheme=prefer-light
-    bg='#eff1f5'
-    bg=$(awk '$1 == "background" { print $2; exit }' \
-         ~/.config/kitty/light-theme.auto.conf)
-else
-    scheme=prefer-dark
-    bg=$(awk '$1 == "background" { print $2; exit }' \
-         ~/.config/kitty/dark-theme.auto.conf)
+case $current in
+    *light*) mode=dark ;;
+    *)       mode=light ;;
+esac
+
+bg=$(
+    awk '$1 == "background" { print $2; exit }' \
+    "$HOME/.config/kitty/$mode-theme.auto.conf"
+)
+
+sed -i -E "/^include.*themes/s|[^/[:space:]]+\$|$mode|" \
+    "$HOME/.config/zathura/zathurarc"
+
+if [ -n "$bg" ]; then
+    sed -i -E "s/^([[:space:]]*background-color )\"[^\"]*\"/\1\"$bg\"/" \
+        "$HOME/.config/niri/config.kdl"
 fi
 
-sed -i -E "s/^(\s*background-color )\"[^\"]*\"/\1\"$bg\"/" \
-    ~/.config/niri/config.kdl
-
-gsettings set org.gnome.desktop.interface color-scheme "$scheme"
+gsettings set org.gnome.desktop.interface color-scheme "prefer-$mode"
