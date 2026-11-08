@@ -19,7 +19,7 @@
         inactive_style: (),
     ),
     highlighted_item_style: (fg: "blue", modifiers: ""),
-    current_item_style: (bg: "#3c3836", modifiers: ""),
+    current_item_style: (bg: "black", modifiers: ""),
     borders_style: (fg: "green"),
     highlight_border_style: (fg: "green"),
     symbols: (

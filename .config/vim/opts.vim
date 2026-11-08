@@ -18,7 +18,6 @@ set expandtab
 set softtabstop=4
 set shiftwidth=4
 set termguicolors
-set background=dark
 set timeoutlen=750
 set ttimeoutlen=10
 set number
@@ -26,6 +25,18 @@ set relativenumber
 set fillchars+=vert:\ 
 set fillchars+=eob:\ 
 set shell=fish
+
+function! s:DetectBackground() abort
+	let l:cmd = ['gsettings', 'get',
+				\'org.gnome.desktop.interface','color-scheme']
+	let l:out = system(join(l:cmd) . ' 2>/dev/null')
+	if l:out =~# 'prefer-light'
+		return 'light'
+	endif
+	return 'dark'
+endfunction
+
+let &background = s:DetectBackground()
 
 if executable('rg')
     set grepprg=rg\ -S\ --vimgrep

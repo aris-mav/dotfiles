@@ -407,6 +407,9 @@ binds {
 
     Mod+Shift+Slash { show-hotkey-overlay; }
 
+    Mod+Shift+T {
+		spawn "~/.config/scripts/toggle_theme.sh";
+	}
     Mod+Return  hotkey-overlay-title="terminal" {
         spawn "kitty" "--single-instance";
     }
