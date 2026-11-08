@@ -6,8 +6,8 @@ for k, v in pairs(lex) do
     end
 end
 
-lex.STYLE_CURSOR_PRIMARY = 'reverse'
-lex.STYLE_SELECTION      = 'back:0'
+lex.STYLE_CURSOR_PRIMARY = 'reverse, keep_attribute'
+lex.STYLE_SELECTION      = 'back:0, keep_attribute'
 lex.STYLE_COLOR_COLUMN   = 'back:0'
 lex.STYLE_WHITESPACE     = 'fore:0'
 lex.STYLE_STATUS_FOCUSED = 'dim,bold'
