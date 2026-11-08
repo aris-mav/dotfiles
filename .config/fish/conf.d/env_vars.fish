@@ -5,6 +5,7 @@ set -gx FZF_DEFAULT_OPTS '
 --border none
 --gutter=" "
 --pointer=""
+--color='current-bg:black,current-fg:-1'
 '
 
 set -gx LESS -Ri
