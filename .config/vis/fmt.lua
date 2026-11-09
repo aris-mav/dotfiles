@@ -1,8 +1,5 @@
 vis.events.subscribe(vis.events.FILE_SAVE_PRE, function(file, path)
-
-    if not path or not path:match("%.md$") then
-        return true
-    else
+    if path:match("%.md$") then
         local win = vis.win
         local pos = win and win.selection.pos or 0
 
@@ -21,6 +18,6 @@ vis.events.subscribe(vis.events.FILE_SAVE_PRE, function(file, path)
         if win then
             win.selection.pos = math.min(pos, file.size)
         end
-        return true
     end
+    return true
 end)
