@@ -1,17 +1,5 @@
 return {
     {
-        "ejrichards/baredot.nvim",
-        event = "VeryLazy",
-        opts = {
-            -- These two options set the GIT_DIR and GIT_WORK_TREE env vars
-            -- They are expanded using "vim.fn.expand"
-            git_dir = "~/.dotfiles.git",
-            git_work_tree = "~",
-            -- Filename pattern to find that will disable Baredot
-            disable_pattern = "%.git"
-        }
-    },
-    {
         "lewis6991/gitsigns.nvim",
         config = function()
             local s = {
