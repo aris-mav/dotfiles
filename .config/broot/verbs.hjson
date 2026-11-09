@@ -5,10 +5,10 @@ verbs: [
         invocation: edit
         shortcut: e
         key: alt-e
-        apply_to: text_file
         execution: "$EDITOR +{line} {file}"
         leave_broot: false
     }
+    { key: "enter", execution: ":edit", apply_to: text_file }
     {
         invocation: sudoedit
         shortcut: se
