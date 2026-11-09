@@ -1,7 +1,7 @@
 require('vis')
 
 vis.events.subscribe(vis.events.INIT, function()
-    vis:command('set theme minimal')
+    vis:command('set theme gruv_mono')
     require('keybinds')
 end)
 
