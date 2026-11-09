@@ -47,7 +47,7 @@ local colours = {
 colours = colours[mode]
 colours.bg0 = colours.bg0[contrast]
 
-for k, v in pairs(lex) do
+for k, _ in pairs(lex) do
     if type(k) == 'string' and k:match('^STYLE_') then
         lex[k] = ''
     end

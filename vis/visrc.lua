@@ -14,7 +14,7 @@ vis.events.subscribe(vis.events.WIN_OPEN, function(win)
     vis:command('set expandtab')
     vis:command('set shell fish')
 
-    opts = require('ftopts')[win.syntax]
+    local opts = require('ftopts')[win.syntax]
     if opts then
         for _, o in ipairs(opts) do
             vis:command('set ' .. o)
