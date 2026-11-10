@@ -1,6 +1,6 @@
 [user]
-    name = arismav
-    email = aris.mav@hotmail.com
+    name = aris-mav
+    email = aris.mav@protonmail.com
 
 [core]
     pager = delta
@@ -13,7 +13,6 @@
     navigate = true  # use n and N to move between diff sections
     line-numbers = true
 	syntax-theme = none
-    ; side-by-side = true 
 
 [merge]
     conflictstyle = zdiff3

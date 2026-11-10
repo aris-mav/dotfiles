@@ -1,8 +1,17 @@
-To save the settings, do:
-dconf dump / > ~/.config/gnome/dconf_dump
+Save settings:
 
-To load the settings, do:
+``` bash
+dconf dump / > ~/.config/gnome/dconf_dump
+```
+
+Load settings:
+
+``` bash
 dconf load / < ~/.config/gnome/dconf_dump
+```
 
 Extensions:
-Dynamic Panel Transparency
+
+- PaperWM
+- V-Shell
+- Hide cursor
