@@ -12,9 +12,8 @@ bg=$(
     "$HOME/.config/kitty/$mode-theme.auto.conf"
 )
 
+echo "include ./themes/gruvbox/$mode" > "$HOME/.config/zathura/theme_switch"
 
-sed -i -E "/^include.*themes/s|[^/[:space:]]+\$|$mode|" \
-    "$HOME/.config/zathura/zathurarc"
 
 # if [ -n "$bg" ]; then
 #     sed -i -E "s/^([[:space:]]*background-color )\"[^\"]*\"/\1\"$bg\"/" \
