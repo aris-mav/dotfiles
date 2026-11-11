@@ -26,6 +26,19 @@ set fillchars+=vert:\
 set fillchars+=eob:\ 
 set shell=fish
 
+let g:netrw_banner = 0
+let g:netrw_preview = 1
+let g:netrw_winsize = 30
+
+let &t_SI = "\e[6 q" " SI = Start Insert (Vertical bar)
+let &t_SR = "\e[4 q" " SR = Start Replace (Underline)
+let &t_EI = "\e[2 q" " EI = End Insert/Replace (Block)
+augroup CursorReset
+  autocmd!
+  autocmd VimEnter * silent !echo -ne "\e[2 q"
+  autocmd VimLeave * silent !echo -ne "\e[0 q"
+augroup END
+
 function! s:DetectBackground() abort
 	let l:cmd = ['gsettings', 'get',
 				\'org.gnome.desktop.interface','color-scheme']
@@ -35,7 +48,6 @@ function! s:DetectBackground() abort
 	endif
 	return 'dark'
 endfunction
-
 let &background = s:DetectBackground()
 
 if executable('rg')
@@ -45,14 +57,6 @@ else
     set grepprg=grep\ -nH\ $*
     set grepformat=%f:%l:%m
 endif
-
-let &t_SI = "\e[6 q" " SI = Start Insert (Vertical bar)
-let &t_SR = "\e[4 q" " SR = Start Replace (Underline)
-let &t_EI = "\e[2 q" " EI = End Insert/Replace (Block)
-
-let g:netrw_banner = 0
-let g:netrw_preview = 1
-let g:netrw_winsize = 30
 
 augroup CmdModeNumbers
     autocmd!
