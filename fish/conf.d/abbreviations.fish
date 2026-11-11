@@ -17,28 +17,8 @@ abbr gcp 'git cherry-pick'
 abbr gau 'git add -u'
 abbr gac 'git commit -a'
 abbr gacp 'git commit -a ; git push'
-
-if set -q FUZZYFIND
-
-    abbr gaf "git add (git diff --name-only \
-        | $FUZZYFIND --multi --preview 'git diff --color=always {}')"
-
-    abbr grf "git reset (git diff --name-only --cached \
-        | $FUZZYFIND --multi --preview 'git diff --color=always --cached {}')"
-
-    abbr gdf "git diff --name-only \
-        | $FUZZYFIND --multi --preview 'git diff --color=always {}'"
-
-    abbr cdp "cd (tmux list-panes -a -F '#{pane_current_path}' | $FUZZYFIND)"
-
-end
-
 abbr e "$EDITOR"
 abbr f "$FILE_BROWSER"
-abbr y fish_clipboard_copy
-abbr xo xdg-open
-abbr x xargs
-
 abbr --set-cursor=% n "nt -%"
 
 if type -q pacman
